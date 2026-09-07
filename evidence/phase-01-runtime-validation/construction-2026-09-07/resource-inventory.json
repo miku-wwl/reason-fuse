@@ -1,0 +1,42 @@
+[
+  {
+    "location": "australiaeast",
+    "name": "cog-cce5b59dd73ad",
+    "type": "Microsoft.CognitiveServices/accounts"
+  },
+  {
+    "location": "australiaeast",
+    "name": "cog-cce5b59dd73ad/reasonfuse-phase1",
+    "type": "Microsoft.CognitiveServices/accounts/projects"
+  },
+  {
+    "location": "australiaeast",
+    "name": "plan-rf-operations-cce5b59dd73ad",
+    "type": "Microsoft.Web/serverFarms"
+  },
+  {
+    "location": "australiaeast",
+    "name": "apim-rf-cce5b59dd73ad",
+    "type": "Microsoft.ApiManagement/service"
+  },
+  {
+    "location": "australiaeast",
+    "name": "log-rf-cce5b59dd73ad",
+    "type": "Microsoft.OperationalInsights/workspaces"
+  },
+  {
+    "location": "australiaeast",
+    "name": "rf-operations-cce5b59dd73ad",
+    "type": "Microsoft.Web/sites"
+  },
+  {
+    "location": "australiaeast",
+    "name": "appi-rf-cce5b59dd73ad",
+    "type": "Microsoft.Insights/components"
+  },
+  {
+    "location": "global",
+    "name": "Application Insights Smart Detection",
+    "type": "microsoft.insights/actiongroups"
+  }
+]

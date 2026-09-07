@@ -1,0 +1,11 @@
+<policies>
+  <inbound>
+    <set-backend-service backend-id="reasonfuse-canary" />
+    <set-query-parameter name="api-version" exists-action="override"><value>v1</value></set-query-parameter>
+  </inbound>
+  <backend>
+    <forward-request timeout="240" buffer-request-body="false" buffer-response="false" />
+  </backend>
+  <outbound />
+  <on-error />
+</policies>

@@ -1,0 +1,10 @@
+name: reasonfuse-operations
+description: Deterministic Operations OpenAPI tools for Phase 1.
+openapi_name: operations
+spec_file: ../../tests/support/operations_api/openapi.yaml
+# SDK model: OpenApiToolboxTool. Keep tools visible to MCP tools/list.
+tool_configs:
+  '*':
+    pin: true
+# Approval is enforced only by the Agent Framework configuration in
+# src/reasonfuse/agent.py; the toolbox endpoint does not enforce it.

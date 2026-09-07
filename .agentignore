@@ -1,0 +1,15 @@
+.venv/
+.tools/
+.azure/
+.env
+.env.*
+evidence/
+infra/
+tests/
+scripts/
+config/
+docs/
+.git/
+**/__pycache__/
+**/.pytest_cache/
+*.md

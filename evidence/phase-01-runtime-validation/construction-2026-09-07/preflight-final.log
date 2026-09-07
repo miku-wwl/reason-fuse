@@ -1,0 +1,26 @@
+azd ai agent doctor
+
+Local
+   (✓) azd extension reachable
+   (✓) azure.yaml present and parseable
+   (✓) azd environment selected
+   (✓) agent service in azure.yaml
+   (✓) FOUNDRY_PROJECT_ENDPOINT set
+   (✓) agent definition valid (per service)
+   (✓) manual env vars set
+   (-) Configured toolboxes have endpoint env vars set -- skipped (no configured toolbox resources were found.)
+
+Authentication
+   (✓) authentication
+
+Remote
+   (✓) Foundry project endpoint reachable
+   (✓) Developer has required role on Foundry project
+   (✓) Hosted agents are active
+   (-) Configured connections exist on Foundry project -- skipped (no enabled connection services or legacy connection resources found.)
+
+11 passed, 0 failed, 2 skipped
+{"tool_names": ["operations___dns_resolution", "operations___restart_service"], "approval_modes": {"operations___dns_resolution": "never_require", "operations___restart_service": "always_require"}}
+TOOLBOX_SMOKE_PASS D:\workshop\sep\reason-fuse\phase1-runtime-validation\evidence\20260907T090653144443Z-toolbox-smoke.jsonl
+FAIL preflight: Command '['C:\\Program Files\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az.CMD', 'rest', '--method', 'get', '--url', '/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/apis/reasonfuse/policies/policy?api-version=2024-05-01&format=rawxml', '-o', 'json']' returned non-zero exit status 4.
+Evidence: D:\workshop\sep\reason-fuse\phase1-runtime-validation\evidence\20260907T090744737612Z-preflight.jsonl

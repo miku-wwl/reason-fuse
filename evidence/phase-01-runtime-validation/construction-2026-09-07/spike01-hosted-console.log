@@ -1,0 +1,305 @@
+Streaming session logs for reasonfuse-phase1-stable (session: 20d82e9895671fba28193ae66e668bcfc176f0de99ca1a320d1b4e7e9647f15)...
+04:00:01  session Running (last accessed: 04:00:01)
+04:03:36  status   Connecting to the container...
+04:03:06  stdout                                               1024,
+04:03:06  stdout                                               4096,
+04:03:06  stdout                                               16384,
+04:03:06  stdout                                               65536,
+04:03:06  stdout                                               262144,
+04:03:06  stdout                                               1048576,
+04:03:06  stdout                                               4194304,
+04:03:06  stdout                                               16777216,
+04:03:06  stdout                                               67108864
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "min": 548,
+04:03:06  stdout                                           "max": 1476,
+04:03:06  stdout                                           "exemplars": []
+04:03:06  stdout                                       },
+04:03:06  stdout                                       {
+04:03:06  stdout                                           "attributes": {
+04:03:06  stdout                                               "gen_ai.operation.name": "chat",
+04:03:06  stdout                                               "server.address": "Unknown",
+04:03:06  stdout                                               "gen_ai.request.model": "gpt-5-mini",
+04:03:06  stdout                                               "gen_ai.provider.name": "azure.ai.foundry",
+04:03:06  stdout                                               "gen_ai.response.model": "gpt-5-mini-2025-08-07",
+04:03:06  stdout                                               "gen_ai.token.type": "output"
+04:03:06  stdout                                           },
+04:03:06  stdout                                           "start_time_unix_nano": 1788753611081344454,
+04:03:06  stdout                                           "time_unix_nano": 1788753786051335243,
+04:03:06  stdout                                           "count": 5,
+04:03:06  stdout                                           "sum": 1112,
+04:03:06  stdout                                           "bucket_counts": [
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               1,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               2,
+04:03:06  stdout                                               2,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "explicit_bounds": [
+04:03:06  stdout                                               1,
+04:03:06  stdout                                               4,
+04:03:06  stdout                                               16,
+04:03:06  stdout                                               64,
+04:03:06  stdout                                               256,
+04:03:06  stdout                                               1024,
+04:03:06  stdout                                               4096,
+04:03:06  stdout                                               16384,
+04:03:06  stdout                                               65536,
+04:03:06  stdout                                               262144,
+04:03:06  stdout                                               1048576,
+04:03:06  stdout                                               4194304,
+04:03:06  stdout                                               16777216,
+04:03:06  stdout                                               67108864
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "min": 15,
+04:03:06  stdout                                           "max": 434,
+04:03:06  stdout                                           "exemplars": []
+04:03:06  stdout                                       }
+04:03:06  stdout                                   ],
+04:03:06  stdout                                   "aggregation_temporality": 2
+04:03:06  stdout                               }
+04:03:06  stdout                           },
+04:03:06  stdout                           {
+04:03:06  stdout                               "name": "gen_ai.client.operation.duration",
+04:03:06  stdout                               "description": "Captures the duration of operations of function-invoking chat clients",
+04:03:06  stdout                               "unit": "s",
+04:03:06  stdout                               "data": {
+04:03:06  stdout                                   "data_points": [
+04:03:06  stdout                                       {
+04:03:06  stdout                                           "attributes": {
+04:03:06  stdout                                               "gen_ai.operation.name": "chat",
+04:03:06  stdout                                               "server.address": "Unknown",
+04:03:06  stdout                                               "gen_ai.request.model": "gpt-5-mini",
+04:03:06  stdout                                               "gen_ai.provider.name": "azure.ai.foundry",
+04:03:06  stdout                                               "gen_ai.response.model": "gpt-5-mini-2025-08-07"
+04:03:06  stdout                                           },
+04:03:06  stdout                                           "start_time_unix_nano": 1788753611081380290,
+04:03:06  stdout                                           "time_unix_nano": 1788753786051335243,
+04:03:06  stdout                                           "count": 5,
+04:03:06  stdout                                           "sum": 16.060488454999994,
+04:03:06  stdout                                           "bucket_counts": [
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               2,
+04:03:06  stdout                                               3,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "explicit_bounds": [
+04:03:06  stdout                                               0.01,
+04:03:06  stdout                                               0.02,
+04:03:06  stdout                                               0.04,
+04:03:06  stdout                                               0.08,
+04:03:06  stdout                                               0.16,
+04:03:06  stdout                                               0.32,
+04:03:06  stdout                                               0.64,
+04:03:06  stdout                                               1.28,
+04:03:06  stdout                                               2.56,
+04:03:06  stdout                                               5.12,
+04:03:06  stdout                                               10.24,
+04:03:06  stdout                                               20.48,
+04:03:06  stdout                                               40.96,
+04:03:06  stdout                                               81.92
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "min": 1.8100013329999989,
+04:03:06  stdout                                           "max": 4.791900093999999,
+04:03:06  stdout                                           "exemplars": []
+04:03:06  stdout                                       }
+04:03:06  stdout                                   ],
+04:03:06  stdout                                   "aggregation_temporality": 2
+04:03:06  stdout                               }
+04:03:06  stdout                           },
+04:03:06  stdout                           {
+04:03:06  stdout                               "name": "agent_framework.function.invoca
+04:03:06  stdout   tion.duration",
+04:03:06  stdout                               "description": "Measures the duration of a function's execution",
+04:03:06  stdout                               "unit": "s",
+04:03:06  stdout                               "data": {
+04:03:06  stdout                                   "data_points": [
+04:03:06  stdout                                       {
+04:03:06  stdout                                           "attributes": {
+04:03:06  stdout                                               "gen_ai.operation.name": "execute_tool",
+04:03:06  stdout                                               "gen_ai.tool.name": "read_runtime_state",
+04:03:06  stdout                                               "gen_ai.tool.call.id": "call_0hbNBGSga9U6q6EMQz3GPXcs",
+04:03:06  stdout                                               "gen_ai.tool.type": "function",
+04:03:06  stdout                                               "gen_ai.tool.description": "Read validation state and release role directly from the current AgentSession.",
+04:03:06  stdout                                               "gen_ai.tool.call.arguments": "None",
+04:03:06  stdout                                               "agent_framework.function.name": "read_runtime_state"
+04:03:06  stdout                                           },
+04:03:06  stdout                                           "start_time_unix_nano": 1788753611083224686,
+04:03:06  stdout                                           "time_unix_nano": 1788753786051335243,
+04:03:06  stdout                                           "count": 1,
+04:03:06  stdout                                           "sum": 0.00044533000000157585,
+04:03:06  stdout                                           "bucket_counts": [
+04:03:06  stdout                                               1,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "explicit_bounds": [
+04:03:06  stdout                                               0.01,
+04:03:06  stdout                                               0.02,
+04:03:06  stdout                                               0.04,
+04:03:06  stdout                                               0.08,
+04:03:06  stdout                                               0.16,
+04:03:06  stdout                                               0.32,
+04:03:06  stdout                                               0.64,
+04:03:06  stdout                                               1.28,
+04:03:06  stdout                                               2.56,
+04:03:06  stdout                                               5.12,
+04:03:06  stdout                                               10.24,
+04:03:06  stdout                                               20.48,
+04:03:06  stdout                                               40.96,
+04:03:06  stdout                                               81.92
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "min": 0.00044533000000157585,
+04:03:06  stdout                                           "max": 0.00044533000000157585,
+04:03:06  stdout                                           "exemplars": []
+04:03:06  stdout                                       },
+04:03:06  stdout                                       {
+04:03:06  stdout                                           "attributes": {
+04:03:06  stdout                                               "gen_ai.operation.name": "execute_tool",
+04:03:06  stdout                                               "gen_ai.tool.name": "mode_get",
+04:03:06  stdout                                               "gen_ai.tool.call.id": "call_1SWlIlW84CF0sGQSpybquDZp",
+04:03:06  stdout                                               "gen_ai.tool.type": "function",
+04:03:06  stdout                                               "gen_ai.tool.description": "Get the agent's current operating mode.",
+04:03:06  stdout                                               "gen_ai.tool.call.arguments": "None",
+04:03:06  stdout                                               "agent_framework.function.name": "mode_get"
+04:03:06  stdout                                           },
+04:03:06  stdout                                           "start_time_unix_nano": 1788753628698769941,
+04:03:06  stdout                                           "time_unix_nano": 1788753786051335243,
+04:03:06  stdout                                           "count": 1,
+04:03:06  stdout                                           "sum": 0.00040132999999897834,
+04:03:06  stdout                                           "bucket_counts": [
+04:03:06  stdout                                               1,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "explicit_bounds": [
+04:03:06  stdout                                               0.01,
+04:03:06  stdout                                               0.02,
+04:03:06  stdout                                               0.04,
+04:03:06  stdout                                               0.08,
+04:03:06  stdout                                               0.16,
+04:03:06  stdout                                               0.32,
+04:03:06  stdout                                               0.64,
+04:03:06  stdout                                               1.28,
+04:03:06  stdout                                               2.56,
+04:03:06  stdout                                               5.12,
+04:03:06  stdout                                               10.24,
+04:03:06  stdout                                               20.48,
+04:03:06  stdout                                               40.96,
+04:03:06  stdout                                               81.92
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "min": 0.00040132999999897834,
+04:03:06  stdout                                           "max": 0.00040132999999897834,
+04:03:06  stdout                                           "exemplars": []
+04:03:06  stdout                                       },
+04:03:06  stdout                                       {
+04:03:06  stdout                                           "attributes": {
+04:03:06  stdout                                               "gen_ai.operation.name": "execute_tool",
+04:03:06  stdout                                               "gen_ai.tool.name": "read_runtime_state",
+04:03:06  stdout                                               "gen_ai.tool.call.id": "call_coapxdp1V6djpUblwTta9Yxt",
+04:03:06  stdout                                               "gen_ai.tool.type": "function",
+04:03:06  stdout                                               "gen_ai.tool.description": "Read validation state and release role directly from the current AgentSession.",
+04:03:06  stdout                                               "gen_ai.tool.call.arguments": "None",
+04:03:06  stdout                                               "agent_framework.function.name": "read_runtime_state"
+04:03:06  stdout                                           },
+04:03:06  stdout                                           "start_time_unix_nano": 1788753630512304690,
+04:03:06  stdout                                           "time_unix_nano": 1788753786051335243,
+04:03:06  stdout                                           "count": 1,
+04:03:06  stdout                                           "sum": 0.00028689999999897964,
+04:03:06  stdout                                           "bucket_counts": [
+04:03:06  stdout                                               1,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0,
+04:03:06  stdout                                               0
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "explicit_bounds": [
+04:03:06  stdout                                               0.01,
+04:03:06  stdout                                               0.02,
+04:03:06  stdout                                     
+04:03:06  stdout             0.04,
+04:03:06  stdout                                               0.08,
+04:03:06  stdout                                               0.16,
+04:03:06  stdout                                               0.32,
+04:03:06  stdout                                               0.64,
+04:03:06  stdout                                               1.28,
+04:03:06  stdout                                               2.56,
+04:03:06  stdout                                               5.12,
+04:03:06  stdout                                               10.24,
+04:03:06  stdout                                               20.48,
+04:03:06  stdout                                               40.96,
+04:03:06  stdout                                               81.92
+04:03:06  stdout                                           ],
+04:03:06  stdout                                           "min": 0.00028689999999897964,
+04:03:06  stdout                                           "max": 0.00028689999999897964,
+04:03:06  stdout                                           "exemplars": []
+04:03:06  stdout                                       }
+04:03:06  stdout                                   ],
+04:03:06  stdout                                   "aggregation_temporality": 2
+04:03:06  stdout                               }
+04:03:06  stdout                           }
+04:03:06  stdout                       ],
+04:03:06  stdout                       "schema_url": ""
+04:03:06  stdout                   }
+04:03:06  stdout               ],
+04:03:06  stdout               "schema_url": ""
+04:03:06  stdout           }
+04:03:06  stdout       ]
+04:03:06  stdout   }
+                   
+04:03:36  status   Successfully connected to container

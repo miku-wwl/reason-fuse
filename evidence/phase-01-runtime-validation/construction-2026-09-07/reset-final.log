@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\workshop\sep\reason-fuse\phase1-runtime-validation\scripts\reset.py", line 59, in <module>
+    reset(evidence)
+    ~~~~~^^^^^^^^^^
+  File "D:\workshop\sep\reason-fuse\phase1-runtime-validation\scripts\reset.py", line 44, in reset
+    assert not remaining.intersection(recorded), f"Recorded test sessions remain for {agent}"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Recorded test sessions remain for reasonfuse-phase1-stable

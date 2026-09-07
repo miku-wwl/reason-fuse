@@ -1,0 +1,22 @@
+{
+  "timestamp_utc": "2026-09-07T13:34:27.766406+00:00",
+  "command": "terraform -chdir=infra plan -refresh=false (preserved local state copy); terraform -chdir=infra show -json",
+  "refresh": false,
+  "applied": false,
+  "resource_changes": [],
+  "output_changes": [
+    {
+      "name": "AZURE_AI_PROJECT_CONNECTIONS_PROJECT_ENDPOINT",
+      "actions": [
+        "delete"
+      ]
+    },
+    {
+      "name": "AZURE_AI_PROJECT_CONNECTION_NAMES",
+      "actions": [
+        "delete"
+      ]
+    }
+  ],
+  "original_terraform_state_unchanged": true
+}
