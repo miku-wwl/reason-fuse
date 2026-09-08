@@ -1,5 +1,5 @@
 name: reasonfuse-operations
-description: Deterministic Operations OpenAPI tools for Phase 1.
+description: Deterministic Operations OpenAPI tools for Phase 1 and bounded Phase 2 scenarios.
 openapi_name: operations
 spec_file: ../../tests/support/operations_api/openapi.yaml
 # SDK model: OpenApiToolboxTool. Keep tools visible to MCP tools/list.

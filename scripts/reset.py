@@ -12,22 +12,27 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from scripts.support.validation import EVIDENCE_ROOT, Evidence, Operations
 
+PHASE2_EVIDENCE_ROOT = ROOT / "evidence" / "phase-02-core"
+
 
 def reset(evidence):
     operations = Operations(evidence)
     operations.reset()
     operations.assert_counts({})
     recorded = set()
-    for path in EVIDENCE_ROOT.rglob("*.jsonl"):
-        for line in path.read_text(encoding="utf-8").splitlines():
-            entry = json.loads(line)
-            body = entry.get("body", {})
-            if entry.get("event") == "RESPONSE" and isinstance(body, dict) and body.get("agent_session_id"):
-                recorded.add(body["agent_session_id"])
-            if entry.get("event") == "SSE_EVENT" and isinstance(body, dict):
-                session = body.get("response", {}).get("agent_session_id")
-                if session:
-                    recorded.add(session)
+    for evidence_root in [EVIDENCE_ROOT, PHASE2_EVIDENCE_ROOT]:
+        if not evidence_root.exists():
+            continue
+        for path in evidence_root.rglob("*.jsonl"):
+            for line in path.read_text(encoding="utf-8").splitlines():
+                entry = json.loads(line)
+                body = entry.get("body", {})
+                if entry.get("event") == "RESPONSE" and isinstance(body, dict) and body.get("agent_session_id"):
+                    recorded.add(body["agent_session_id"])
+                if entry.get("event") == "SSE_EVENT" and isinstance(body, dict):
+                    session = body.get("response", {}).get("agent_session_id")
+                    if session:
+                        recorded.add(session)
     deleted = []
     already_deleted = 0
     final_statuses = {}
@@ -62,7 +67,8 @@ def reset(evidence):
     for session_id in sorted(recorded):
         evidence.write("RECORDED_SESSION_OUTCOME", session_id=session_id,
                        **final_statuses.get(session_id, {"status": "absent_from_all_agent_session_pages"}))
-    evidence.write("ASSERTIONS", recorded_sessions=len(recorded), deleted_sessions=len(deleted),
+    evidence.write("ASSERTIONS", evidence_roots=[str(EVIDENCE_ROOT), str(PHASE2_EVIDENCE_ROOT)],
+                   recorded_sessions=len(recorded), deleted_sessions=len(deleted),
                    already_deleted_sessions=already_deleted,
                    recorded_non_deleted_sessions_remaining=0, external_counts={},
                    local_artifact_absent=not artifact.exists())

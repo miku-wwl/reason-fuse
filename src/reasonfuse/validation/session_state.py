@@ -85,6 +85,7 @@ class ValidationStateProvider(ContextProvider):
         def snapshot():
             return {
                 **state,
+                "reasonfuse_core": session.state.get("reasonfuse_core_v1"),
                 "agent_session_id": session.session_id,
                 "platform_session_id": get_request_context().session_id,
                 "release_role": os.environ.get("RELEASE_ROLE", "stable"),

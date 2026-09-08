@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: ReasonFuse deterministic Operations API
-  version: 1.0.0
+  version: 2.0.0
 servers:
   - url: ${OPERATIONS_ENDPOINT}
 paths:
@@ -55,3 +55,73 @@ paths:
                 properties:
                   service_name: {type: string}
                   status: {type: string}
+                  accepted: {type: boolean}
+                  generation: {type: string}
+  /service-status:
+    post:
+      operationId: service_status
+      description: Read the current deterministic service health for a named resource.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                service_name: {type: string}
+              required: [service_name]
+              additionalProperties: false
+      responses:
+        '200':
+          description: Current service state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource: {type: string}
+                  service_name: {type: string}
+                  service_health: {type: string}
+                  world_state: {type: object}
+  /database-health:
+    post:
+      operationId: database_health
+      description: Read deterministic database health for a named resource.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                service_name: {type: string}
+              required: [service_name]
+              additionalProperties: false
+      responses:
+        '200':
+          description: Current database state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource: {type: string}
+                  service_health: {type: string}
+                  world_state: {type: object}
+  /retrieval-fixture:
+    post:
+      operationId: retrieval_fixture
+      description: Deterministic Phase 2 retrieval-churn fixture; not Foundry IQ.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query: {type: string}
+              required: [query]
+              additionalProperties: false
+      responses:
+        '200':
+          description: Fixed non-IQ retrieval evidence
