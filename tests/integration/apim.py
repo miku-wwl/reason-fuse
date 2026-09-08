@@ -6,6 +6,7 @@ import sys
 import time
 from collections import Counter
 from pathlib import Path
+from azure.identity import AzureCliCredential, get_bearer_token_provider
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from scripts.support.validation import HostedClient, output_text, run_case, safe_headers
@@ -40,8 +41,14 @@ def new_session_control(evidence, samples):
     # A fresh HTTP client means a fresh cookie jar, so the old affinity is absent.
     # Sequential requests keep the experimental load and spending bounded.
     counts = Counter()
+    # Share authentication only, not a connection or cookie jar. Azure's provider
+    # caches tokens until refresh is needed, avoiding 60 identical CLI logins.
+    credential = AzureCliCredential(process_timeout=60)
+    token_provider = get_bearer_token_provider(credential, "https://ai.azure.com/.default")
+    evidence.write("COHORT_POLICY", samples=samples, sequential=True, fresh_cookie_jar_per_sample=True,
+                   shared_authentication_only=True)
     for index in range(samples):
-        client = HostedClient(evidence, base_url=os.environ["APIM_ENDPOINT"])
+        client = HostedClient(evidence, base_url=os.environ["APIM_ENDPOINT"], token_provider=token_provider)
         try:
             assert not list(client.http.cookies.jar)
             role, _ = probe(client)
@@ -49,6 +56,7 @@ def new_session_control(evidence, samples):
         finally:
             client.close()
         print(f"New session {index + 1}/{samples}: {dict(counts)}", flush=True)
+    credential.close()
     assert counts["stable"] > 0 and counts["candidate"] > 0, "Both backends must be observed"
     # Check consistency with 5% using a 99% Wilson interval; this is not a precise
     # ratio estimate. Native pool readback separately checks the configured 95/5.
@@ -70,6 +78,7 @@ def sse(evidence):
         conversation = client.conversation()
         deltas = []
         done = False
+        completed_at = None
         started = time.monotonic()
         body = {"input": "RF_SSE_PROBE", "conversation": conversation, "stream": True, "store": True}
         evidence.write("REQUEST", url=client.base + "/responses", body=body)
@@ -88,16 +97,19 @@ def sse(evidence):
                 arrived = time.monotonic() - started
                 evidence.write("SSE_EVENT", arrival_seconds=arrived, body=event)
                 if event.get("type") == "response.output_text.delta":
+                    assert not done, "Text delta arrived after completion"
                     deltas.append((arrived, event["delta"]))
                 if event.get("type") == "response.completed":
                     done = True
+                    completed_at = arrived
                 assert event.get("type") not in {"error", "response.failed"}, event
         assert done, "No terminal response.completed event"
         assert len(deltas) == 4, deltas
         assert [text.split(":", 1)[1].strip() for _, text in deltas] == [f"chunk-{n}" for n in range(1, 5)]
         assert deltas[-1][0] - deltas[0][0] >= 1.5, "SSE arrived as a buffered burst"
         assert all(deltas[i + 1][0] - deltas[i][0] >= 0.35 for i in range(3)), "Adjacent chunks were buffered"
-        evidence.write("ASSERTIONS", conversation_id=conversation, delta_arrivals=deltas)
+        assert all(arrival < completed_at for arrival, _ in deltas[:3])
+        evidence.write("ASSERTIONS", conversation_id=conversation, delta_arrivals=deltas, completed_at=completed_at)
     finally:
         client.close()
 

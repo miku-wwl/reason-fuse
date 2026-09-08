@@ -1,0 +1,1177 @@
+{
+  "updated_utc": "2026-09-08T09:00:59.053158+00:00",
+  "status": "PASS",
+  "git_revision": "4d88420a2ad3eb56ace7528a1f0dc4c47f8455b1",
+  "source_identity": {
+    "git_revision": "4d88420a2ad3eb56ace7528a1f0dc4c47f8455b1",
+    "source_manifest_sha256": "adf7a170d63d7df7bc06d18a7f87f8aef3aa3498cd42c74272f113b8a6b5c372",
+    "files": {
+      ".agentignore": "60623aebc8b69d268cadf4dac63b9f826e2f19b97d6a96f3399ef1e311a491d8",
+      ".gitattributes": "920422a538c860fd9a7621270883e76a44ff702df9237ee0f1c0b31a06ac86e7",
+      ".gitignore": "bcb4b65c98620cd8275298b76c692e58a3c67018b03c3d32769aba9d8d64e060",
+      "azure.yaml": "ee623efd3665caec91b8bd3583409523ee3ca029c0e72e8b59e4e3427d347ca3",
+      "pyproject.toml": "3aec8de9559a746f46ccd406ef30751d2e2f695756e79471ee676b60aa1d6c38",
+      "requirements.txt": "a15d2cfa08b0b99d33ff5fe3e8887b0e3d544617a83c45e2f28384d199425bfd",
+      "src/main.py": "a2ee5a3ac494c1f08ab86bf2944b0271e9cfa056cb821c855e49be5df3c6e4a6",
+      "src/reasonfuse/__init__.py": "396b8b8ed346e0c9152d1457d04a543a54bd3a607502a5513eb26f5a98bf9af1",
+      "src/reasonfuse/agent.py": "37bd1aa795788e32110e7459576286fbfdc578d5825b7ee85ff2e3dd37430f04",
+      "src/reasonfuse/main.py": "e2e18981cae679d083a79c71a63d2d68f4b22fe372bb7ffb9179ec9b3d4fdf27",
+      "src/reasonfuse/validation/__init__.py": "d8c7df95572b7e32a8fc59ce9ff899315c20891b5a4042bb97d73df8b3d1b1a8",
+      "src/reasonfuse/validation/middleware.py": "08ec9cb2bf859d474f697f9c8d3c45953ef716fa63d32ae02c0332a5f305bfad",
+      "src/reasonfuse/validation/session_state.py": "3a43bd5eb8778d25dd576631891218c0b3293f321f8c61500a14b3a6fd46c543",
+      "uv.lock": "357c0879939d3fc459cb1bfc740d161b61ecf29a80e237a4f37c07857cfbf7d4"
+    }
+  },
+  "batches": {
+    "corrected-initial": {
+      "status": "PASS",
+      "batch_evidence": "evidence/phase-01-runtime-validation/runs/20260907/20260907T233918811421Z-batch-corrected-initial.jsonl",
+      "requirements": {
+        "preflight": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234026677644Z-preflight.jsonl",
+            "sha256": "40ea7e70e33d04a8ebc2702100b4692cad343ba6445a0477ad8961b68ecf8134",
+            "case": "preflight",
+            "started_utc": "2026-09-07T23:40:26.678701+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "environment": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234133141716Z-environment.jsonl",
+            "sha256": "69d0ef86483b55e73fa320e9e78bc2f5d4844a1482447a5e6cfdbd10bda70331",
+            "case": "environment",
+            "started_utc": "2026-09-07T23:41:33.142572+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike01_history_session": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234206084402Z-spike01_history_session.jsonl",
+            "sha256": "5fa682f8046dc2c40c3ce56ce48a16b456afeefd9da96a5c3b9b9b8d93f14db1",
+            "case": "spike01_history_session",
+            "started_utc": "2026-09-07T23:42:06.085433+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike02_toolbox_allow": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234337293910Z-spike02_toolbox_allow.jsonl",
+            "sha256": "31e89a45df4ad3686812951abd6e92c57ac8ab673f749a5b99e4e4663d7addb9",
+            "case": "spike02_toolbox_allow",
+            "started_utc": "2026-09-07T23:43:37.294705+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          },
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234454207519Z-spike02_toolbox_allow.jsonl",
+            "sha256": "4e0a40ab0e42ee4886040333ef9207dd3b6674e9e541f7800e9e213c355c26b8",
+            "case": "spike02_toolbox_allow",
+            "started_utc": "2026-09-07T23:44:54.209196+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike02_toolbox_block": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234416578309Z-spike02_toolbox_block.jsonl",
+            "sha256": "b319225be282fc5ab233855b70a32cbf75af9730d20781da8911f52946c7e13f",
+            "case": "spike02_toolbox_block",
+            "started_utc": "2026-09-07T23:44:16.579298+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          },
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234531908666Z-spike02_toolbox_block.jsonl",
+            "sha256": "0857c64727b05e359d81da9d19c1cf82585bb446e3fa40b80ed6b650a38b402f",
+            "case": "spike02_toolbox_block",
+            "started_utc": "2026-09-07T23:45:31.909764+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike03_approval_approve": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234609233143Z-spike03_approval_approve.jsonl",
+            "sha256": "b1088c50f8d21e6a42177a63ec8da077556f33c1da97ff0b7604967850d14411",
+            "case": "spike03_approval_approve",
+            "started_utc": "2026-09-07T23:46:09.234267+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike03_approval_deny": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234700035642Z-spike03_approval_deny.jsonl",
+            "sha256": "0194c6301e1acf6f5b0e6422ef700cca647129cb393673932ebbd9e4411f9344",
+            "case": "spike03_approval_deny",
+            "started_utc": "2026-09-07T23:47:00.036533+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike03_approval_binding": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234747815339Z-spike03_approval_binding.jsonl",
+            "sha256": "9463f91fbc2c769010097e35a79533e6b973e4a12541d6f09b6ec92a597bb6a4",
+            "case": "spike03_approval_binding",
+            "started_utc": "2026-09-07T23:47:47.816093+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike04_affinity": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234859266168Z-spike04_affinity.jsonl",
+            "sha256": "1c6539fdff7cd45d7a70fbb17acd054cb32b8cc606d73247f6ec7d70ffe90915",
+            "case": "spike04_affinity",
+            "started_utc": "2026-09-07T23:48:59.267148+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike04_new_session_control": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234930665875Z-spike04_new_session_control.jsonl",
+            "sha256": "3043810807e68506f5f6110506eda5c4736f50b80c22fc1e11820511c34ffe7f",
+            "case": "spike04_new_session_control",
+            "started_utc": "2026-09-07T23:49:30.666639+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike04_sse": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235751428432Z-spike04_sse.jsonl",
+            "sha256": "080dcbdbec9563855863fa1165d2153de2d119c4b1eca1b31a2a2fea7c530e22",
+            "case": "spike04_sse",
+            "started_utc": "2026-09-07T23:57:51.429440+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "metadata_telemetry": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235819698828Z-metadata_telemetry.jsonl",
+            "sha256": "d9eb5cd47c4696d9467da1e3a209acb7aeb5a98d5e4a0cc54b5b48fcf826297f",
+            "case": "metadata_telemetry",
+            "started_utc": "2026-09-07T23:58:19.700155+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ]
+      }
+    },
+    "clean-start": {
+      "status": "PASS",
+      "batch_evidence": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000659264358Z-batch-clean-start.jsonl",
+      "requirements": {
+        "preflight": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000809643894Z-preflight.jsonl",
+            "sha256": "699e40dc86db6c983917e7b3937d033b3a79a21de09e875af88b8e07b6b45053",
+            "case": "preflight",
+            "started_utc": "2026-09-08T00:08:09.644637+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "environment": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000913622027Z-environment.jsonl",
+            "sha256": "d4e38d95f7cc0a6b23dd90736b0144f5a45a6b26ef07d3db6f914631618bfc54",
+            "case": "environment",
+            "started_utc": "2026-09-08T00:09:13.622748+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike01_history_session": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000946891624Z-spike01_history_session.jsonl",
+            "sha256": "fa191cd8b433030430dc201aa6595bc03ae4a3105828ab7b9f71b96535589887",
+            "case": "spike01_history_session",
+            "started_utc": "2026-09-08T00:09:46.892968+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike02_toolbox_allow": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001047525550Z-spike02_toolbox_allow.jsonl",
+            "sha256": "5827fdd3f296326e257c7b0d65ad482ddde8d1f9b0ef38613b59527ec19ff8da",
+            "case": "spike02_toolbox_allow",
+            "started_utc": "2026-09-08T00:10:47.526507+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          },
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001211407204Z-spike02_toolbox_allow.jsonl",
+            "sha256": "1443aa473c93ad097b6b6e9e95093cf177e13660f9fe443457665dd467e525f7",
+            "case": "spike02_toolbox_allow",
+            "started_utc": "2026-09-08T00:12:11.408441+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike02_toolbox_block": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001128218491Z-spike02_toolbox_block.jsonl",
+            "sha256": "10a56e31cd005c523b0802256a0f25f3f035b224d0c8ca1704b9386a5124f2db",
+            "case": "spike02_toolbox_block",
+            "started_utc": "2026-09-08T00:11:28.219379+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          },
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001253980910Z-spike02_toolbox_block.jsonl",
+            "sha256": "2c0646ed3ade659dda8ea95170341b0cd4af686975b7a0ce4fd76c46400b57a2",
+            "case": "spike02_toolbox_block",
+            "started_utc": "2026-09-08T00:12:53.982265+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike03_approval_approve": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001334255380Z-spike03_approval_approve.jsonl",
+            "sha256": "76bca1c64926d6c4b81a0ded2d4cb11c001bd9d503b86cdfea5900f8bc312a68",
+            "case": "spike03_approval_approve",
+            "started_utc": "2026-09-08T00:13:34.256665+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike03_approval_deny": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001428454749Z-spike03_approval_deny.jsonl",
+            "sha256": "f236752a2a91495b62a0d961741e8d12dfbf63a928f022cf3f91a285979db6a2",
+            "case": "spike03_approval_deny",
+            "started_utc": "2026-09-08T00:14:28.455611+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike03_approval_binding": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001522140345Z-spike03_approval_binding.jsonl",
+            "sha256": "9361b8906ef8a0b9958f7928ffd405097534d0e0c04c90b6cff4debcae8338be",
+            "case": "spike03_approval_binding",
+            "started_utc": "2026-09-08T00:15:22.141775+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike04_affinity": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001635686033Z-spike04_affinity.jsonl",
+            "sha256": "8360d7686d0224e79ad2383720b1886c31583462b0e4d1dca1bbaf83d80b73f2",
+            "case": "spike04_affinity",
+            "started_utc": "2026-09-08T00:16:35.686854+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike04_new_session_control": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001707441683Z-spike04_new_session_control.jsonl",
+            "sha256": "37608c497e2643add3edb188f71392408caba7ce49e2987192bcf827078b9620",
+            "case": "spike04_new_session_control",
+            "started_utc": "2026-09-08T00:17:07.443142+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "spike04_sse": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T002538855595Z-spike04_sse.jsonl",
+            "sha256": "9c3234984d10e810c86478225f39023b206414e72faeeb2f6dafe3260368fd18",
+            "case": "spike04_sse",
+            "started_utc": "2026-09-08T00:25:38.856791+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ],
+        "metadata_telemetry": [
+          {
+            "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T002604312550Z-metadata_telemetry.jsonl",
+            "sha256": "894729c959d2994489c92d9dcdefb93217da496c01f5a70429879a51733a1aa3",
+            "case": "metadata_telemetry",
+            "started_utc": "2026-09-08T00:26:04.313251+00:00",
+            "result": "PASS",
+            "exit_code": 0
+          }
+        ]
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T233918811421Z-batch-corrected-initial.jsonl",
+      "sha256": "a715bf648f087827efa7f5a23e874b64fb03fcb330cce2b149660cca7dd5ca62",
+      "case": "batch-corrected-initial",
+      "started_utc": "2026-09-07T23:39:18.812651+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T233919844387Z-corrected-initial-00.jsonl",
+      "sha256": "284dbb7b4654edfa4ead76831807e08af80bce73fe7715e7411bd437bf48ea66",
+      "case": "corrected-initial-00",
+      "started_utc": "2026-09-07T23:39:19.845399+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T233934296685Z-toolbox-smoke.jsonl",
+      "sha256": "a2bf44dea1daf946ad2346f9b67e2af6a4a429aaa656a77b166460d84351da9d",
+      "case": "toolbox-smoke",
+      "started_utc": "2026-09-07T23:39:34.298025+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234026677644Z-preflight.jsonl",
+      "sha256": "40ea7e70e33d04a8ebc2702100b4692cad343ba6445a0477ad8961b68ecf8134",
+      "case": "preflight",
+      "started_utc": "2026-09-07T23:40:26.678701+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234132094710Z-corrected-initial-01.jsonl",
+      "sha256": "6072574f9b50e24ac0bd74975d4497fd71105accdcdb41e19fe3413774f774e3",
+      "case": "corrected-initial-01",
+      "started_utc": "2026-09-07T23:41:32.095565+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234133141716Z-environment.jsonl",
+      "sha256": "69d0ef86483b55e73fa320e9e78bc2f5d4844a1482447a5e6cfdbd10bda70331",
+      "case": "environment",
+      "started_utc": "2026-09-07T23:41:33.142572+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234204915879Z-corrected-initial-02.jsonl",
+      "sha256": "879f6b3500c31bffdc16e35b78798d112ebb5da78be06464f5992ff595328353",
+      "case": "corrected-initial-02",
+      "started_utc": "2026-09-07T23:42:04.916850+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234206084402Z-spike01_history_session.jsonl",
+      "sha256": "5fa682f8046dc2c40c3ce56ce48a16b456afeefd9da96a5c3b9b9b8d93f14db1",
+      "case": "spike01_history_session",
+      "started_utc": "2026-09-07T23:42:06.085433+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234317268216Z-local-complete.jsonl",
+      "sha256": "d375d942bd2ca83466fe5aafb62d0b2710707a36c342fda69fc47344e2d3b9d4",
+      "case": "local-complete",
+      "started_utc": "2026-09-07T23:43:17.269077+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234336154853Z-corrected-initial-03.jsonl",
+      "sha256": "b6daef46f69807b216ed90a3111553c10cbf70d13d9823df7a8f0376b8ac2653",
+      "case": "corrected-initial-03",
+      "started_utc": "2026-09-07T23:43:36.155885+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234337293910Z-spike02_toolbox_allow.jsonl",
+      "sha256": "31e89a45df4ad3686812951abd6e92c57ac8ab673f749a5b99e4e4663d7addb9",
+      "case": "spike02_toolbox_allow",
+      "started_utc": "2026-09-07T23:43:37.294705+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234415352467Z-corrected-initial-04.jsonl",
+      "sha256": "d43dffc4ec7b4107b7055e4f03b60f17a88e6fbb1b7f3f728a60da4b0ff9133f",
+      "case": "corrected-initial-04",
+      "started_utc": "2026-09-07T23:44:15.353501+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234416578309Z-spike02_toolbox_block.jsonl",
+      "sha256": "b319225be282fc5ab233855b70a32cbf75af9730d20781da8911f52946c7e13f",
+      "case": "spike02_toolbox_block",
+      "started_utc": "2026-09-07T23:44:16.579298+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234453185541Z-corrected-initial-05.jsonl",
+      "sha256": "8b31e6585046ec9cfe5c3aaae1bb92127c8a53096cb6b9124b46bd8711968d28",
+      "case": "corrected-initial-05",
+      "started_utc": "2026-09-07T23:44:53.186489+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234454207519Z-spike02_toolbox_allow.jsonl",
+      "sha256": "4e0a40ab0e42ee4886040333ef9207dd3b6674e9e541f7800e9e213c355c26b8",
+      "case": "spike02_toolbox_allow",
+      "started_utc": "2026-09-07T23:44:54.209196+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234530893452Z-corrected-initial-06.jsonl",
+      "sha256": "8a31f7d95162f545755789301d05febaf730e634036d5919ec6986fbf83d6ddf",
+      "case": "corrected-initial-06",
+      "started_utc": "2026-09-07T23:45:30.894708+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234531908666Z-spike02_toolbox_block.jsonl",
+      "sha256": "0857c64727b05e359d81da9d19c1cf82585bb446e3fa40b80ed6b650a38b402f",
+      "case": "spike02_toolbox_block",
+      "started_utc": "2026-09-07T23:45:31.909764+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234608248786Z-corrected-initial-07.jsonl",
+      "sha256": "8f8ff303fe87f892b0f1a5485df783fd9ffa2f79733b7d35c13f612aa9b19259",
+      "case": "corrected-initial-07",
+      "started_utc": "2026-09-07T23:46:08.249594+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234609233143Z-spike03_approval_approve.jsonl",
+      "sha256": "b1088c50f8d21e6a42177a63ec8da077556f33c1da97ff0b7604967850d14411",
+      "case": "spike03_approval_approve",
+      "started_utc": "2026-09-07T23:46:09.234267+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234658982846Z-corrected-initial-08.jsonl",
+      "sha256": "f5d7c7a2f9cf6c5e1275cf907a18bbd5175a645a3b4560b5318e562d229629e6",
+      "case": "corrected-initial-08",
+      "started_utc": "2026-09-07T23:46:58.983799+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234700035642Z-spike03_approval_deny.jsonl",
+      "sha256": "0194c6301e1acf6f5b0e6422ef700cca647129cb393673932ebbd9e4411f9344",
+      "case": "spike03_approval_deny",
+      "started_utc": "2026-09-07T23:47:00.036533+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234746671009Z-corrected-initial-09.jsonl",
+      "sha256": "0c3c1113023b005c49af46ba909cf0b43cc8e8a807291442c45063da8ba55075",
+      "case": "corrected-initial-09",
+      "started_utc": "2026-09-07T23:47:46.671834+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234747815339Z-spike03_approval_binding.jsonl",
+      "sha256": "9463f91fbc2c769010097e35a79533e6b973e4a12541d6f09b6ec92a597bb6a4",
+      "case": "spike03_approval_binding",
+      "started_utc": "2026-09-07T23:47:47.816093+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234858130453Z-corrected-initial-10.jsonl",
+      "sha256": "f7739155363d9912089af18bafb04cf723e933a3c49b419d8222fdf78c7423c4",
+      "case": "corrected-initial-10",
+      "started_utc": "2026-09-07T23:48:58.131343+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234859266168Z-spike04_affinity.jsonl",
+      "sha256": "1c6539fdff7cd45d7a70fbb17acd054cb32b8cc606d73247f6ec7d70ffe90915",
+      "case": "spike04_affinity",
+      "started_utc": "2026-09-07T23:48:59.267148+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234929601954Z-corrected-initial-11.jsonl",
+      "sha256": "ffd5579f00305a32200f486a45d0d0fe49cfa1b9a051b4746e90c572e1eaeb11",
+      "case": "corrected-initial-11",
+      "started_utc": "2026-09-07T23:49:29.603236+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T234930665875Z-spike04_new_session_control.jsonl",
+      "sha256": "3043810807e68506f5f6110506eda5c4736f50b80c22fc1e11820511c34ffe7f",
+      "case": "spike04_new_session_control",
+      "started_utc": "2026-09-07T23:49:30.666639+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235506966866Z-local-final-scripts.jsonl",
+      "sha256": "3531bfc613e5e9dfe5849ebe6da15ea3ddad0efb555a34d5e4814937f77de47e",
+      "case": "local-final-scripts",
+      "started_utc": "2026-09-07T23:55:06.967845+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235750318770Z-corrected-initial-12.jsonl",
+      "sha256": "d21ecd89a7f3a38dd396f685f22b7fc4f7a30ef69698dfbe34afdd35bb5f51ee",
+      "case": "corrected-initial-12",
+      "started_utc": "2026-09-07T23:57:50.320353+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235751428432Z-spike04_sse.jsonl",
+      "sha256": "080dcbdbec9563855863fa1165d2153de2d119c4b1eca1b31a2a2fea7c530e22",
+      "case": "spike04_sse",
+      "started_utc": "2026-09-07T23:57:51.429440+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235818644555Z-corrected-initial-13.jsonl",
+      "sha256": "1ff1dfdd019166dbd602c0c64a98ceb93e8e56003d5c9aeed5a43682d782c030",
+      "case": "corrected-initial-13",
+      "started_utc": "2026-09-07T23:58:18.645580+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235819698828Z-metadata_telemetry.jsonl",
+      "sha256": "d9eb5cd47c4696d9467da1e3a209acb7aeb5a98d5e4a0cc54b5b48fcf826297f",
+      "case": "metadata_telemetry",
+      "started_utc": "2026-09-07T23:58:19.700155+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235851685943Z-clean-start-orchestration.jsonl",
+      "sha256": "2f56d2fd6283e831f7ec7913d515ce863904d50760f4d8b6fd1d4d6055db72dd",
+      "case": "clean-start-orchestration",
+      "started_utc": "2026-09-07T23:58:51.686762+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235857430123Z-reset.jsonl",
+      "sha256": "f83bb8bd2db02dd6543d8d4f479941f8ecbc392ad9d923a9f379c501b92629d0",
+      "case": "reset",
+      "started_utc": "2026-09-07T23:58:57.431040+00:00",
+      "result": "RESET_COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000229352434Z-toolbox-provision.jsonl",
+      "sha256": "6dad7f439fd2289e8eaae3c9950835b64dfa5944b93958cace433b8da563488b",
+      "case": "toolbox-provision",
+      "started_utc": "2026-09-08T00:02:29.353511+00:00",
+      "result": "INCOMPLETE_CAPTURE",
+      "exit_code": null
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000249667303Z-toolbox-smoke.jsonl",
+      "sha256": "27320ce52fe2b44c5059c1b3034278128fec08fde0422df27e4ab15eb65a0385",
+      "case": "toolbox-smoke",
+      "started_utc": "2026-09-08T00:02:49.668180+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000345135000Z-source-identity.jsonl",
+      "sha256": "bfd5a5082cc74297df429badb94659f6a93b693310166c2db1f3452f3203a6c9",
+      "case": "source-identity",
+      "started_utc": "2026-09-08T00:03:45.136045+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000348242826Z-source-identity.jsonl",
+      "sha256": "879084b6bc163d44575de958f495b32bb0105a150d0fa3574cc143098a9d09a8",
+      "case": "source-identity",
+      "started_utc": "2026-09-08T00:03:48.244158+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000622486240Z-source-identity.jsonl",
+      "sha256": "4d8d3e417f018bdf06a6efaa5d91703d6bb3d42d82a630fde85d20cdb0d22ff5",
+      "case": "source-identity",
+      "started_utc": "2026-09-08T00:06:22.487060+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000623802740Z-environment.jsonl",
+      "sha256": "9c16174ec6e3b003128b477c968eeced465b81c2c7a585c8d7d9d4e3e5342944",
+      "case": "environment",
+      "started_utc": "2026-09-08T00:06:23.803442+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000659264358Z-batch-clean-start.jsonl",
+      "sha256": "9ae7edb7e1c38d7cbfcd2fd64c6d9dc4da2f44bf085f89246fb766e7a26bf287",
+      "case": "batch-clean-start",
+      "started_utc": "2026-09-08T00:06:59.265447+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000700276529Z-clean-start-00.jsonl",
+      "sha256": "eba053c039b03a3ab3bc084b597fe165f787e9d331d1e87f39b7c13752535174",
+      "case": "clean-start-00",
+      "started_utc": "2026-09-08T00:07:00.277403+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000717350270Z-toolbox-smoke.jsonl",
+      "sha256": "4201ad5672f2e8577354bafb84ebe9e6df031a21c5649c9521ea5abd64efaf18",
+      "case": "toolbox-smoke",
+      "started_utc": "2026-09-08T00:07:17.351806+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000809643894Z-preflight.jsonl",
+      "sha256": "699e40dc86db6c983917e7b3937d033b3a79a21de09e875af88b8e07b6b45053",
+      "case": "preflight",
+      "started_utc": "2026-09-08T00:08:09.644637+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000912491632Z-clean-start-01.jsonl",
+      "sha256": "1ccf3edbd6c26ea85927a49e7a1eae0246fbd9e6a3f52f5b75cd03a4146f6979",
+      "case": "clean-start-01",
+      "started_utc": "2026-09-08T00:09:12.492833+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000913622027Z-environment.jsonl",
+      "sha256": "d4e38d95f7cc0a6b23dd90736b0144f5a45a6b26ef07d3db6f914631618bfc54",
+      "case": "environment",
+      "started_utc": "2026-09-08T00:09:13.622748+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000945760183Z-clean-start-02.jsonl",
+      "sha256": "6e73d11d4f75a181792ee1e27766b73117ec0e45d3b9b5d4f02e46a10c351227",
+      "case": "clean-start-02",
+      "started_utc": "2026-09-08T00:09:45.760953+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T000946891624Z-spike01_history_session.jsonl",
+      "sha256": "fa191cd8b433030430dc201aa6595bc03ae4a3105828ab7b9f71b96535589887",
+      "case": "spike01_history_session",
+      "started_utc": "2026-09-08T00:09:46.892968+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001046354991Z-clean-start-03.jsonl",
+      "sha256": "130beb8dfac09ed911bf883b23e9e12cb387ef5a87fe00bf9c94e3b3082a2c59",
+      "case": "clean-start-03",
+      "started_utc": "2026-09-08T00:10:46.355892+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001047525550Z-spike02_toolbox_allow.jsonl",
+      "sha256": "5827fdd3f296326e257c7b0d65ad482ddde8d1f9b0ef38613b59527ec19ff8da",
+      "case": "spike02_toolbox_allow",
+      "started_utc": "2026-09-08T00:10:47.526507+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001126985081Z-clean-start-04.jsonl",
+      "sha256": "f8023939a07bd12e363095d3e702adb6a4361e1205d6b24b30050e9bd34928fb",
+      "case": "clean-start-04",
+      "started_utc": "2026-09-08T00:11:26.986216+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001128218491Z-spike02_toolbox_block.jsonl",
+      "sha256": "10a56e31cd005c523b0802256a0f25f3f035b224d0c8ca1704b9386a5124f2db",
+      "case": "spike02_toolbox_block",
+      "started_utc": "2026-09-08T00:11:28.219379+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001210288487Z-clean-start-05.jsonl",
+      "sha256": "8e87ac8ac9e1eea981c2548afa229cc43f81e24578797308d57fbe2409e2b053",
+      "case": "clean-start-05",
+      "started_utc": "2026-09-08T00:12:10.289447+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001211407204Z-spike02_toolbox_allow.jsonl",
+      "sha256": "1443aa473c93ad097b6b6e9e95093cf177e13660f9fe443457665dd467e525f7",
+      "case": "spike02_toolbox_allow",
+      "started_utc": "2026-09-08T00:12:11.408441+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001252933682Z-clean-start-06.jsonl",
+      "sha256": "2aac0fdc51fc918da0c0c1e9bddd0478c41b5b87f3f0a5d742b77f13d637dd0a",
+      "case": "clean-start-06",
+      "started_utc": "2026-09-08T00:12:52.934770+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001253980910Z-spike02_toolbox_block.jsonl",
+      "sha256": "2c0646ed3ade659dda8ea95170341b0cd4af686975b7a0ce4fd76c46400b57a2",
+      "case": "spike02_toolbox_block",
+      "started_utc": "2026-09-08T00:12:53.982265+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001333222036Z-clean-start-07.jsonl",
+      "sha256": "f63940fd33ed3a93d1c7117bc48614c59a668ae72e39047ad5bb32071efaaaec",
+      "case": "clean-start-07",
+      "started_utc": "2026-09-08T00:13:33.223455+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001334255380Z-spike03_approval_approve.jsonl",
+      "sha256": "76bca1c64926d6c4b81a0ded2d4cb11c001bd9d503b86cdfea5900f8bc312a68",
+      "case": "spike03_approval_approve",
+      "started_utc": "2026-09-08T00:13:34.256665+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001420678773Z-local-clean-environment.jsonl",
+      "sha256": "8c713d408dff8667c812a20169f7db4cd9f5e19809e8f4aaad5dd071c99427f4",
+      "case": "local-clean-environment",
+      "started_utc": "2026-09-08T00:14:20.679856+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001427318908Z-clean-start-08.jsonl",
+      "sha256": "9e1ddc5aeb496d273d045f052f7de8d6f6bad53c7579e13c35c3de378921c500",
+      "case": "clean-start-08",
+      "started_utc": "2026-09-08T00:14:27.320032+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001428454749Z-spike03_approval_deny.jsonl",
+      "sha256": "f236752a2a91495b62a0d961741e8d12dfbf63a928f022cf3f91a285979db6a2",
+      "case": "spike03_approval_deny",
+      "started_utc": "2026-09-08T00:14:28.455611+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001521100103Z-clean-start-09.jsonl",
+      "sha256": "73565a5c5f0e3e2ae81e36242865ec0086b3024608b0408b084be339c9bdb419",
+      "case": "clean-start-09",
+      "started_utc": "2026-09-08T00:15:21.100832+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001522140345Z-spike03_approval_binding.jsonl",
+      "sha256": "9361b8906ef8a0b9958f7928ffd405097534d0e0c04c90b6cff4debcae8338be",
+      "case": "spike03_approval_binding",
+      "started_utc": "2026-09-08T00:15:22.141775+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001634671687Z-clean-start-10.jsonl",
+      "sha256": "f1039082865765bae547823e4d6efd9b8f030bf659fe4b53a10d3665a348c32b",
+      "case": "clean-start-10",
+      "started_utc": "2026-09-08T00:16:34.672626+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001635686033Z-spike04_affinity.jsonl",
+      "sha256": "8360d7686d0224e79ad2383720b1886c31583462b0e4d1dca1bbaf83d80b73f2",
+      "case": "spike04_affinity",
+      "started_utc": "2026-09-08T00:16:35.686854+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001706323039Z-clean-start-11.jsonl",
+      "sha256": "7e89d97ae85d4786f91930648445a21d6da495ec6c19541b0d789a25e0d835c0",
+      "case": "clean-start-11",
+      "started_utc": "2026-09-08T00:17:06.323853+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T001707441683Z-spike04_new_session_control.jsonl",
+      "sha256": "37608c497e2643add3edb188f71392408caba7ce49e2987192bcf827078b9620",
+      "case": "spike04_new_session_control",
+      "started_utc": "2026-09-08T00:17:07.443142+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T002537654617Z-clean-start-12.jsonl",
+      "sha256": "d079b98aa6941d9bb104d822a643420dd5168307fe63d77b84026a36c0c2413e",
+      "case": "clean-start-12",
+      "started_utc": "2026-09-08T00:25:37.655798+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T002538855595Z-spike04_sse.jsonl",
+      "sha256": "9c3234984d10e810c86478225f39023b206414e72faeeb2f6dafe3260368fd18",
+      "case": "spike04_sse",
+      "started_utc": "2026-09-08T00:25:38.856791+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T002603324078Z-clean-start-13.jsonl",
+      "sha256": "227e24c96d90fd7a9a0dfdecac5dbf3d14ca19ebaf0774d44153e85844a8c1e7",
+      "case": "clean-start-13",
+      "started_utc": "2026-09-08T00:26:03.324832+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T002604312550Z-metadata_telemetry.jsonl",
+      "sha256": "894729c959d2994489c92d9dcdefb93217da496c01f5a70429879a51733a1aa3",
+      "case": "metadata_telemetry",
+      "started_utc": "2026-09-08T00:26:04.313251+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T002632738176Z-reset.jsonl",
+      "sha256": "4245f416107f88c529c5fe3ca4b044d9ac59271c39522d8e14d5f115ee55f0ec",
+      "case": "reset",
+      "started_utc": "2026-09-08T00:26:32.738850+00:00",
+      "result": "RESET_COMPLETE",
+      "exit_code": 0
+    }
+  ],
+  "source_snapshot": [
+    {
+      "source": ".agentignore",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/.agentignore",
+      "sha256": "60623aebc8b69d268cadf4dac63b9f826e2f19b97d6a96f3399ef1e311a491d8"
+    },
+    {
+      "source": "azure.yaml",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/azure.yaml",
+      "sha256": "ee623efd3665caec91b8bd3583409523ee3ca029c0e72e8b59e4e3427d347ca3"
+    },
+    {
+      "source": "pyproject.toml",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/pyproject.toml",
+      "sha256": "3aec8de9559a746f46ccd406ef30751d2e2f695756e79471ee676b60aa1d6c38"
+    },
+    {
+      "source": "uv.lock",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/uv.lock",
+      "sha256": "357c0879939d3fc459cb1bfc740d161b61ecf29a80e237a4f37c07857cfbf7d4"
+    },
+    {
+      "source": "requirements.txt",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/requirements.txt",
+      "sha256": "a15d2cfa08b0b99d33ff5fe3e8887b0e3d544617a83c45e2f28384d199425bfd"
+    },
+    {
+      "source": "infra/.terraform.lock.hcl",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/infra/.terraform.lock.hcl",
+      "sha256": "ca06a7e9563cab305794a9e9e3e1c187e09d3dd0fb602d9f7ff23c2852850680"
+    },
+    {
+      "source": "ReasonFuse_Phase2_Core_Construction_Prompt.md",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/ReasonFuse_Phase2_Core_Construction_Prompt.md",
+      "sha256": "af2cdaad373740ddd52e49a880c889231c58bd78ee558e48adbe9b64ca4e1e56"
+    },
+    {
+      "source": "src/main.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/src/main.py",
+      "sha256": "a2ee5a3ac494c1f08ab86bf2944b0271e9cfa056cb821c855e49be5df3c6e4a6"
+    },
+    {
+      "source": "src/reasonfuse/agent.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/src/reasonfuse/agent.py",
+      "sha256": "37bd1aa795788e32110e7459576286fbfdc578d5825b7ee85ff2e3dd37430f04"
+    },
+    {
+      "source": "src/reasonfuse/main.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/src/reasonfuse/main.py",
+      "sha256": "e2e18981cae679d083a79c71a63d2d68f4b22fe372bb7ffb9179ec9b3d4fdf27"
+    },
+    {
+      "source": "src/reasonfuse/__init__.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/src/reasonfuse/__init__.py",
+      "sha256": "396b8b8ed346e0c9152d1457d04a543a54bd3a607502a5513eb26f5a98bf9af1"
+    },
+    {
+      "source": "src/reasonfuse/validation/build_identity.json",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/src/reasonfuse/validation/build_identity.json",
+      "sha256": "9265ae901f437465bc1273229bec787701c660dffb9f0a833661dd832aca23b1"
+    },
+    {
+      "source": "src/reasonfuse/validation/middleware.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/src/reasonfuse/validation/middleware.py",
+      "sha256": "08ec9cb2bf859d474f697f9c8d3c45953ef716fa63d32ae02c0332a5f305bfad"
+    },
+    {
+      "source": "src/reasonfuse/validation/session_state.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/src/reasonfuse/validation/session_state.py",
+      "sha256": "3a43bd5eb8778d25dd576631891218c0b3293f321f8c61500a14b3a6fd46c543"
+    },
+    {
+      "source": "src/reasonfuse/validation/__init__.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/src/reasonfuse/validation/__init__.py",
+      "sha256": "d8c7df95572b7e32a8fc59ce9ff899315c20891b5a4042bb97d73df8b3d1b1a8"
+    },
+    {
+      "source": "scripts/bootstrap.ps1",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/bootstrap.ps1",
+      "sha256": "2b6ea0bf0bbc7159479f3af8ac0891085b1593516dbf04b44f62d656d8c8aa21"
+    },
+    {
+      "source": "scripts/capture_environment.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/capture_environment.py",
+      "sha256": "0d8b908199dcca114773ef70015f7d2c347243471245ded23078d097109b1446"
+    },
+    {
+      "source": "scripts/capture_telemetry.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/capture_telemetry.py",
+      "sha256": "739416ad9669f8b323bfd74dce2b01e59fb8308adcc6af6ed638d5a6229ad5b5"
+    },
+    {
+      "source": "scripts/create_toolbox.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/create_toolbox.py",
+      "sha256": "8dd684126135f46b71c177fb0be82b68d941697e6101c55d58f23d1074ba30c0"
+    },
+    {
+      "source": "scripts/deploy.ps1",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/deploy.ps1",
+      "sha256": "5fef72d7a6e5e2af76eb3b672d130cc5d4d1cf2eb3ff4dd817fd077388f16b12"
+    },
+    {
+      "source": "scripts/deploy.sh",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/deploy.sh",
+      "sha256": "ec75e2059fbc80727e772d351a5d0a761ccac5a31ddf158321a890d89b14f6c2"
+    },
+    {
+      "source": "scripts/preflight.ps1",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/preflight.ps1",
+      "sha256": "c5b99842f08155f475ed8aa063c6705c643079fc88edbac328b97429d7ddb3eb"
+    },
+    {
+      "source": "scripts/preflight.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/preflight.py",
+      "sha256": "4ea99f7a0aaf8560d8cdf983d3f122a736384c76fc76ac28440fc041f4a47798"
+    },
+    {
+      "source": "scripts/preflight.sh",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/preflight.sh",
+      "sha256": "3c0d20d04a4ca27dc5e2155b568cbf86ba50f7af0cac5a2343375a82a12c254d"
+    },
+    {
+      "source": "scripts/reset.ps1",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/reset.ps1",
+      "sha256": "c8739e24944b6fdae120fbfce7097ace73b7db1a1642039eae3e5ac8fdc87dc8"
+    },
+    {
+      "source": "scripts/reset.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/reset.py",
+      "sha256": "00d862d1595b76372b97d6e0bfcabcde1a9d4967116077d3720912fd192209f8"
+    },
+    {
+      "source": "scripts/reset.sh",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/reset.sh",
+      "sha256": "341304b893ca02d39f1f533afa5e35edf44996e981c98ad9169aca5528ca640d"
+    },
+    {
+      "source": "scripts/review_verification.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/review_verification.py",
+      "sha256": "ec01e57c40785c49979b25b673d93e0338a7fd5752add8f2d055a98bef1240a3"
+    },
+    {
+      "source": "scripts/source_identity.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/source_identity.py",
+      "sha256": "6ed7a963bea4b00add8222e5fc6b15073d0b0bcdc5a79e0c702abc7d61f1d546"
+    },
+    {
+      "source": "scripts/toolbox_smoke.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/toolbox_smoke.py",
+      "sha256": "a39a90f1936ed34e1662390c3fcd4e1f2de929ab0a9fd8bd4985d95a6e31bc6d"
+    },
+    {
+      "source": "scripts/verification_batch.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/verification_batch.py",
+      "sha256": "37369abe278024b8b6fbc04f10b35723b770008df5a4860723a9fda0e8d72174"
+    },
+    {
+      "source": "scripts/verification_clean_start.ps1",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/verification_clean_start.ps1",
+      "sha256": "651fd5d84b6d2cf41b8e2c5eee4a12669534a6b34eb42033d209470bc70937b0"
+    },
+    {
+      "source": "scripts/verification_command.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/verification_command.py",
+      "sha256": "e03abc7800cb705c097776f3ea4cfcf9ed5452c27cd1b34b6fd8a5c2514a8108"
+    },
+    {
+      "source": "scripts/verification_index.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/verification_index.py",
+      "sha256": "abb29ef9469efddcf1e66e6f5280c419b220cd0ca8828fbcea72b43d5cc9a03e"
+    },
+    {
+      "source": "scripts/verification_local.ps1",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/verification_local.ps1",
+      "sha256": "5fd07e66474fd70f9261356c3c1c1dddc06ccd8f1ea3cadc1c1795b10adc09e0"
+    },
+    {
+      "source": "scripts/__init__.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/__init__.py",
+      "sha256": "f8375553da0cf49bf68904f4f63cc5246a3928b8cdb85c7c29fb383e75a96f15"
+    },
+    {
+      "source": "scripts/support/validation.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/support/validation.py",
+      "sha256": "ba79fb0c55feee943e34836fa8bdcca572e16579c40f309f5d2740959aa761a8"
+    },
+    {
+      "source": "scripts/support/__init__.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/scripts/support/__init__.py",
+      "sha256": "c02135619c101c019b4329c7d50f3acc14f623a17ec08419c22519166d17da84"
+    },
+    {
+      "source": "tests/local_history_audit.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/local_history_audit.py",
+      "sha256": "a42932ba3aea4cc218be3e384519aed420bb2e7cea7818e15d94a8e2c1c74be2"
+    },
+    {
+      "source": "tests/local_wiring.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/local_wiring.py",
+      "sha256": "af1171eba1f66965735e7eab5cb5e393f70c90405cc258b3101e5fc4fc3c10d3"
+    },
+    {
+      "source": "tests/integration/apim.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/integration/apim.py",
+      "sha256": "91f5c3bef5c50fb2bd09f59ac1f709e993742a49359672372b30e854f134262a"
+    },
+    {
+      "source": "tests/integration/approval.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/integration/approval.py",
+      "sha256": "88a80349639c1c57337acd10c8461269c80758db64675b153a97726b443746a5"
+    },
+    {
+      "source": "tests/integration/history_session.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/integration/history_session.py",
+      "sha256": "14cbc5343c7b2f5e272c6ae90ec579b14e3e041118f15a69a39a8354509d10e1"
+    },
+    {
+      "source": "tests/integration/toolbox_interception.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/integration/toolbox_interception.py",
+      "sha256": "6a67926d5dad2ae13e989aea0746f2927fe41e289fd201045f351054e38e9ecd"
+    },
+    {
+      "source": "tests/support/operations_api/dns_resolution.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/support/operations_api/dns_resolution.py",
+      "sha256": "0c69ba238cd6262176a924cce7935df7615f467bf1f6e43442cf2db77c656140"
+    },
+    {
+      "source": "tests/support/operations_api/openapi.yaml",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/support/operations_api/openapi.yaml",
+      "sha256": "721e47ffb84455bb30283332af053a8b90b605018f6651a779371225c3b5c2f5"
+    },
+    {
+      "source": "tests/support/operations_api/restart_service.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/support/operations_api/restart_service.py",
+      "sha256": "3d7ce3f745e26e136884f147992e589e2a8c923789828cb9111a0b72c9a5432f"
+    },
+    {
+      "source": "tests/support/operations_api/server.py",
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/sources/tests/support/operations_api/server.py",
+      "sha256": "26c182d913c4045a5698ebafb2cfab878f9ceca5e9a669cc58aba3249af0736c"
+    }
+  ],
+  "audited_packages": [
+    {
+      "path": "evidence/phase-01-runtime-validation/verification-20260907T232624Z/packages/d7b0ddeb3e2aa21a24360dbcfced1a017d35806e07d171f796a7d9e2e011eb97.zip",
+      "sha256": "d7b0ddeb3e2aa21a24360dbcfced1a017d35806e07d171f796a7d9e2e011eb97",
+      "source_manifest_sha256": "adf7a170d63d7df7bc06d18a7f87f8aef3aa3498cd42c74272f113b8a6b5c372"
+    }
+  ],
+  "clean_start_workflow": [
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235851685943Z-clean-start-orchestration.jsonl",
+      "sha256": "2f56d2fd6283e831f7ec7913d515ce863904d50760f4d8b6fd1d4d6055db72dd",
+      "case": "clean-start-orchestration",
+      "started_utc": "2026-09-07T23:58:51.686762+00:00",
+      "result": "PASS",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260907/20260907T235857430123Z-reset.jsonl",
+      "sha256": "f83bb8bd2db02dd6543d8d4f479941f8ecbc392ad9d923a9f379c501b92629d0",
+      "case": "reset",
+      "started_utc": "2026-09-07T23:58:57.431040+00:00",
+      "result": "RESET_COMPLETE",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/phase-01-runtime-validation/runs/20260908/20260908T002632738176Z-reset.jsonl",
+      "sha256": "4245f416107f88c529c5fe3ca4b044d9ac59271c39522d8e14d5f115ee55f0ec",
+      "case": "reset",
+      "started_utc": "2026-09-08T00:26:32.738850+00:00",
+      "result": "RESET_COMPLETE",
+      "exit_code": 0
+    }
+  ],
+  "reports": [
+    {
+      "path": "docs/phases/phase-01-runtime-validation/verification-open-questions.md",
+      "sha256": "7298165a688c693bc34536c59a7cf7c8c5dd3c9fb539bb5fe1adbd1e4e5c93ef"
+    },
+    {
+      "path": "docs/phases/phase-01-runtime-validation/verification-report.md",
+      "sha256": "3151dcd3dce5fed8ae2b2badc436c284ff93f8a7ad5f08876c8238de2e96db1d"
+    }
+  ],
+  "retention": "User-authorized learning cleanup on 2026-09-08: superseded construction/diagnostic artifacts removed; complete accepted initial and clean-start batches retained. This is not a complete execution-history archive.",
+  "source_snapshot_scope": "Working-source snapshot at index update; the audited ZIP and embedded build identity identify the runtime actually tested.",
+  "scope": "bounded independent Phase 1 acceptance; deterministic external operations and middleware SSE"
+}

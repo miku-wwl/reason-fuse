@@ -1,0 +1,5 @@
+{"timestamp_utc": "2026-09-07T23:42:04.916850+00:00", "event": "START", "case": "corrected-initial-02", "command": ["scripts/verification_command.py", "corrected-initial-02", "--", "D:\\workshop\\sep\\reason-fuse\\.venv\\Scripts\\python.exe", "tests/integration/history_session.py"], "region": "australiaeast"}
+{"timestamp_utc": "2026-09-07T23:42:04.917599+00:00", "event": "COMMAND", "argv": ["D:\\workshop\\sep\\reason-fuse\\.venv\\Scripts\\python.exe", "tests/integration/history_session.py"]}
+{"timestamp_utc": "2026-09-07T23:43:29.193851+00:00", "event": "OUTPUT", "text": "PASS spike01_history_session"}
+{"timestamp_utc": "2026-09-07T23:43:29.194390+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260907\\20260907T234206084402Z-spike01_history_session.jsonl"}
+{"timestamp_utc": "2026-09-07T23:43:34.695197+00:00", "event": "RESULT", "status": "PASS", "exit_code": 0}

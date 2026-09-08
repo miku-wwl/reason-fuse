@@ -30,6 +30,7 @@ def reset(evidence):
                     recorded.add(session)
     deleted = []
     already_deleted = 0
+    final_statuses = {}
     with AzureCliCredential(process_timeout=60) as credential, AIProjectClient(
         endpoint=os.environ["FOUNDRY_PROJECT_ENDPOINT"], credential=credential
     ) as project:
@@ -50,12 +51,17 @@ def reset(evidence):
             # The native API can retain metadata rows with terminal status deleted.
             # Absence or explicit deleted status is success; every other status fails.
             evidence.write("SESSION_RESET_READBACK", agent=agent, recorded_sessions_still_listed=remaining)
+            for session in remaining:
+                final_statuses[session["session_id"]] = {"agent": agent, "status": session["status"]}
             assert all(session["status"] == "deleted" for session in remaining), f"Non-deleted recorded test sessions remain for {agent}"
     # Evidence is retained. The next test creates fresh native conversation/provider/
     # approval state. There is no separate fault state or custom approval database.
     artifact = ROOT / ".azure" / "rf-phase1-aue" / "validation-last-run.json"
     artifact.unlink(missing_ok=True)
     operations.assert_counts({})
+    for session_id in sorted(recorded):
+        evidence.write("RECORDED_SESSION_OUTCOME", session_id=session_id,
+                       **final_statuses.get(session_id, {"status": "absent_from_all_agent_session_pages"}))
     evidence.write("ASSERTIONS", recorded_sessions=len(recorded), deleted_sessions=len(deleted),
                    already_deleted_sessions=already_deleted,
                    recorded_non_deleted_sessions_remaining=0, external_counts={},

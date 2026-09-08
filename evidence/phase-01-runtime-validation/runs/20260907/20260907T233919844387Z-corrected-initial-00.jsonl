@@ -1,0 +1,29 @@
+{"timestamp_utc": "2026-09-07T23:39:19.845399+00:00", "event": "START", "case": "corrected-initial-00", "command": ["scripts/verification_command.py", "corrected-initial-00", "--", "pwsh", "-File", "scripts/preflight.ps1"], "region": "australiaeast"}
+{"timestamp_utc": "2026-09-07T23:39:19.846306+00:00", "event": "COMMAND", "argv": ["pwsh", "-File", "scripts/preflight.ps1"]}
+{"timestamp_utc": "2026-09-07T23:39:21.087285+00:00", "event": "OUTPUT", "text": "azd ai agent doctor"}
+{"timestamp_utc": "2026-09-07T23:39:21.088044+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:39:21.088611+00:00", "event": "OUTPUT", "text": "Local"}
+{"timestamp_utc": "2026-09-07T23:39:21.089576+00:00", "event": "OUTPUT", "text": "   (\u2713) azd extension reachable"}
+{"timestamp_utc": "2026-09-07T23:39:21.139582+00:00", "event": "OUTPUT", "text": "   (\u2713) azure.yaml present and parseable"}
+{"timestamp_utc": "2026-09-07T23:39:21.142641+00:00", "event": "OUTPUT", "text": "   (\u2713) azd environment selected"}
+{"timestamp_utc": "2026-09-07T23:39:21.143954+00:00", "event": "OUTPUT", "text": "   (\u2713) agent service in azure.yaml"}
+{"timestamp_utc": "2026-09-07T23:39:21.147819+00:00", "event": "OUTPUT", "text": "   (\u2713) FOUNDRY_PROJECT_ENDPOINT set"}
+{"timestamp_utc": "2026-09-07T23:39:21.153383+00:00", "event": "OUTPUT", "text": "   (\u2713) agent definition valid (per service)"}
+{"timestamp_utc": "2026-09-07T23:39:21.194941+00:00", "event": "OUTPUT", "text": "   (\u2713) manual env vars set"}
+{"timestamp_utc": "2026-09-07T23:39:21.195564+00:00", "event": "OUTPUT", "text": "   (-) Configured toolboxes have endpoint env vars set -- skipped (no configured toolbox resources were found.)"}
+{"timestamp_utc": "2026-09-07T23:39:22.544513+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:39:22.545129+00:00", "event": "OUTPUT", "text": "Authentication"}
+{"timestamp_utc": "2026-09-07T23:39:22.545799+00:00", "event": "OUTPUT", "text": "   (\u2713) authentication"}
+{"timestamp_utc": "2026-09-07T23:39:25.718750+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:39:25.719330+00:00", "event": "OUTPUT", "text": "Remote"}
+{"timestamp_utc": "2026-09-07T23:39:25.719767+00:00", "event": "OUTPUT", "text": "   (\u2713) Foundry project endpoint reachable"}
+{"timestamp_utc": "2026-09-07T23:39:29.941249+00:00", "event": "OUTPUT", "text": "   (\u2713) Developer has required role on Foundry project"}
+{"timestamp_utc": "2026-09-07T23:39:31.527762+00:00", "event": "OUTPUT", "text": "   (\u2713) Hosted agents are active"}
+{"timestamp_utc": "2026-09-07T23:39:31.528730+00:00", "event": "OUTPUT", "text": "   (-) Configured connections exist on Foundry project -- skipped (no enabled connection services or legacy connection resources found.)"}
+{"timestamp_utc": "2026-09-07T23:39:31.543447+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:39:31.544128+00:00", "event": "OUTPUT", "text": "11 passed, 0 failed, 2 skipped"}
+{"timestamp_utc": "2026-09-07T23:40:19.781886+00:00", "event": "OUTPUT", "text": "{\"tool_names\": [\"operations___dns_resolution\", \"operations___restart_service\"], \"approval_modes\": {\"operations___dns_resolution\": \"never_require\", \"operations___restart_service\": \"always_require\"}}"}
+{"timestamp_utc": "2026-09-07T23:40:19.782543+00:00", "event": "OUTPUT", "text": "TOOLBOX_SMOKE_PASS D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260907\\20260907T233934296685Z-toolbox-smoke.jsonl"}
+{"timestamp_utc": "2026-09-07T23:41:25.076889+00:00", "event": "OUTPUT", "text": "PASS preflight"}
+{"timestamp_utc": "2026-09-07T23:41:25.077416+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260907\\20260907T234026677644Z-preflight.jsonl"}
+{"timestamp_utc": "2026-09-07T23:41:30.802215+00:00", "event": "RESULT", "status": "PASS", "exit_code": 0}

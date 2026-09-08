@@ -2,10 +2,11 @@
 
 Implements only the four spikes in
 [construction-prompt.md](construction-prompt.md).
-Australia East is the only configured region. Construction is complete: all nine
-real integration cases, full preflight and reset passed. Read
-[report.md](report.md) for evidence and limits. The separate
-independent Phase 1 validation remains pending.
+Australia East is the only configured region. Independent acceptance is complete:
+all four spikes, both full batches, deployed-source identity and clean-start passed.
+Read the [final report](verification-report.md) and
+[validation boundaries](verification-open-questions.md). The following commands
+are reusable procedures, not a request to rerun Phase 1 before learning Phase 2.
 
 ## Run from the repository root on Windows
 
@@ -65,3 +66,57 @@ Analytics. Ingestion can lag; it exits non-zero if no recent APIM records are fo
 Dependency locks are authoritative; code deployment uploads exact `requirements.txt`
 for remote build. `.agentignore` excludes environment files, local tools, evidence
 and infrastructure state from the upload. No Full Harness bundle is used.
+
+## Independent verification workflow
+
+The corrected fixed batch executes preflight, live environment/package readback,
+history (including canonical items and duplicate-input audit), two allow and two
+block cases, approve/deny/binding including same-action replay, affinity, exactly
+60 new clients, SSE ordering, and telemetry matched to that SSE operation ID:
+
+```powershell
+.venv/Scripts/python.exe scripts/verification_batch.py corrected-initial
+```
+
+It runs commands sequentially and stops at the first failure; preserve that batch
+before diagnosis. Do not rerun a routing sample until it happens to look favorable.
+Fresh-cookie clients may share the Azure identity token cache, but never a cookie
+jar or HTTP connection. The fixed cohort and all assignments remain recorded.
+
+Only after that batch passes, run the full clean-start workflow. The current
+workspace has a preserved interpreter outside the .venv being replaced:
+
+```powershell
+.venv-before-clean-start-20260907/Scripts/python.exe scripts/verification_command.py clean-start-orchestration -- pwsh -File scripts/verification_clean_start.ps1
+```
+
+Do not launch the outer recorder from the .venv that this command moves. If that
+preserved interpreter is unavailable, first establish a working pinned recorder
+environment outside .venv; do not remove or reuse Terraform ownership state.
+The workflow checks the initial batch, resets recorded sessions/counters, preserves
+the old .venv under .tools, creates a new one, checks bootstrap tooling, performs
+the full deploy (not DnsOnly), reruns the complete fixed suite, and resets again.
+It does not tear down infrastructure. Deleted test runtime state is not restored;
+evidence is retained and fresh scenarios can be reproduced.
+
+Deployment generates `src/reasonfuse/validation/build_identity.json`, audits the
+native ZIP membership/hashes, deploys roles serially and checks `active` status.
+`capture_environment.py` requires both Hosted content_hash values to equal the
+audited ZIP SHA-256; preflight also reads the embedded identity from both releases.
+Regenerate the identity through deployment after code/lock/Git revision changes.
+Never edit it to make a stale upload look current. Use the ordinary native deploy
+path in `deploy.ps1` with the pinned tools; do not substitute `--from-package`.
+
+The hosting SDK's `_foundry_responses_history` has load_messages=True for its
+within-run tool loop. It is cleared across hosted turns. Synthetic history
+validation observes this state and model-bound metadata without changing options
+or keeping another canonical transcript. Actual transcript/tool evidence stays in
+the synthetic validation artifacts; broad message/body telemetry remains disabled.
+
+Retained acceptance evidence, source snapshots, the audited ZIP and hashes are indexed in
+[verification-20260907T232624Z](../../../evidence/phase-01-runtime-validation/verification-20260907T232624Z/index.json).
+`verification_index.py --final` fails unless both full batches and final cleanup
+passed. Superseded construction and diagnostic artifacts were removed by the owner;
+this index is the final acceptance set, not an archive of every attempt.
+`review_verification.py` remains an optional reusable artifact checker; no historical
+review is required. Neither indexing nor artifact checking executes live tests.

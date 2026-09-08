@@ -1,0 +1,66 @@
+{"timestamp_utc": "2026-09-07T23:49:29.603236+00:00", "event": "START", "case": "corrected-initial-11", "command": ["scripts/verification_command.py", "corrected-initial-11", "--", "D:\\workshop\\sep\\reason-fuse\\.venv\\Scripts\\python.exe", "tests/integration/apim.py", "new_session_control", "--samples", "60"], "region": "australiaeast"}
+{"timestamp_utc": "2026-09-07T23:49:29.603958+00:00", "event": "COMMAND", "argv": ["D:\\workshop\\sep\\reason-fuse\\.venv\\Scripts\\python.exe", "tests/integration/apim.py", "new_session_control", "--samples", "60"]}
+{"timestamp_utc": "2026-09-07T23:49:29.617300+00:00", "event": "EXECUTION_SOURCE_HASHES", "sha256": {"src/main.py": "a2ee5a3ac494c1f08ab86bf2944b0271e9cfa056cb821c855e49be5df3c6e4a6", "src/reasonfuse/agent.py": "37bd1aa795788e32110e7459576286fbfdc578d5825b7ee85ff2e3dd37430f04", "src/reasonfuse/main.py": "e2e18981cae679d083a79c71a63d2d68f4b22fe372bb7ffb9179ec9b3d4fdf27", "src/reasonfuse/__init__.py": "396b8b8ed346e0c9152d1457d04a543a54bd3a607502a5513eb26f5a98bf9af1", "src/reasonfuse/validation/build_identity.json": "9265ae901f437465bc1273229bec787701c660dffb9f0a833661dd832aca23b1", "src/reasonfuse/validation/middleware.py": "08ec9cb2bf859d474f697f9c8d3c45953ef716fa63d32ae02c0332a5f305bfad", "src/reasonfuse/validation/session_state.py": "3a43bd5eb8778d25dd576631891218c0b3293f321f8c61500a14b3a6fd46c543", "src/reasonfuse/validation/__init__.py": "d8c7df95572b7e32a8fc59ce9ff899315c20891b5a4042bb97d73df8b3d1b1a8", "scripts/bootstrap.ps1": "2b6ea0bf0bbc7159479f3af8ac0891085b1593516dbf04b44f62d656d8c8aa21", "scripts/capture_environment.py": "4378bb348e94af8db0ac1cc22f746c9f3ec3afeb4c62c781db386325c743b91e", "scripts/capture_telemetry.py": "739416ad9669f8b323bfd74dce2b01e59fb8308adcc6af6ed638d5a6229ad5b5", "scripts/create_toolbox.py": "8dd684126135f46b71c177fb0be82b68d941697e6101c55d58f23d1074ba30c0", "scripts/deploy.ps1": "5fef72d7a6e5e2af76eb3b672d130cc5d4d1cf2eb3ff4dd817fd077388f16b12", "scripts/deploy_agents.ps1": "c8a3b51ce1169dd8f3efc18fea678163d4138fd2de1468e17aba02d1e9cb8985", "scripts/preflight.ps1": "c5b99842f08155f475ed8aa063c6705c643079fc88edbac328b97429d7ddb3eb", "scripts/preflight.py": "4ea99f7a0aaf8560d8cdf983d3f122a736384c76fc76ac28440fc041f4a47798", "scripts/reset.ps1": "c8739e24944b6fdae120fbfce7097ace73b7db1a1642039eae3e5ac8fdc87dc8", "scripts/reset.py": "00d862d1595b76372b97d6e0bfcabcde1a9d4967116077d3720912fd192209f8", "scripts/source_identity.py": "fe6bf4378f0874a4c3463e58a17c7cf1534e1d8ff90c8f442a125549c47e91ac", "scripts/toolbox_smoke.py": "a39a90f1936ed34e1662390c3fcd4e1f2de929ab0a9fd8bd4985d95a6e31bc6d", "scripts/verification_batch.py": "37369abe278024b8b6fbc04f10b35723b770008df5a4860723a9fda0e8d72174", "scripts/verification_clean_start.ps1": "651fd5d84b6d2cf41b8e2c5eee4a12669534a6b34eb42033d209470bc70937b0", "scripts/verification_command.py": "e03abc7800cb705c097776f3ea4cfcf9ed5452c27cd1b34b6fd8a5c2514a8108", "scripts/verification_index.py": "57281f62f7580aa5600395121eeee9f521d624d979ea82c118e742112e4d0d47", "scripts/verification_local.ps1": "5fd07e66474fd70f9261356c3c1c1dddc06ccd8f1ea3cadc1c1795b10adc09e0", "scripts/__init__.py": "f8375553da0cf49bf68904f4f63cc5246a3928b8cdb85c7c29fb383e75a96f15", "scripts/support/validation.py": "ba79fb0c55feee943e34836fa8bdcca572e16579c40f309f5d2740959aa761a8", "scripts/support/__init__.py": "c02135619c101c019b4329c7d50f3acc14f623a17ec08419c22519166d17da84", "tests/local_history_audit.py": "a42932ba3aea4cc218be3e384519aed420bb2e7cea7818e15d94a8e2c1c74be2", "tests/local_wiring.py": "af1171eba1f66965735e7eab5cb5e393f70c90405cc258b3101e5fc4fc3c10d3", "tests/integration/apim.py": "91f5c3bef5c50fb2bd09f59ac1f709e993742a49359672372b30e854f134262a", "tests/integration/approval.py": "88a80349639c1c57337acd10c8461269c80758db64675b153a97726b443746a5", "tests/integration/history_session.py": "14cbc5343c7b2f5e272c6ae90ec579b14e3e041118f15a69a39a8354509d10e1", "tests/integration/toolbox_interception.py": "6a67926d5dad2ae13e989aea0746f2927fe41e289fd201045f351054e38e9ecd", "tests/support/operations_api/dns_resolution.py": "0c69ba238cd6262176a924cce7935df7615f467bf1f6e43442cf2db77c656140", "tests/support/operations_api/restart_service.py": "3d7ce3f745e26e136884f147992e589e2a8c923789828cb9111a0b72c9a5432f", "tests/support/operations_api/server.py": "26c182d913c4045a5698ebafb2cfab878f9ceca5e9a669cc58aba3249af0736c"}}
+{"timestamp_utc": "2026-09-07T23:49:45.312753+00:00", "event": "OUTPUT", "text": "New session 1/60: {'stable': 1}"}
+{"timestamp_utc": "2026-09-07T23:49:53.017106+00:00", "event": "OUTPUT", "text": "New session 2/60: {'stable': 2}"}
+{"timestamp_utc": "2026-09-07T23:50:00.788498+00:00", "event": "OUTPUT", "text": "New session 3/60: {'stable': 3}"}
+{"timestamp_utc": "2026-09-07T23:50:08.378393+00:00", "event": "OUTPUT", "text": "New session 4/60: {'stable': 4}"}
+{"timestamp_utc": "2026-09-07T23:50:16.749135+00:00", "event": "OUTPUT", "text": "New session 5/60: {'stable': 5}"}
+{"timestamp_utc": "2026-09-07T23:50:25.662697+00:00", "event": "OUTPUT", "text": "New session 6/60: {'stable': 6}"}
+{"timestamp_utc": "2026-09-07T23:50:33.153613+00:00", "event": "OUTPUT", "text": "New session 7/60: {'stable': 7}"}
+{"timestamp_utc": "2026-09-07T23:50:40.829064+00:00", "event": "OUTPUT", "text": "New session 8/60: {'stable': 8}"}
+{"timestamp_utc": "2026-09-07T23:50:48.682580+00:00", "event": "OUTPUT", "text": "New session 9/60: {'stable': 9}"}
+{"timestamp_utc": "2026-09-07T23:50:56.139510+00:00", "event": "OUTPUT", "text": "New session 10/60: {'stable': 10}"}
+{"timestamp_utc": "2026-09-07T23:51:04.458233+00:00", "event": "OUTPUT", "text": "New session 11/60: {'stable': 11}"}
+{"timestamp_utc": "2026-09-07T23:51:12.197202+00:00", "event": "OUTPUT", "text": "New session 12/60: {'stable': 12}"}
+{"timestamp_utc": "2026-09-07T23:51:20.337815+00:00", "event": "OUTPUT", "text": "New session 13/60: {'stable': 13}"}
+{"timestamp_utc": "2026-09-07T23:51:28.455864+00:00", "event": "OUTPUT", "text": "New session 14/60: {'stable': 14}"}
+{"timestamp_utc": "2026-09-07T23:51:36.707036+00:00", "event": "OUTPUT", "text": "New session 15/60: {'stable': 15}"}
+{"timestamp_utc": "2026-09-07T23:51:45.257409+00:00", "event": "OUTPUT", "text": "New session 16/60: {'stable': 16}"}
+{"timestamp_utc": "2026-09-07T23:51:52.919772+00:00", "event": "OUTPUT", "text": "New session 17/60: {'stable': 17}"}
+{"timestamp_utc": "2026-09-07T23:52:01.752485+00:00", "event": "OUTPUT", "text": "New session 18/60: {'stable': 17, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:52:09.632937+00:00", "event": "OUTPUT", "text": "New session 19/60: {'stable': 18, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:52:18.669660+00:00", "event": "OUTPUT", "text": "New session 20/60: {'stable': 19, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:52:26.496404+00:00", "event": "OUTPUT", "text": "New session 21/60: {'stable': 20, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:52:34.484686+00:00", "event": "OUTPUT", "text": "New session 22/60: {'stable': 21, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:52:42.373047+00:00", "event": "OUTPUT", "text": "New session 23/60: {'stable': 22, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:52:50.117899+00:00", "event": "OUTPUT", "text": "New session 24/60: {'stable': 23, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:52:59.392410+00:00", "event": "OUTPUT", "text": "New session 25/60: {'stable': 24, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:53:07.669317+00:00", "event": "OUTPUT", "text": "New session 26/60: {'stable': 25, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:53:15.165737+00:00", "event": "OUTPUT", "text": "New session 27/60: {'stable': 26, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:53:23.710420+00:00", "event": "OUTPUT", "text": "New session 28/60: {'stable': 27, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:53:31.743209+00:00", "event": "OUTPUT", "text": "New session 29/60: {'stable': 28, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:53:40.217227+00:00", "event": "OUTPUT", "text": "New session 30/60: {'stable': 29, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:53:48.164821+00:00", "event": "OUTPUT", "text": "New session 31/60: {'stable': 30, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:53:56.230609+00:00", "event": "OUTPUT", "text": "New session 32/60: {'stable': 31, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:54:04.276063+00:00", "event": "OUTPUT", "text": "New session 33/60: {'stable': 32, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:54:12.619431+00:00", "event": "OUTPUT", "text": "New session 34/60: {'stable': 33, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:54:20.353837+00:00", "event": "OUTPUT", "text": "New session 35/60: {'stable': 34, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:54:28.830160+00:00", "event": "OUTPUT", "text": "New session 36/60: {'stable': 35, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:54:36.994480+00:00", "event": "OUTPUT", "text": "New session 37/60: {'stable': 36, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-07T23:54:44.884030+00:00", "event": "OUTPUT", "text": "New session 38/60: {'stable': 36, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:54:52.586102+00:00", "event": "OUTPUT", "text": "New session 39/60: {'stable': 37, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:55:00.529564+00:00", "event": "OUTPUT", "text": "New session 40/60: {'stable': 38, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:55:09.127796+00:00", "event": "OUTPUT", "text": "New session 41/60: {'stable': 39, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:55:17.644057+00:00", "event": "OUTPUT", "text": "New session 42/60: {'stable': 40, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:55:25.767457+00:00", "event": "OUTPUT", "text": "New session 43/60: {'stable': 41, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:55:34.145601+00:00", "event": "OUTPUT", "text": "New session 44/60: {'stable': 42, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:55:42.056611+00:00", "event": "OUTPUT", "text": "New session 45/60: {'stable': 43, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:55:50.194529+00:00", "event": "OUTPUT", "text": "New session 46/60: {'stable': 44, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:55:58.221089+00:00", "event": "OUTPUT", "text": "New session 47/60: {'stable': 45, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:56:07.484431+00:00", "event": "OUTPUT", "text": "New session 48/60: {'stable': 46, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:56:15.244579+00:00", "event": "OUTPUT", "text": "New session 49/60: {'stable': 47, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:56:23.245506+00:00", "event": "OUTPUT", "text": "New session 50/60: {'stable': 48, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:56:31.852676+00:00", "event": "OUTPUT", "text": "New session 51/60: {'stable': 49, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:56:39.981653+00:00", "event": "OUTPUT", "text": "New session 52/60: {'stable': 50, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:56:47.458976+00:00", "event": "OUTPUT", "text": "New session 53/60: {'stable': 51, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:56:55.296117+00:00", "event": "OUTPUT", "text": "New session 54/60: {'stable': 52, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:57:02.928637+00:00", "event": "OUTPUT", "text": "New session 55/60: {'stable': 53, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:57:11.420092+00:00", "event": "OUTPUT", "text": "New session 56/60: {'stable': 54, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:57:18.928296+00:00", "event": "OUTPUT", "text": "New session 57/60: {'stable': 55, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-07T23:57:27.217972+00:00", "event": "OUTPUT", "text": "New session 58/60: {'stable': 55, 'candidate': 3}"}
+{"timestamp_utc": "2026-09-07T23:57:34.988387+00:00", "event": "OUTPUT", "text": "New session 59/60: {'stable': 56, 'candidate': 3}"}
+{"timestamp_utc": "2026-09-07T23:57:43.274186+00:00", "event": "OUTPUT", "text": "New session 60/60: {'stable': 57, 'candidate': 3}"}
+{"timestamp_utc": "2026-09-07T23:57:43.275140+00:00", "event": "OUTPUT", "text": "PASS spike04_new_session_control"}
+{"timestamp_utc": "2026-09-07T23:57:43.275639+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260907\\20260907T234930665875Z-spike04_new_session_control.jsonl"}
+{"timestamp_utc": "2026-09-07T23:57:48.839511+00:00", "event": "RESULT", "status": "PASS", "exit_code": 0}

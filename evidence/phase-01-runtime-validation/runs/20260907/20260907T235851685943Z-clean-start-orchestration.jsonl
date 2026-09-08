@@ -1,0 +1,528 @@
+{"timestamp_utc": "2026-09-07T23:58:51.686762+00:00", "event": "START", "case": "clean-start-orchestration", "command": ["scripts/verification_command.py", "clean-start-orchestration", "--", "pwsh", "-File", "scripts/verification_clean_start.ps1"], "region": "australiaeast"}
+{"timestamp_utc": "2026-09-07T23:58:51.687481+00:00", "event": "COMMAND", "argv": ["pwsh", "-File", "scripts/verification_clean_start.ps1"]}
+{"timestamp_utc": "2026-09-07T23:58:51.698310+00:00", "event": "EXECUTION_SOURCE_HASHES", "sha256": {"src/main.py": "a2ee5a3ac494c1f08ab86bf2944b0271e9cfa056cb821c855e49be5df3c6e4a6", "src/reasonfuse/agent.py": "37bd1aa795788e32110e7459576286fbfdc578d5825b7ee85ff2e3dd37430f04", "src/reasonfuse/main.py": "e2e18981cae679d083a79c71a63d2d68f4b22fe372bb7ffb9179ec9b3d4fdf27", "src/reasonfuse/__init__.py": "396b8b8ed346e0c9152d1457d04a543a54bd3a607502a5513eb26f5a98bf9af1", "src/reasonfuse/validation/build_identity.json": "9265ae901f437465bc1273229bec787701c660dffb9f0a833661dd832aca23b1", "src/reasonfuse/validation/middleware.py": "08ec9cb2bf859d474f697f9c8d3c45953ef716fa63d32ae02c0332a5f305bfad", "src/reasonfuse/validation/session_state.py": "3a43bd5eb8778d25dd576631891218c0b3293f321f8c61500a14b3a6fd46c543", "src/reasonfuse/validation/__init__.py": "d8c7df95572b7e32a8fc59ce9ff899315c20891b5a4042bb97d73df8b3d1b1a8", "scripts/bootstrap.ps1": "2b6ea0bf0bbc7159479f3af8ac0891085b1593516dbf04b44f62d656d8c8aa21", "scripts/capture_environment.py": "0d8b908199dcca114773ef70015f7d2c347243471245ded23078d097109b1446", "scripts/capture_telemetry.py": "739416ad9669f8b323bfd74dce2b01e59fb8308adcc6af6ed638d5a6229ad5b5", "scripts/create_toolbox.py": "8dd684126135f46b71c177fb0be82b68d941697e6101c55d58f23d1074ba30c0", "scripts/deploy.ps1": "5fef72d7a6e5e2af76eb3b672d130cc5d4d1cf2eb3ff4dd817fd077388f16b12", "scripts/deploy_agents.ps1": "c8a3b51ce1169dd8f3efc18fea678163d4138fd2de1468e17aba02d1e9cb8985", "scripts/preflight.ps1": "c5b99842f08155f475ed8aa063c6705c643079fc88edbac328b97429d7ddb3eb", "scripts/preflight.py": "4ea99f7a0aaf8560d8cdf983d3f122a736384c76fc76ac28440fc041f4a47798", "scripts/reset.ps1": "c8739e24944b6fdae120fbfce7097ace73b7db1a1642039eae3e5ac8fdc87dc8", "scripts/reset.py": "00d862d1595b76372b97d6e0bfcabcde1a9d4967116077d3720912fd192209f8", "scripts/review_verification.py": "9e4c70b2c98c66441b4a4b2dfff1c22ff1422c4933419c06f41da02b7617fd5f", "scripts/source_identity.py": "6ed7a963bea4b00add8222e5fc6b15073d0b0bcdc5a79e0c702abc7d61f1d546", "scripts/toolbox_smoke.py": "a39a90f1936ed34e1662390c3fcd4e1f2de929ab0a9fd8bd4985d95a6e31bc6d", "scripts/verification_batch.py": "37369abe278024b8b6fbc04f10b35723b770008df5a4860723a9fda0e8d72174", "scripts/verification_clean_start.ps1": "651fd5d84b6d2cf41b8e2c5eee4a12669534a6b34eb42033d209470bc70937b0", "scripts/verification_command.py": "e03abc7800cb705c097776f3ea4cfcf9ed5452c27cd1b34b6fd8a5c2514a8108", "scripts/verification_index.py": "bbd74c162083e64c3b986820f13f6b2b5e488a172b68df2138315600ba46a4f8", "scripts/verification_local.ps1": "5fd07e66474fd70f9261356c3c1c1dddc06ccd8f1ea3cadc1c1795b10adc09e0", "scripts/__init__.py": "f8375553da0cf49bf68904f4f63cc5246a3928b8cdb85c7c29fb383e75a96f15", "scripts/support/validation.py": "ba79fb0c55feee943e34836fa8bdcca572e16579c40f309f5d2740959aa761a8", "scripts/support/__init__.py": "c02135619c101c019b4329c7d50f3acc14f623a17ec08419c22519166d17da84", "tests/local_history_audit.py": "a42932ba3aea4cc218be3e384519aed420bb2e7cea7818e15d94a8e2c1c74be2", "tests/local_wiring.py": "af1171eba1f66965735e7eab5cb5e393f70c90405cc258b3101e5fc4fc3c10d3", "tests/integration/apim.py": "91f5c3bef5c50fb2bd09f59ac1f709e993742a49359672372b30e854f134262a", "tests/integration/approval.py": "88a80349639c1c57337acd10c8461269c80758db64675b153a97726b443746a5", "tests/integration/history_session.py": "14cbc5343c7b2f5e272c6ae90ec579b14e3e041118f15a69a39a8354509d10e1", "tests/integration/toolbox_interception.py": "6a67926d5dad2ae13e989aea0746f2927fe41e289fd201045f351054e38e9ecd", "tests/support/operations_api/dns_resolution.py": "0c69ba238cd6262176a924cce7935df7615f467bf1f6e43442cf2db77c656140", "tests/support/operations_api/restart_service.py": "3d7ce3f745e26e136884f147992e589e2a8c923789828cb9111a0b72c9a5432f", "tests/support/operations_api/server.py": "26c182d913c4045a5698ebafb2cfab878f9ceca5e9a669cc58aba3249af0736c"}}
+{"timestamp_utc": "2026-09-07T23:58:52.776261+00:00", "event": "OUTPUT", "text": "INITIAL_BATCH_PASS D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260907\\20260907T233918811421Z-batch-corrected-initial.jsonl"}
+{"timestamp_utc": "2026-09-07T23:59:15.244027+00:00", "event": "OUTPUT", "text": "RESET_COMPLETE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260907\\20260907T235857430123Z-reset.jsonl"}
+{"timestamp_utc": "2026-09-07T23:59:21.477536+00:00", "event": "OUTPUT", "text": "PRESERVE_VENV source=D:\\workshop\\sep\\reason-fuse\\.venv destination=D:\\workshop\\sep\\reason-fuse\\.tools\\clean-start-backup-20260907T235921Z"}
+{"timestamp_utc": "2026-09-07T23:59:21.566478+00:00", "event": "OUTPUT", "text": "Using CPython 3.13.9 interpreter at: D:\\anaconda3\\python.exe"}
+{"timestamp_utc": "2026-09-07T23:59:21.567100+00:00", "event": "OUTPUT", "text": "Creating virtual environment at: .venv"}
+{"timestamp_utc": "2026-09-07T23:59:21.662711+00:00", "event": "OUTPUT", "text": "warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance."}
+{"timestamp_utc": "2026-09-07T23:59:21.663678+00:00", "event": "OUTPUT", "text": "         If the cache and target directories are on different filesystems, hardlinking may not be supported."}
+{"timestamp_utc": "2026-09-07T23:59:21.664593+00:00", "event": "OUTPUT", "text": "         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning."}
+{"timestamp_utc": "2026-09-07T23:59:30.008657+00:00", "event": "OUTPUT", "text": "Installed 105 packages in 8.35s"}
+{"timestamp_utc": "2026-09-07T23:59:30.009641+00:00", "event": "OUTPUT", "text": " + agent-framework-core==1.17.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.010482+00:00", "event": "OUTPUT", "text": " + agent-framework-foundry==1.12.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.011141+00:00", "event": "OUTPUT", "text": " + agent-framework-foundry-hosting==1.0.0b260903"}
+{"timestamp_utc": "2026-09-07T23:59:30.011927+00:00", "event": "OUTPUT", "text": " + agent-framework-openai==1.14.2"}
+{"timestamp_utc": "2026-09-07T23:59:30.013366+00:00", "event": "OUTPUT", "text": " + aiohappyeyeballs==2.7.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.014600+00:00", "event": "OUTPUT", "text": " + aiohttp==3.14.3"}
+{"timestamp_utc": "2026-09-07T23:59:30.015673+00:00", "event": "OUTPUT", "text": " + aiosignal==1.4.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.016807+00:00", "event": "OUTPUT", "text": " + annotated-types==0.8.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.018643+00:00", "event": "OUTPUT", "text": " + anyio==4.15.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.019516+00:00", "event": "OUTPUT", "text": " + asgiref==3.12.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.020353+00:00", "event": "OUTPUT", "text": " + attrs==26.1.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.021060+00:00", "event": "OUTPUT", "text": " + azure-ai-agentserver-core==2.1.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.021728+00:00", "event": "OUTPUT", "text": " + azure-ai-agentserver-invocations==1.2.0b1"}
+{"timestamp_utc": "2026-09-07T23:59:30.022572+00:00", "event": "OUTPUT", "text": " + azure-ai-agentserver-responses==2.2.0b1"}
+{"timestamp_utc": "2026-09-07T23:59:30.023134+00:00", "event": "OUTPUT", "text": " + azure-ai-inference==1.0.0b9"}
+{"timestamp_utc": "2026-09-07T23:59:30.023683+00:00", "event": "OUTPUT", "text": " + azure-ai-projects==2.3.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.025381+00:00", "event": "OUTPUT", "text": " + azure-core==1.41.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.026173+00:00", "event": "OUTPUT", "text": " + azure-core-tracing-opentelemetry==1.0.0b13"}
+{"timestamp_utc": "2026-09-07T23:59:30.026868+00:00", "event": "OUTPUT", "text": " + azure-identity==1.25.3"}
+{"timestamp_utc": "2026-09-07T23:59:30.028959+00:00", "event": "OUTPUT", "text": " + azure-monitor-opentelemetry-exporter==1.0.0b56"}
+{"timestamp_utc": "2026-09-07T23:59:30.030073+00:00", "event": "OUTPUT", "text": " + azure-storage-blob==12.31.0b1"}
+{"timestamp_utc": "2026-09-07T23:59:30.031505+00:00", "event": "OUTPUT", "text": " + certifi==2026.7.22"}
+{"timestamp_utc": "2026-09-07T23:59:30.032734+00:00", "event": "OUTPUT", "text": " + cffi==2.1.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.033434+00:00", "event": "OUTPUT", "text": " + charset-normalizer==3.5.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.034209+00:00", "event": "OUTPUT", "text": " + click==8.5.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.035297+00:00", "event": "OUTPUT", "text": " + cryptography==50.0.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.036274+00:00", "event": "OUTPUT", "text": " + frozenlist==1.8.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.037615+00:00", "event": "OUTPUT", "text": " + googleapis-common-protos==1.75.3"}
+{"timestamp_utc": "2026-09-07T23:59:30.038546+00:00", "event": "OUTPUT", "text": " + h11==0.16.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.039737+00:00", "event": "OUTPUT", "text": " + h2==4.4.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.040737+00:00", "event": "OUTPUT", "text": " + hpack==4.2.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.041367+00:00", "event": "OUTPUT", "text": " + httpcore==1.0.9"}
+{"timestamp_utc": "2026-09-07T23:59:30.041963+00:00", "event": "OUTPUT", "text": " + httpcore2==2.12.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.043143+00:00", "event": "OUTPUT", "text": " + httpx==0.28.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.044386+00:00", "event": "OUTPUT", "text": " + httpx-sse==0.4.3"}
+{"timestamp_utc": "2026-09-07T23:59:30.045198+00:00", "event": "OUTPUT", "text": " + httpx2==2.12.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.046078+00:00", "event": "OUTPUT", "text": " + hypercorn==0.18.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.046823+00:00", "event": "OUTPUT", "text": " + hyperframe==6.1.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.047480+00:00", "event": "OUTPUT", "text": " + idna==3.19"}
+{"timestamp_utc": "2026-09-07T23:59:30.048535+00:00", "event": "OUTPUT", "text": " + isodate==0.7.2"}
+{"timestamp_utc": "2026-09-07T23:59:30.049213+00:00", "event": "OUTPUT", "text": " + jiter==0.16.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.049867+00:00", "event": "OUTPUT", "text": " + jsonschema==4.26.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.050851+00:00", "event": "OUTPUT", "text": " + jsonschema-specifications==2025.9.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.051517+00:00", "event": "OUTPUT", "text": " + mcp==1.29.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.052389+00:00", "event": "OUTPUT", "text": " + microsoft-opentelemetry==1.3.8"}
+{"timestamp_utc": "2026-09-07T23:59:30.053361+00:00", "event": "OUTPUT", "text": " + msal==1.38.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.054155+00:00", "event": "OUTPUT", "text": " + msal-extensions==1.3.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.054874+00:00", "event": "OUTPUT", "text": " + msgspec==0.21.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.055618+00:00", "event": "OUTPUT", "text": " + msrest==0.7.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.056500+00:00", "event": "OUTPUT", "text": " + multidict==6.7.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.057372+00:00", "event": "OUTPUT", "text": " + oauthlib==3.3.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.058270+00:00", "event": "OUTPUT", "text": " + openai==3.8.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.058976+00:00", "event": "OUTPUT", "text": " + opentelemetry-api==1.43.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.059955+00:00", "event": "OUTPUT", "text": " + opentelemetry-exporter-otlp-proto-common==1.43.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.060607+00:00", "event": "OUTPUT", "text": " + opentelemetry-exporter-otlp-proto-http==1.43.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.061192+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.061768+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-asgi==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.062378+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-dbapi==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.062965+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-django==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.063620+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-fastapi==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.064297+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-flask==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.064948+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-httpx==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.065631+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-logging==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.066211+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-openai-agents-v2==0.1.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.066866+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-openai-v2==2.3b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.067519+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-psycopg2==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.068161+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-requests==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.068781+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-urllib==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.069436+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-urllib3==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.070047+00:00", "event": "OUTPUT", "text": " + opentelemetry-instrumentation-wsgi==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.070633+00:00", "event": "OUTPUT", "text": " + opentelemetry-proto==1.43.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.071283+00:00", "event": "OUTPUT", "text": " + opentelemetry-resource-detector-azure==0.2.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.072293+00:00", "event": "OUTPUT", "text": " + opentelemetry-sdk==1.43.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.073178+00:00", "event": "OUTPUT", "text": " + opentelemetry-semantic-conventions==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.074199+00:00", "event": "OUTPUT", "text": " + opentelemetry-util-genai==0.3b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.075272+00:00", "event": "OUTPUT", "text": " + opentelemetry-util-http==0.64b0"}
+{"timestamp_utc": "2026-09-07T23:59:30.076187+00:00", "event": "OUTPUT", "text": " + packaging==26.3"}
+{"timestamp_utc": "2026-09-07T23:59:30.077113+00:00", "event": "OUTPUT", "text": " + priority==2.0.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.077957+00:00", "event": "OUTPUT", "text": " + propcache==0.5.2"}
+{"timestamp_utc": "2026-09-07T23:59:30.078843+00:00", "event": "OUTPUT", "text": " + protobuf==6.33.6"}
+{"timestamp_utc": "2026-09-07T23:59:30.079601+00:00", "event": "OUTPUT", "text": " + psutil==7.2.2"}
+{"timestamp_utc": "2026-09-07T23:59:30.080433+00:00", "event": "OUTPUT", "text": " + pycparser==3.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.081454+00:00", "event": "OUTPUT", "text": " + pydantic==2.14.0b1"}
+{"timestamp_utc": "2026-09-07T23:59:30.082483+00:00", "event": "OUTPUT", "text": " + pydantic-core==2.48.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.083299+00:00", "event": "OUTPUT", "text": " + pydantic-settings==2.15.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.084589+00:00", "event": "OUTPUT", "text": " + pyjwt==2.13.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.085397+00:00", "event": "OUTPUT", "text": " + python-dotenv==1.2.3"}
+{"timestamp_utc": "2026-09-07T23:59:30.086299+00:00", "event": "OUTPUT", "text": " + python-multipart==0.0.32"}
+{"timestamp_utc": "2026-09-07T23:59:30.087488+00:00", "event": "OUTPUT", "text": " + pywin32==312"}
+{"timestamp_utc": "2026-09-07T23:59:30.088689+00:00", "event": "OUTPUT", "text": " + pyyaml==6.0.3"}
+{"timestamp_utc": "2026-09-07T23:59:30.089347+00:00", "event": "OUTPUT", "text": " + referencing==0.37.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.090029+00:00", "event": "OUTPUT", "text": " + requests==2.34.2"}
+{"timestamp_utc": "2026-09-07T23:59:30.090604+00:00", "event": "OUTPUT", "text": " + requests-oauthlib==2.0.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.091135+00:00", "event": "OUTPUT", "text": " + rpds-py==2026.6.3"}
+{"timestamp_utc": "2026-09-07T23:59:30.091713+00:00", "event": "OUTPUT", "text": " + sniffio==1.3.1"}
+{"timestamp_utc": "2026-09-07T23:59:30.092264+00:00", "event": "OUTPUT", "text": " + sse-starlette==3.4.11"}
+{"timestamp_utc": "2026-09-07T23:59:30.092884+00:00", "event": "OUTPUT", "text": " + starlette==1.6.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.093453+00:00", "event": "OUTPUT", "text": " + truststore==0.10.4"}
+{"timestamp_utc": "2026-09-07T23:59:30.094026+00:00", "event": "OUTPUT", "text": " + typing-extensions==4.16.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.094557+00:00", "event": "OUTPUT", "text": " + typing-inspection==0.4.4"}
+{"timestamp_utc": "2026-09-07T23:59:30.095093+00:00", "event": "OUTPUT", "text": " + urllib3==2.7.0"}
+{"timestamp_utc": "2026-09-07T23:59:30.095695+00:00", "event": "OUTPUT", "text": " + uvicorn==0.52.4"}
+{"timestamp_utc": "2026-09-07T23:59:30.096272+00:00", "event": "OUTPUT", "text": " + wrapt==1.17.4rc1"}
+{"timestamp_utc": "2026-09-07T23:59:30.096834+00:00", "event": "OUTPUT", "text": " + wsproto==1.3.2"}
+{"timestamp_utc": "2026-09-07T23:59:30.097382+00:00", "event": "OUTPUT", "text": " + yarl==1.24.5"}
+{"timestamp_utc": "2026-09-07T23:59:32.084673+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:32.085741+00:00", "event": "OUTPUT", "text": "Install an azd extension (azd extension install)"}
+{"timestamp_utc": "2026-09-07T23:59:32.086576+00:00", "event": "OUTPUT", "text": "Installs the specified extension onto the local machine."}
+{"timestamp_utc": "2026-09-07T23:59:32.087298+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:32.088136+00:00", "event": "OUTPUT", "text": "Installing azure.ai.agents"}
+{"timestamp_utc": "2026-09-07T23:59:32.088805+00:00", "event": "OUTPUT", "text": "Installing azure.ai.agents"}
+{"timestamp_utc": "2026-09-07T23:59:32.089490+00:00", "event": "OUTPUT", "text": "  (-) Skipped: Installing azure.ai.agents (version 1.0.0-beta.13 already installed)"}
+{"timestamp_utc": "2026-09-07T23:59:32.090140+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:32.090814+00:00", "event": "OUTPUT", "text": "SUCCESS: Extension(s) installed successfully"}
+{"timestamp_utc": "2026-09-07T23:59:32.940743+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:32.941254+00:00", "event": "OUTPUT", "text": "Install an azd extension (azd extension install)"}
+{"timestamp_utc": "2026-09-07T23:59:32.941817+00:00", "event": "OUTPUT", "text": "Installs the specified extension onto the local machine."}
+{"timestamp_utc": "2026-09-07T23:59:32.942231+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:32.942661+00:00", "event": "OUTPUT", "text": "Installing azure.ai.projects"}
+{"timestamp_utc": "2026-09-07T23:59:32.943161+00:00", "event": "OUTPUT", "text": "Installing azure.ai.projects"}
+{"timestamp_utc": "2026-09-07T23:59:32.943719+00:00", "event": "OUTPUT", "text": "  (-) Skipped: Installing azure.ai.projects (version 1.0.0-beta.9 already installed)"}
+{"timestamp_utc": "2026-09-07T23:59:32.944191+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:32.944717+00:00", "event": "OUTPUT", "text": "SUCCESS: Extension(s) installed successfully"}
+{"timestamp_utc": "2026-09-07T23:59:33.673586+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:33.674153+00:00", "event": "OUTPUT", "text": "Install an azd extension (azd extension install)"}
+{"timestamp_utc": "2026-09-07T23:59:33.674713+00:00", "event": "OUTPUT", "text": "Installs the specified extension onto the local machine."}
+{"timestamp_utc": "2026-09-07T23:59:33.675441+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:33.675994+00:00", "event": "OUTPUT", "text": "Installing azure.ai.toolboxes"}
+{"timestamp_utc": "2026-09-07T23:59:33.676425+00:00", "event": "OUTPUT", "text": "Installing azure.ai.toolboxes"}
+{"timestamp_utc": "2026-09-07T23:59:33.676863+00:00", "event": "OUTPUT", "text": "  (-) Skipped: Installing azure.ai.toolboxes (version 1.0.0-beta.6 already installed)"}
+{"timestamp_utc": "2026-09-07T23:59:33.677289+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:33.677853+00:00", "event": "OUTPUT", "text": "SUCCESS: Extension(s) installed successfully"}
+{"timestamp_utc": "2026-09-07T23:59:34.140188+00:00", "event": "OUTPUT", "text": "azd version 1.33.0 (commit 29133b640536436db9b56f8db4b1781cb136e5ba) (stable)"}
+{"timestamp_utc": "2026-09-07T23:59:34.226381+00:00", "event": "OUTPUT", "text": "Terraform v1.14.0"}
+{"timestamp_utc": "2026-09-07T23:59:34.226989+00:00", "event": "OUTPUT", "text": "on windows_amd64"}
+{"timestamp_utc": "2026-09-07T23:59:34.227746+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-07T23:59:34.228332+00:00", "event": "OUTPUT", "text": "Your version of Terraform is out of date! The latest version"}
+{"timestamp_utc": "2026-09-07T23:59:34.228879+00:00", "event": "OUTPUT", "text": "is 1.16.1. You can update by downloading from https://developer.hashicorp.com/terraform/install"}
+{"timestamp_utc": "2026-09-07T23:59:34.268594+00:00", "event": "OUTPUT", "text": "uv 0.11.16 (135a36367 2026-05-21 x86_64-pc-windows-msvc)"}
+{"timestamp_utc": "2026-09-07T23:59:35.643363+00:00", "event": "OUTPUT", "text": "Checked 105 packages in 11ms"}
+{"timestamp_utc": "2026-09-08T00:00:03.604034+00:00", "event": "OUTPUT", "text": "Initializing the backend..."}
+{"timestamp_utc": "2026-09-08T00:00:04.482475+00:00", "event": "OUTPUT", "text": "Initializing provider plugins..."}
+{"timestamp_utc": "2026-09-08T00:00:04.483205+00:00", "event": "OUTPUT", "text": "- Reusing previous version of azure/azapi from the dependency lock file"}
+{"timestamp_utc": "2026-09-08T00:00:04.708440+00:00", "event": "OUTPUT", "text": "- Reusing previous version of hashicorp/azurerm from the dependency lock file"}
+{"timestamp_utc": "2026-09-08T00:00:05.291060+00:00", "event": "OUTPUT", "text": "- Using previously-installed azure/azapi v2.12.0"}
+{"timestamp_utc": "2026-09-08T00:00:05.610152+00:00", "event": "OUTPUT", "text": "- Using previously-installed hashicorp/azurerm v5.4.0"}
+{"timestamp_utc": "2026-09-08T00:00:05.610864+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:05.611462+00:00", "event": "OUTPUT", "text": "Terraform has been successfully initialized!"}
+{"timestamp_utc": "2026-09-08T00:00:05.612175+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:05.613062+00:00", "event": "OUTPUT", "text": "You may now begin working with Terraform. Try running \"terraform plan\" to see"}
+{"timestamp_utc": "2026-09-08T00:00:05.613826+00:00", "event": "OUTPUT", "text": "any changes that are required for your infrastructure. All Terraform commands"}
+{"timestamp_utc": "2026-09-08T00:00:05.614527+00:00", "event": "OUTPUT", "text": "should now work."}
+{"timestamp_utc": "2026-09-08T00:00:05.615204+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:05.615956+00:00", "event": "OUTPUT", "text": "If you ever set or change modules or backend configuration for Terraform,"}
+{"timestamp_utc": "2026-09-08T00:00:05.616654+00:00", "event": "OUTPUT", "text": "rerun this command to reinitialize your working directory. If you forget, other"}
+{"timestamp_utc": "2026-09-08T00:00:05.617521+00:00", "event": "OUTPUT", "text": "commands will detect it and remind you to do so if necessary."}
+{"timestamp_utc": "2026-09-08T00:00:09.676067+00:00", "event": "OUTPUT", "text": "Success! The configuration is valid."}
+{"timestamp_utc": "2026-09-08T00:00:09.676768+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:10.596341+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:10.597106+00:00", "event": "OUTPUT", "text": "Provisioning Azure resources (azd provision)"}
+{"timestamp_utc": "2026-09-08T00:00:10.597680+00:00", "event": "OUTPUT", "text": "Provisioning Azure resources can take some time."}
+{"timestamp_utc": "2026-09-08T00:00:10.598378+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:10.783255+00:00", "event": "OUTPUT", "text": "Reading subscription and location from environment..."}
+{"timestamp_utc": "2026-09-08T00:00:12.843490+00:00", "event": "OUTPUT", "text": "Subscription: Azure for Students (7c73b89d-485e-43a9-8d66-b12b766d567f)"}
+{"timestamp_utc": "2026-09-08T00:00:12.844023+00:00", "event": "OUTPUT", "text": "Location: Australia East"}
+{"timestamp_utc": "2026-09-08T00:00:12.844554+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:12.889043+00:00", "event": "OUTPUT", "text": "Locating plan file..."}
+{"timestamp_utc": "2026-09-08T00:00:12.985577+00:00", "event": "OUTPUT", "text": "Initializing the backend..."}
+{"timestamp_utc": "2026-09-08T00:00:13.895500+00:00", "event": "OUTPUT", "text": "Initializing provider plugins..."}
+{"timestamp_utc": "2026-09-08T00:00:13.896523+00:00", "event": "OUTPUT", "text": "- Finding hashicorp/azurerm versions matching \"5.4.0\"..."}
+{"timestamp_utc": "2026-09-08T00:00:14.050733+00:00", "event": "OUTPUT", "text": "- Finding azure/azapi versions matching \"2.12.0\"..."}
+{"timestamp_utc": "2026-09-08T00:00:14.403959+00:00", "event": "OUTPUT", "text": "- Using previously-installed hashicorp/azurerm v5.4.0"}
+{"timestamp_utc": "2026-09-08T00:00:14.929261+00:00", "event": "OUTPUT", "text": "- Using previously-installed azure/azapi v2.12.0"}
+{"timestamp_utc": "2026-09-08T00:00:14.929989+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:14.930627+00:00", "event": "OUTPUT", "text": "Terraform has been successfully initialized!"}
+{"timestamp_utc": "2026-09-08T00:00:14.931189+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:14.931627+00:00", "event": "OUTPUT", "text": "You may now begin working with Terraform. Try running \"terraform plan\" to see"}
+{"timestamp_utc": "2026-09-08T00:00:14.932134+00:00", "event": "OUTPUT", "text": "any changes that are required for your infrastructure. All Terraform commands"}
+{"timestamp_utc": "2026-09-08T00:00:14.932647+00:00", "event": "OUTPUT", "text": "should now work."}
+{"timestamp_utc": "2026-09-08T00:00:14.933214+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:00:14.933736+00:00", "event": "OUTPUT", "text": "If you ever set or change modules or backend configuration for Terraform,"}
+{"timestamp_utc": "2026-09-08T00:00:14.934354+00:00", "event": "OUTPUT", "text": "rerun this command to reinitialize your working directory. If you forget, other"}
+{"timestamp_utc": "2026-09-08T00:00:14.934845+00:00", "event": "OUTPUT", "text": "commands will detect it and remind you to do so if necessary."}
+{"timestamp_utc": "2026-09-08T00:00:20.188697+00:00", "event": "OUTPUT", "text": "\u2577"}
+{"timestamp_utc": "2026-09-08T00:00:20.189264+00:00", "event": "OUTPUT", "text": "\u2502 Warning: Deprecated flag: -state"}
+{"timestamp_utc": "2026-09-08T00:00:20.189644+00:00", "event": "OUTPUT", "text": "\u2502"}
+{"timestamp_utc": "2026-09-08T00:00:20.190005+00:00", "event": "OUTPUT", "text": "\u2502 Use the \"path\" attribute within the \"local\" backend to specify a file for"}
+{"timestamp_utc": "2026-09-08T00:00:20.190380+00:00", "event": "OUTPUT", "text": "\u2502 state storage"}
+{"timestamp_utc": "2026-09-08T00:00:20.190727+00:00", "event": "OUTPUT", "text": "\u2575"}
+{"timestamp_utc": "2026-09-08T00:00:44.502722+00:00", "event": "OUTPUT", "text": "azurerm_resource_group.this: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue]"}
+{"timestamp_utc": "2026-09-08T00:00:51.719662+00:00", "event": "OUTPUT", "text": "azurerm_log_analytics_workspace.validation: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.OperationalInsights/workspaces/log-rf-cce5b59dd73ad]"}
+{"timestamp_utc": "2026-09-08T00:00:51.720647+00:00", "event": "OUTPUT", "text": "azurerm_service_plan.operations: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.Web/serverFarms/plan-rf-operations-cce5b59dd73ad]"}
+{"timestamp_utc": "2026-09-08T00:00:51.727150+00:00", "event": "OUTPUT", "text": "azurerm_api_management.validation: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad]"}
+{"timestamp_utc": "2026-09-08T00:00:51.765914+00:00", "event": "OUTPUT", "text": "azapi_resource.foundry_account: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.CognitiveServices/accounts/cog-cce5b59dd73ad]"}
+{"timestamp_utc": "2026-09-08T00:00:52.011298+00:00", "event": "OUTPUT", "text": "azurerm_linux_web_app.operations: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.Web/sites/rf-operations-cce5b59dd73ad]"}
+{"timestamp_utc": "2026-09-08T00:00:52.185216+00:00", "event": "OUTPUT", "text": "azurerm_application_insights.validation: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.Insights/components/appi-rf-cce5b59dd73ad]"}
+{"timestamp_utc": "2026-09-08T00:00:52.256960+00:00", "event": "OUTPUT", "text": "azurerm_api_management_api.responses: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/apis/reasonfuse;rev=1]"}
+{"timestamp_utc": "2026-09-08T00:00:52.685721+00:00", "event": "OUTPUT", "text": "azurerm_api_management_api_operation.post[\"conversations\"]: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/apis/reasonfuse/operations/post-conversations]"}
+{"timestamp_utc": "2026-09-08T00:00:52.686370+00:00", "event": "OUTPUT", "text": "azurerm_api_management_api_operation.post[\"responses\"]: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/apis/reasonfuse/operations/post-responses]"}
+{"timestamp_utc": "2026-09-08T00:00:52.704621+00:00", "event": "OUTPUT", "text": "azurerm_api_management_logger.metadata: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/loggers/phase1-metadata]"}
+{"timestamp_utc": "2026-09-08T00:00:53.038176+00:00", "event": "OUTPUT", "text": "azurerm_api_management_api_diagnostic.metadata: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/apis/reasonfuse/diagnostics/applicationinsights]"}
+{"timestamp_utc": "2026-09-08T00:00:59.314472+00:00", "event": "OUTPUT", "text": "azurerm_role_assignment.operator_model_user[0]: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.CognitiveServices/accounts/cog-cce5b59dd73ad/providers/Microsoft.Authorization/roleAssignments/a2ebb7a5-4172-7712-cc06-71c9ef971ff6]"}
+{"timestamp_utc": "2026-09-08T00:00:59.315229+00:00", "event": "OUTPUT", "text": "azurerm_cognitive_deployment.model[\"gpt-5-mini\"]: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.CognitiveServices/accounts/cog-cce5b59dd73ad/deployments/gpt-5-mini]"}
+{"timestamp_utc": "2026-09-08T00:00:59.531866+00:00", "event": "OUTPUT", "text": "azapi_resource.project: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.CognitiveServices/accounts/cog-cce5b59dd73ad/projects/reasonfuse-phase1]"}
+{"timestamp_utc": "2026-09-08T00:00:59.723796+00:00", "event": "OUTPUT", "text": "azurerm_role_assignment.operator_project_manager[0]: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.CognitiveServices/accounts/cog-cce5b59dd73ad/projects/reasonfuse-phase1/providers/Microsoft.Authorization/roleAssignments/ce8311d1-6de2-6242-3a68-4a82d6842a57]"}
+{"timestamp_utc": "2026-09-08T00:00:59.724550+00:00", "event": "OUTPUT", "text": "azurerm_role_assignment.developer_cognitive_services_user[0]: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.CognitiveServices/accounts/cog-cce5b59dd73ad/projects/reasonfuse-phase1/providers/Microsoft.Authorization/roleAssignments/1c88ba77-1692-463a-cd70-1c22c7e16338]"}
+{"timestamp_utc": "2026-09-08T00:00:59.725163+00:00", "event": "OUTPUT", "text": "azurerm_api_management_backend.release[\"stable\"]: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/backends/stable]"}
+{"timestamp_utc": "2026-09-08T00:00:59.725665+00:00", "event": "OUTPUT", "text": "azurerm_api_management_backend.release[\"candidate\"]: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/backends/candidate]"}
+{"timestamp_utc": "2026-09-08T00:01:00.062429+00:00", "event": "OUTPUT", "text": "azapi_resource.canary_pool: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/backends/reasonfuse-canary]"}
+{"timestamp_utc": "2026-09-08T00:01:00.556176+00:00", "event": "OUTPUT", "text": "azurerm_api_management_api_policy.streaming: Refreshing state... [id=/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.ApiManagement/service/apim-rf-cce5b59dd73ad/apis/reasonfuse]"}
+{"timestamp_utc": "2026-09-08T00:01:07.557641+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:01:07.558451+00:00", "event": "OUTPUT", "text": "No changes. Your infrastructure matches the configuration."}
+{"timestamp_utc": "2026-09-08T00:01:07.559090+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:01:07.559776+00:00", "event": "OUTPUT", "text": "Terraform has compared your real infrastructure against your configuration"}
+{"timestamp_utc": "2026-09-08T00:01:07.560357+00:00", "event": "OUTPUT", "text": "and found no differences, so no changes are needed."}
+{"timestamp_utc": "2026-09-08T00:01:08.837894+00:00", "event": "OUTPUT", "text": "\u2577"}
+{"timestamp_utc": "2026-09-08T00:01:08.838709+00:00", "event": "OUTPUT", "text": "\u2502 Warning: Deprecated flag: -state"}
+{"timestamp_utc": "2026-09-08T00:01:08.839380+00:00", "event": "OUTPUT", "text": "\u2502"}
+{"timestamp_utc": "2026-09-08T00:01:08.839996+00:00", "event": "OUTPUT", "text": "\u2502 Use the \"path\" attribute within the \"local\" backend to specify a file for"}
+{"timestamp_utc": "2026-09-08T00:01:08.840603+00:00", "event": "OUTPUT", "text": "\u2502 state storage"}
+{"timestamp_utc": "2026-09-08T00:01:08.841238+00:00", "event": "OUTPUT", "text": "\u2575"}
+{"timestamp_utc": "2026-09-08T00:01:32.614032+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:01:32.614626+00:00", "event": "OUTPUT", "text": "Apply complete! Resources: 0 added, 0 changed, 0 destroyed."}
+{"timestamp_utc": "2026-09-08T00:01:32.615114+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:01:32.615657+00:00", "event": "OUTPUT", "text": "Outputs:"}
+{"timestamp_utc": "2026-09-08T00:01:32.616229+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:01:32.616751+00:00", "event": "OUTPUT", "text": "APIM_ENDPOINT = \"https://apim-rf-cce5b59dd73ad.azure-api.net/reasonfuse\""}
+{"timestamp_utc": "2026-09-08T00:01:32.617370+00:00", "event": "OUTPUT", "text": "APIM_NAME = \"apim-rf-cce5b59dd73ad\""}
+{"timestamp_utc": "2026-09-08T00:01:32.618024+00:00", "event": "OUTPUT", "text": "APPLICATIONINSIGHTS_CONNECTION_STRING = <sensitive>"}
+{"timestamp_utc": "2026-09-08T00:01:32.618696+00:00", "event": "OUTPUT", "text": "AZURE_AI_ACCOUNT_NAME = \"cog-cce5b59dd73ad\""}
+{"timestamp_utc": "2026-09-08T00:01:32.619430+00:00", "event": "OUTPUT", "text": "AZURE_AI_PROJECT_ID = \"/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/providers/Microsoft.CognitiveServices/accounts/cog-cce5b59dd73ad/projects/reasonfuse-phase1\""}
+{"timestamp_utc": "2026-09-08T00:01:32.620084+00:00", "event": "OUTPUT", "text": "AZURE_AI_PROJECT_NAME = \"reasonfuse-phase1\""}
+{"timestamp_utc": "2026-09-08T00:01:32.620632+00:00", "event": "OUTPUT", "text": "AZURE_FOUNDRY_RESOURCE_GROUP = \"rg-reasonfuse-phase1-aue\""}
+{"timestamp_utc": "2026-09-08T00:01:32.621184+00:00", "event": "OUTPUT", "text": "AZURE_OPENAI_ENDPOINT = \"https://cog-cce5b59dd73ad.openai.azure.com/\""}
+{"timestamp_utc": "2026-09-08T00:01:32.621831+00:00", "event": "OUTPUT", "text": "AZURE_RESOURCE_GROUP = \"rg-reasonfuse-phase1-aue\""}
+{"timestamp_utc": "2026-09-08T00:01:32.623515+00:00", "event": "OUTPUT", "text": "FOUNDRY_PROJECT_ENDPOINT = \"https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1\""}
+{"timestamp_utc": "2026-09-08T00:01:32.624514+00:00", "event": "OUTPUT", "text": "OPERATIONS_APP_NAME = \"rf-operations-cce5b59dd73ad\""}
+{"timestamp_utc": "2026-09-08T00:01:32.625117+00:00", "event": "OUTPUT", "text": "OPERATIONS_ENDPOINT = \"https://rf-operations-cce5b59dd73ad.azurewebsites.net\""}
+{"timestamp_utc": "2026-09-08T00:01:33.859011+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:01:33.859737+00:00", "event": "OUTPUT", "text": "SUCCESS: Your application was provisioned in Azure in 1 minute 23 seconds."}
+{"timestamp_utc": "2026-09-08T00:01:33.860308+00:00", "event": "OUTPUT", "text": "You can view the resources created under the resource group rg-reasonfuse-phase1-aue in Azure Portal:"}
+{"timestamp_utc": "2026-09-08T00:01:33.860919+00:00", "event": "OUTPUT", "text": "https://portal.azure.com/#@/resource/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/overview"}
+{"timestamp_utc": "2026-09-08T00:01:39.391576+00:00", "event": "OUTPUT", "text": "WARNING: Note: 'az webapp deploy' does not run build automation (dependency installation, compilation, etc.) by default for Linux web apps. If your package is not pre-built, set the app setting SCM_DO_BUILD_DURING_DEPLOYMENT=true to enable builds during deployment."}
+{"timestamp_utc": "2026-09-08T00:01:39.392250+00:00", "event": "OUTPUT", "text": "WARNING: Initiating deployment"}
+{"timestamp_utc": "2026-09-08T00:01:39.392678+00:00", "event": "OUTPUT", "text": "WARNING: Deploying from local path: .tools/operations-api.zip"}
+{"timestamp_utc": "2026-09-08T00:01:48.393674+00:00", "event": "OUTPUT", "text": "WARNING: Warming up Kudu before deployment."}
+{"timestamp_utc": "2026-09-08T00:01:54.985234+00:00", "event": "OUTPUT", "text": "WARNING: Warmed up Kudu instance successfully."}
+{"timestamp_utc": "2026-09-08T00:02:12.167726+00:00", "event": "OUTPUT", "text": "WARNING: Deployment has completed successfully"}
+{"timestamp_utc": "2026-09-08T00:02:13.150611+00:00", "event": "OUTPUT", "text": "WARNING: You can visit your app at: http://rf-operations-cce5b59dd73ad.azurewebsites.net"}
+{"timestamp_utc": "2026-09-08T00:02:13.259174+00:00", "event": "OUTPUT", "text": "{"}
+{"timestamp_utc": "2026-09-08T00:02:13.259822+00:00", "event": "OUTPUT", "text": "  \"active\": true,"}
+{"timestamp_utc": "2026-09-08T00:02:13.260406+00:00", "event": "OUTPUT", "text": "  \"author\": \"N/A\","}
+{"timestamp_utc": "2026-09-08T00:02:13.260918+00:00", "event": "OUTPUT", "text": "  \"author_email\": \"N/A\","}
+{"timestamp_utc": "2026-09-08T00:02:13.261416+00:00", "event": "OUTPUT", "text": "  \"build_summary\": {"}
+{"timestamp_utc": "2026-09-08T00:02:13.261944+00:00", "event": "OUTPUT", "text": "    \"errors\": [],"}
+{"timestamp_utc": "2026-09-08T00:02:13.262392+00:00", "event": "OUTPUT", "text": "    \"warnings\": []"}
+{"timestamp_utc": "2026-09-08T00:02:13.262995+00:00", "event": "OUTPUT", "text": "  },"}
+{"timestamp_utc": "2026-09-08T00:02:13.263453+00:00", "event": "OUTPUT", "text": "  \"complete\": true,"}
+{"timestamp_utc": "2026-09-08T00:02:13.263928+00:00", "event": "OUTPUT", "text": "  \"deployer\": \"OneDeploy\","}
+{"timestamp_utc": "2026-09-08T00:02:13.264424+00:00", "event": "OUTPUT", "text": "  \"end_time\": \"2026-09-08T00:02:03.2551332Z\","}
+{"timestamp_utc": "2026-09-08T00:02:13.264867+00:00", "event": "OUTPUT", "text": "  \"id\": \"394bf392-d8c0-4131-8fc5-81c89d628492\","}
+{"timestamp_utc": "2026-09-08T00:02:13.265282+00:00", "event": "OUTPUT", "text": "  \"is_readonly\": true,"}
+{"timestamp_utc": "2026-09-08T00:02:13.265732+00:00", "event": "OUTPUT", "text": "  \"is_temp\": false,"}
+{"timestamp_utc": "2026-09-08T00:02:13.266226+00:00", "event": "OUTPUT", "text": "  \"last_success_end_time\": \"2026-09-08T00:02:03.2551332Z\","}
+{"timestamp_utc": "2026-09-08T00:02:13.266960+00:00", "event": "OUTPUT", "text": "  \"log_url\": \"https://rf-operations-cce5b59dd73ad.scm.azurewebsites.net/api/deployments/394bf392-d8c0-4131-8fc5-81c89d628492/log\","}
+{"timestamp_utc": "2026-09-08T00:02:13.267460+00:00", "event": "OUTPUT", "text": "  \"message\": \"OneDeploy\","}
+{"timestamp_utc": "2026-09-08T00:02:13.267911+00:00", "event": "OUTPUT", "text": "  \"progress\": \"\","}
+{"timestamp_utc": "2026-09-08T00:02:13.268555+00:00", "event": "OUTPUT", "text": "  \"received_time\": \"2026-09-08T00:01:58.8533636Z\","}
+{"timestamp_utc": "2026-09-08T00:02:13.269117+00:00", "event": "OUTPUT", "text": "  \"site_name\": \"rf-operations-cce5b59dd73ad\","}
+{"timestamp_utc": "2026-09-08T00:02:13.269684+00:00", "event": "OUTPUT", "text": "  \"start_time\": \"2026-09-08T00:02:00.2322308Z\","}
+{"timestamp_utc": "2026-09-08T00:02:13.270293+00:00", "event": "OUTPUT", "text": "  \"status\": 4,"}
+{"timestamp_utc": "2026-09-08T00:02:13.271093+00:00", "event": "OUTPUT", "text": "  \"status_text\": \"\","}
+{"timestamp_utc": "2026-09-08T00:02:13.271661+00:00", "event": "OUTPUT", "text": "  \"url\": \"https://rf-operations-cce5b59dd73ad.scm.azurewebsites.net/api/deployments/394bf392-d8c0-4131-8fc5-81c89d628492\""}
+{"timestamp_utc": "2026-09-08T00:02:13.272214+00:00", "event": "OUTPUT", "text": "}"}
+{"timestamp_utc": "2026-09-08T00:02:37.625545+00:00", "event": "OUTPUT", "text": "{\"toolbox\": \"reasonfuse-operations\", \"endpoint\": \"https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/6/mcp?api-version=v1\", \"evidence\": \"D:\\\\workshop\\\\sep\\\\reason-fuse\\\\evidence\\\\phase-01-runtime-validation\\\\runs\\\\20260908\\\\20260908T000229352434Z-toolbox-provision.jsonl\"}"}
+{"timestamp_utc": "2026-09-08T00:03:38.322207+00:00", "event": "OUTPUT", "text": "{\"tool_names\": [\"operations___dns_resolution\", \"operations___restart_service\"], \"approval_modes\": {\"operations___dns_resolution\": \"never_require\", \"operations___restart_service\": \"always_require\"}}"}
+{"timestamp_utc": "2026-09-08T00:03:38.322785+00:00", "event": "OUTPUT", "text": "TOOLBOX_SMOKE_PASS D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000249667303Z-toolbox-smoke.jsonl"}
+{"timestamp_utc": "2026-09-08T00:03:45.321723+00:00", "event": "OUTPUT", "text": "warning: in the working copy of 'scripts/capture_environment.py', CRLF will be replaced by LF the next time Git touches it"}
+{"timestamp_utc": "2026-09-08T00:03:45.322400+00:00", "event": "OUTPUT", "text": "warning: in the working copy of 'scripts/capture_telemetry.py', CRLF will be replaced by LF the next time Git touches it"}
+{"timestamp_utc": "2026-09-08T00:03:45.322895+00:00", "event": "OUTPUT", "text": "warning: in the working copy of 'scripts/preflight.py', CRLF will be replaced by LF the next time Git touches it"}
+{"timestamp_utc": "2026-09-08T00:03:45.323404+00:00", "event": "OUTPUT", "text": "warning: in the working copy of 'scripts/reset.py', CRLF will be replaced by LF the next time Git touches it"}
+{"timestamp_utc": "2026-09-08T00:03:45.326680+00:00", "event": "OUTPUT", "text": "warning: in the working copy of 'tests/integration/apim.py', CRLF will be replaced by LF the next time Git touches it"}
+{"timestamp_utc": "2026-09-08T00:03:45.327332+00:00", "event": "OUTPUT", "text": "warning: in the working copy of 'tests/integration/approval.py', CRLF will be replaced by LF the next time Git touches it"}
+{"timestamp_utc": "2026-09-08T00:03:45.327925+00:00", "event": "OUTPUT", "text": "warning: in the working copy of 'tests/integration/history_session.py', CRLF will be replaced by LF the next time Git touches it"}
+{"timestamp_utc": "2026-09-08T00:03:45.361365+00:00", "event": "OUTPUT", "text": "SOURCE_IDENTITY adf7a170d63d7df7bc06d18a7f87f8aef3aa3498cd42c74272f113b8a6b5c372 D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000345135000Z-source-identity.jsonl"}
+{"timestamp_utc": "2026-09-08T00:03:46.486635+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:03:46.487788+00:00", "event": "OUTPUT", "text": "Packaging services (azd package)"}
+{"timestamp_utc": "2026-09-08T00:03:46.488713+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:03:46.589955+00:00", "event": "OUTPUT", "text": "Packaging service stable"}
+{"timestamp_utc": "2026-09-08T00:03:46.823653+00:00", "event": "OUTPUT", "text": "Packaging service stable (Packaging code)"}
+{"timestamp_utc": "2026-09-08T00:03:46.842853+00:00", "event": "OUTPUT", "text": "  (\u2713) Done: Packaging service stable"}
+{"timestamp_utc": "2026-09-08T00:03:46.843815+00:00", "event": "OUTPUT", "text": "  - Build Output: D:\\workshop\\sep\\reason-fuse"}
+{"timestamp_utc": "2026-09-08T00:03:46.844490+00:00", "event": "OUTPUT", "text": "  - Package Output: D:\\workshop\\sep\\reason-fuse\\.tools\\deployment-20260908T000345Z\\azd-code-deploy-2551593431.zip"}
+{"timestamp_utc": "2026-09-08T00:03:46.845244+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:03:46.846076+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:03:46.846803+00:00", "event": "OUTPUT", "text": "SUCCESS: Your application was packaged for Azure in less than a second."}
+{"timestamp_utc": "2026-09-08T00:03:48.314505+00:00", "event": "OUTPUT", "text": "SOURCE_IDENTITY adf7a170d63d7df7bc06d18a7f87f8aef3aa3498cd42c74272f113b8a6b5c372 D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000348242826Z-source-identity.jsonl"}
+{"timestamp_utc": "2026-09-08T00:03:49.629565+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:03:49.630182+00:00", "event": "OUTPUT", "text": "Deploying services (azd deploy)"}
+{"timestamp_utc": "2026-09-08T00:03:49.630646+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:03:49.641573+00:00", "event": "OUTPUT", "text": "  stable: Packaging"}
+{"timestamp_utc": "2026-09-08T00:03:49.660223+00:00", "event": "OUTPUT", "text": "  stable: Packaging (Packaging code)"}
+{"timestamp_utc": "2026-09-08T00:03:49.674815+00:00", "event": "OUTPUT", "text": "  stable: Publishing"}
+{"timestamp_utc": "2026-09-08T00:03:52.370691+00:00", "event": "OUTPUT", "text": "  stable: Deploying [2s]"}
+{"timestamp_utc": "2026-09-08T00:03:58.552675+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Loading deployment environment) [8s]"}
+{"timestamp_utc": "2026-09-08T00:03:58.553592+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Loading Foundry project) [8s]"}
+{"timestamp_utc": "2026-09-08T00:03:58.556090+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Validating service dependencies) [8s]"}
+{"timestamp_utc": "2026-09-08T00:03:58.559341+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Preparing code agent configuration) [8s]"}
+{"timestamp_utc": "2026-09-08T00:03:58.559913+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Loading code package artifact) [8s]"}
+{"timestamp_utc": "2026-09-08T00:03:58.560315+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Deploying hosted agent (code deploy)) [8s]"}
+{"timestamp_utc": "2026-09-08T00:03:58.560676+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Checking existing agent) [8s]"}
+{"timestamp_utc": "2026-09-08T00:04:01.766548+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Updating existing agent from code package) [12s]"}
+{"timestamp_utc": "2026-09-08T00:04:03.026286+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Waiting for agent to become active) [13s]"}
+{"timestamp_utc": "2026-09-08T00:04:03.027161+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Agent version created; waiting for activation) [13s]"}
+{"timestamp_utc": "2026-09-08T00:04:13.027407+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Polling agent status (1/30)) [23s]"}
+{"timestamp_utc": "2026-09-08T00:04:24.532671+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Polling agent status (2/30)) [34s]"}
+{"timestamp_utc": "2026-09-08T00:04:34.911345+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Polling agent status (3/30)) [45s]"}
+{"timestamp_utc": "2026-09-08T00:04:45.037930+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Polling agent status (4/30)) [55s]"}
+{"timestamp_utc": "2026-09-08T00:04:55.167644+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Polling agent status (5/30)) [1m5s]"}
+{"timestamp_utc": "2026-09-08T00:04:55.256953+00:00", "event": "OUTPUT", "text": "  stable: Deploying (Registering agent environment variables) [1m5s]"}
+{"timestamp_utc": "2026-09-08T00:04:55.351741+00:00", "event": "OUTPUT", "text": "  stable: Done [1m5s]"}
+{"timestamp_utc": "2026-09-08T00:04:55.352448+00:00", "event": "OUTPUT", "text": "- Agent playground (portal): https://ai.azure.com/nextgen/r/fHO4nUheQ6mNZrErdm1Wfw,rg-reasonfuse-phase1-aue,,cog-cce5b59dd73ad,reasonfuse-phase1/build/agents/reasonfuse-phase1-stable/build?version=8"}
+{"timestamp_utc": "2026-09-08T00:04:55.352960+00:00", "event": "OUTPUT", "text": "- Agent endpoint (responses): https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/agents/reasonfuse-phase1-stable/endpoint/protocols/openai/responses?api-version=v1"}
+{"timestamp_utc": "2026-09-08T00:04:55.353533+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:04:55.354127+00:00", "event": "OUTPUT", "text": "Next:"}
+{"timestamp_utc": "2026-09-08T00:04:55.354760+00:00", "event": "OUTPUT", "text": "  azd ai agent show stable"}
+{"timestamp_utc": "2026-09-08T00:04:55.355433+00:00", "event": "OUTPUT", "text": "  verify it's running"}
+{"timestamp_utc": "2026-09-08T00:04:55.356111+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:04:55.357220+00:00", "event": "OUTPUT", "text": "  see README.md"}
+{"timestamp_utc": "2026-09-08T00:04:55.358298+00:00", "event": "OUTPUT", "text": "  find the sample-specific payload"}
+{"timestamp_utc": "2026-09-08T00:04:55.358946+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:04:55.359624+00:00", "event": "OUTPUT", "text": "  azd ai agent invoke stable '<payload>'"}
+{"timestamp_utc": "2026-09-08T00:04:55.360267+00:00", "event": "OUTPUT", "text": "  test with the sample-specific payload"}
+{"timestamp_utc": "2026-09-08T00:04:55.360880+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:04:55.361522+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:04:55.362455+00:00", "event": "OUTPUT", "text": "SUCCESS: Your application was deployed to Azure in 1 minute 5 seconds."}
+{"timestamp_utc": "2026-09-08T00:04:55.363149+00:00", "event": "OUTPUT", "text": "You can view the resources created under the resource group rg-reasonfuse-phase1-aue in Azure Portal:"}
+{"timestamp_utc": "2026-09-08T00:04:55.363787+00:00", "event": "OUTPUT", "text": "https://portal.azure.com/#@/resource/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/overview"}
+{"timestamp_utc": "2026-09-08T00:04:58.484416+00:00", "event": "OUTPUT", "text": "DEPLOYED role=stable version=8 content_hash=d7b0ddeb3e2aa21a24360dbcfced1a017d35806e07d171f796a7d9e2e011eb97"}
+{"timestamp_utc": "2026-09-08T00:05:06.899154+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:05:06.899932+00:00", "event": "OUTPUT", "text": "Deploying services (azd deploy)"}
+{"timestamp_utc": "2026-09-08T00:05:06.900584+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:05:06.910124+00:00", "event": "OUTPUT", "text": "  candidate: Packaging"}
+{"timestamp_utc": "2026-09-08T00:05:06.927910+00:00", "event": "OUTPUT", "text": "  candidate: Packaging (Packaging code)"}
+{"timestamp_utc": "2026-09-08T00:05:06.941224+00:00", "event": "OUTPUT", "text": "  candidate: Publishing"}
+{"timestamp_utc": "2026-09-08T00:05:17.917236+00:00", "event": "OUTPUT", "text": "  candidate: Deploying [10s]"}
+{"timestamp_utc": "2026-09-08T00:05:22.667626+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Loading Foundry project) [15s]"}
+{"timestamp_utc": "2026-09-08T00:05:22.668411+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Loading deployment environment) [15s]"}
+{"timestamp_utc": "2026-09-08T00:05:22.669454+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Validating service dependencies) [15s]"}
+{"timestamp_utc": "2026-09-08T00:05:22.671207+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Loading code package artifact) [15s]"}
+{"timestamp_utc": "2026-09-08T00:05:22.671902+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Deploying hosted agent (code deploy)) [15s]"}
+{"timestamp_utc": "2026-09-08T00:05:22.672496+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Preparing code agent configuration) [15s]"}
+{"timestamp_utc": "2026-09-08T00:05:22.673079+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Checking existing agent) [15s]"}
+{"timestamp_utc": "2026-09-08T00:05:24.362938+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Updating existing agent from code package) [17s]"}
+{"timestamp_utc": "2026-09-08T00:05:25.291652+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Agent version created; waiting for activation) [18s]"}
+{"timestamp_utc": "2026-09-08T00:05:25.292425+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Waiting for agent to become active) [18s]"}
+{"timestamp_utc": "2026-09-08T00:05:35.292104+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Polling agent status (1/30)) [28s]"}
+{"timestamp_utc": "2026-09-08T00:05:47.016791+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Polling agent status (2/30)) [40s]"}
+{"timestamp_utc": "2026-09-08T00:05:57.114896+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Polling agent status (3/30)) [50s]"}
+{"timestamp_utc": "2026-09-08T00:06:07.387550+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Polling agent status (4/30)) [1m0s]"}
+{"timestamp_utc": "2026-09-08T00:06:17.524706+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Polling agent status (5/30)) [1m10s]"}
+{"timestamp_utc": "2026-09-08T00:06:17.611530+00:00", "event": "OUTPUT", "text": "  candidate: Deploying (Registering agent environment variables) [1m10s]"}
+{"timestamp_utc": "2026-09-08T00:06:17.693724+00:00", "event": "OUTPUT", "text": "  candidate: Done [1m10s]"}
+{"timestamp_utc": "2026-09-08T00:06:17.694345+00:00", "event": "OUTPUT", "text": "- Agent playground (portal): https://ai.azure.com/nextgen/r/fHO4nUheQ6mNZrErdm1Wfw,rg-reasonfuse-phase1-aue,,cog-cce5b59dd73ad,reasonfuse-phase1/build/agents/reasonfuse-phase1-candidate/build?version=5"}
+{"timestamp_utc": "2026-09-08T00:06:17.694955+00:00", "event": "OUTPUT", "text": "- Agent endpoint (responses): https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/agents/reasonfuse-phase1-candidate/endpoint/protocols/openai/responses?api-version=v1"}
+{"timestamp_utc": "2026-09-08T00:06:17.695538+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:06:17.696145+00:00", "event": "OUTPUT", "text": "Next:"}
+{"timestamp_utc": "2026-09-08T00:06:17.696869+00:00", "event": "OUTPUT", "text": "  azd ai agent show candidate"}
+{"timestamp_utc": "2026-09-08T00:06:17.697488+00:00", "event": "OUTPUT", "text": "  verify it's running"}
+{"timestamp_utc": "2026-09-08T00:06:17.698514+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:06:17.699168+00:00", "event": "OUTPUT", "text": "  see README.md"}
+{"timestamp_utc": "2026-09-08T00:06:17.699739+00:00", "event": "OUTPUT", "text": "  find the sample-specific payload"}
+{"timestamp_utc": "2026-09-08T00:06:17.700471+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:06:17.701178+00:00", "event": "OUTPUT", "text": "  azd ai agent invoke candidate '<payload>'"}
+{"timestamp_utc": "2026-09-08T00:06:17.701890+00:00", "event": "OUTPUT", "text": "  test with the sample-specific payload"}
+{"timestamp_utc": "2026-09-08T00:06:17.702796+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:06:17.703445+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:06:17.704036+00:00", "event": "OUTPUT", "text": "SUCCESS: Your application was deployed to Azure in 1 minute 10 seconds."}
+{"timestamp_utc": "2026-09-08T00:06:17.704818+00:00", "event": "OUTPUT", "text": "You can view the resources created under the resource group rg-reasonfuse-phase1-aue in Azure Portal:"}
+{"timestamp_utc": "2026-09-08T00:06:17.705392+00:00", "event": "OUTPUT", "text": "https://portal.azure.com/#@/resource/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourceGroups/rg-reasonfuse-phase1-aue/overview"}
+{"timestamp_utc": "2026-09-08T00:06:21.310101+00:00", "event": "OUTPUT", "text": "DEPLOYED role=candidate version=5 content_hash=d7b0ddeb3e2aa21a24360dbcfced1a017d35806e07d171f796a7d9e2e011eb97"}
+{"timestamp_utc": "2026-09-08T00:06:22.555399+00:00", "event": "OUTPUT", "text": "SOURCE_IDENTITY adf7a170d63d7df7bc06d18a7f87f8aef3aa3498cd42c74272f113b8a6b5c372 D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000622486240Z-source-identity.jsonl"}
+{"timestamp_utc": "2026-09-08T00:06:54.400371+00:00", "event": "OUTPUT", "text": "ENVIRONMENT_CAPTURED D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000623802740Z-environment.jsonl"}
+{"timestamp_utc": "2026-09-08T00:06:55.457922+00:00", "event": "OUTPUT", "text": "FOUNDRY_PROJECT_ENDPOINT=https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1"}
+{"timestamp_utc": "2026-09-08T00:06:56.321595+00:00", "event": "OUTPUT", "text": "TOOLBOX_ENDPOINT=https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/6/mcp?api-version=v1"}
+{"timestamp_utc": "2026-09-08T00:06:57.167216+00:00", "event": "OUTPUT", "text": "OPERATIONS_ENDPOINT=https://rf-operations-cce5b59dd73ad.azurewebsites.net"}
+{"timestamp_utc": "2026-09-08T00:06:57.949065+00:00", "event": "OUTPUT", "text": "APIM_ENDPOINT=https://apim-rf-cce5b59dd73ad.azure-api.net/reasonfuse"}
+{"timestamp_utc": "2026-09-08T00:07:01.705710+00:00", "event": "OUTPUT", "text": "azd ai agent doctor"}
+{"timestamp_utc": "2026-09-08T00:07:01.706343+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:07:01.706962+00:00", "event": "OUTPUT", "text": "Local"}
+{"timestamp_utc": "2026-09-08T00:07:01.707606+00:00", "event": "OUTPUT", "text": "   (\u2713) azd extension reachable"}
+{"timestamp_utc": "2026-09-08T00:07:01.726741+00:00", "event": "OUTPUT", "text": "   (\u2713) azure.yaml present and parseable"}
+{"timestamp_utc": "2026-09-08T00:07:01.729837+00:00", "event": "OUTPUT", "text": "   (\u2713) azd environment selected"}
+{"timestamp_utc": "2026-09-08T00:07:01.730610+00:00", "event": "OUTPUT", "text": "   (\u2713) agent service in azure.yaml"}
+{"timestamp_utc": "2026-09-08T00:07:01.732625+00:00", "event": "OUTPUT", "text": "   (\u2713) FOUNDRY_PROJECT_ENDPOINT set"}
+{"timestamp_utc": "2026-09-08T00:07:01.735221+00:00", "event": "OUTPUT", "text": "   (\u2713) agent definition valid (per service)"}
+{"timestamp_utc": "2026-09-08T00:07:01.762693+00:00", "event": "OUTPUT", "text": "   (\u2713) manual env vars set"}
+{"timestamp_utc": "2026-09-08T00:07:01.763429+00:00", "event": "OUTPUT", "text": "   (-) Configured toolboxes have endpoint env vars set -- skipped (no configured toolbox resources were found.)"}
+{"timestamp_utc": "2026-09-08T00:07:03.156953+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:07:03.157519+00:00", "event": "OUTPUT", "text": "Authentication"}
+{"timestamp_utc": "2026-09-08T00:07:03.158092+00:00", "event": "OUTPUT", "text": "   (\u2713) authentication"}
+{"timestamp_utc": "2026-09-08T00:07:04.796322+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:07:04.797298+00:00", "event": "OUTPUT", "text": "Remote"}
+{"timestamp_utc": "2026-09-08T00:07:04.798096+00:00", "event": "OUTPUT", "text": "   (\u2713) Foundry project endpoint reachable"}
+{"timestamp_utc": "2026-09-08T00:07:12.526822+00:00", "event": "OUTPUT", "text": "   (\u2713) Developer has required role on Foundry project"}
+{"timestamp_utc": "2026-09-08T00:07:14.355279+00:00", "event": "OUTPUT", "text": "   (\u2713) Hosted agents are active"}
+{"timestamp_utc": "2026-09-08T00:07:14.355873+00:00", "event": "OUTPUT", "text": "   (-) Configured connections exist on Foundry project -- skipped (no enabled connection services or legacy connection resources found.)"}
+{"timestamp_utc": "2026-09-08T00:07:14.379534+00:00", "event": "OUTPUT", "text": ""}
+{"timestamp_utc": "2026-09-08T00:07:14.380204+00:00", "event": "OUTPUT", "text": "11 passed, 0 failed, 2 skipped"}
+{"timestamp_utc": "2026-09-08T00:08:02.779918+00:00", "event": "OUTPUT", "text": "{\"tool_names\": [\"operations___dns_resolution\", \"operations___restart_service\"], \"approval_modes\": {\"operations___dns_resolution\": \"never_require\", \"operations___restart_service\": \"always_require\"}}"}
+{"timestamp_utc": "2026-09-08T00:08:02.780563+00:00", "event": "OUTPUT", "text": "TOOLBOX_SMOKE_PASS D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000717350270Z-toolbox-smoke.jsonl"}
+{"timestamp_utc": "2026-09-08T00:09:05.426220+00:00", "event": "OUTPUT", "text": "PASS preflight"}
+{"timestamp_utc": "2026-09-08T00:09:05.426769+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000809643894Z-preflight.jsonl"}
+{"timestamp_utc": "2026-09-08T00:09:11.100203+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000700276529Z-clean-start-00.jsonl"}
+{"timestamp_utc": "2026-09-08T00:09:44.199796+00:00", "event": "OUTPUT", "text": "ENVIRONMENT_CAPTURED D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000913622027Z-environment.jsonl"}
+{"timestamp_utc": "2026-09-08T00:09:44.486852+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000912491632Z-clean-start-01.jsonl"}
+{"timestamp_utc": "2026-09-08T00:10:39.454363+00:00", "event": "OUTPUT", "text": "PASS spike01_history_session"}
+{"timestamp_utc": "2026-09-08T00:10:39.455345+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000946891624Z-spike01_history_session.jsonl"}
+{"timestamp_utc": "2026-09-08T00:10:45.016778+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000945760183Z-clean-start-02.jsonl"}
+{"timestamp_utc": "2026-09-08T00:11:20.005387+00:00", "event": "OUTPUT", "text": "PASS spike02_toolbox_allow"}
+{"timestamp_utc": "2026-09-08T00:11:20.006073+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001047525550Z-spike02_toolbox_allow.jsonl"}
+{"timestamp_utc": "2026-09-08T00:11:25.483697+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001046354991Z-clean-start-03.jsonl"}
+{"timestamp_utc": "2026-09-08T00:12:03.452393+00:00", "event": "OUTPUT", "text": "PASS spike02_toolbox_block"}
+{"timestamp_utc": "2026-09-08T00:12:03.453067+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001128218491Z-spike02_toolbox_block.jsonl"}
+{"timestamp_utc": "2026-09-08T00:12:08.997189+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001126985081Z-clean-start-04.jsonl"}
+{"timestamp_utc": "2026-09-08T00:12:46.113427+00:00", "event": "OUTPUT", "text": "PASS spike02_toolbox_allow"}
+{"timestamp_utc": "2026-09-08T00:12:46.114021+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001211407204Z-spike02_toolbox_allow.jsonl"}
+{"timestamp_utc": "2026-09-08T00:12:51.658713+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001210288487Z-clean-start-05.jsonl"}
+{"timestamp_utc": "2026-09-08T00:13:26.402316+00:00", "event": "OUTPUT", "text": "PASS spike02_toolbox_block"}
+{"timestamp_utc": "2026-09-08T00:13:26.402954+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001253980910Z-spike02_toolbox_block.jsonl"}
+{"timestamp_utc": "2026-09-08T00:13:31.900617+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001252933682Z-clean-start-06.jsonl"}
+{"timestamp_utc": "2026-09-08T00:14:20.288898+00:00", "event": "OUTPUT", "text": "PASS spike03_approval_approve"}
+{"timestamp_utc": "2026-09-08T00:14:20.289494+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001334255380Z-spike03_approval_approve.jsonl"}
+{"timestamp_utc": "2026-09-08T00:14:25.845336+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001333222036Z-clean-start-07.jsonl"}
+{"timestamp_utc": "2026-09-08T00:15:14.340463+00:00", "event": "OUTPUT", "text": "PASS spike03_approval_deny"}
+{"timestamp_utc": "2026-09-08T00:15:14.341120+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001428454749Z-spike03_approval_deny.jsonl"}
+{"timestamp_utc": "2026-09-08T00:15:19.815003+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001427318908Z-clean-start-08.jsonl"}
+{"timestamp_utc": "2026-09-08T00:16:27.870376+00:00", "event": "OUTPUT", "text": "PASS spike03_approval_binding"}
+{"timestamp_utc": "2026-09-08T00:16:27.871263+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001522140345Z-spike03_approval_binding.jsonl"}
+{"timestamp_utc": "2026-09-08T00:16:33.374956+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001521100103Z-clean-start-09.jsonl"}
+{"timestamp_utc": "2026-09-08T00:16:59.421204+00:00", "event": "OUTPUT", "text": "PASS spike04_affinity"}
+{"timestamp_utc": "2026-09-08T00:16:59.421768+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001635686033Z-spike04_affinity.jsonl"}
+{"timestamp_utc": "2026-09-08T00:17:04.987910+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001634671687Z-clean-start-10.jsonl"}
+{"timestamp_utc": "2026-09-08T00:17:23.190688+00:00", "event": "OUTPUT", "text": "New session 1/60: {'stable': 1}"}
+{"timestamp_utc": "2026-09-08T00:17:30.847594+00:00", "event": "OUTPUT", "text": "New session 2/60: {'stable': 2}"}
+{"timestamp_utc": "2026-09-08T00:17:38.585576+00:00", "event": "OUTPUT", "text": "New session 3/60: {'stable': 3}"}
+{"timestamp_utc": "2026-09-08T00:17:47.386223+00:00", "event": "OUTPUT", "text": "New session 4/60: {'stable': 4}"}
+{"timestamp_utc": "2026-09-08T00:17:55.727851+00:00", "event": "OUTPUT", "text": "New session 5/60: {'stable': 5}"}
+{"timestamp_utc": "2026-09-08T00:18:03.260422+00:00", "event": "OUTPUT", "text": "New session 6/60: {'stable': 6}"}
+{"timestamp_utc": "2026-09-08T00:18:11.121252+00:00", "event": "OUTPUT", "text": "New session 7/60: {'stable': 7}"}
+{"timestamp_utc": "2026-09-08T00:18:18.909035+00:00", "event": "OUTPUT", "text": "New session 8/60: {'stable': 8}"}
+{"timestamp_utc": "2026-09-08T00:18:27.332945+00:00", "event": "OUTPUT", "text": "New session 9/60: {'stable': 9}"}
+{"timestamp_utc": "2026-09-08T00:18:35.415429+00:00", "event": "OUTPUT", "text": "New session 10/60: {'stable': 10}"}
+{"timestamp_utc": "2026-09-08T00:18:43.275604+00:00", "event": "OUTPUT", "text": "New session 11/60: {'stable': 11}"}
+{"timestamp_utc": "2026-09-08T00:18:51.469855+00:00", "event": "OUTPUT", "text": "New session 12/60: {'stable': 12}"}
+{"timestamp_utc": "2026-09-08T00:18:59.475452+00:00", "event": "OUTPUT", "text": "New session 13/60: {'stable': 13}"}
+{"timestamp_utc": "2026-09-08T00:19:07.738456+00:00", "event": "OUTPUT", "text": "New session 14/60: {'stable': 14}"}
+{"timestamp_utc": "2026-09-08T00:19:18.371077+00:00", "event": "OUTPUT", "text": "New session 15/60: {'stable': 14, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:19:26.373169+00:00", "event": "OUTPUT", "text": "New session 16/60: {'stable': 15, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:19:37.496246+00:00", "event": "OUTPUT", "text": "New session 17/60: {'stable': 16, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:19:46.993915+00:00", "event": "OUTPUT", "text": "New session 18/60: {'stable': 17, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:19:54.653064+00:00", "event": "OUTPUT", "text": "New session 19/60: {'stable': 18, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:20:02.689206+00:00", "event": "OUTPUT", "text": "New session 20/60: {'stable': 19, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:20:11.088630+00:00", "event": "OUTPUT", "text": "New session 21/60: {'stable': 20, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:20:19.405142+00:00", "event": "OUTPUT", "text": "New session 22/60: {'stable': 21, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:20:27.550241+00:00", "event": "OUTPUT", "text": "New session 23/60: {'stable': 22, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:20:35.739134+00:00", "event": "OUTPUT", "text": "New session 24/60: {'stable': 23, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:20:43.274500+00:00", "event": "OUTPUT", "text": "New session 25/60: {'stable': 24, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:20:50.986520+00:00", "event": "OUTPUT", "text": "New session 26/60: {'stable': 25, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:20:58.856262+00:00", "event": "OUTPUT", "text": "New session 27/60: {'stable': 26, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:21:08.118872+00:00", "event": "OUTPUT", "text": "New session 28/60: {'stable': 27, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:21:15.488531+00:00", "event": "OUTPUT", "text": "New session 29/60: {'stable': 28, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:21:23.849657+00:00", "event": "OUTPUT", "text": "New session 30/60: {'stable': 29, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:21:31.936901+00:00", "event": "OUTPUT", "text": "New session 31/60: {'stable': 30, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:21:40.886091+00:00", "event": "OUTPUT", "text": "New session 32/60: {'stable': 31, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:21:49.223113+00:00", "event": "OUTPUT", "text": "New session 33/60: {'stable': 32, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:21:58.603336+00:00", "event": "OUTPUT", "text": "New session 34/60: {'stable': 33, 'candidate': 1}"}
+{"timestamp_utc": "2026-09-08T00:22:06.199174+00:00", "event": "OUTPUT", "text": "New session 35/60: {'stable': 33, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:22:14.504010+00:00", "event": "OUTPUT", "text": "New session 36/60: {'stable': 34, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:22:24.238026+00:00", "event": "OUTPUT", "text": "New session 37/60: {'stable': 35, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:22:32.590527+00:00", "event": "OUTPUT", "text": "New session 38/60: {'stable': 36, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:22:40.681918+00:00", "event": "OUTPUT", "text": "New session 39/60: {'stable': 37, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:22:48.841350+00:00", "event": "OUTPUT", "text": "New session 40/60: {'stable': 38, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:22:56.918320+00:00", "event": "OUTPUT", "text": "New session 41/60: {'stable': 39, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:23:05.257913+00:00", "event": "OUTPUT", "text": "New session 42/60: {'stable': 40, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:23:12.715247+00:00", "event": "OUTPUT", "text": "New session 43/60: {'stable': 41, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:23:20.607330+00:00", "event": "OUTPUT", "text": "New session 44/60: {'stable': 42, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:23:29.333844+00:00", "event": "OUTPUT", "text": "New session 45/60: {'stable': 43, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:23:38.054494+00:00", "event": "OUTPUT", "text": "New session 46/60: {'stable': 44, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:23:45.607220+00:00", "event": "OUTPUT", "text": "New session 47/60: {'stable': 45, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:23:53.818168+00:00", "event": "OUTPUT", "text": "New session 48/60: {'stable': 46, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:24:01.814843+00:00", "event": "OUTPUT", "text": "New session 49/60: {'stable': 47, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:24:09.439890+00:00", "event": "OUTPUT", "text": "New session 50/60: {'stable': 48, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:24:17.371743+00:00", "event": "OUTPUT", "text": "New session 51/60: {'stable': 49, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:24:26.199315+00:00", "event": "OUTPUT", "text": "New session 52/60: {'stable': 50, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:24:33.854182+00:00", "event": "OUTPUT", "text": "New session 53/60: {'stable': 51, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:24:41.823416+00:00", "event": "OUTPUT", "text": "New session 54/60: {'stable': 52, 'candidate': 2}"}
+{"timestamp_utc": "2026-09-08T00:24:50.065131+00:00", "event": "OUTPUT", "text": "New session 55/60: {'stable': 52, 'candidate': 3}"}
+{"timestamp_utc": "2026-09-08T00:24:58.690316+00:00", "event": "OUTPUT", "text": "New session 56/60: {'stable': 53, 'candidate': 3}"}
+{"timestamp_utc": "2026-09-08T00:25:06.367862+00:00", "event": "OUTPUT", "text": "New session 57/60: {'stable': 54, 'candidate': 3}"}
+{"timestamp_utc": "2026-09-08T00:25:14.260579+00:00", "event": "OUTPUT", "text": "New session 58/60: {'stable': 55, 'candidate': 3}"}
+{"timestamp_utc": "2026-09-08T00:25:22.063165+00:00", "event": "OUTPUT", "text": "New session 59/60: {'stable': 56, 'candidate': 3}"}
+{"timestamp_utc": "2026-09-08T00:25:30.678654+00:00", "event": "OUTPUT", "text": "New session 60/60: {'stable': 57, 'candidate': 3}"}
+{"timestamp_utc": "2026-09-08T00:25:30.679706+00:00", "event": "OUTPUT", "text": "PASS spike04_new_session_control"}
+{"timestamp_utc": "2026-09-08T00:25:30.680503+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001707441683Z-spike04_new_session_control.jsonl"}
+{"timestamp_utc": "2026-09-08T00:25:36.217774+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T001706323039Z-clean-start-11.jsonl"}
+{"timestamp_utc": "2026-09-08T00:25:56.585587+00:00", "event": "OUTPUT", "text": "PASS spike04_sse"}
+{"timestamp_utc": "2026-09-08T00:25:56.586093+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T002538855595Z-spike04_sse.jsonl"}
+{"timestamp_utc": "2026-09-08T00:26:02.063323+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T002537654617Z-clean-start-12.jsonl"}
+{"timestamp_utc": "2026-09-08T00:26:22.106862+00:00", "event": "OUTPUT", "text": "PASS metadata_telemetry"}
+{"timestamp_utc": "2026-09-08T00:26:22.107499+00:00", "event": "OUTPUT", "text": "Evidence: D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T002604312550Z-metadata_telemetry.jsonl"}
+{"timestamp_utc": "2026-09-08T00:26:27.636363+00:00", "event": "OUTPUT", "text": "COMMAND_EVIDENCE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T002603324078Z-clean-start-13.jsonl"}
+{"timestamp_utc": "2026-09-08T00:26:27.962149+00:00", "event": "OUTPUT", "text": "BATCH_PASS clean-start D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T000659264358Z-batch-clean-start.jsonl"}
+{"timestamp_utc": "2026-09-08T00:26:42.865551+00:00", "event": "OUTPUT", "text": "RESET_COMPLETE D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260908\\20260908T002632738176Z-reset.jsonl"}
+{"timestamp_utc": "2026-09-08T00:26:49.041806+00:00", "event": "OUTPUT", "text": "CLEAN_START_COMPLETE"}
+{"timestamp_utc": "2026-09-08T00:26:49.275583+00:00", "event": "RESULT", "status": "PASS", "exit_code": 0}

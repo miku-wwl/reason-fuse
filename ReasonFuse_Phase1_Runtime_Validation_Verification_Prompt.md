@@ -5,11 +5,11 @@
 > **Phase:** 1 — Runtime Validation  
 > **Role:** Validator, not implementer  
 > **Rule:** Do not award PASS based on code inspection alone.  
-> **Revision:** Post-construction handoff, 2026-09-08 (Pacific/Auckland). This revision does not itself execute or pass independent validation.
+> **Status:** Phase 1 acceptance completed on 2026-09-08. This document retains the reusable rubric; it is not a new execution or historical-review task.
 
 ---
 
-# 0. Current Repository and Construction Handoff
+# 0. Current Repository and Acceptance Baseline
 
 ReasonFuse is one project. Phase 1 is a validation scope within that project.
 Run commands from the repository root, currently `D:\workshop\sep\reason-fuse`.
@@ -21,21 +21,19 @@ Read these current sources before execution:
 | --- | --- |
 | [README.md](README.md) | Project layout and entry points |
 | [runbook.md](docs/phases/phase-01-runtime-validation/runbook.md) | Deployment, integration and reset procedures |
-| [report.md](docs/phases/phase-01-runtime-validation/report.md) | Construction results and known limits |
-| [reorganization.md](docs/phases/phase-01-runtime-validation/reorganization.md) | Source moves and checks performed after construction |
-| [evidence index](evidence/phase-01-runtime-validation/index.json) | Original construction evidence and hashes |
+| [final report](docs/phases/phase-01-runtime-validation/verification-report.md) | Completed independent acceptance and exact test scope |
+| [validation boundaries](docs/phases/phase-01-runtime-validation/verification-open-questions.md) | Capabilities not verified by Phase 1 |
+| [evidence index](evidence/phase-01-runtime-validation/index.json) | Retained acceptance evidence and hashes |
 | [latest captured environment](evidence/phase-01-runtime-validation/environment-current.json) | A timestamped snapshot, not a substitute for live readback |
 
-The pre-deployment environment archive is
-[2026-09-07-before-deployment.md](docs/environment/2026-09-07-before-deployment.md).
-It is historical context, not the deployed inventory.
 Leave `ReasonFuse_Phase1_Runtime_Validation_Construction_Prompt.md` unchanged;
 it is a historical construction instruction, not a new execution task.
 
-Construction completed nine real integration cases, preflight and reset.
-Those results are baseline evidence only. Independent acceptance and a complete
-deployment/retest of the reorganized source were still **NOT VERIFIED** at handoff.
-Do not copy the construction PASS labels into the independent report.
+Independent acceptance completed all four spikes, two full batches, deployed-source
+identity, clean-start and final reset. Superseded reports and diagnostic attempts
+were removed in an owner-authorized learning cleanup; do not reconstruct or review
+them. For a future separately requested validation, apply all gates below to fresh
+evidence rather than copying this dated PASS.
 
 Keep the four frozen assumptions and all acceptance gates below. The implemented
 Operations API is a deterministic external test service: DNS returns a controlled
@@ -940,9 +938,9 @@ Existing helpers write new JSONL files under
 Create a separate
 `evidence/phase-01-runtime-validation/verification-<UTC-timestamp>/index.json`
 mapping each requirement and batch to repo-relative evidence paths, SHA-256
-hashes and outcomes. Keep any additional diagnostic scripts and sanitized logs
-with that batch. Do not rename or overwrite original files under
-`construction-2026-09-07/` or replace the construction evidence index.
+hashes and outcomes. During a new validation, keep diagnostic scripts and sanitized
+logs with that batch. Do not overwrite the retained completed acceptance evidence.
+This does not require restoring artifacts removed by the owner after closeout.
 
 `environment-current.json` is a rolling snapshot. Preserve each validation
 batch's timestamped environment output and all required supplementary live
@@ -972,9 +970,9 @@ Create or update the independent report:
 docs/phases/phase-01-runtime-validation/verification-report.md
 ```
 
-Keep the construction report `docs/phases/phase-01-runtime-validation/report.md`
-as historical evidence. Do not overwrite it with independent acceptance results.
-Use the structure below, linking every result to the new evidence index.
+For a future separately requested validation, use the structure below and link
+every result to its new evidence index. Do not recreate the removed construction
+report or reopen the closed historical investigation.
 
 ```text
 # Phase 1 Independent Runtime Validation Report

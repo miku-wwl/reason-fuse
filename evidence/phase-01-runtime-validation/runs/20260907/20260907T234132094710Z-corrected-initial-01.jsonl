@@ -1,0 +1,4 @@
+{"timestamp_utc": "2026-09-07T23:41:32.095565+00:00", "event": "START", "case": "corrected-initial-01", "command": ["scripts/verification_command.py", "corrected-initial-01", "--", "D:\\workshop\\sep\\reason-fuse\\.venv\\Scripts\\python.exe", "scripts/capture_environment.py"], "region": "australiaeast"}
+{"timestamp_utc": "2026-09-07T23:41:32.096171+00:00", "event": "COMMAND", "argv": ["D:\\workshop\\sep\\reason-fuse\\.venv\\Scripts\\python.exe", "scripts/capture_environment.py"]}
+{"timestamp_utc": "2026-09-07T23:42:03.362261+00:00", "event": "OUTPUT", "text": "ENVIRONMENT_CAPTURED D:\\workshop\\sep\\reason-fuse\\evidence\\phase-01-runtime-validation\\runs\\20260907\\20260907T234133141716Z-environment.jsonl"}
+{"timestamp_utc": "2026-09-07T23:42:03.617311+00:00", "event": "RESULT", "status": "PASS", "exit_code": 0}

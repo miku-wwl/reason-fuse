@@ -32,6 +32,12 @@ def validate(evidence, case):
         assert after["reasonfuse_test_counter"] == 7
         assert after["restored_at_turn_start"] is True
         if case == "binding":
+            # Exact same-action replay is exposed by the native endpoint. Record it
+            # separately from the cross-argument attack; never resubmit a tool call.
+            same = client.turn([approval_response(pending, True)], conversation=conversation)
+            external.assert_counts(expected)
+            assert not any(item.get("type") == "mcp_approval_request" for item in same.get("output", []))
+            evidence.write("SAME_ACTION_REPLAY", approval_id=pending["id"], counts=expected)
             # Reuse the already consumed approval while requesting different arguments.
             # A rejection is acceptable; executing either action again is not.
             try:
@@ -41,7 +47,7 @@ def validate(evidence, case):
                 ], conversation=conversation)
             except httpx.HTTPStatusError as error:
                 assert error.response.status_code in {400, 409, 422}, "Unexpected replay failure"
-                evidence.write("REPLAY_REJECTED", status_code=error.response.status_code)
+                evidence.write("REPLAY_REJECTED", status_code=error.response.status_code, body=error.response.json())
                 replay = client.turn("Call restart_service with service_name payments.", conversation=conversation)
             external.assert_counts(expected)
             payments = approval_request(replay)
@@ -53,6 +59,7 @@ def validate(evidence, case):
                         exact_action=json.loads(pending["arguments"]), approved=approved,
                         session_before=before["agent_session_id"], session_after=after["agent_session_id"], counter=7)
     finally:
+        external.snapshot()
         client.close()
 
 
