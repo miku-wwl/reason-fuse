@@ -73,7 +73,8 @@ class Handler(BaseHTTPRequestHandler):
         if self.path != "/counters" or not self.admin_authorized():
             return self.send_json(404, {"error": "not_found"})
         with LOCK:
-            self.send_json(200, {"epoch": EPOCH, "counts": dict(COUNTS), "events": list(EVENTS)})
+            self.send_json(200, {"epoch": EPOCH, "counts": dict(COUNTS), "events": list(EVENTS),
+                                 "scenario": SCENARIO, "service_health": dict(SERVICE_HEALTH)})
 
     def do_POST(self):
         global EPOCH, SCENARIO

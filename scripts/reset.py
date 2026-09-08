@@ -64,6 +64,8 @@ def reset(evidence):
     artifact = ROOT / ".azure" / "rf-phase1-aue" / "validation-last-run.json"
     artifact.unlink(missing_ok=True)
     operations.assert_counts({})
+    baseline = operations.snapshot()
+    assert baseline["scenario"] == "phase1" and baseline["service_health"] == {}, "Scenario reset incomplete"
     for session_id in sorted(recorded):
         evidence.write("RECORDED_SESSION_OUTCOME", session_id=session_id,
                        **final_statuses.get(session_id, {"status": "absent_from_all_agent_session_pages"}))
@@ -71,6 +73,7 @@ def reset(evidence):
                    recorded_sessions=len(recorded), deleted_sessions=len(deleted),
                    already_deleted_sessions=already_deleted,
                    recorded_non_deleted_sessions_remaining=0, external_counts={},
+                   scenario=baseline["scenario"], service_health=baseline["service_health"],
                    local_artifact_absent=not artifact.exists())
     evidence.write("RESULT", status="RESET_COMPLETE", exit_code=0)
     print(f"RESET_COMPLETE {evidence.path}")

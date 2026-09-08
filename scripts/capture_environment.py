@@ -72,7 +72,8 @@ def main(evidence):
             "code_configuration": definition.get("code_configuration"),
             "env": {key: value for key, value in definition.get("environment_variables", {}).items()
                     if key in {"RELEASE_ROLE", "AZURE_AI_MODEL_DEPLOYMENT_NAME", "TOOLBOX_ENDPOINT",
-                               "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT"}},
+                               "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT", "REASONFUSE_PROFILE",
+                               "REASONFUSE_ENABLED", "REASONFUSE_CONTRACT_JSON"}},
             "endpoint": raw.get("agent_endpoints", {}).get("responses"),
         })
     evidence.write("ENVIRONMENT", **result)
