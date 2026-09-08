@@ -82,6 +82,8 @@ paths:
                   resource: {type: string}
                   service_name: {type: string}
                   service_health: {type: string}
+                  generation: {type: string}
+                  status: {type: string}
                   world_state: {type: object}
   /database-health:
     post:
@@ -107,6 +109,8 @@ paths:
                 properties:
                   resource: {type: string}
                   service_health: {type: string}
+                  generation: {type: string}
+                  status: {type: string}
                   world_state: {type: object}
   /retrieval-fixture:
     post:
