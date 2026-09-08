@@ -69,6 +69,7 @@ class ConstructionBoundaryTests(unittest.TestCase):
             {"resource": "orders", "service_health": "HEALTHY", "status": "stale", "generation": "g2"},
             {"resource": "orders", "service_health": "HEALTHY", "generation": "g1"},
             {"resource": "orders", "generation": "g2"},
+            {"resource": "orders", "generation": "g2", "service_health": []},
         ):
             self.assertEqual(verifier.verify("restart_service", accepted, observation,
                              requested_resource="orders")["outcome"], "OUTCOME_UNKNOWN")
@@ -127,6 +128,22 @@ class ConstructionBoundaryTests(unittest.TestCase):
         self.assertFalse(result.signals["useful_recheck"])
         self.assertFalse(engine.state.pending_postcondition["consumed"])
 
+    def test_database_health_alias_preserves_useful_recheck(self):
+        engine = ReasonFuseEngine()
+        engine.record("restart_service", {"service_name": "orders"}, {"accepted": True, "generation": "g1"},
+                      executed=True, side_effect=True)
+        engine = ReasonFuseEngine(ReasonFuseState.from_dict(engine.state.to_dict()))
+        self.assertTrue(engine.before_dispatch("database_health", {"service_name": "orders"}).allow)
+        result = engine.record("database_health", {"service_name": "orders"},
+                               {"resource": "orders", "generation": "g1"}, executed=True)
+        self.assertTrue(result.signals["useful_recheck"])
+
+    def test_optional_postcondition_configuration_is_honored(self):
+        engine = ReasonFuseEngine(contract=RunContract(require_postcondition_for_side_effects=False))
+        engine.record("restart_service", {"service_name": "orders"}, {"accepted": True},
+                      executed=True, side_effect=True)
+        self.assertIsNone(engine.state.pending_postcondition)
+
     def test_alternating_resource_reads_do_not_invent_world_change(self):
         engine = ReasonFuseEngine()
         for resource in ["orders", "payments", "orders", "payments"]:
@@ -183,6 +200,29 @@ class ConstructionBoundaryTests(unittest.TestCase):
         for updates in ({"contained": "false"}, {"core_state_version": "unknown"}, {"tool_call_count": True}):
             with self.subTest(updates=updates), self.assertRaises(ValueError):
                 ReasonFuseState.from_dict({**ReasonFuseState().to_dict(), **updates})
+
+    def test_decision_span_contains_structured_attributes(self):
+        from opentelemetry.sdk.trace import TracerProvider
+        from opentelemetry.sdk.trace.export import SimpleSpanProcessor
+        from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
+        provider, exporter = TracerProvider(), InMemorySpanExporter()
+        provider.add_span_processor(SimpleSpanProcessor(exporter))
+        async def scenario():
+            session = AgentSession()
+            session.state["reasonfuse_core_v1"] = ReasonFuseState().to_dict()
+            context = FunctionInvocationContext(SimpleNamespace(name="dns_resolution"), {}, session=session)
+            async def call_next():
+                context.result = {"status": "INCONCLUSIVE"}
+            with provider.get_tracer("core-test").start_as_current_span("dispatch"):
+                await ReasonFuseFunctionMiddleware().process(context, call_next)
+        try:
+            asyncio.run(scenario())
+            span = exporter.get_finished_spans()[0]
+            self.assertIs(span.attributes["reasonfuse.evidence_delta"], False)
+            self.assertEqual(span.attributes["reasonfuse.contract_version"], "reasonfuse-contract-v1")
+            self.assertEqual(span.events[0].name, "reasonfuse.observation")
+        finally:
+            provider.shutdown()
 
 
 if __name__ == "__main__":

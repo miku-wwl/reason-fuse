@@ -46,7 +46,7 @@ class ReasonFuseEngine:
 
     def pending_verification(self, tool_name: str, arguments: Any) -> bool:
         pending = self.state.pending_postcondition
-        return bool(pending and not pending.get("consumed") and tool_name == "service_status"
+        return bool(pending and not pending.get("consumed") and tool_name in VERIFICATION_TO_RESOURCE
                     and self._resource(tool_name, self._args(arguments)) == pending["resource"])
 
     def _stalled(self) -> bool:
@@ -185,7 +185,8 @@ class ReasonFuseEngine:
         else:
             self.state.stall_counter += 1
             self.state.progress_state = "STALLED" if self.state.stall_counter else "ACTIVE"
-        if side_effect and executed and approved and result.get("accepted") is True:
+        if (side_effect and executed and approved and result.get("accepted") is True
+                and self.contract.require_postcondition_for_side_effects):
             self.state.pending_postcondition = {"action": tool_name, "resource": resource,
                                                 "generation": result.get("generation"), "consumed": False,
                                                 "accepted_result": result,

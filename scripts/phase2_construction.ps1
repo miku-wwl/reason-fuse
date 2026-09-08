@@ -24,7 +24,7 @@ $restoreRequired = $false
 try {
     Configure 'true' $defaultContract
     Checked @('pwsh', '-File', 'scripts/deploy.ps1')
-    Cases @('b-on', 'e-retrieval', 'f-useful', 'g-outcome-failure', 'i-outcome-unknown')
+    Cases @('b-on', 'e-retrieval', 'f-useful', 'g-outcome-failure', 'i-outcome-unknown', 'j-database-recheck')
     $restoreRequired = $true
     Configure 'false' $defaultContract
     Checked @($azd, 'deploy', 'stable', '--no-prompt')

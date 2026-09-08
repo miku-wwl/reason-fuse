@@ -243,10 +243,11 @@ def scenario_e(evidence: Phase2Evidence):
         close_case(external, client, "E_retrieval_churn")
 
 
-def approved_restart(evidence, client, conversation, service="orders"):
+def approved_restart(evidence, client, conversation, service="orders", verifier=None):
     requested = turn(evidence, client, conversation, "restart-request",
                      f"Call operations___restart_service exactly once with service_name {service}. "
-                     "Submit the native tool call immediately for approval; do not ask for prose approval.")
+                     "Submit the native tool call immediately for approval; do not ask for prose approval." +
+                     (f" After acceptance verify only with operations___{verifier} for {service}." if verifier else ""))
     pending = approval_request(requested)
     approved = client.turn([approval_response(pending, True)], conversation=conversation)
     evidence.write("APPROVAL_RESUME", conversation_id=conversation, approval_id=pending["id"],
@@ -254,11 +255,11 @@ def approved_restart(evidence, client, conversation, service="orders"):
     return approved
 
 
-def ensure_status(evidence, client, conversation, response, service="orders"):
-    if has_tool(response, "operations___service_status") or has_tool(response, "service_status"):
+def ensure_status(evidence, client, conversation, response, service="orders", verifier="service_status"):
+    if has_tool(response, "operations___" + verifier) or has_tool(response, verifier):
         return response
     return turn(evidence, client, conversation, "status-explicit",
-                f"Now call operations___service_status exactly once with service_name {service}. "
+                f"Now call operations___{verifier} exactly once with service_name {service}. "
                 "Use its exact result as the postcondition observation.")
 
 
@@ -360,6 +361,26 @@ SCENARIOS = {
     "h-budget": scenario_h,
     "i-outcome-unknown": scenario_i,
 }
+
+
+def scenario_j(evidence):
+    external, client, conversation = new_case(evidence, "J_database_recheck", "useful_recheck")
+    try:
+        turn(evidence, client, conversation, "database-before",
+             "Call operations___database_health exactly once with service_name orders.")
+        resumed = approved_restart(evidence, client, conversation, verifier="database_health")
+        ensure_status(evidence, client, conversation, resumed, verifier="database_health")
+        core = core_state(state(evidence, client, conversation, "database-final"))
+        counts = external.snapshot()["counts"]
+        assert counts.get("restart_service:orders") == 1 and counts.get("database_health:orders") == 2, counts
+        assert core["last_postcondition_result"]["outcome"] == "OUTCOME_VERIFIED", core
+        assert core["recent_actions"][-1]["useful_recheck"] is True and not core["contained"], core
+        evidence.write("ASSERTIONS", scenario="J_database_recheck", detector_state=core, counts=counts)
+    finally:
+        close_case(external, client, "J_database_recheck")
+
+
+SCENARIOS["j-database-recheck"] = scenario_j
 
 
 def main():

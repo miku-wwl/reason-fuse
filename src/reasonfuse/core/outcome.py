@@ -40,11 +40,11 @@ class OutcomeVerifier:
         postcondition = self.registry.get(action)
         if not isinstance(observation, dict) or observation.get("resource") != requested_resource:
             return {"outcome": "OUTCOME_UNKNOWN", "reason": "missing_or_mismatched_observation"}
-        if observation.get("status") in {"timeout", "unavailable", "malformed", "stale"}:
+        if observation.get("status") in ("timeout", "unavailable", "malformed", "stale"):
             return {"outcome": "OUTCOME_UNKNOWN", "reason": observation["status"]}
         if accepted_result.get("generation") is not None and observation.get("generation") != accepted_result["generation"]:
             return {"outcome": "OUTCOME_UNKNOWN", "reason": "stale_or_missing_generation"}
-        if observation.get(postcondition.expected_field) not in {"HEALTHY", "UNHEALTHY", "DEGRADED"}:
+        if observation.get(postcondition.expected_field) not in ("HEALTHY", "UNHEALTHY", "DEGRADED"):
             return {"outcome": "OUTCOME_UNKNOWN", "reason": "malformed_observation"}
         if observation[postcondition.expected_field] == postcondition.expected_value:
             return {"outcome": "OUTCOME_VERIFIED", "reason": "fresh_postcondition_observation"}
