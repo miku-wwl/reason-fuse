@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2026-09-08T22:29:29.496963+00:00",
+  "timestamp_utc": "2026-09-09T02:15:43.483163+00:00",
   "region": "australiaeast",
   "python_local": "3.13.9",
   "packages": {
@@ -189,7 +189,7 @@
   "agents": [
     {
       "name": "reasonfuse-phase1-stable",
-      "version": "27",
+      "version": "35",
       "status": "active",
       "protocols": [
         {
@@ -198,7 +198,7 @@
         }
       ],
       "code_configuration": {
-        "content_hash": "8e9f9f9ade984691c21e73584e01a16f6988e2d3d7a59cc23db10ee3c132ac8b",
+        "content_hash": "3c655e50c5d8be97527069444adb7961769c09519fd5cdcf5ec340696163e04a",
         "dependency_resolution": "remote_build",
         "entry_point": [
           "python",
@@ -213,13 +213,13 @@
         "REASONFUSE_ENABLED": "true",
         "REASONFUSE_PROFILE": "phase2",
         "RELEASE_ROLE": "stable",
-        "TOOLBOX_ENDPOINT": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/11/mcp?api-version=v1"
+        "TOOLBOX_ENDPOINT": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/13/mcp?api-version=v1"
       },
       "endpoint": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/agents/reasonfuse-phase1-stable/endpoint/protocols/openai/responses?api-version=v1"
     },
     {
       "name": "reasonfuse-phase1-candidate",
-      "version": "13",
+      "version": "15",
       "status": "active",
       "protocols": [
         {
@@ -228,7 +228,7 @@
         }
       ],
       "code_configuration": {
-        "content_hash": "8e9f9f9ade984691c21e73584e01a16f6988e2d3d7a59cc23db10ee3c132ac8b",
+        "content_hash": "3c655e50c5d8be97527069444adb7961769c09519fd5cdcf5ec340696163e04a",
         "dependency_resolution": "remote_build",
         "entry_point": [
           "python",
@@ -243,7 +243,7 @@
         "REASONFUSE_ENABLED": "true",
         "REASONFUSE_PROFILE": "phase2",
         "RELEASE_ROLE": "candidate",
-        "TOOLBOX_ENDPOINT": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/11/mcp?api-version=v1"
+        "TOOLBOX_ENDPOINT": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/13/mcp?api-version=v1"
       },
       "endpoint": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/agents/reasonfuse-phase1-candidate/endpoint/protocols/openai/responses?api-version=v1"
     }
