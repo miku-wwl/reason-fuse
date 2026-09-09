@@ -23,8 +23,6 @@ Read these current sources before execution:
 | [runbook.md](docs/phases/phase-01-runtime-validation/runbook.md) | Deployment, integration and reset procedures |
 | [final report](docs/phases/phase-01-runtime-validation/verification-report.md) | Completed independent acceptance and exact test scope |
 | [validation boundaries](docs/phases/phase-01-runtime-validation/verification-open-questions.md) | Capabilities not verified by Phase 1 |
-| [evidence index](evidence/phase-01-runtime-validation/index.json) | Retained acceptance evidence and hashes |
-| [latest captured environment](evidence/phase-01-runtime-validation/environment-current.json) | A timestamped snapshot, not a substitute for live readback |
 
 Leave `ReasonFuse_Phase1_Runtime_Validation_Construction_Prompt.md` unchanged;
 it is a historical construction instruction, not a new execution task.

@@ -1,7 +1,0 @@
-{"timestamp_utc": "2026-09-09T00:36:16.208942+00:00", "event": "START", "endpoint": "local_loopback", "scenarios": ["outcome_failure", "useful_recheck", "retrieval_churn"]}
-{"timestamp_utc": "2026-09-09T00:36:16.239613+00:00", "event": "RESET", "epoch": "3dcbd93d-1c44-4281-8b2e-bb104da04d22", "counts": {}}
-{"timestamp_utc": "2026-09-09T00:36:16.344884+00:00", "event": "OUTCOME_FAILURE", "accepted_status": 202, "service_health": "UNHEALTHY"}
-{"timestamp_utc": "2026-09-09T00:36:16.443796+00:00", "event": "USEFUL_RECHECK", "accepted_status": 202, "service_health": "HEALTHY"}
-{"timestamp_utc": "2026-09-09T00:36:16.567145+00:00", "event": "RETRIEVAL_FIXTURE", "queries": ["database failure", "db connectivity", "database issue"], "source_keys": ["fixture-A", "fixture-B"], "foundry_iq": "NOT VERIFIED"}
-{"timestamp_utc": "2026-09-09T00:36:16.650479+00:00", "event": "ASSERTIONS", "first_epoch": "3dcbd93d-1c44-4281-8b2e-bb104da04d22", "second_epoch": "88b025ab-6afd-4a06-b2d5-9ce45b74901f", "reset_counts": {}, "admin_key_recorded": false}
-{"timestamp_utc": "2026-09-09T00:36:16.651415+00:00", "event": "RESULT", "status": "PASS", "exit_code": 0, "evidence_layer": "LOCAL_OPERATIONS_API"}

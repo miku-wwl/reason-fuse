@@ -1,7 +1,0 @@
-{
-  "boundary": "NOT VERIFIED",
-  "evaluator_results": [],
-  "reason": "FoundryEvals was not invoked; this construction uses the deterministic LocalEvaluator.",
-  "records_available": 300,
-  "status": "NOT_RUN"
-}

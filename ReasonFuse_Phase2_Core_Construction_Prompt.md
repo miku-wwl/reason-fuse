@@ -37,7 +37,8 @@ At this 2026-09-08 handoff, the independent report records all four spikes and
 the full clean-start as PASS in both corrected batches. Active releases are
 stable 8 / candidate 5, Toolbox 6, with both Hosted content hashes equal to the
 audited ZIP SHA-256 `d7b0ddeb3e2aa21a24360dbcfced1a017d35806e07d171f796a7d9e2e011eb97`.
-See the [completion evidence index](evidence/phase-01-runtime-validation/verification-20260907T232624Z/index.json).
+The dated handoff is summarized in the Phase 1 reports; its temporary execution
+artifacts are not part of the retained repository deliverable.
 This is a dated handoff, not permission to ignore subsequent source/deployment drift.
 
 If the current report is BLOCKED, stop Phase 2 construction and report the exact

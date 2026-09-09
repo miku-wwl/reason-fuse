@@ -21,7 +21,6 @@ Read these three materials before executing:
 | --- | --- |
 | [Construction report](docs/phases/phase-02-core/report.md) | Completed fixes, actual tests and dated deployment |
 | [Open questions](docs/phases/phase-02-core/open-questions.md) | Remaining evidence boundaries; not implicit PASS |
-| [Construction evidence index](evidence/phase-02-core/index.json) | Paths, hashes, commands and all attempts in the final batch |
 
 Use the [Core runbook](docs/phases/phase-02-core/runbook.md) and the retained
 [Phase 1 independent report](docs/phases/phase-01-runtime-validation/verification-report.md).
@@ -87,10 +86,11 @@ Always restore enabled true and contract `{}` in finally, deploy and read back.
 
 `scripts/phase2_construction.ps1` and `scripts/phase2_index.py` are construction
 reproduction/indexing helpers, NOT independent acceptance or the repeat campaign.
-Use `scripts/verification_command.py <label> -- <command>` to retain command output;
-link its shared recorder files into the new independent evidence index. The local
-drivers also write to `local-<UTC-date>`; index their exact paths/hashes as LOCAL,
-not Hosted. Do not select PASS from unrelated batches or omit failed attempts.
+Use `scripts/verification_command.py <label> -- <command>` to retain command output
+for the current run and summarize the exact commands, outcomes, and failed attempts
+in the independent report. The local drivers also write to `local-<UTC-date>`;
+identify those results as LOCAL, not Hosted. Do not select PASS from unrelated
+batches or omit failed attempts.
 
 After core tests, run `scripts/verification_batch.py verification-<UTC>-compatibility`
 as a separate compatibility gate, not a Phase 2 detector test. This retains the
@@ -1099,7 +1099,7 @@ only if all are true:
 
 [ ] final default ON restored; recorded test sessions deleted/absent, counters zero, world baseline
 
-[ ] separate reports and complete hashed evidence index retained, including all attempts
+[ ] separate reports record the commands, outcomes, and all attempts; temporary run artifacts may be removed
 
 [ ] no frozen architecture assumption failed
 ```

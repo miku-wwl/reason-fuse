@@ -43,9 +43,11 @@ of the agent, and an epoch change causes validation to fail rather than acceptin
 a reset counter as proof that no call occurred. Only the counter/reset endpoints
 use the generated administration key, which stays in the ignored azd environment.
 
-Reset deletes only hosted test sessions whose IDs are recorded in these evidence
-files under `evidence/phase-01-runtime-validation/`, resets the external counters, and retains evidence. It does not delete Azure
-infrastructure. Subsequent tests create new native sessions and approval state.
+Reset deletes only hosted test sessions whose IDs were recorded during the
+current validation run, resets the external counters, and does not delete
+Azure infrastructure. The run's evidence directory is temporary and may be
+removed after the conclusions are recorded. Subsequent tests create new native
+sessions and approval state.
 Reset verifies that recorded hosted sessions are absent or explicitly `deleted`,
 and external counters are still zero. Foundry can retain deleted metadata rows.
 Run reset after the validation commands have finished.
@@ -83,21 +85,17 @@ before diagnosis. Do not rerun a routing sample until it happens to look favorab
 Fresh-cookie clients may share the Azure identity token cache, but never a cookie
 jar or HTTP connection. The fixed cohort and all assignments remain recorded.
 
-Only after that batch passes, run the full clean-start workflow. The current
-workspace has a preserved interpreter outside the .venv being replaced:
-
-```powershell
-.venv-before-clean-start-20260907/Scripts/python.exe scripts/verification_command.py clean-start-orchestration -- pwsh -File scripts/verification_clean_start.ps1
-```
-
-Do not launch the outer recorder from the .venv that this command moves. If that
-preserved interpreter is unavailable, first establish a working pinned recorder
-environment outside .venv; do not remove or reuse Terraform ownership state.
+Only after that batch passes, run the full clean-start workflow. The previously
+preserved interpreter was a one-off temporary backup and has been removed. Before
+a future run, establish a working pinned recorder environment outside `.venv`;
+do not launch the outer recorder from the `.venv` that the workflow replaces, and
+do not remove or reuse Terraform ownership state.
 The workflow checks the initial batch, resets recorded sessions/counters, preserves
 the old .venv under .tools, creates a new one, checks bootstrap tooling, performs
 the full deploy (not DnsOnly), reruns the complete fixed suite, and resets again.
 It does not tear down infrastructure. Deleted test runtime state is not restored;
-evidence is retained and fresh scenarios can be reproduced.
+the current run may use a temporary evidence directory, which can be removed
+after the report has recorded the commands and results.
 
 Deployment generates `src/reasonfuse/validation/build_identity.json`, audits the
 native ZIP membership/hashes, deploys roles serially and checks `active` status.
@@ -110,13 +108,13 @@ path in `deploy.ps1` with the pinned tools; do not substitute `--from-package`.
 The hosting SDK's `_foundry_responses_history` has load_messages=True for its
 within-run tool loop. It is cleared across hosted turns. Synthetic history
 validation observes this state and model-bound metadata without changing options
-or keeping another canonical transcript. Actual transcript/tool evidence stays in
-the synthetic validation artifacts; broad message/body telemetry remains disabled.
+or keeping another canonical transcript. Actual transcript/tool evidence is
+available during the validation run; broad message/body telemetry remains
+disabled.
 
-Retained acceptance evidence, source snapshots, the audited ZIP and hashes are indexed in
-[verification-20260907T232624Z](../../../evidence/phase-01-runtime-validation/verification-20260907T232624Z/index.json).
 `verification_index.py --final` fails unless both full batches and final cleanup
-passed. Superseded construction and diagnostic artifacts were removed by the owner;
-this index is the final acceptance set, not an archive of every attempt.
+passed. The command creates a final temporary acceptance index for the current
+run; it is not an archive requirement and may be removed after the report is
+recorded.
 `review_verification.py` remains an optional reusable artifact checker; no historical
 review is required. Neither indexing nor artifact checking executes live tests.

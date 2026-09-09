@@ -4,10 +4,10 @@
 
 ## Scope and result
 
-- Batch: `verification-20260909T090921Z`
-- Dataset: `D:/workshop/sep/reason-fuse/benchmark/datasets/reasonfuse_v1.jsonl`
-- Dataset SHA-256: `87d7d9db77dc8ce346e4bd95d3e8b06b07744c81df9726daabae03a8dbf7cd29`
-- Frozen thresholds SHA-256: `75b490f5f8b675c4db095b76214c0f3404c73e4e8d03485d10a70bac6459e5c7`.
+- Batch: `verification-20260909T-v2-construction`
+- Dataset: `D:/workshop/sep/reason-fuse/benchmark/datasets/reasonfuse_v2.jsonl`
+- Dataset SHA-256: `75492a018b0b80f1ab15da00c41f5c7f3d4761fed29aa4d85c6938d5a2f7af94`
+- Frozen thresholds SHA-256: `e08679ded3114754c2f0f0622f5733699220bb29cd1fec203a2f8d031ed24b20`.
 - Runs: `300` / expected `300`
 - Valid runner records: `300`; invalid: `0`
 - LocalEvaluator-correct records: `300`
@@ -47,27 +47,27 @@ Independent verification status: `NOT RUN by this construction command`.
 
 ## Work and latency
 
-- Tool calls/run: `2.810000`.
-- Redundant canonical calls/run: `0.750000`.
-- Steps/run: `2.810000`.
-- Containment latency p50/p95/p99 ms: `0.475350` / `1.124020` / `1.571722`.
+- Tool calls/run: `2.720000`.
+- Redundant canonical calls/run: `0.650000`.
+- Steps/run: `2.720000`.
+- Containment latency p50/p95/p99 ms: `0.432100` / `0.934210` / `1.270926`.
 - Tokens/run: `NOT AVAILABLE` (no LLM was invoked).
 - Cost/run: `NOT AVAILABLE` (no billable provider was invoked).
 
 ## Controlled OFF/ON subset
 
 - Paired runs: `20`.
-- ON mean tool calls / steps: `2.950000` / `2.950000`.
-- OFF mean tool calls / steps: `3.450000` / `3.450000`.
+- ON mean tool calls / steps: `2.800000` / `2.800000`.
+- OFF mean tool calls / steps: `3.300000` / `3.300000`.
 - OFF-minus-ON mean tool calls / steps: `0.500000` / `0.500000`.
 - Control definition: same scenario, repetition, prompt, tool arguments, world state, and local engine; only reasonfuse_enabled differs.
 
 ## Microbenchmark
 
 - Status: `PASS`; events: `10000`.
-- Events/second: `5500.460801`.
-- Per-event latency p50/p95/p99 ns: `72900.000000` / `506205.000000` / `764542.000000`.
-- Peak traced memory: `580386` bytes.
+- Events/second: `5310.110450`.
+- Per-event latency p50/p95/p99 ns: `72000.000000` / `506135.000000` / `852015.000000`.
+- Peak traced memory: `580390` bytes.
 
 ## Evidence and boundaries
 
@@ -90,8 +90,8 @@ Raw evidence is in `raw/runs.jsonl`; normalized records are in `normalized/resul
 ```powershell
 $env:PYTHONPATH = 'src'
 .venv/Scripts/python.exe -m benchmark.datasets.validate_dataset
-.venv/Scripts/python.exe -m benchmark.runners.run_suite --dataset benchmark/datasets/reasonfuse_v1.jsonl --output-dir <run-dir> --repetitions 3 --include-impact
+.venv/Scripts/python.exe -m benchmark.runners.run_suite --dataset benchmark/datasets/reasonfuse_v2.jsonl --output-dir <run-dir> --repetitions 3 --include-impact
 .venv/Scripts/python.exe -m benchmark.microbenchmark.run_microbenchmark --output <run-dir>/microbenchmark.json
 ```
 
-Source commit recorded by runner: `283bc6cfdfe9482b5846b61d1555a2ac09809931`.
+Source commit recorded by runner: `6f16c64a9c0b5f2aa5d5c6fa72eaf09140847845`.

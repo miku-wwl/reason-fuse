@@ -135,7 +135,7 @@ def render(run_dir: str | Path, output: str | Path | None = None) -> Path:
         "```powershell",
         "$env:PYTHONPATH = 'src'",
         ".venv/Scripts/python.exe -m benchmark.datasets.validate_dataset",
-        ".venv/Scripts/python.exe -m benchmark.runners.run_suite --dataset benchmark/datasets/reasonfuse_v1.jsonl --output-dir <run-dir> --repetitions 3 --include-impact",
+        ".venv/Scripts/python.exe -m benchmark.runners.run_suite --dataset benchmark/datasets/reasonfuse_v2.jsonl --output-dir <run-dir> --repetitions 3 --include-impact",
         ".venv/Scripts/python.exe -m benchmark.microbenchmark.run_microbenchmark --output <run-dir>/microbenchmark.json",
         "```",
         "",

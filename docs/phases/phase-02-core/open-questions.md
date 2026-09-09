@@ -1,6 +1,6 @@
 # Phase 2 Core — Open Questions and Evidence Boundaries
 
-本文件只列当前未证明的能力或需要后续独立验证处理的疑问。修复过程与当前批次重测见 [construction report](report.md)，完整材料见 [evidence index](../../../evidence/phase-02-core/index.json)。不要求恢复或 review 已清理的历史中间文件。
+本文件只列当前未证明的能力或需要后续独立验证处理的疑问。修复过程与当前批次重测见 [construction report](report.md)，完整材料见 evidence index。不要求恢复或 review 已清理的历史中间文件。
 
 ## 当前 construction 状态
 
@@ -16,7 +16,7 @@ OFF 的结论限定于固定四轮 harness：它证明本次允许冗余调用�
 
 状态：`NOT VERIFIED`。Hosted E 调用 `operations___retrieval_fixture`，证明 fixture 等价 evidence 的 churn containment 经过真实 Middleware/Toolbox 路径。它不证明 Foundry IQ 接入、索引刷新、权限或检索质量。当前 construction 允许该明确标注的 fixture，无需为获得 Phase 2 PASS 擅自新增 RAG 架构。
 
-证据：[Hosted E](../../../evidence/phase-02-core/construction-20260908-final/20260908T142354698801Z-hosted.jsonl)。若以后启用真实 IQ，需单独定义 adapter、KB 版本与真实 integration evidence。
+证据：Hosted E。若以后启用真实 IQ，需单独定义 adapter、KB 版本与真实 integration evidence。
 
 ## 3. Production restart 与真实一致性
 

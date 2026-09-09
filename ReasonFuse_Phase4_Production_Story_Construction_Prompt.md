@@ -6,7 +6,7 @@
 > **Expected effort:** 6–9 hours  
 > **Prerequisite:** Phase 3 Evidence & Benchmark = **PASS**  
 > **Architecture status:** FROZEN — no redesign  
-> **Primary Exit Gate:** `Stable/Candidate + APIM sticky canary + tracing + Judge Mode + complete E2E demo PASS`
+> **Primary Exit Gate:** `Stable/Candidate + APIM sticky canary + native Foundry IQ retrieval + tracing + Judge Mode + cold-start recovery + complete E2E demo PASS`
 
 ---
 
@@ -29,6 +29,8 @@ Your job is to implement and prove:
 8. Rollback / traffic removal path
 9. Clean end-to-end demo flow
 10. Competition-facing production narrative
+11. Native Foundry IQ retrieval path with versioned source/citation evidence
+12. Forced platform cold-start recovery with state/history evidence
 ```
 
 The product core must remain unchanged except for bug fixes required by integration.
@@ -89,6 +91,9 @@ Azure API Management
 Foundry Hosted Agent
  ├─ Stable version
  └─ Candidate version
+ ↓
+Native Foundry IQ knowledge source / retrieval path
+ (version-pinned; real connection and citations)
  ↓
 ResponsesHostServer
 history_source="agent_server"
@@ -168,6 +173,12 @@ same environment
 ```
 
 Only the intended candidate behavior should differ.
+
+For the Phase 4 native retrieval path, Stable and Candidate must use the same
+Foundry IQ connection, knowledge source, index/data-source version, retrieval
+permissions, and query contract unless the experiment explicitly tests a
+retrieval-version change. Phase 4 is not a license to silently substitute the
+existing deterministic `retrieval_fixture` for native Foundry IQ evidence.
 
 ---
 
@@ -293,6 +304,72 @@ Candidate knowledge_base_version
 ```
 
 unless the experiment is explicitly about retrieval-version changes, which Phase 4 is not.
+
+---
+
+# 8A. Native Foundry IQ Retrieval Construction
+
+Phase 4 must construct a real native Foundry IQ retrieval path. The existing
+deterministic `retrieval_fixture` is useful for Phase 2/3 behavior evidence,
+but it must not be presented as Foundry IQ.
+
+Construct and record, using the frozen Azure/Foundry project scope:
+
+```text
+Foundry project connection
+knowledge source / index / data source
+RBAC and managed-identity access
+knowledge_base_version
+retrieval query contract
+returned source keys and citations
+content hashes or equivalent source identity
+retrieval trace/run/session identifiers
+```
+
+The construction must include at least one reproducible query whose answer is
+grounded in the configured native source. Save the request, retrieved source
+identity, citation metadata, version, and the corresponding hosted trace.
+
+Required construction rules:
+
+```text
+do not call retrieval_fixture and label it Foundry IQ
+do not use an untracked local file as the native knowledge source
+do not omit the connection or data-source identity
+do not claim retrieval success without source/citation evidence
+do not change Stable/Candidate retrieval inputs during a release comparison
+```
+
+If the current subscription has no eligible native knowledge source, record the
+exact provisioning or RBAC blocker in the Phase 4 open-questions report. Do
+not silently downgrade this item to a fixture PASS.
+
+---
+
+# 8B. Forced Platform Cold-Start Construction
+
+Phase 4 must construct a real cold-start recovery procedure for the deployed
+hosted agent/runtime. A fresh HTTP client or a new browser session is not a
+platform cold-start and may only be recorded as a separate recovery proxy.
+
+The procedure must:
+
+```text
+1. create a conversation and establish authoritative runtime state
+2. record response/session/history/ReasonFuse state and trace identity
+3. force a bounded platform restart, recycle, or equivalent cold-start event
+4. wait for the deployment to become healthy
+5. continue the same conversation with a fresh client
+6. call read_runtime_state and inspect canonical conversation history
+7. verify state restoration, turn continuity, and no counter reset/leak
+8. capture pre-restart and post-restart trace/run/session identifiers
+```
+
+Use only a bounded test conversation and restore the intended Stable release
+after the procedure. Record the actual restart mechanism, timestamps,
+deployment/instance identity, health checks, and any platform limitation. If
+the platform cannot be safely forced to cold-start in the current environment,
+the result is `NOT VERIFIED`, not a PASS inferred from fresh-client recovery.
 
 ---
 
@@ -833,6 +910,8 @@ tool sequence
 ReasonFuse decision
 Outcome Verifier result
 rollback confirmation
+native Foundry IQ connection and citation proof
+pre/post cold-start state and trace lineage
 ```
 
 Do not store secrets.
@@ -1003,6 +1082,21 @@ Evidence:
 Status:
 Evidence:
 
+## Native Foundry IQ Retrieval
+Status:
+Evidence:
+Connection / knowledge source:
+Knowledge base version:
+Query / citation proof:
+
+## Forced Cold-Start Recovery
+Status:
+Evidence:
+Restart mechanism:
+Pre-restart state:
+Post-restart state:
+History / trace continuity:
+
 ## Judge Mode
 Status:
 Evidence:
@@ -1081,6 +1175,18 @@ Construction is complete only when:
 [ ] SSE arrives incrementally through APIM
 
 [ ] OTel / Foundry Tracing / App Insights path works
+
+[ ] native Foundry IQ connection and knowledge source exist
+
+[ ] native retrieval returns source/citation evidence with a pinned version
+
+[ ] native retrieval evidence is distinct from `retrieval_fixture`
+
+[ ] bounded platform cold-start/restart procedure exists
+
+[ ] post-cold-start conversation history and ReasonFuse state are restored
+
+[ ] pre/post cold-start trace and session lineage is captured
 
 [ ] Judge Mode uses real runtime data
 

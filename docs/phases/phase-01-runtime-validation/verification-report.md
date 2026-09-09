@@ -65,16 +65,16 @@ Architecture Unfreeze Required：**NO**。
 `adf7a170d63d7df7bc06d18a7f87f8aef3aa3498cd42c74272f113b8a6b5c372`
 
 源码身份由实际运行时读回，ZIP 逐文件核对。完整依赖、工具版本、命令和哈希
-见[最终证据索引](../../../evidence/phase-01-runtime-validation/verification-20260907T232624Z/index.json)。
+见最终证据索引。
 
 ## 保留的验收证据
 
 | 流程 | 原始记录 |
 | --- | --- |
-| 第一批，14 条命令全部退出 0 | [initial batch](../../../evidence/phase-01-runtime-validation/runs/20260907/20260907T233918811421Z-batch-corrected-initial.jsonl) |
-| 新环境、全量部署、第二批和 reset | [clean-start orchestration](../../../evidence/phase-01-runtime-validation/runs/20260907/20260907T235851685943Z-clean-start-orchestration.jsonl) |
-| 第二批，14 条命令全部退出 0 | [clean-start batch](../../../evidence/phase-01-runtime-validation/runs/20260908/20260908T000659264358Z-batch-clean-start.jsonl) |
-| 最终运行态清理 | [final reset](../../../evidence/phase-01-runtime-validation/runs/20260908/20260908T002632738176Z-reset.jsonl) |
+| 第一批，14 条命令全部退出 0 | initial batch |
+| 新环境、全量部署、第二批和 reset | clean-start orchestration |
+| 第二批，14 条命令全部退出 0 | clean-start batch |
+| 最终运行态清理 | final reset |
 
 按项目所有者要求，学习目录已移除旧报告和诊断中间产物，不再要求复盘历史尝试。
 保留的正式批次记录与部署 ZIP 未改写；此索引是最终验收集，不是所有尝试的完整档案。

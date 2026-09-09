@@ -278,7 +278,7 @@ Create or extend:
 ```text
 benchmark/
 ├── datasets/
-│   ├── reasonfuse_v1.jsonl
+│   ├── reasonfuse_v2.jsonl
 │   ├── schema.json
 │   └── README.md
 │

@@ -1,5 +1,5 @@
 {
-  "dataset_version": "reasonfuse-v1",
+  "dataset_version": "reasonfuse-v2",
   "frozen_before_full_run": true,
   "detectors": {
     "exact_loop_threshold": 3,

@@ -4,7 +4,7 @@
 
 There are no unresolved blockers for the documented Phase 2 P0 validation
 scope. The independent batch passed and the final index is
-[verification-20260909T110000Z/index.json](../../../evidence/phase-02-core/verification-20260909T110000Z/index.json).
+verification-20260909T110000Z/index.json.
 
 The two retained failures were setup issues, not unresolved core failures:
 
@@ -54,4 +54,4 @@ current P0 gates. No Phase 2 runtime change is required by this report.
 
 The final deployment was restored to enabled ON with contract `{}` on stable and
 candidate, both agents active and sharing the audited package hash. The final
-reset readback is [reset.jsonl](../../../evidence/phase-01-runtime-validation/runs/20260909/20260909T021517872355Z-reset.jsonl).
+reset readback is reset.jsonl.

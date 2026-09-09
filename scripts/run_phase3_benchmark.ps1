@@ -2,7 +2,8 @@
 param(
     [string]$Batch = "",
     [int]$Repetitions = 3,
-    [switch]$IncludeImpact
+    [switch]$IncludeImpact,
+    [string]$DatasetPath = "benchmark\datasets\reasonfuse_v2.jsonl"
 )
 
 $ErrorActionPreference = "Stop"
@@ -15,7 +16,7 @@ if ([string]::IsNullOrWhiteSpace($Batch)) {
 $RunDir = Join-Path $RepoRoot "evidence\phase-03-evidence-benchmark\$Batch"
 $CommandEvidenceDir = Join-Path $RepoRoot "evidence\phase-03-evidence-benchmark\commands\$Batch"
 $Python = Join-Path $RepoRoot ".venv\Scripts\python.exe"
-$Dataset = Join-Path $RepoRoot "benchmark\datasets\reasonfuse_v1.jsonl"
+$Dataset = if ([IO.Path]::IsPathRooted($DatasetPath)) { $DatasetPath } else { Join-Path $RepoRoot $DatasetPath }
 New-Item -ItemType Directory -Force -Path $RunDir, $CommandEvidenceDir | Out-Null
 $env:REASONFUSE_EVIDENCE_ROOT = $CommandEvidenceDir
 
@@ -37,7 +38,7 @@ if ($Phase2IndexBody.result -ne "INDEPENDENT_PHASE2_VALIDATION_PASS") {
     throw "Phase 2 evidence index is not an independent PASS handoff."
 }
 
-Invoke-Checked "dataset-generate" @($Python, "-m", "benchmark.datasets.generate_dataset")
+Invoke-Checked "dataset-generate" @($Python, "-m", "benchmark.datasets.generate_dataset_v2", "--output", $Dataset)
 Invoke-Checked "dataset-validate" @($Python, "-m", "benchmark.datasets.validate_dataset", "--dataset", $Dataset)
 $args = @("-m", "benchmark.runners.run_suite", "--dataset", $Dataset, "--output-dir", $RunDir, "--repetitions", $Repetitions)
 if ($IncludeImpact) { $args += "--include-impact" }

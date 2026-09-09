@@ -18,7 +18,7 @@ silently replace it with a new benchmark design.
 Canonical construction inputs:
 
 ```text
-benchmark/datasets/reasonfuse_v1.jsonl
+benchmark/datasets/reasonfuse_v2.jsonl
 benchmark/datasets/schema.json
 benchmark/datasets/frozen_thresholds.json
 benchmark/datasets/generate_dataset.py
@@ -48,13 +48,13 @@ $env:PYTHONPATH = 'src'
 The authoritative completed construction batch for this review is:
 
 ```text
-evidence/phase-03-evidence-benchmark/verification-20260909T090921Z/
+evidence/phase-03-evidence-benchmark/verification-20260909T-v2-construction/
 ```
 
 Its command-capture evidence is separate from the benchmark artifacts:
 
 ```text
-evidence/phase-03-evidence-benchmark/commands/verification-20260909T090921Z/
+evidence/phase-03-evidence-benchmark/commands/verification-20260909T-v2-construction/
 ```
 
 The batch contains:
@@ -335,7 +335,7 @@ with:
 
 ```powershell
 $env:PYTHONPATH = 'src'
-.venv/Scripts/python.exe -m benchmark.datasets.validate_dataset --dataset benchmark/datasets/reasonfuse_v1.jsonl
+.venv/Scripts/python.exe -m benchmark.datasets.validate_dataset --dataset benchmark/datasets/reasonfuse_v2.jsonl
 ```
 
 Reject silently malformed or incomplete scenarios.
@@ -953,7 +953,7 @@ If memory is reported, verify methodology.
 The construction output is:
 
 ```text
-evidence/phase-03-evidence-benchmark/verification-20260909T090921Z/microbenchmark.json
+evidence/phase-03-evidence-benchmark/verification-20260909T-v2-construction/microbenchmark.json
 ```
 
 The measurement loop creates isolated local engine packets and records 10,000
@@ -1047,7 +1047,7 @@ Inspect:
 
 ```text
 benchmark/PHASE3_REPORT.md
-evidence/phase-03-evidence-benchmark/verification-20260909T090921Z/PHASE3_REPORT.md
+evidence/phase-03-evidence-benchmark/verification-20260909T-v2-construction/PHASE3_REPORT.md
 ```
 
 The repository report and batch report should agree. The batch report is the

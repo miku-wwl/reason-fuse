@@ -116,7 +116,7 @@ def run_suite(dataset_path: str | Path, output_dir: str | Path, repetitions: int
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", default="benchmark/datasets/reasonfuse_v1.jsonl")
+    parser.add_argument("--dataset", default="benchmark/datasets/reasonfuse_v2.jsonl")
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--repetitions", type=int, default=3)
     parser.add_argument("--include-impact", action="store_true")

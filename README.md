@@ -4,7 +4,7 @@ ReasonFuse 使用 Foundry Hosted Agent、Microsoft Agent Framework、Foundry Too
 和 Azure API Management 构建 agent runtime。
 
 仓库按功能组织为一个工程。Phase 是建设与验收里程碑，阶段记录放在 `docs/phases/`
-和 `evidence/`；后续阶段继续演进同一套源码、依赖和部署配置。
+和各阶段报告；后续阶段继续演进同一套源码、依赖和部署配置。
 
 Phase 1 独立验收已通过：四项验证、完整 clean-start
 及部署源码身份均有实跑证据，见 [最终报告](docs/phases/phase-01-runtime-validation/verification-report.md)。
@@ -39,7 +39,6 @@ reason-fuse/
 │   └── support/operations_api/   # 独立执行计数与模拟操作服务
 ├── docs/
 │   └── phases/                   # 阶段任务、运行手册、最终报告和验证边界
-└── evidence/                     # 按阶段和运行批次保存证据
 ```
 
 ## 本地使用
@@ -73,8 +72,6 @@ Phase 2 部署、A–J 场景、预算续跑和证据生成见 [Core 运行手�
 - [Phase 2 构建报告](docs/phases/phase-02-core/report.md)
 - [Phase 2 待验证边界与疑问](docs/phases/phase-02-core/open-questions.md)
 - [Phase 2 独立验收任务](ReasonFuse_Phase2_Core_Verification_Prompt.md)
-- [Phase 1 证据索引](evidence/phase-01-runtime-validation/index.json)
-- [Phase 2 证据索引](evidence/phase-02-core/index.json)
 
 学习入口只保留最终结论与必要边界，不再包含旧失败复盘任务。
 Phase 1 正式验收及 Phase 2 最终批次、源码身份和部署包保留；清理不改变 Azure 资源。

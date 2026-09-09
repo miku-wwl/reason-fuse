@@ -56,6 +56,10 @@ def validate(path: str | Path) -> list[dict[str, Any]]:
             _fail(errors, f"line {line_number}: initial_world_state must be an object")
         if not isinstance(value.get("fault_configuration"), dict):
             _fail(errors, f"line {line_number}: fault_configuration must be an object")
+        elif value.get("scenario_version") == "reasonfuse-v2":
+            pattern_family = value["fault_configuration"].get("pattern_family")
+            if not isinstance(pattern_family, str) or not pattern_family.strip():
+                _fail(errors, f"line {line_number}: v2 scenarios require a non-empty fault_configuration.pattern_family")
         expected = value.get("expected")
         if not isinstance(expected, dict) or not REQUIRED_EXPECTED <= set(expected):
             _fail(errors, f"line {line_number}: expected fields incomplete")
@@ -93,7 +97,7 @@ def _raise(errors: list[str]) -> list[dict[str, Any]]:
 def main(argv: list[str] | None = None) -> int:
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", default=str(Path(__file__).with_name("reasonfuse_v1.jsonl")))
+    parser.add_argument("--dataset", default=str(Path(__file__).with_name("reasonfuse_v2.jsonl")))
     args = parser.parse_args(argv)
     try:
         records = validate(args.dataset)
