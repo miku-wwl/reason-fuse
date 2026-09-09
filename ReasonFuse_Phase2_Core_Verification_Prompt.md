@@ -953,18 +953,15 @@ postcondition result
 trace/request ID if available
 ```
 
-Save evidence under:
+Use a disposable system-temporary directory for any raw verification output:
 
 ```text
-evidence/phase-02-core/verification-<UTC>/
+%TEMP%/reasonfuse-phase2/verification-<UTC>/
 ```
 
-Create an index in that directory with command, UTC timestamp, exit status,
-evidence layer, exact repo-relative path and SHA-256 for each required gate and
-attempt, source manifests, audited ZIP and final reset. Shared recorder/local
-artifacts may remain in their existing directories but must be explicitly indexed.
-Do not overwrite `evidence/phase-02-core/index.json`, which is the construction
-handoff, or rewrite construction evidence to contain independent PASS labels.
+Record the verification result in the retained Markdown report and keep any
+raw command output outside the repository. The deleted Phase 2 evidence
+indexes are not recreated and are not prerequisites for later phases.
 
 ---
 

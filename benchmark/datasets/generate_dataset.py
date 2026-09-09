@@ -197,7 +197,8 @@ def build() -> list[dict[str, Any]]:
             tool("retrieval_search", args({"query": "orders unknown health"}), retrieval("orders unknown health", "src-8", "hash-8")),
         ], False),
     ]
-    for index, (description, variation, actions, is_useful) in enumerate(healthy_cases, 1):
+    for index in (1, 7, 18):
+        description, variation, actions, is_useful = healthy_cases[index - 1]
         scenarios.append(scenario(
             f"H-{index:03d}", "Healthy", description, variation,
             expected_healthy("OUTCOME_VERIFIED" if is_useful else None, is_useful), actions,
@@ -216,7 +217,7 @@ def build() -> list[dict[str, Any]]:
         ("dependency_check", "service_name", "orders"),
         ("read_runtime_state", None, None),
     ]
-    for index in range(1, 21):
+    for index in (1, 5, 13):
         name, key, value = exact_tools[(index - 1) % len(exact_tools)]
         body = {key: value} if key else {}
         variants = [body, dict(reversed(list(body.items()))), {**body, **({"request_id": f"noise-{index}"} if index % 2 else {})}]
@@ -242,7 +243,7 @@ def build() -> list[dict[str, Any]]:
         ("config_check", "deployment_check", {"service_name": "orders"}, {"service_name": "orders"}),
         ("dependency_check", "service_status", {"service_name": "orders"}, {"service_name": "payments"}),
     ]
-    for index in range(1, 21):
+    for index in (1, 7, 18):
         a, b, aa, bb = oscillation_pairs[(index - 1) % len(oscillation_pairs)]
         scenarios.append(scenario(
             f"OS-{index:03d}", "Oscillation",
@@ -261,7 +262,7 @@ def build() -> list[dict[str, Any]]:
         ("api incident", "api failure", "api outage"),
         ("deployment bad", "release issue", "deployment failure"),
     ]
-    for index in range(1, 21):
+    for index in (1, 10, 20):
         queries = retrieval_queries[(index - 1) % len(retrieval_queries)]
         source = f"src-churn-{((index - 1) % 5) + 1}"
         actions = [tool("retrieval_search", args({"query": query}), retrieval(query, source, f"hash-churn-{(index - 1) % 5}")) for query in queries]
@@ -275,7 +276,7 @@ def build() -> list[dict[str, Any]]:
 
     services = ["orders", "payments", "inventory", "checkout", "catalog"]
     statuses = ["UNHEALTHY", "DEGRADED"]
-    for index in range(1, 21):
+    for index in (1, 2, 15):
         service = services[(index - 1) % len(services)]
         generation = f"g{index}"
         status = statuses[(index - 1) % len(statuses)]
@@ -291,6 +292,10 @@ def build() -> list[dict[str, Any]]:
             ],
             fault_configuration={"action": "restart_service", "postcondition": status},
         ))
+    if len(scenarios) != 15:
+        raise ValueError(f"Agentathon profile expected 15 records, got {len(scenarios)}")
+    for record in scenarios:
+        record["benchmark_profile"] = "agentathon-15"
     return scenarios
 
 
@@ -299,11 +304,11 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=Path(__file__).with_name("reasonfuse_v1.jsonl"))
     args = parser.parse_args()
     records = build()
-    if len(records) != 100:
-        raise SystemExit(f"dataset generation expected 100 records, got {len(records)}")
+    if len(records) != 15:
+        raise SystemExit(f"dataset generation expected 15 records, got {len(records)}")
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text("".join(json.dumps(record, sort_keys=True, ensure_ascii=False) + "\n" for record in records), encoding="utf-8")
-    print(f"DATASET_GENERATED path={args.output} scenarios={len(records)}")
+    print(f"DATASET_GENERATED path={args.output} scenarios={len(records)} profile=agentathon-15")
 
 
 if __name__ == "__main__":

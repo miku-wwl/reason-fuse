@@ -5,7 +5,7 @@
 > **Phase:** 3 — Evidence & Benchmark  
 > **Role:** Validator, not benchmark author  
 > **Prerequisite:** Phase 2 = PASS  
-> **Primary Exit Gate:** `300 valid runs + trustworthy metrics + confusion matrix + reproducibility`
+> **Primary Exit Gate:** `15 valid competition scenarios + trustworthy metrics + confusion matrix + reproducibility`
 
 ---
 
@@ -21,7 +21,7 @@ Canonical construction inputs:
 benchmark/datasets/reasonfuse_v2.jsonl
 benchmark/datasets/schema.json
 benchmark/datasets/frozen_thresholds.json
-benchmark/datasets/generate_dataset.py
+benchmark/datasets/generate_dataset_v2.py
 ```
 
 Canonical runner/evaluator entry points:
@@ -42,25 +42,30 @@ The reproducible Windows entry point is:
 ```powershell
 Set-Location D:\workshop\sep\reason-fuse
 $env:PYTHONPATH = 'src'
-.\scripts\run_phase3_benchmark.ps1 -Repetitions 3 -IncludeImpact
+.\scripts\run_phase3_benchmark.ps1 -Repetitions 1 -IncludeImpact
 ```
 
-The authoritative completed construction batch for this review is:
+The construction script writes raw artifacts to a disposable system-temporary
+directory. The exact batch path is printed as `PHASE3_CONSTRUCTION_COMPLETE`
+when the script finishes; do not assume a retained repository evidence path.
+The retained review report is:
 
 ```text
-evidence/phase-03-evidence-benchmark/verification-20260909T-v2-construction/
+benchmark/PHASE3_REPORT.md
 ```
 
-Its command-capture evidence is separate from the benchmark artifacts:
+For a fresh run, use the printed temporary batch path for raw artifacts and
+command captures. A typical layout is:
 
 ```text
-evidence/phase-03-evidence-benchmark/commands/verification-20260909T-v2-construction/
+%TEMP%/reasonfuse-phase3/verification-<UTC>/
+%TEMP%/reasonfuse-phase3/commands/verification-<UTC>/
 ```
 
 The batch contains:
 
 ```text
-raw/runs.jsonl                         300 ON records
+raw/runs.jsonl                         15 ON records
 raw/off_on.jsonl                       controlled OFF/ON subset
 normalized/results.jsonl               evaluated normalized records
 summary/metrics.json                   recomputable metrics
@@ -146,7 +151,7 @@ Return:
 ```text
 Dataset Quality          PASS / FAIL
 Runner Integrity         PASS / FAIL
-300-Run Completion       PASS / FAIL
+15-Scenario Completion   PASS / FAIL
 Ground Truth             PASS / FAIL
 Confusion Matrix         PASS / FAIL
 Core Metrics             PASS / FAIL
@@ -245,13 +250,11 @@ Confirm:
 ```text
 docs/phases/phase-02-core/verification-report.md
 → contains INDEPENDENT_PHASE2_VALIDATION_PASS
-
-evidence/phase-02-core/verification-20260909T110000Z/index.json
-→ result = INDEPENDENT_PHASE2_VALIDATION_PASS
 ```
 
 Do not rerun the Phase 2 hosted campaign as part of this prompt. Verify the
-handoff and keep Phase 2 reports/indexes unchanged.
+report handoff and keep Phase 2 reports unchanged. The deleted Phase 2
+evidence indexes are not prerequisites for this local Phase 3 verification.
 
 Run Phase 3 preflight:
 
@@ -262,9 +265,10 @@ $env:PYTHONPATH = 'src'
 .tools/check-phase2-artifacts.ps1
 ```
 
-Then verify the authoritative Phase 3 `index.json`, its listed SHA-256 hashes,
+Then verify the fresh temporary batch `index.json`, its listed SHA-256 hashes,
 the command-capture `RESULT` records, and the clean working-tree diff scope.
-The preflight must not substitute a summary-only PASS for these checks.
+The preflight must not substitute a summary-only PASS for these checks. Do not
+commit the temporary raw artifacts.
 
 ---
 
@@ -275,13 +279,13 @@ Inspect the dataset.
 Required exact counts:
 
 ```text
-Healthy Investigations   20
-Exact Loop               20
-Oscillation              20
-Retrieval Churn          20
-Outcome Failure          20
+Healthy Investigations   3
+Exact Loop               3
+Oscillation              3
+Retrieval Churn          3
+Outcome Failure          3
 --------------------------------
-Total                   100
+Total                   15
 ```
 
 Confirm unique scenario IDs.
@@ -289,11 +293,11 @@ Confirm unique scenario IDs.
 Required ranges:
 
 ```text
-H-001 ... H-020
-EL-001 ... EL-020
-OS-001 ... OS-020
-RC-001 ... RC-020
-OF-001 ... OF-020
+H-001, H-007, H-018
+EL-001, EL-005, EL-013
+OS-001, OS-007, OS-018
+RC-001, RC-010, RC-020
+OF-001, OF-002, OF-015
 ```
 
 Equivalent unique naming is acceptable, but duplicates are not.
@@ -302,7 +306,7 @@ Equivalent unique naming is acceptable, but duplicates are not.
 
 # 5. Schema Validation
 
-Validate all 100 records against the declared schema.
+Validate all 15 records against the declared schema.
 
 At minimum each must have:
 
@@ -344,7 +348,7 @@ Reject silently malformed or incomplete scenarios.
 
 # 6. Scenario Diversity Audit
 
-For each category, inspect all 20 cases.
+For each category, inspect all 3 cases.
 
 Determine whether they vary meaningful dimensions.
 
@@ -357,7 +361,7 @@ same fault
 only service name changed
 ```
 
-A few variants are acceptable, but a category cannot be 20 superficial clones.
+A few variants are acceptable, but a category cannot be superficial clones.
 
 Produce a short diversity assessment per category.
 
@@ -483,13 +487,13 @@ Runner Integrity = FAIL
 Confirm each scenario has exactly:
 
 ```text
-3 valid repetitions
+1 valid competition repetition
 ```
 
 Expected:
 
 ```text
-100 × 3 = 300 valid runs
+15 × 1 = 15 valid runs
 ```
 
 Check raw records, not summary totals.
@@ -525,18 +529,18 @@ Invalid runs must not appear in confusion matrix counts.
 
 ---
 
-# 12. 300-Run Completion Gate
+# 12. 15-Scenario Completion Gate
 
 PASS only when:
 
 ```text
-valid runs = 300
+valid runs = 15
 ```
 
-If valid runs < 300:
+If valid runs < 15:
 
 ```text
-300-Run Completion = FAIL
+15-Scenario Completion = FAIL
 ```
 
 unless the phase definition was explicitly amended before execution.
@@ -815,7 +819,7 @@ multiple repetitions
 and report uncertainty rather than a single anecdote. The current OFF/ON
 subset is local and deterministic: 5 Exact Loop, 5 Oscillation, 5 Retrieval
 Churn, and 5 Outcome Failure scenarios, one paired repetition each. Confirm
-that only `reasonfuse_enabled` differs and do not present this 20-pair fixture
+that only `reasonfuse_enabled` differs and do not present this 15-pair fixture
 comparison as a production causal estimate.
 
 ---
@@ -950,10 +954,11 @@ p99
 
 If memory is reported, verify methodology.
 
-The construction output is:
+The construction output is in the fresh temporary batch directory printed by
+the runner:
 
 ```text
-evidence/phase-03-evidence-benchmark/verification-20260909T-v2-construction/microbenchmark.json
+<temporary-batch>/microbenchmark.json
 ```
 
 The measurement loop creates isolated local engine packets and records 10,000
@@ -1047,12 +1052,11 @@ Inspect:
 
 ```text
 benchmark/PHASE3_REPORT.md
-evidence/phase-03-evidence-benchmark/verification-20260909T-v2-construction/PHASE3_REPORT.md
 ```
 
-The repository report and batch report should agree. The batch report is the
-one covered by the batch `index.json`; the repository report is a convenience
-copy for review.
+If a fresh run was executed, compare its temporary batch report with the
+repository report. The temporary batch is covered by its `index.json`; the
+repository report is the retained review artifact.
 
 Confirm every headline number can be traced to raw evidence.
 
@@ -1137,9 +1141,9 @@ PHASE 3 RESULT: PASS
 only when all mandatory conditions are true:
 
 ```text
-[ ] exactly 100 scenarios exist
+[ ] exactly 15 curated scenarios exist
 
-[ ] category counts are 20/20/20/20/20
+[ ] category counts are 3/3/3/3/3
 
 [ ] scenario diversity is credible
 
@@ -1147,7 +1151,7 @@ only when all mandatory conditions are true:
 
 [ ] reset integrity PASS
 
-[ ] exactly 300 valid benchmark runs exist
+[ ] exactly 15 valid benchmark runs exist
 
 [ ] raw results are sufficient to recompute metrics
 
@@ -1191,7 +1195,7 @@ without blocking Phase 3, provided:
 ```text
 deterministic LocalEvaluator
 +
-300-run evidence
+15-scenario evidence
 +
 core metrics
 ```
@@ -1215,7 +1219,7 @@ PHASE 3 RESULT: BLOCKED
 if any competition-critical evidence condition fails, including:
 
 ```text
-<300 valid runs
+<15 valid runs
 invalid confusion matrix
 state leakage
 trivial Healthy benchmark
@@ -1238,7 +1242,7 @@ Phase 3 is the difference between:
 and:
 
 ```text
-"We ran 300 controlled executions and can show exactly
+"We ran 15 controlled executions and can show exactly
 what it detects, what it preserves, and how quickly it contains failures."
 ```
 

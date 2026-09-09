@@ -3,8 +3,8 @@
 The project deployment is configured in Azure as ``gpt-5-mini`` in
 ``australiaeast``. This script uses the current ``AZURE_OPENAI_ENDPOINT``
 environment value and Azure CLI credential without printing either endpoint or
-credential material. It intentionally evaluates ten representative trajectories
-instead of silently charging a model call for all 300 deterministic runs.
+credential material. It intentionally evaluates the 15-scenario Agentathon
+profile instead of silently expanding the cloud bill with repeated runs.
 """
 
 from __future__ import annotations
@@ -48,8 +48,8 @@ def main() -> int:
     parser.add_argument("--dataset", required=True)
     parser.add_argument("--raw", required=True)
     parser.add_argument("--output", required=True)
-    parser.add_argument("--per-category", type=int, default=2)
-    parser.add_argument("--all-repetitions", action="store_true")
+    parser.add_argument("--per-category", type=int, default=3)
+    parser.add_argument("--repetitions", type=int, default=1)
     parser.add_argument("--scenario-id", action="append", dest="scenario_ids",
                         help="Evaluate only the named scenario IDs; repeat for multiple IDs.")
     parser.add_argument("--workers", type=int, default=1)
@@ -80,14 +80,11 @@ def main() -> int:
         "azure_deployment": deployment,
     }
     max_completion_tokens = int(os.environ.get("REASONFUSE_TOOLCALL_MAX_COMPLETION_TOKENS", "8192"))
-    if args.all_repetitions:
-        selected_pairs = [
-            (scenario, raw_by_key[(scenario["scenario_id"], repetition)])
-            for scenario in dataset
-            for repetition in (1, 2, 3)
-        ]
-    else:
-        selected_pairs = [(scenario, raw_by_key[(scenario["scenario_id"], 1)]) for scenario in selected]
+    selected_pairs = [
+        (scenario, raw_by_key[(scenario["scenario_id"], repetition)])
+        for scenario in selected
+        for repetition in range(1, args.repetitions + 1)
+    ]
     if args.scenario_ids:
         wanted = set(args.scenario_ids)
         selected_pairs = [pair for pair in selected_pairs if pair[0]["scenario_id"] in wanted]
@@ -107,7 +104,7 @@ def main() -> int:
             )
             # The SDK's reasoning-model default is 60,000 completion tokens,
             # which is excessive for this evaluator's short JSON score and
-            # makes a 300-case run unnecessarily slow. Keep a bounded but
+            # makes the competition run unnecessarily slow. Keep a bounded but
             # ample reasoning budget for the evaluation-only model calls.
             evaluator._flow._model.parameters["max_completion_tokens"] = max_completion_tokens
             thread_local.evaluator = evaluator
@@ -222,15 +219,16 @@ def main() -> int:
     completed = [row for row in results if row["status"] == "completed"]
     errors = [row for row in results if row["status"] == "ERROR" or row.get("error_message")]
     threshold_passed = sum(bool(row.get("passed")) for row in results)
+    expected_cases = len(selected_pairs)
     payload = {
-        "status": "PASS" if len(results) == len(selected) and not errors else "PARTIAL",
+        "status": "PASS" if len(results) == expected_cases and not errors else "PARTIAL",
         "evaluator": "ToolCallAccuracyEvaluator",
         "package": "azure-ai-evaluation",
         "deployment": deployment,
         "region": "australiaeast",
         "subset_size": len(results),
         "per_category": args.per_category,
-        "all_repetitions": args.all_repetitions,
+        "repetitions": args.repetitions,
         "workers": workers,
         "completed": len(completed),
         "errors": len(errors),
@@ -239,7 +237,7 @@ def main() -> int:
         "max_completion_tokens": max_completion_tokens,
         "network": "AZURE_OPENAI_MODEL_CALLS",
         "llm": "INVOKED",
-        "full_300_run": "RUN" if args.all_repetitions and len(results) == 300 else "NOT RUN - bounded representative subset",
+        "competition_15_scenario_run": "RUN" if len(results) == 15 and args.repetitions == 1 else "NOT RUN - bounded or repeated subset",
         "transport": args.transport,
         "results": results,
     }

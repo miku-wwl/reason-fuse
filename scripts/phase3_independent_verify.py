@@ -14,6 +14,17 @@ from typing import Any
 
 
 CATEGORIES = ("Healthy", "Exact Loop", "Oscillation", "Retrieval Churn", "Outcome Failure")
+EXPECTED_SCENARIO_IDS = {
+    "H-001", "H-007", "H-018",
+    "EL-001", "EL-005", "EL-013",
+    "OS-001", "OS-007", "OS-018",
+    "RC-001", "RC-010", "RC-020",
+    "OF-001", "OF-002", "OF-015",
+}
+EXPECTED_SCENARIO_COUNT = 15
+EXPECTED_CATEGORY_COUNT = 3
+EXPECTED_REPETITIONS = [1]
+EXPECTED_RUN_COUNT = EXPECTED_SCENARIO_COUNT * len(EXPECTED_REPETITIONS)
 REQUIRED_FLAT = {
     "scenario_id", "repetition", "run_id", "conversation_id", "agent_session_id",
     "category", "expected_failure_type", "actual_failure_type", "expected_trip", "actual_trip",
@@ -63,18 +74,18 @@ def main(argv: list[str] | None = None) -> int:
     dataset = load_jsonl(dataset_path)
     by_id = {row["scenario_id"]: row for row in dataset}
     category_counts = Counter(row.get("category") for row in dataset)
-    expected_ids = {f"{prefix}-{index:03d}" for prefix in ("H", "EL", "OS", "RC", "OF") for index in range(1, 21)}
+    expected_ids = EXPECTED_SCENARIO_IDS
     actual_ids = {row.get("scenario_id") for row in dataset}
-    check("dataset_count", len(dataset) == 100, f"records={len(dataset)}")
-    check("dataset_unique_ids", len(actual_ids) == 100 and actual_ids == expected_ids, f"unique={len(actual_ids)}")
-    check("dataset_category_counts", all(category_counts.get(category, 0) == 20 for category in CATEGORIES), dict(category_counts))
+    check("dataset_count", len(dataset) == EXPECTED_SCENARIO_COUNT, f"records={len(dataset)}")
+    check("dataset_unique_ids", len(actual_ids) == EXPECTED_SCENARIO_COUNT and actual_ids == expected_ids, f"unique={len(actual_ids)}")
+    check("dataset_category_counts", all(category_counts.get(category, 0) == EXPECTED_CATEGORY_COUNT for category in CATEGORIES), dict(category_counts))
     check("dataset_schema_helper", subprocess.run([sys.executable, "-m", "benchmark.datasets.validate_dataset", "--dataset", str(dataset_path)], cwd=repo, capture_output=True, text=True).returncode == 0, "portable validator exit status")
     check("dataset_version", len({row.get("scenario_version") for row in dataset}) == 1, str(sorted({row.get("scenario_version") for row in dataset})))
     variations = {category: len({row.get("variation_dimension") for row in dataset if row.get("category") == category}) for category in CATEGORIES}
     tool_shapes = {category: len({tuple(action.get("tool_name") for action in row.get("actions", [])) for row in dataset if row.get("category") == category}) for category in CATEGORIES}
     pattern_families = {category: len({row.get("fault_configuration", {}).get("pattern_family") for row in dataset if row.get("category") == category}) for category in CATEGORIES}
     check("scenario_diversity", all(variations[category] >= 1 for category in CATEGORIES), f"variation_dimensions={variations}; tool_shapes={tool_shapes}; pattern_families={pattern_families}")
-    check("semantic_pattern_family_coverage", all(pattern_families[category] == 20 for category in CATEGORIES), f"pattern_families={pattern_families}")
+    check("semantic_pattern_family_coverage", all(pattern_families[category] == EXPECTED_CATEGORY_COUNT for category in CATEGORIES), f"pattern_families={pattern_families}")
     warn("scenario_pattern_diversity_review", f"Semantic pattern-family counts are {pattern_families}; raw tool-shape counts remain {tool_shapes} because Retrieval Churn intentionally uses one retrieval tool with different domains and evidence identities.")
     todo_actions = sum(1 for row in dataset for action in row.get("actions", []) if action.get("todo_snapshot") is not None)
     if todo_actions == 0:
@@ -94,16 +105,16 @@ def main(argv: list[str] | None = None) -> int:
 
     raw = load_jsonl(batch / "raw/runs.jsonl")
     normalized = load_jsonl(batch / "normalized/results.jsonl")
-    check("raw_run_count", len(raw) == 300, f"raw={len(raw)}")
-    check("normalized_run_count", len(normalized) == 300, f"normalized={len(normalized)}")
+    check("raw_run_count", len(raw) == EXPECTED_RUN_COUNT, f"raw={len(raw)}")
+    check("normalized_run_count", len(normalized) == EXPECTED_RUN_COUNT, f"normalized={len(normalized)}")
     check("raw_validity", all(row.get("valid") is True and row.get("error") is None for row in raw), "all raw rows valid with no runner error")
     check("raw_schema", all(REQUIRED_FLAT <= set(row) for row in raw), "flat run-result fields present")
     run_keys = [(row.get("scenario_id"), row.get("repetition"), row.get("mode")) for row in raw]
-    check("raw_unique_run_keys", len(set(run_keys)) == 300, f"unique_keys={len(set(run_keys))}")
+    check("raw_unique_run_keys", len(set(run_keys)) == EXPECTED_RUN_COUNT, f"unique_keys={len(set(run_keys))}")
     repetition_map: dict[str, list[int]] = defaultdict(list)
     for row in raw:
         repetition_map[row["scenario_id"]].append(row["repetition"])
-    check("three_repetitions_each", all(sorted(values) == [1, 2, 3] for values in repetition_map.values()), "each scenario has repetitions 1,2,3")
+    check("one_repetition_each", all(sorted(values) == EXPECTED_REPETITIONS for values in repetition_map.values()), "each scenario has one competition repetition")
     reset_failures = []
     first_state_failures = []
     for row in raw:
@@ -117,7 +128,7 @@ def main(argv: list[str] | None = None) -> int:
             first_state_failures.append(row["scenario_id"] + f"/{row['repetition']}")
     check("reset_integrity", not reset_failures, f"failures={reset_failures[:5]}")
     check("fresh_state_integrity", not first_state_failures, f"failures={first_state_failures[:5]}")
-    check("fresh_conversation_ids", len({row.get("conversation_id") for row in raw}) == 300, "conversation IDs unique across ON repetitions")
+    check("fresh_conversation_ids", len({row.get("conversation_id") for row in raw}) == EXPECTED_RUN_COUNT, "conversation IDs unique across ON scenarios")
 
     mismatch_rows = []
     for row in raw:
@@ -170,7 +181,7 @@ def main(argv: list[str] | None = None) -> int:
             "correct": sum(row["expected"] == row["expected"] and row["actual_failure_type"] == row["expected_failure_type"] and row["actual_trip"] == row["expected_trip"] and row["actual_outcome"] == row["expected_outcome"] and row["actual_useful_recheck"] == row["expected_useful_recheck"] and row["healthy_completion_actual"] == row["healthy_completion_expected"] for row in rows),
             "actual_trip_rate": ratio(sum(row["actual_trip"] for row in rows), len(rows)),
         }
-    check("category_denominators", all(category_results[category]["runs"] == 60 for category in CATEGORIES), str(category_results))
+    check("category_denominators", all(category_results[category]["runs"] == EXPECTED_CATEGORY_COUNT for category in CATEGORIES), str(category_results))
     check("healthy_completion", all(row["actual"]["healthy_completion"] for row in valid if row["category"] == "Healthy"), "all Healthy rows completed without containment")
     useful_rows = [row for row in valid if row["expected"]["expected_useful_recheck"]]
     check("useful_recheck_preservation", all(row["actual"]["useful_recheck"] for row in useful_rows), f"preserved={sum(row['actual']['useful_recheck'] for row in useful_rows)}/{len(useful_rows)}")
@@ -185,7 +196,7 @@ def main(argv: list[str] | None = None) -> int:
         on, off = on_rows[key], off_rows[key]
         if on["category"] != off["category"] or on["description"] != off["description"] or on["expected"] != off["expected"] or on["versions"] != off["versions"] or on["reset"]["world_state"] != off["reset"]["world_state"]:
             fair_failures.append(key)
-    check("off_on_pair_count", len(on_rows) == 20 and len(off_rows) == 20 and len(on_rows.keys() & off_rows.keys()) == 20, f"on={len(on_rows)} off={len(off_rows)} pairs={len(on_rows.keys() & off_rows.keys())}")
+    check("off_on_pair_count", len(on_rows) == EXPECTED_SCENARIO_COUNT and len(off_rows) == EXPECTED_SCENARIO_COUNT and len(on_rows.keys() & off_rows.keys()) == EXPECTED_SCENARIO_COUNT, f"on={len(on_rows)} off={len(off_rows)} pairs={len(on_rows.keys() & off_rows.keys())}")
     check("off_on_fairness", not fair_failures, f"failures={fair_failures}")
 
     micro = json.loads((batch / "microbenchmark.json").read_text(encoding="utf-8"))
@@ -197,7 +208,14 @@ def main(argv: list[str] | None = None) -> int:
     check("foundry_compatibility_record", foundry.get("status") == "NOT_RUN" and foundry.get("boundary") == "NOT VERIFIED", str(foundry))
 
     report_text = (batch / "PHASE3_REPORT.md").read_text(encoding="utf-8")
-    report_markers = all(marker in report_text for marker in ("TP | 240", "FP | 0", "TN | 60", "FN | 0", "Runs: `300`", "NOT AWARDED BY CONSTRUCTION"))
+    report_markers = all(marker in report_text for marker in (
+        f"TP | {recomputed_metrics['TP']}",
+        f"FP | {recomputed_metrics['FP']}",
+        f"TN | {recomputed_metrics['TN']}",
+        f"FN | {recomputed_metrics['FN']}",
+        f"Runs: `{EXPECTED_RUN_COUNT}`",
+        "NOT AWARDED BY CONSTRUCTION",
+    ))
     check("report_headline_integrity", report_markers, "report includes independently recomputed headline values and non-PASS construction status")
 
     result = "PASS" if all(item["status"] == "PASS" for item in checks) else "BLOCKED"

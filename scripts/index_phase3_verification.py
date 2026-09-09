@@ -21,7 +21,7 @@ def digest(path: Path) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--directory", required=True)
-    parser.add_argument("--source-batch", default="evidence/phase-03-evidence-benchmark/verification-20260909T-v2-construction")
+    parser.add_argument("--source-batch", default="")
     args = parser.parse_args()
     directory = Path(args.directory)
     artifacts = []
@@ -34,10 +34,10 @@ def main() -> int:
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
         "artifacts": artifacts,
-        "source_batch": args.source_batch,
+        "source_batch": args.source_batch or "disposable temporary batch (not retained)",
         "boundaries": {
-            "toolcall_accuracy_300_execution": "PASS",
-            "toolcall_accuracy_threshold_quality": "PARTIAL (159/300)",
+            "toolcall_accuracy_15_execution": "NOT VERIFIED - optional cloud evaluation",
+            "toolcall_accuracy_threshold_quality": "NOT VERIFIED - no model-backed result retained",
             "foundry_iq_native_retrieval": "NOT VERIFIED",
             "production_operations_backend": "PASS",
             "cloud_core_trace_correlation": "PASS",

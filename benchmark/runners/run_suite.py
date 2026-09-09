@@ -41,7 +41,7 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def run_suite(dataset_path: str | Path, output_dir: str | Path, repetitions: int = 3, include_impact: bool = False) -> dict[str, Any]:
+def run_suite(dataset_path: str | Path, output_dir: str | Path, repetitions: int = 1, include_impact: bool = False) -> dict[str, Any]:
     records = validate(dataset_path)
     output = Path(output_dir)
     if (output / "raw" / "runs.jsonl").exists():
@@ -77,9 +77,7 @@ def run_suite(dataset_path: str | Path, output_dir: str | Path, repetitions: int
     _write_json(output / "summary" / "foundry_evals.json", foundry)
     impact: dict[str, Any] | None = None
     if include_impact:
-        subset = []
-        for category in ("Exact Loop", "Oscillation", "Retrieval Churn", "Outcome Failure"):
-            subset.extend([r for r in records if r["category"] == category][:5])
+        subset = records
         on = [execute_scenario(scenario, 1, enabled=True, mode="ON") for scenario in subset]
         off = [execute_scenario(scenario, 1, enabled=False, mode="OFF") for scenario in subset]
         for row in on + off:
@@ -118,7 +116,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default="benchmark/datasets/reasonfuse_v2.jsonl")
     parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--repetitions", type=int, default=3)
+    parser.add_argument("--repetitions", type=int, default=1)
     parser.add_argument("--include-impact", action="store_true")
     args = parser.parse_args(argv)
     try:

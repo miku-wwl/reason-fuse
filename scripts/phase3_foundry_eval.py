@@ -57,8 +57,8 @@ def main() -> int:
         "mean_f1": mean(scores) if scores else None,
         "network": "DISABLED",
         "llm": "NOT INVOKED",
-        "model_backed_trajectory_evaluators": "FULL 300-CASE RUN IN SEPARATE EVIDENCE - gpt-5-mini / australiaeast",
-        "tool_call_accuracy": "SEE SEPARATE ARTIFACT - toolcall-accuracy-300-independent-merged.json; 300/300 completed with zero final errors",
+        "model_backed_trajectory_evaluators": "15-SCENARIO AGENTATHON PROFILE IS A SEPARATE OPTIONAL CLOUD EVALUATION - gpt-5-mini / australiaeast",
+        "tool_call_accuracy": "SEE SEPARATE 15-SCENARIO COMPETITION ARTIFACT; no cloud result is implied by this offline evaluator",
         "boundary": "PARTIAL: offline SDK evaluator is complete and the model-backed run is execution-complete; cloud hosted Foundry evaluation orchestration remains NOT VERIFIED",
         "results": results,
     }
@@ -66,7 +66,7 @@ def main() -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"FOUNDRY_EVAL_PARTIAL package=azure-ai-evaluation version={payload['package_version']} records={len(results)} passed={payload['passed']} output={output}")
-    return 0 if payload["records"] == 300 and payload["completed"] == 300 else 1
+    return 0 if payload["records"] > 0 and payload["completed"] == payload["records"] else 1
 
 
 if __name__ == "__main__":

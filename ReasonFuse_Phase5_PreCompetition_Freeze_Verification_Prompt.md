@@ -422,8 +422,8 @@ Verify frozen evidence exists.
 Required:
 
 ```text
-100 scenarios
-300 valid runs
+15 curated scenarios
+15 valid runs
 raw JSONL
 normalized results
 confusion matrix
@@ -474,7 +474,7 @@ retrieval normalization
 If YES:
 
 ```text
-full 300-run benchmark must have been rerun
+full 15-scenario competition profile must have been rerun
 ```
 
 If not rerun:

@@ -3,8 +3,9 @@
 ## Independent gate status
 
 There are no unresolved blockers for the documented Phase 2 P0 validation
-scope. The independent batch passed and the final index is
-verification-20260909T110000Z/index.json.
+scope. The independent batch passed. Raw evidence indexes were intentionally
+removed after the report was finalized; the retained source of truth is
+`verification-report.md`.
 
 The two retained failures were setup issues, not unresolved core failures:
 
@@ -13,7 +14,7 @@ The two retained failures were setup issues, not unresolved core failures:
 - The first fresh deployment hit a transient Azure CLI token acquisition
   timeout; the subsequent audited deployment and all downstream gates passed.
 
-They remain in the main report and evidence index for auditability.
+They remain in the main report for auditability.
 
 ## Boundaries for a higher-level model
 

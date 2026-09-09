@@ -1,8 +1,8 @@
-"""Generate the repaired deterministic Phase 3 v2 dataset.
+"""Generate the curated deterministic Phase 3 Agentathon dataset.
 
-The v1 dataset is retained as historical evidence.  This revision keeps the
-same five-by-twenty contract but makes each scenario's semantic pattern
-explicit and materially different, rather than rotating a small template.
+The generator still derives scenarios from the repaired v2 families so the
+fixture semantics remain stable, but the active competition profile publishes
+three representative scenarios per category: 15 scenarios total.
 """
 
 from __future__ import annotations
@@ -60,6 +60,7 @@ def _todo_action(status: str, index: int) -> dict[str, Any]:
 
 def build_v2() -> list[dict[str, Any]]:
     records = build_v1()
+    by_id = {record["scenario_id"]: record for record in records}
     for record in records:
         record["scenario_version"] = "reasonfuse-v2"
         record["toolbox_version"] = "fixture-local-v2"
@@ -92,11 +93,12 @@ def build_v2() -> list[dict[str, Any]]:
         "world-transition-health",
         "unknown-path-new-diagnostic-source",
     ]
-    for index, family in enumerate(healthy_families, 1):
-        record = records[index - 1]
+    for index in (1, 7, 18):
+        family = healthy_families[index - 1]
+        record = by_id[f"H-{index:03d}"]
         _set_family(record, family, semantic_role="healthy_false_positive_control")
 
-    todo_record = records[17]
+    todo_record = by_id["H-018"]
     todo_record["description"] = (
         "Todo status changes from OPEN to IN_PROGRESS to COMPLETED without "
         "objective evidence; the run must complete without containment"
@@ -135,8 +137,9 @@ def build_v2() -> list[dict[str, Any]]:
         ("deployment_check", {"service_name": "media"}, "deployment-media-version"),
         ("dependency_check", {"service_name": "webhooks"}, "dependency-webhooks-queue"),
     ]
-    for index, (tool_name, body, family) in enumerate(exact_specs, 1):
-        record = records[20 + index - 1]
+    for index in (1, 5, 13):
+        tool_name, body, family = exact_specs[index - 1]
+        record = by_id[f"EL-{index:03d}"]
         variants = [body, body, body]
         if index % 2:
             variants = [body, {**body, "request_id": f"canonical-noise-{index}"}, body, body, body]
@@ -177,8 +180,9 @@ def build_v2() -> list[dict[str, Any]]:
         ("deployment_check", {"service_name": "media"}, "dependency_check", {"service_name": "media"}, "deployment-vs-dependency-media"),
         ("deployment_check", {"service_name": "webhooks"}, "read_runtime_state", {"scope": "webhooks"}, "deployment-vs-runtime-webhooks"),
     ]
-    for index, (first_tool, first_body, second_tool, second_body, family) in enumerate(oscillation_specs, 1):
-        record = records[40 + index - 1]
+    for index in (1, 7, 18):
+        first_tool, first_body, second_tool, second_body, family = oscillation_specs[index - 1]
+        record = by_id[f"OS-{index:03d}"]
         actions = []
         for tool_name, body in ((first_tool, first_body), (second_tool, second_body)) * 2:
             actions.append(_diagnostic(tool_name, body, family))
@@ -221,8 +225,9 @@ def build_v2() -> list[dict[str, Any]]:
         ("audit event ordering", "audit event sequence", "audit trail consistency", "src-audit-ordering", "retrieval-audit-ordering"),
         ("release rollback evidence", "release rollback status", "deployment rollback cause", "src-release-rollback", "retrieval-release-rollback"),
     ]
-    for index, (q1, q2, q3, source, family) in enumerate(retrieval_specs, 1):
-        record = records[60 + index - 1]
+    for index in (1, 10, 20):
+        q1, q2, q3, source, family = retrieval_specs[index - 1]
+        record = by_id[f"RC-{index:03d}"]
         content_hash = f"hash-{source}"
         actions = [
             tool("retrieval_search", args({"query": query}), retrieval(query, source, content_hash, "fixture-kb-v2"))
@@ -266,8 +271,9 @@ def build_v2() -> list[dict[str, Any]]:
         ("audit", "UNHEALTHY", "service_status"),
         ("release", "DEGRADED", "database_health"),
     ]
-    for index, (service, status, verifier) in enumerate(outcome_specs, 1):
-        record = records[80 + index - 1]
+    for index in (1, 2, 15):
+        service, status, verifier = outcome_specs[index - 1]
+        record = by_id[f"OF-{index:03d}"]
         generation = f"v2-g{index:02d}"
         family = f"postcondition-{service}-{status.lower()}"
         record["description"] = (
@@ -299,8 +305,10 @@ def build_v2() -> list[dict[str, Any]]:
         _set_family(record, family, action="restart_service", postcondition=status,
                     verifier=verifier, service=service)
 
-    if len(records) != 100:
-        raise ValueError(f"v2 dataset generation expected 100 records, got {len(records)}")
+    if len(records) != 15:
+        raise ValueError(f"Agentathon profile expected 15 records, got {len(records)}")
+    for record in records:
+        record["benchmark_profile"] = "agentathon-15"
     return records
 
 

@@ -4,13 +4,14 @@
 
 ## Scope and result
 
-- Batch: `verification-20260909T-v2-construction`
+- Batch: `agentathon15-final2`
 - Dataset: `D:/workshop/sep/reason-fuse/benchmark/datasets/reasonfuse_v2.jsonl`
-- Dataset SHA-256: `75492a018b0b80f1ab15da00c41f5c7f3d4761fed29aa4d85c6938d5a2f7af94`
+- Dataset SHA-256: `cc3456ea76f20c94b749b2e0cdde7445e8a2497bf008de5a5a4451b4735d3d6c`
 - Frozen thresholds SHA-256: `e08679ded3114754c2f0f0622f5733699220bb29cd1fec203a2f8d031ed24b20`.
-- Runs: `300` / expected `300`
-- Valid runner records: `300`; invalid: `0`
-- LocalEvaluator-correct records: `300`
+- Execution profile: `15 scenarios × 1 repetition = 15 runs`.
+- Runs: `15` / expected `15`
+- Valid runner records: `15`; invalid: `0`
+- LocalEvaluator-correct records: `15`
 - Execution layer: `local deterministic ReasonFuse engine; no network, LLM, Azure, or hosted Operations backend`
 
 Construction status: `COMPLETE — local deterministic evidence materialized`.
@@ -20,9 +21,9 @@ Independent verification status: `NOT RUN by this construction command`.
 
 | Metric | Value |
 | --- | ---: |
-| TP | 240 |
+| TP | 12 |
 | FP | 0 |
-| TN | 60 |
+| TN | 3 |
 | FN | 0 |
 | Recall | 1.000000 |
 | Precision | 1.000000 |
@@ -35,38 +36,38 @@ Independent verification status: `NOT RUN by this construction command`.
 
 | Category | Runs | Correct | Expected trip rate | Actual trip rate |
 | --- | ---: | ---: | ---: | ---: |
-| Exact Loop | 60 | 60 | 1 | 1 |
-| Healthy | 60 | 60 | 0 | 0 |
-| Oscillation | 60 | 60 | 1 | 1 |
-| Outcome Failure | 60 | 60 | 1 | 1 |
-| Retrieval Churn | 60 | 60 | 1 | 1 |
+| Exact Loop | 3 | 3 | 1 | 1 |
+| Healthy | 3 | 3 | 0 | 0 |
+| Oscillation | 3 | 3 | 1 | 1 |
+| Outcome Failure | 3 | 3 | 1 | 1 |
+| Retrieval Churn | 3 | 3 | 1 | 1 |
 
-- Postcondition failure detection: `60/60`.
-- Successful postcondition verification: `12/12`.
-- Useful recheck preservation: `12/12`.
+- Postcondition failure detection: `3/3`.
+- Successful postcondition verification: `1/1`.
+- Useful recheck preservation: `1/1`.
 
 ## Work and latency
 
-- Tool calls/run: `2.720000`.
-- Redundant canonical calls/run: `0.650000`.
-- Steps/run: `2.720000`.
-- Containment latency p50/p95/p99 ms: `0.432100` / `0.934210` / `1.270926`.
+- Tool calls/run: `2.933333`.
+- Redundant canonical calls/run: `0.666667`.
+- Steps/run: `2.933333`.
+- Containment latency p50/p95/p99 ms: `0.775200` / `4.269800` / `9.934200`.
 - Tokens/run: `NOT AVAILABLE` (no LLM was invoked).
 - Cost/run: `NOT AVAILABLE` (no billable provider was invoked).
 
 ## Controlled OFF/ON subset
 
-- Paired runs: `20`.
-- ON mean tool calls / steps: `2.800000` / `2.800000`.
-- OFF mean tool calls / steps: `3.300000` / `3.300000`.
-- OFF-minus-ON mean tool calls / steps: `0.500000` / `0.500000`.
+- Paired runs: `15`.
+- ON mean tool calls / steps: `2.933333` / `2.933333`.
+- OFF mean tool calls / steps: `3.333333` / `3.333333`.
+- OFF-minus-ON mean tool calls / steps: `0.400000` / `0.400000`.
 - Control definition: same scenario, repetition, prompt, tool arguments, world state, and local engine; only reasonfuse_enabled differs.
 
 ## Microbenchmark
 
 - Status: `PASS`; events: `10000`.
-- Events/second: `5310.110450`.
-- Per-event latency p50/p95/p99 ns: `72000.000000` / `506135.000000` / `852015.000000`.
+- Events/second: `4376.280472`.
+- Per-event latency p50/p95/p99 ns: `93300.000000` / `642705.000000` / `946428.000000`.
 - Peak traced memory: `580390` bytes.
 
 ## Evidence and boundaries
@@ -90,8 +91,8 @@ Raw evidence is in `raw/runs.jsonl`; normalized records are in `normalized/resul
 ```powershell
 $env:PYTHONPATH = 'src'
 .venv/Scripts/python.exe -m benchmark.datasets.validate_dataset
-.venv/Scripts/python.exe -m benchmark.runners.run_suite --dataset benchmark/datasets/reasonfuse_v2.jsonl --output-dir <run-dir> --repetitions 3 --include-impact
+.venv/Scripts/python.exe -m benchmark.runners.run_suite --dataset benchmark/datasets/reasonfuse_v2.jsonl --output-dir <run-dir> --repetitions 1 --include-impact
 .venv/Scripts/python.exe -m benchmark.microbenchmark.run_microbenchmark --output <run-dir>/microbenchmark.json
 ```
 
-Source commit recorded by runner: `6f16c64a9c0b5f2aa5d5c6fa72eaf09140847845`.
+Source commit recorded by runner: `804598aff76dbbc37d266252a5dceb9202ef3f09`.

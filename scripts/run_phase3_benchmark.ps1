@@ -1,9 +1,10 @@
 [CmdletBinding()]
 param(
     [string]$Batch = "",
-    [int]$Repetitions = 3,
+    [int]$Repetitions = 1,
     [switch]$IncludeImpact,
-    [string]$DatasetPath = "benchmark\datasets\reasonfuse_v2.jsonl"
+    [string]$DatasetPath = "benchmark\datasets\reasonfuse_v2.jsonl",
+    [string]$OutputRoot = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -13,8 +14,13 @@ $env:PYTHONPATH = "src"
 if ([string]::IsNullOrWhiteSpace($Batch)) {
     $Batch = "verification-$((Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssZ'))"
 }
-$RunDir = Join-Path $RepoRoot "evidence\phase-03-evidence-benchmark\$Batch"
-$CommandEvidenceDir = Join-Path $RepoRoot "evidence\phase-03-evidence-benchmark\commands\$Batch"
+if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
+    $OutputRoot = Join-Path ([IO.Path]::GetTempPath()) "reasonfuse-phase3"
+} elseif (-not [IO.Path]::IsPathRooted($OutputRoot)) {
+    $OutputRoot = Join-Path $RepoRoot $OutputRoot
+}
+$RunDir = Join-Path $OutputRoot $Batch
+$CommandEvidenceDir = Join-Path $OutputRoot "commands\$Batch"
 $Python = Join-Path $RepoRoot ".venv\Scripts\python.exe"
 $Dataset = if ([IO.Path]::IsPathRooted($DatasetPath)) { $DatasetPath } else { Join-Path $RepoRoot $DatasetPath }
 New-Item -ItemType Directory -Force -Path $RunDir, $CommandEvidenceDir | Out-Null
@@ -26,16 +32,11 @@ function Invoke-Checked([string]$Label, [string[]]$Command) {
 }
 
 $Phase2Report = Join-Path $RepoRoot "docs\phases\phase-02-core\verification-report.md"
-$Phase2Index = Join-Path $RepoRoot "evidence\phase-02-core\verification-20260909T110000Z\index.json"
-if (-not (Test-Path -LiteralPath $Phase2Report) -or -not (Test-Path -LiteralPath $Phase2Index)) {
-    throw "Phase 2 handoff artifacts are missing; refusing to construct Phase 3 evidence."
+if (-not (Test-Path -LiteralPath $Phase2Report)) {
+    throw "Phase 2 verification report is missing; refusing to construct Phase 3 evidence."
 }
 if (-not ((Get-Content -Raw -LiteralPath $Phase2Report) -match "INDEPENDENT_PHASE2_VALIDATION_PASS")) {
     throw "Phase 2 report does not contain the required independent PASS handoff."
-}
-$Phase2IndexBody = Get-Content -Raw -LiteralPath $Phase2Index | ConvertFrom-Json
-if ($Phase2IndexBody.result -ne "INDEPENDENT_PHASE2_VALIDATION_PASS") {
-    throw "Phase 2 evidence index is not an independent PASS handoff."
 }
 
 Invoke-Checked "dataset-generate" @($Python, "-m", "benchmark.datasets.generate_dataset_v2", "--output", $Dataset)

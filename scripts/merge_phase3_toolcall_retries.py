@@ -1,4 +1,4 @@
-"""Merge successful low-rate-limit retries into a full Phase 3 model run."""
+"""Merge successful low-rate-limit retries into the 15-scenario model run."""
 
 from __future__ import annotations
 
@@ -40,8 +40,8 @@ def main() -> int:
     base["completed"] = len(completed)
     base["errors"] = len(errors)
     base["threshold_passed"] = sum(bool(row.get("passed")) for row in results)
-    base["status"] = "PASS" if len(results) == 300 and not errors else "PARTIAL"
-    base["full_300_run"] = "RUN" if len(results) == 300 else base.get("full_300_run")
+    base["status"] = "PASS" if len(results) == 15 and not errors else "PARTIAL"
+    base["competition_15_scenario_run"] = "RUN" if len(results) == 15 else base.get("competition_15_scenario_run")
     base["recovery"] = {
         "method": "low_concurrency_retry_merge",
         "base_status": "PARTIAL",

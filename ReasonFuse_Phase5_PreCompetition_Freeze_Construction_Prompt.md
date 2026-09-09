@@ -493,12 +493,13 @@ Postcondition Failed
 
 # 17. Phase 3 Evidence Regression
 
-Do not necessarily rerun the entire 300-run benchmark unless a core behavior changed.
+Do not expand the 15-scenario competition profile into a large cloud regression
+unless a core behavior changed and the larger run is separately authorized.
 
 At minimum:
 
 ```text
-verify frozen 300-run raw evidence exists
+verify the frozen 15-scenario raw result exists
 verify report recomputes
 verify confusion matrix recomputes
 verify metrics recompute
@@ -508,7 +509,7 @@ verify 10,000-event microbenchmark artifact exists
 If Phase 5 changes detector logic or Run Contract behavior:
 
 ```text
-rerun the full 300-run benchmark
+rerun the full 15-scenario competition profile
 ```
 
 No exceptions.

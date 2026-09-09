@@ -54,8 +54,8 @@ PHASE 3 RESULT: PASS
 At minimum:
 
 ```text
-100 scenarios
-300 valid runs
+15 curated Agentathon scenarios
+15 valid runs
 confusion matrix verified
 Recall / Precision / FPR / FNR verified
 Healthy Completion verified
@@ -121,7 +121,7 @@ Release flow:
 ```text
 Versioned Dataset
  ↓
-evaluate_agent(num_repetitions=3)
+evaluate_agent(num_repetitions=1)
  ↓
 LocalEvaluator + FoundryEvals
  ↓

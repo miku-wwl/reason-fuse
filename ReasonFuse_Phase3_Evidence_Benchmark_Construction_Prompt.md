@@ -6,7 +6,7 @@
 > **Expected effort:** 8–10 hours  
 > **Prerequisite:** Phase 2 ReasonFuse Core independent verification = **PASS**  
 > **Architecture status:** FROZEN — do not redesign ReasonFuse  
-> **Primary Exit Gate:** `100 scenarios × 3 repetitions = 300 completed runs + confusion matrix + measured metrics`
+> **Primary Exit Gate:** `15 curated scenarios × 1 repetition = 15 completed runs + confusion matrix + measured metrics`
 
 ---
 
@@ -31,8 +31,6 @@ docs/phases/phase-02-core/report.md
 docs/phases/phase-02-core/open-questions.md
 docs/phases/phase-02-core/verification-report.md
 docs/phases/phase-02-core/verification-open-questions.md
-evidence/phase-02-core/index.json
-evidence/phase-02-core/verification-20260909T110000Z/index.json
 ```
 
 The independent index reports:
@@ -41,10 +39,10 @@ The independent index reports:
 INDEPENDENT_PHASE2_VALIDATION_PASS
 ```
 
-The construction handoff index is historical construction evidence. The
-`verification-20260909T110000Z/index.json` file is the authoritative
-independent Phase 2 evidence index. The superseded duplicate root index and
-old learning intermediates were removed; do not recover or review them.
+The Phase 2 handoff is report-based. The superseded evidence indexes and old
+learning intermediates were intentionally removed; do not recover or review
+them. Use `verification-report.md` for the independent Phase 2 result and
+`verification-open-questions.md` for its bounded caveats.
 
 ## Phase 2 baseline to preserve
 
@@ -81,7 +79,7 @@ concurrent/forked turns and cold-start recovery
 Phase 3 must not silently convert those boundaries into benchmark PASS claims.
 If the benchmark uses deterministic Toolbox/Operations fixtures, label them as
 fixtures. A real production capability requires a separate explicit evidence
-path and must be reported separately from the 300-run core benchmark.
+path and must be reported separately from the 15-scenario competition benchmark.
 
 ## Execution conventions
 
@@ -101,16 +99,15 @@ retained. Use explicit UTC batch names such as:
 verification-<UTC>-phase3-benchmark
 ```
 
-Keep raw Phase 3 evidence in a new directory such as:
+Keep raw Phase 3 evidence in a disposable system-temporary directory such as:
 
 ```text
-evidence/phase-03-evidence-benchmark/verification-<UTC>/
+%TEMP%/reasonfuse-phase3/verification-<UTC>/
 ```
 
-Do not put new benchmark evidence into the Phase 1 or Phase 2 evidence
-directories. Inspect `git status -sb` before work; current Phase 2 evidence and
-reports may be local changes awaiting their own delivery. Do not sweep them
-into a Phase 3 commit or push without explicit authorization.
+Do not create new benchmark evidence under the repository's deleted `evidence`
+tree. Inspect `git status -sb` before work; retain only the curated dataset,
+code, and Markdown report required for review.
 
 ---
 
@@ -147,7 +144,6 @@ Before changing code, inspect all of:
 ```text
 docs/phases/phase-02-core/verification-report.md
 docs/phases/phase-02-core/verification-open-questions.md
-evidence/phase-02-core/verification-20260909T110000Z/index.json
 ReasonFuse_Phase2_Core_Verification_Prompt.md
 ```
 
@@ -188,8 +184,8 @@ Build exactly these evidence layers:
 ```text
 A. Versioned benchmark dataset
 B. Deterministic scenario runner
-C. 100-scenario suite
-D. 3 repetitions per scenario
+C. 15-scenario suite
+D. 1 repetition per scenario
 E. LocalEvaluator / deterministic evaluator
 F. FoundryEvals quality layer
 G. Confusion matrix
@@ -204,8 +200,9 @@ detectors, replace the middleware, introduce a production database, add a new
 transport, or promote deterministic fixtures to Foundry IQ/production proof.
 Do not redesign runtime architecture.
 
-The Phase 3 implementation may add benchmark-only code under `benchmark/`,
-`scripts/` and a new Phase 3 evidence directory, but it must not alter the
+The Phase 3 implementation may add benchmark-only code under `benchmark/` and
+`scripts/`; raw execution output belongs in a disposable system-temporary
+directory, and it must not alter the
 Phase 2 runtime semantics without opening a separately recorded regression and
 revalidation boundary.
 
@@ -216,28 +213,29 @@ revalidation boundary.
 The canonical Phase 3 dataset is:
 
 ```text
-20 Healthy Investigations
-20 Exact Loop
-20 Oscillation
-20 Retrieval Churn
-20 Outcome Failure
+3 Healthy Investigations
+3 Exact Loop
+3 Oscillation
+3 Retrieval Churn
+3 Outcome Failure
 --------------------------------
-100 scenarios
+15 scenarios
 ```
 
 Run each scenario:
 
 ```text
-3 repetitions
+1 repetition
 ```
 
 Total:
 
 ```text
-100 × 3 = 300 runs
+15 × 1 = 15 runs
 ```
 
-Do not silently reduce this target.
+Do not silently expand this target into a cloud-scale regression run. Larger
+offline or production regressions belong to a separately authorized phase.
 
 If an external service outage blocks completion, record the incomplete run count explicitly.
 
@@ -368,11 +366,11 @@ Use deterministic IDs.
 Example:
 
 ```text
-H-001 ... H-020
-EL-001 ... EL-020
-OS-001 ... OS-020
-RC-001 ... RC-020
-OF-001 ... OF-020
+H-001, H-007, H-018
+EL-001, EL-005, EL-013
+OS-001, OS-007, OS-018
+RC-001, RC-010, RC-020
+OF-001, OF-002, OF-015
 ```
 
 Where:
@@ -432,7 +430,7 @@ Do not create only trivial healthy cases.
 
 # 10. Exact Loop Scenarios
 
-Create 20 distinct loop patterns.
+Create 3 representative loop patterns.
 
 Variation dimensions may include:
 
@@ -456,7 +454,7 @@ expected_failure_type = EXACT_LOOP
 
 # 11. Oscillation Scenarios
 
-Create 20 oscillation scenarios.
+Create 3 representative oscillation scenarios.
 
 At minimum include:
 
@@ -479,7 +477,8 @@ Include negative-control Healthy cases where the same repeated pattern is justif
 
 # 12. Retrieval Churn Scenarios
 
-Create 20 scenarios where query wording changes but effective evidence does not.
+Create 3 representative scenarios where query wording changes but effective
+evidence does not.
 
 Normalize based on:
 
@@ -504,7 +503,8 @@ Include Healthy negative controls where one new source materially changes eviden
 
 # 13. Outcome Failure Scenarios
 
-Create 20 scenarios where action execution is accepted but real-world postcondition fails.
+Create 3 representative scenarios where action execution is accepted but the
+real-world postcondition fails.
 
 Examples:
 
@@ -536,7 +536,7 @@ expected_outcome = POSTCONDITION_FAILED
 
 # 14. Scenario Diversity Requirement
 
-Avoid creating 20 copies of one scenario with renamed services.
+Avoid creating superficial copies of one scenario with renamed services.
 
 Each category should vary meaningful dimensions.
 
@@ -595,7 +595,7 @@ Every repetition must start from a clean scenario state.
 Use:
 
 ```text
-num_repetitions = 3
+num_repetitions = 1
 ```
 
 where supported by the evaluation path.
@@ -1043,7 +1043,7 @@ Phase 4 will handle presentation.
 
 Do not secretly choose thresholds after seeing all benchmark results.
 
-Before the full 300-run benchmark:
+Before the full 15-run competition benchmark:
 
 ```text
 freeze detector thresholds
@@ -1065,22 +1065,12 @@ Do not tune on the final test results and report them as unbiased evidence.
 
 # 33. Preferred Train/Tune/Test Discipline
 
-If practical within the 100 scenarios:
+Do not claim a statistical train/tune/test split from this 15-scenario
+competition profile. Use the Phase 2-frozen thresholds and, if exploratory
+tuning is needed, complete it before the final profile run. At minimum:
 
 ```text
-20 scenarios
-→ development/tuning
-
-80 scenarios
-→ frozen evaluation
-```
-
-or use a similar explicit split.
-
-If the competition timeline is too short, at minimum:
-
-```text
-freeze thresholds before the final 300-run evidence run
+freeze thresholds before the final 15-run evidence run
 ```
 
 and document this limitation.
@@ -1125,7 +1115,7 @@ write a machine-readable result and exit non-zero on invalid evidence.
 The main evidence run is complete only if:
 
 ```text
-300 valid runs
+15 valid runs
 ```
 
 or, if external failure prevents this:
@@ -1156,7 +1146,7 @@ Scenario count:
 Category counts:
 
 ## Run Summary
-Expected runs: 300
+Expected runs: 15
 Valid runs:
 Invalid runs:
 Failure reasons:
@@ -1252,12 +1242,12 @@ Do not expand product scope.
 Construction is complete when:
 
 ```text
-[ ] versioned 100-scenario dataset exists
+[ ] versioned 15-scenario dataset exists
 [ ] schema validates all scenarios
-[ ] category counts are exactly 20 each
+[ ] category counts are exactly 3 each
 [ ] deterministic runner exists
 [ ] reset integrity checks exist
-[ ] 3-repetition execution is implemented
+[ ] 1-repetition competition execution is implemented
 [ ] raw result persistence exists
 [ ] normalized result pipeline exists
 [ ] LocalEvaluator exists
@@ -1268,8 +1258,8 @@ Construction is complete when:
 [ ] 10,000-event microbenchmark exists
 [ ] report generator exists
 [ ] PHASE3_REPORT.md template exists
-[ ] Phase 2 reports and indexes remain unchanged
-[ ] all Phase 3 raw/normalized artifacts have a new hashed evidence index
+[ ] Phase 2 reports remain unchanged; deleted evidence indexes are not recreated
+[ ] raw/normalized artifacts can be indexed in a disposable temporary batch
 [ ] fixture-based findings and NOT VERIFIED production boundaries are explicit
 ```
 

@@ -276,7 +276,8 @@ Core live scenarios
 Phase 2 evidence
 docs/phases/phase-02-core/report.md
 docs/phases/phase-02-core/open-questions.md
-evidence/phase-02-core/<batch>/index.json
+docs/phases/phase-02-core/verification-report.md
+docs/phases/phase-02-core/verification-open-questions.md
 ```
 
 ---
@@ -1207,16 +1208,16 @@ trace/request ID if available
 exit result
 ```
 
-Save under:
+Use a disposable system-temporary directory for raw verification output:
 
 ```text
-evidence/phase-02-core/<UTC-batch>/
+%TEMP%/reasonfuse-phase2/<UTC-batch>/
 ```
 
-Do not store secrets.
+Do not store secrets or create a retained repository evidence index.
 
-Index each requirement by evidence layer, command, UTC timestamp, exit code,
-repo-relative artifact path and SHA-256. Capture deployed source/ZIP manifests,
+Record each requirement by evidence layer, command, UTC timestamp and exit code
+in the retained Markdown report. Capture deployed source/ZIP manifests,
 embedded build identity, stable/candidate versions, dependencies, actual tool
 schema, scenario epoch and before/after counters. Use `scripts/deploy.ps1`'s
 audited native packaging and serial release readback; do not revert to unverified
@@ -1292,8 +1293,7 @@ PASS / BLOCKED
 Do not spend Phase 2 on:
 
 ```text
-100-scenario benchmark
-300-run benchmark
+15-scenario Agentathon benchmark
 confusion matrix
 APIM canary polish
 Judge Mode final UI
@@ -1324,7 +1324,7 @@ Construction is complete when:
 [ ] Outcome Verifier is wired
 [ ] telemetry exists
 [ ] reset script works
-[ ] construction report contains actual test outcomes and evidence links
+[ ] construction report contains actual test outcomes and report references
 [ ] open-questions report contains remaining issues or explicitly states none in scope
 [ ] full Phase 1 regression suite and supplementary checks rerun on the evolved runtime
 [ ] all Phase 2 live scenarios executed, not merely supplied as scripts

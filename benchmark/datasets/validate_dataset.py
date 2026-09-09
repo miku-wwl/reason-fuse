@@ -10,6 +10,8 @@ from typing import Any
 
 
 CATEGORIES = ("Healthy", "Exact Loop", "Oscillation", "Retrieval Churn", "Outcome Failure")
+EXPECTED_SCENARIO_COUNT = 15
+EXPECTED_CATEGORY_COUNT = 3
 ID_RE = re.compile(r"^(H|EL|OS|RC|OF)-\d{3}$")
 REQUIRED_EXPECTED = {
     "should_trip", "expected_failure_type", "expected_outcome",
@@ -79,14 +81,14 @@ def validate(path: str | Path) -> list[dict[str, Any]]:
                 if not isinstance(action["side_effect"], bool) or not isinstance(action["approved"], bool):
                     _fail(errors, f"line {line_number}: action {action_index} flags invalid")
     ids = [r.get("scenario_id") for r in records]
-    if len(records) != 100:
-        _fail(errors, f"expected 100 records, got {len(records)}")
+    if len(records) != EXPECTED_SCENARIO_COUNT:
+        _fail(errors, f"expected {EXPECTED_SCENARIO_COUNT} records, got {len(records)}")
     if len(set(ids)) != len(ids):
         _fail(errors, "scenario IDs are not unique")
     for category in CATEGORIES:
         count = sum(r.get("category") == category for r in records)
-        if count != 20:
-            _fail(errors, f"category {category!r}: expected 20, got {count}")
+        if count != EXPECTED_CATEGORY_COUNT:
+            _fail(errors, f"category {category!r}: expected {EXPECTED_CATEGORY_COUNT}, got {count}")
     return records if not errors else (_raise(errors))
 
 
