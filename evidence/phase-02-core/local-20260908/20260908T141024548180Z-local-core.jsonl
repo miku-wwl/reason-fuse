@@ -1,0 +1,32 @@
+{"timestamp_utc": "2026-09-08T14:10:24.549218+00:00", "event": "START", "batch": "local-20260908", "evidence_layer": "LOCAL_CORE"}
+{"timestamp_utc": "2026-09-08T14:10:24.549798+00:00", "event": "SCENARIO_START", "scenario": "A_off_no_progress"}
+{"timestamp_utc": "2026-09-08T14:10:24.550752+00:00", "event": "ASSERTIONS", "scenario": "A_off_no_progress", "mode": "OFF", "executed": 4, "harness_stop": true, "fuse_tripped": false}
+{"timestamp_utc": "2026-09-08T14:10:24.551341+00:00", "event": "SCENARIO_RESULT", "scenario": "A_off_no_progress", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.551857+00:00", "event": "SCENARIO_START", "scenario": "B_on_no_progress"}
+{"timestamp_utc": "2026-09-08T14:10:24.553049+00:00", "event": "ASSERTIONS", "scenario": "B_on_no_progress", "mode": "ON", "executed_before_fuse": 2, "fuse_reason": "NO_PROGRESS", "later_dispatches": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.553464+00:00", "event": "SCENARIO_RESULT", "scenario": "B_on_no_progress", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.553873+00:00", "event": "SCENARIO_START", "scenario": "C_exact_loop"}
+{"timestamp_utc": "2026-09-08T14:10:24.554631+00:00", "event": "ASSERTIONS", "scenario": "C_exact_loop", "fuse_reason": "EXACT_LOOP", "external_dispatch_after_trip": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.555032+00:00", "event": "SCENARIO_RESULT", "scenario": "C_exact_loop", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.555629+00:00", "event": "SCENARIO_START", "scenario": "D_oscillation"}
+{"timestamp_utc": "2026-09-08T14:10:24.556626+00:00", "event": "ASSERTIONS", "scenario": "D_oscillation", "fuse_reason": "OSCILLATING", "external_dispatch_after_trip": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.557016+00:00", "event": "SCENARIO_RESULT", "scenario": "D_oscillation", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.557514+00:00", "event": "SCENARIO_START", "scenario": "E_retrieval_churn"}
+{"timestamp_utc": "2026-09-08T14:10:24.558556+00:00", "event": "ASSERTIONS", "scenario": "E_retrieval_churn", "label": "LIVE_HOSTED_WITH_DETERMINISTIC_RETRIEVAL_FIXTURE_PENDING", "fuse_reason": "RETRIEVAL_CHURN", "foundry_iq": "NOT VERIFIED"}
+{"timestamp_utc": "2026-09-08T14:10:24.559143+00:00", "event": "SCENARIO_RESULT", "scenario": "E_retrieval_churn", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.559774+00:00", "event": "SCENARIO_START", "scenario": "F_useful_recheck"}
+{"timestamp_utc": "2026-09-08T14:10:24.561118+00:00", "event": "ASSERTIONS", "scenario": "F_useful_recheck", "useful_recheck": true, "outcome": "OUTCOME_VERIFIED", "side_effects": 1}
+{"timestamp_utc": "2026-09-08T14:10:24.561726+00:00", "event": "SCENARIO_RESULT", "scenario": "F_useful_recheck", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.562436+00:00", "event": "SCENARIO_START", "scenario": "G_todo_only"}
+{"timestamp_utc": "2026-09-08T14:10:24.563402+00:00", "event": "ASSERTIONS", "scenario": "G_todo_only", "todo_delta_seen": true, "objective_progress": false, "progress_state": "STALLED"}
+{"timestamp_utc": "2026-09-08T14:10:24.564459+00:00", "event": "SCENARIO_RESULT", "scenario": "G_todo_only", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.564973+00:00", "event": "SCENARIO_START", "scenario": "H_budget_exhaustion"}
+{"timestamp_utc": "2026-09-08T14:10:24.566182+00:00", "event": "ASSERTIONS", "scenario": "H_budget_exhaustion", "fuse_reason": "BUDGET_EXHAUSTED", "tool_calls": 2}
+{"timestamp_utc": "2026-09-08T14:10:24.566874+00:00", "event": "SCENARIO_RESULT", "scenario": "H_budget_exhaustion", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.567391+00:00", "event": "SCENARIO_START", "scenario": "I_outcomes"}
+{"timestamp_utc": "2026-09-08T14:10:24.567917+00:00", "event": "ASSERTIONS", "scenario": "I_outcomes", "postcondition_failed": "POSTCONDITION_FAILED", "unknown": "OUTCOME_UNKNOWN", "verified": "OUTCOME_VERIFIED"}
+{"timestamp_utc": "2026-09-08T14:10:24.568412+00:00", "event": "SCENARIO_RESULT", "scenario": "I_outcomes", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.568934+00:00", "event": "SCENARIO_START", "scenario": "J_middleware_path"}
+{"timestamp_utc": "2026-09-08T14:10:24.600731+00:00", "event": "ASSERTIONS", "scenario": "J_middleware_path", "middleware_path": true, "calls_before_containment": 2, "fuse_reason": "NO_PROGRESS"}
+{"timestamp_utc": "2026-09-08T14:10:24.601402+00:00", "event": "SCENARIO_RESULT", "scenario": "J_middleware_path", "status": "PASS", "exit_code": 0}
+{"timestamp_utc": "2026-09-08T14:10:24.601794+00:00", "event": "RESULT", "status": "PASS", "exit_code": 0, "evidence_layer": "LOCAL_CORE"}

@@ -27,7 +27,8 @@ def free_port() -> int:
 class Evidence:
     def __init__(self):
         stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-        self.path = ROOT / "evidence" / "phase-02-core" / "local-20260908" / f"{stamp}-operations-api.jsonl"
+        batch = "local-" + datetime.now(timezone.utc).strftime("%Y%m%d")
+        self.path = ROOT / "evidence" / "phase-02-core" / batch / f"{stamp}-operations-api.jsonl"
         self.path.parent.mkdir(parents=True, exist_ok=True)
 
     def write(self, event, **fields):

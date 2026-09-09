@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2026-09-08T00:09:13.623049+00:00",
+  "timestamp_utc": "2026-09-08T22:29:29.496963+00:00",
   "region": "australiaeast",
   "python_local": "3.13.9",
   "packages": {
@@ -189,7 +189,7 @@
   "agents": [
     {
       "name": "reasonfuse-phase1-stable",
-      "version": "8",
+      "version": "27",
       "status": "active",
       "protocols": [
         {
@@ -198,7 +198,7 @@
         }
       ],
       "code_configuration": {
-        "content_hash": "d7b0ddeb3e2aa21a24360dbcfced1a017d35806e07d171f796a7d9e2e011eb97",
+        "content_hash": "8e9f9f9ade984691c21e73584e01a16f6988e2d3d7a59cc23db10ee3c132ac8b",
         "dependency_resolution": "remote_build",
         "entry_point": [
           "python",
@@ -209,14 +209,17 @@
       "env": {
         "AZURE_AI_MODEL_DEPLOYMENT_NAME": "gpt-5-mini",
         "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT": "false",
+        "REASONFUSE_CONTRACT_JSON": "{}",
+        "REASONFUSE_ENABLED": "true",
+        "REASONFUSE_PROFILE": "phase2",
         "RELEASE_ROLE": "stable",
-        "TOOLBOX_ENDPOINT": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/6/mcp?api-version=v1"
+        "TOOLBOX_ENDPOINT": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/11/mcp?api-version=v1"
       },
       "endpoint": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/agents/reasonfuse-phase1-stable/endpoint/protocols/openai/responses?api-version=v1"
     },
     {
       "name": "reasonfuse-phase1-candidate",
-      "version": "5",
+      "version": "13",
       "status": "active",
       "protocols": [
         {
@@ -225,7 +228,7 @@
         }
       ],
       "code_configuration": {
-        "content_hash": "d7b0ddeb3e2aa21a24360dbcfced1a017d35806e07d171f796a7d9e2e011eb97",
+        "content_hash": "8e9f9f9ade984691c21e73584e01a16f6988e2d3d7a59cc23db10ee3c132ac8b",
         "dependency_resolution": "remote_build",
         "entry_point": [
           "python",
@@ -236,8 +239,11 @@
       "env": {
         "AZURE_AI_MODEL_DEPLOYMENT_NAME": "gpt-5-mini",
         "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT": "false",
+        "REASONFUSE_CONTRACT_JSON": "{}",
+        "REASONFUSE_ENABLED": "true",
+        "REASONFUSE_PROFILE": "phase2",
         "RELEASE_ROLE": "candidate",
-        "TOOLBOX_ENDPOINT": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/6/mcp?api-version=v1"
+        "TOOLBOX_ENDPOINT": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/toolboxes/reasonfuse-operations/versions/11/mcp?api-version=v1"
       },
       "endpoint": "https://cog-cce5b59dd73ad.services.ai.azure.com/api/projects/reasonfuse-phase1/agents/reasonfuse-phase1-candidate/endpoint/protocols/openai/responses?api-version=v1"
     }

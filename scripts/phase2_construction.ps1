@@ -1,4 +1,5 @@
-param([string]$Batch = ('construction-' + [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssZ')))
+param([string]$Batch = ('construction-' + [DateTime]::UtcNow.ToString('yyyyMMddTHHmmssZ')),
+      [switch]$ResumeBudget)
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath (Split-Path -Parent $PSScriptRoot)
 $azd = (Resolve-Path -LiteralPath '.tools/azd-1.33.0/azd-windows-amd64.exe').Path
@@ -16,22 +17,30 @@ function Configure([string]$Enabled, [string]$Contract) {
     if ($LASTEXITCODE -ne 0) { throw 'contract configuration failed' }
 }
 function Cases([string[]]$Names) {
-    foreach ($case in $Names) { Checked @($python, 'scripts/phase2_hosted.py', $case, '--batch', $Batch) }
+    foreach ($case in $Names) {
+        $caseCommand = @($python, 'scripts/phase2_hosted.py', $case, '--batch', $Batch)
+        if ($case -eq 'h-budget') { $caseCommand += @('--turn-delay', '45') }
+        Checked $caseCommand
+    }
 }
 $defaultContract = '{}'
 $detectorContract = '{"max_stalled_steps":20,"required_objective_progress_interval":20}'
 $restoreRequired = $false
 try {
-    Configure 'true' $defaultContract
-    Checked @('pwsh', '-File', 'scripts/deploy.ps1')
-    Cases @('b-on', 'e-retrieval', 'f-useful', 'g-outcome-failure', 'i-outcome-unknown', 'j-database-recheck')
+    if (-not $ResumeBudget) {
+        Configure 'true' $defaultContract
+        Checked @('pwsh', '-File', 'scripts/deploy.ps1')
+        Cases @('b-on', 'e-retrieval', 'f-useful', 'g-outcome-failure', 'i-outcome-unknown', 'j-database-recheck')
+        $restoreRequired = $true
+        Configure 'false' $defaultContract
+        Checked @($azd, 'deploy', 'stable', '--no-prompt')
+        Cases @('a-off')
+    }
     $restoreRequired = $true
-    Configure 'false' $defaultContract
-    Checked @($azd, 'deploy', 'stable', '--no-prompt')
-    Cases @('a-off')
     Configure 'true' $detectorContract
     Checked @($azd, 'deploy', 'stable', '--no-prompt')
-    Cases @('c-exact', 'd-oscillation', 'h-budget')
+    if (-not $ResumeBudget) { Cases @('c-exact', 'd-oscillation') }
+    Cases @('h-budget')
 } finally {
     if ($restoreRequired) {
         Configure 'true' $defaultContract
