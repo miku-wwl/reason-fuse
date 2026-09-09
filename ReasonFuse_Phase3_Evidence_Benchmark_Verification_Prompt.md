@@ -9,6 +9,116 @@
 
 ---
 
+# 0. Current Construction Handoff
+
+The Phase 3 benchmark construction has been materialized in the repository.
+Use this handoff as the starting point for independent verification; do not
+silently replace it with a new benchmark design.
+
+Canonical construction inputs:
+
+```text
+benchmark/datasets/reasonfuse_v1.jsonl
+benchmark/datasets/schema.json
+benchmark/datasets/frozen_thresholds.json
+benchmark/datasets/generate_dataset.py
+```
+
+Canonical runner/evaluator entry points:
+
+```text
+benchmark/runners/reset_scenario.py
+benchmark/runners/run_single.py
+benchmark/runners/run_suite.py
+benchmark/evaluators/local_evaluator.py
+benchmark/evaluators/confusion_matrix.py
+benchmark/evaluators/impact_metrics.py
+benchmark/evaluators/foundry_evals.py
+benchmark/microbenchmark/run_microbenchmark.py
+```
+
+The reproducible Windows entry point is:
+
+```powershell
+Set-Location D:\workshop\sep\reason-fuse
+$env:PYTHONPATH = 'src'
+.\scripts\run_phase3_benchmark.ps1 -Repetitions 3 -IncludeImpact
+```
+
+The authoritative completed construction batch for this review is:
+
+```text
+evidence/phase-03-evidence-benchmark/verification-20260909T090921Z/
+```
+
+Its command-capture evidence is separate from the benchmark artifacts:
+
+```text
+evidence/phase-03-evidence-benchmark/commands/verification-20260909T090921Z/
+```
+
+The batch contains:
+
+```text
+raw/runs.jsonl                         300 ON records
+raw/off_on.jsonl                       controlled OFF/ON subset
+normalized/results.jsonl               evaluated normalized records
+summary/metrics.json                   recomputable metrics
+summary/off_on_impact.json             paired impact metrics
+summary/foundry_evals.json             Foundry compatibility status
+microbenchmark.json                    10,000-event result
+PHASE3_REPORT.md                       batch report
+index.json                             SHA-256 artifact index
+```
+
+The repository-level report is:
+
+```text
+benchmark/PHASE3_REPORT.md
+```
+
+The construction report records `PHASE3_CONSTRUCTION_COMPLETE`; it does not
+award `PHASE 3 RESULT: PASS`. The validator must independently recompute the
+result from raw evidence.
+
+---
+
+# 0.1 Phase Boundary
+
+This verification validates the frozen Phase 2 ReasonFuse core through a
+deterministic local benchmark. The benchmark runner is intentionally:
+
+```text
+no network
+no Azure calls
+no LLM invocation
+no hosted Operations backend
+no Foundry IQ native retrieval
+no cloud trace query
+```
+
+The following remain explicit boundaries and are not required to be silently
+promoted to Phase 3 PASS claims:
+
+```text
+Foundry IQ native retrieval                 NOT VERIFIED
+production Operations restart/health        NOT VERIFIED
+cloud Core trace correlation                NOT VERIFIED
+concurrent/forked turns                     NOT VERIFIED
+cold-start recovery                         NOT VERIFIED
+```
+
+These boundaries require a later production/integration evidence path. Do not
+block the deterministic Phase 3 benchmark solely because one of these is not
+verified. Do not report them as verified because the local fixture passed.
+
+FoundryEvals is different: it is an optional Phase 3 quality layer. Attempt it
+if the pinned environment supports it. If it is unavailable or incompatible,
+record the exact limitation and use the documented `PARTIAL`/exception path;
+never claim that an unavailable evaluator ran.
+
+---
+
 # 1. Mission
 
 Your job is not to generate attractive numbers.
@@ -133,11 +243,28 @@ benchmark date/time
 Confirm:
 
 ```text
-PHASE2_REPORT.md
-→ PASS
+docs/phases/phase-02-core/verification-report.md
+→ contains INDEPENDENT_PHASE2_VALIDATION_PASS
+
+evidence/phase-02-core/verification-20260909T110000Z/index.json
+→ result = INDEPENDENT_PHASE2_VALIDATION_PASS
 ```
 
-Run Phase 3 preflight.
+Do not rerun the Phase 2 hosted campaign as part of this prompt. Verify the
+handoff and keep Phase 2 reports/indexes unchanged.
+
+Run Phase 3 preflight:
+
+```powershell
+Set-Location D:\workshop\sep\reason-fuse
+$env:PYTHONPATH = 'src'
+.venv/Scripts/python.exe -m benchmark.datasets.validate_dataset
+.tools/check-phase2-artifacts.ps1
+```
+
+Then verify the authoritative Phase 3 `index.json`, its listed SHA-256 hashes,
+the command-capture `RESULT` records, and the clean working-tree diff scope.
+The preflight must not substitute a summary-only PASS for these checks.
 
 ---
 
@@ -188,6 +315,27 @@ fault_configuration
 user_prompt
 expected result
 run_contract_version
+```
+
+The declared schema also permits deterministic `actions`. For every action,
+inspect at least:
+
+```text
+type
+tool_name
+arguments
+result
+side_effect
+approved
+```
+
+If `verify_postcondition` is present, confirm that the action is the intended
+fresh verification read for the accepted side effect. Validate the actual file
+with:
+
+```powershell
+$env:PYTHONPATH = 'src'
+.venv/Scripts/python.exe -m benchmark.datasets.validate_dataset --dataset benchmark/datasets/reasonfuse_v1.jsonl
 ```
 
 Reject silently malformed or incomplete scenarios.
@@ -263,6 +411,12 @@ Outcome Failure
 → expected_outcome = POSTCONDITION_FAILED
 ```
 
+For this frozen dataset, `expected_useful_recheck = true` means a bounded
+recheck actually verifies the accepted side effect and produces
+`OUTCOME_VERIFIED`. An unhealthy or degraded fresh recheck is an outcome
+failure, not a preserved useful recheck. Confirm this interpretation from the
+raw action and outcome records rather than accepting a label in isolation.
+
 Do not assume all Outcome Failure cases must necessarily trip the Behavioral Fuse if the intended architecture distinguishes outcome verification from behavioral containment.
 
 Evaluate expected labels according to the frozen ReasonFuse semantics.
@@ -290,11 +444,25 @@ Inspect:
 ```text
 world state
 execution counters
-AgentSession state
 conversation IDs
-approval state
 retrieval state/cache behavior
 ```
+
+The current Phase 3 runner is a local deterministic fixture. Its authoritative
+reset assertions are:
+
+```text
+reset.reset = RESET_COMPLETE
+reset.network = DISABLED
+reset.fixture_scope = true
+reset.counters.steps/tool_calls/side_effects = 0
+reset.conversation_id changes by scenario/repetition/mode
+```
+
+Do not require a hosted AgentSession or real approval state from this local
+benchmark and then call the benchmark invalid; those are Phase 4/production
+integration concerns. Do confirm that no in-process ReasonFuse state, pending
+postcondition, retrieval attempt, or fuse counter leaks across repetitions.
 
 Required:
 
@@ -394,6 +562,30 @@ steps
 containment timing
 version lineage
 ```
+
+The current normalized records also expose the Phase 3 run-result fields as
+flat keys, including:
+
+```text
+expected_failure_type / actual_failure_type
+expected_trip / actual_trip
+expected_useful_recheck / actual_useful_recheck
+expected_outcome / actual_outcome
+healthy_completion_expected / healthy_completion_actual
+steps / tool_calls / side_effects
+containment_step / containment_latency_ms
+objective_progress_events / stall_events
+tokens_in / tokens_out / estimated_cost
+trace_id
+agent_version / model_version / prompt_version
+toolbox_version / knowledge_base_version
+reasonfuse_contract_version
+timestamp
+```
+
+`tokens_*` and `estimated_cost` are expected to be `NOT AVAILABLE` because the
+construction path invokes no model or billable provider. `trace_id` is
+`NOT_AVAILABLE_LOCAL`; this is not cloud trace evidence.
 
 If metrics cannot be independently recomputed:
 
@@ -543,6 +735,12 @@ p99 if reported
 
 Check units.
 
+For the current local runner, `containment_latency_ms` is measured with
+`time.perf_counter()` around the deterministic dispatch/record path. The raw
+record does not claim a distributed wall-clock or hosted network timestamp.
+Verify that methodology and units; do not report it as Azure, model, APIM, or
+production latency.
+
 Do not report network/runtime latency as ReasonFuse core processing latency.
 
 Full-run containment latency and microbenchmark event latency are separate metrics.
@@ -614,7 +812,11 @@ If model stochasticity materially affects comparability, require:
 multiple repetitions
 ```
 
-and report uncertainty rather than a single anecdote.
+and report uncertainty rather than a single anecdote. The current OFF/ON
+subset is local and deterministic: 5 Exact Loop, 5 Oscillation, 5 Retrieval
+Churn, and 5 Outcome Failure scenarios, one paired repetition each. Confirm
+that only `reasonfuse_enabled` differs and do not present this 20-pair fixture
+comparison as a production causal estimate.
 
 ---
 
@@ -673,6 +875,19 @@ FoundryEvals Layer = PARTIAL
 This does not automatically block Phase 3 if deterministic ReasonFuse evaluation is complete.
 
 Do not claim unavailable evaluators were used.
+
+The current construction compatibility artifact is:
+
+```text
+summary/foundry_evals.json
+status = NOT_RUN
+boundary = NOT VERIFIED
+```
+
+This is an explicit compatibility result, not a hidden FoundryEvals PASS.
+Independently check whether the pinned environment can run a real evaluator;
+if it cannot, preserve the exact `NOT_RUN` reason in the validation report and
+classify the layer as `PARTIAL` under the exception below.
 
 ---
 
@@ -735,6 +950,17 @@ p99
 
 If memory is reported, verify methodology.
 
+The construction output is:
+
+```text
+evidence/phase-03-evidence-benchmark/verification-20260909T090921Z/microbenchmark.json
+```
+
+The measurement loop creates isolated local engine packets and records 10,000
+decision events. Reporting/indexing happens after the measured loop and must
+not be counted as core event time. Treat the measured throughput as a local
+ReasonFuse-core comparison point, not as full-agent or hosted latency.
+
 ---
 
 # 27. Microbenchmark Isolation
@@ -758,6 +984,17 @@ The result should represent ReasonFuse core processing overhead.
 Inspect git history/config timestamps if available.
 
 Determine whether detector thresholds or Run Contract values changed after seeing the final benchmark results.
+
+Inspect the frozen declaration:
+
+```text
+benchmark/datasets/frozen_thresholds.json
+```
+
+Compare its SHA-256 in `summary/dataset_metadata.json` with the actual file,
+and compare the declared detector/contract values with the scenario overrides
+and the ReasonFuse implementation. The final construction batch was generated
+after this freeze; any later threshold edit requires a new evidence batch.
 
 If yes:
 
@@ -809,8 +1046,13 @@ Core labels should remain stable.
 Inspect:
 
 ```text
-PHASE3_REPORT.md
+benchmark/PHASE3_REPORT.md
+evidence/phase-03-evidence-benchmark/verification-20260909T090921Z/PHASE3_REPORT.md
 ```
+
+The repository report and batch report should agree. The batch report is the
+one covered by the batch `index.json`; the repository report is a convenience
+copy for review.
 
 Confirm every headline number can be traced to raw evidence.
 
@@ -874,6 +1116,8 @@ metrics summary
 OFF/ON paired results
 microbenchmark raw output
 PHASE3_REPORT.md
+SHA-256 evidence index
+command-capture RESULT records
 ```
 
 Charts are secondary.

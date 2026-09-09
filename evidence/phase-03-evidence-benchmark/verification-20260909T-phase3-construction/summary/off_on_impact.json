@@ -1,0 +1,16 @@
+{
+  "deltas_off_minus_on": {
+    "mean_steps": 0.5,
+    "mean_tool_calls": 0.5
+  },
+  "fixture_control": "same scenario, repetition, prompt, tool arguments, world state, and local engine; only reasonfuse_enabled differs",
+  "off": {
+    "mean_steps": 3.45,
+    "mean_tool_calls": 3.45
+  },
+  "on": {
+    "mean_steps": 2.95,
+    "mean_tool_calls": 2.95
+  },
+  "paired_runs": 20
+}

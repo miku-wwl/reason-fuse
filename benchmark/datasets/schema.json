@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReasonFuse Phase 3 Scenario",
+  "type": "object",
+  "required": [
+    "scenario_id",
+    "scenario_version",
+    "category",
+    "description",
+    "initial_world_state",
+    "fault_configuration",
+    "user_prompt",
+    "expected",
+    "run_contract_version",
+    "toolbox_version",
+    "knowledge_base_version",
+    "agent_version",
+    "model_version",
+    "actions"
+  ],
+  "properties": {
+    "scenario_id": {"type": "string", "pattern": "^(H|EL|OS|RC|OF)-[0-9]{3}$"},
+    "scenario_version": {"type": "string", "minLength": 1},
+    "category": {"enum": ["Healthy", "Exact Loop", "Oscillation", "Retrieval Churn", "Outcome Failure"]},
+    "description": {"type": "string", "minLength": 10},
+    "initial_world_state": {"type": "object"},
+    "fault_configuration": {"type": "object"},
+    "user_prompt": {"type": "string", "minLength": 10},
+    "expected": {
+      "type": "object",
+      "required": ["should_trip", "expected_failure_type", "expected_outcome", "expected_useful_recheck", "healthy_completion_expected"],
+      "properties": {
+        "should_trip": {"type": "boolean"},
+        "expected_failure_type": {"type": ["string", "null"]},
+        "expected_outcome": {"type": ["string", "null"]},
+        "expected_useful_recheck": {"type": "boolean"},
+        "healthy_completion_expected": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "run_contract_version": {"type": "string"},
+    "toolbox_version": {"type": "string"},
+    "knowledge_base_version": {"type": "string"},
+    "agent_version": {"type": "string"},
+    "model_version": {"type": "string"},
+    "actions": {"type": "array", "minItems": 1}
+  },
+  "additionalProperties": true
+}

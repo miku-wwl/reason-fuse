@@ -1,0 +1,81 @@
+{
+  "artifacts": [
+    {
+      "bytes": 1382,
+      "path": "manifest.json",
+      "sha256": "fed7c09c8742e85e49b36a849d2115155dcc737f87a6ef2d803998fd7fe0c9ae",
+      "status": "PRESENT"
+    },
+    {
+      "bytes": 805,
+      "path": "microbenchmark.json",
+      "sha256": "32b9ce871f72a3c111613ff46bedfacbef13f6efbdae3a0435cda3b7b24c5d0b",
+      "status": "PRESENT"
+    },
+    {
+      "bytes": 3198129,
+      "path": "normalized/results.jsonl",
+      "sha256": "74e4c112f5a64840224e8eaef86d3348ae23ae614ca03ff40e5657e7858a7ef6",
+      "status": "PRESENT"
+    },
+    {
+      "bytes": 3629,
+      "path": "PHASE3_CONSTRUCTION_REPORT.md",
+      "sha256": "52d4551099d9174d97191a7c39550f2bd6a843af4a2b78f2d59fc408b1af13e9",
+      "status": "PRESENT"
+    },
+    {
+      "bytes": 464422,
+      "path": "raw/off_on.jsonl",
+      "sha256": "c1f0357f73b276ced06c7b5448094bc732c833c854fc0f000dc4e48333884db2",
+      "status": "PRESENT"
+    },
+    {
+      "bytes": 3198129,
+      "path": "raw/runs.jsonl",
+      "sha256": "74e4c112f5a64840224e8eaef86d3348ae23ae614ca03ff40e5657e7858a7ef6",
+      "status": "PRESENT"
+    },
+    {
+      "bytes": 1909,
+      "path": "summary/dataset_metadata.json",
+      "sha256": "c78fa3459fd22f9fb3bc4e61a3e0664a530873acc0cd5c8437405fa3caf42995",
+      "status": "PRESENT"
+    },
+    {
+      "bytes": 220,
+      "path": "summary/foundry_evals.json",
+      "sha256": "cf4173a4fc4e773abe6da0dd3ecb3dadf10b750efbfcdad5deb66c140de30e7e",
+      "status": "PRESENT"
+    },
+    {
+      "bytes": 1824,
+      "path": "summary/metrics.json",
+      "sha256": "74cb1cb756cd51ea6f192de7195868a2477b20205d5f8c2e7fdfe4fcf1f4c112",
+      "status": "PRESENT"
+    },
+    {
+      "bytes": 395,
+      "path": "summary/off_on_impact.json",
+      "sha256": "86c57ca659b1864e14336538414b08a0b0d5edd94e6eb18fcd86b985ffb9e088",
+      "status": "PRESENT"
+    }
+  ],
+  "batch": "verification-20260909T-phase3-construction",
+  "boundaries": [
+    "Foundry IQ native retrieval: NOT VERIFIED",
+    "production Operations backend: NOT VERIFIED",
+    "cloud Core trace correlation: NOT VERIFIED",
+    "concurrent/forked turns and cold-start recovery: NOT VERIFIED"
+  ],
+  "generated_at_utc": "2026-09-09T09:04:13.209410+00:00",
+  "manifest_sha256": "fed7c09c8742e85e49b36a849d2115155dcc737f87a6ef2d803998fd7fe0c9ae",
+  "phase": "Phase 3 Evidence Benchmark Construction",
+  "result": "PHASE3_CONSTRUCTION_EVIDENCE_INDEXED",
+  "summary": {
+    "actual_runs": 300,
+    "expected_runs": 300,
+    "invalid_runs": 0,
+    "valid_runs": 300
+  }
+}

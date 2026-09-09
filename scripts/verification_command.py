@@ -22,7 +22,7 @@ def main():
         command = command[1:]
     evidence = Evidence(args.label)
     evidence.write("COMMAND", argv=command)
-    sources = [p for folder in ["src", "scripts", "tests"] for p in Path(folder).rglob("*")
+    sources = [p for folder in ["src", "scripts", "tests", "benchmark"] if Path(folder).exists() for p in Path(folder).rglob("*")
                if p.is_file() and p.suffix in {".py", ".ps1", ".json"} and "__pycache__" not in p.parts]
     evidence.write("EXECUTION_SOURCE_HASHES", sha256={p.as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources})
     secrets = [v for k, v in os.environ.items() if any(s in k.upper() for s in

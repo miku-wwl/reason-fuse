@@ -1,0 +1,39 @@
+{
+  "actual_runs": 300,
+  "batch": "verification-20260909T-phase3-construction",
+  "boundaries": [
+    "Foundry IQ native retrieval: NOT VERIFIED",
+    "production Operations backend: NOT VERIFIED",
+    "cloud Core trace correlation: NOT VERIFIED",
+    "concurrent/forked turns and cold-start recovery: NOT VERIFIED"
+  ],
+  "command_scope": "local deterministic ReasonFuse engine; no network, LLM, Azure, or hosted Operations backend",
+  "correct_runs": 300,
+  "dataset_path": "D:/workshop/sep/reason-fuse/benchmark/datasets/reasonfuse_v1.jsonl",
+  "dataset_sha256": "87d7d9db77dc8ce346e4bd95d3e8b06b07744c81df9726daabae03a8dbf7cd29",
+  "expected_runs": 300,
+  "generated_at_utc": "2026-09-09T09:04:10.426620+00:00",
+  "impact_subset": {
+    "deltas_off_minus_on": {
+      "mean_steps": 0.5,
+      "mean_tool_calls": 0.5
+    },
+    "fixture_control": "same scenario, repetition, prompt, tool arguments, world state, and local engine; only reasonfuse_enabled differs",
+    "off": {
+      "mean_steps": 3.45,
+      "mean_tool_calls": 3.45
+    },
+    "on": {
+      "mean_steps": 2.95,
+      "mean_tool_calls": 2.95
+    },
+    "paired_runs": 20
+  },
+  "invalid_runs": 0,
+  "phase": "Phase 3 Evidence Benchmark Construction",
+  "repetitions": 3,
+  "source": {
+    "git_commit": "283bc6cfdfe9482b5846b61d1555a2ac09809931"
+  },
+  "valid_runs": 300
+}

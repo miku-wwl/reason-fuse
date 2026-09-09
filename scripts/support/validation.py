@@ -14,7 +14,10 @@ from azure.identity import AzureCliCredential, get_bearer_token_provider
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[2]
-EVIDENCE_ROOT = ROOT / "evidence" / "phase-01-runtime-validation"
+EVIDENCE_ROOT = Path(os.environ.get(
+    "REASONFUSE_EVIDENCE_ROOT",
+    str(ROOT / "evidence" / "phase-01-runtime-validation"),
+))
 load_dotenv(ROOT / ".azure" / "rf-phase1-aue" / ".env")
 load_dotenv(ROOT / ".env")
 
