@@ -14,6 +14,8 @@ from agent_framework import Content, ContextProvider, tool
 from azure.ai.agentserver.core import get_request_context
 from opentelemetry import trace
 
+from reasonfuse.telemetry import flush_reasonfuse_log_exporter, reasonfuse_log_extra
+
 LOG = logging.getLogger("reasonfuse.validation")
 
 
@@ -48,13 +50,23 @@ def json_value(value):
 
 
 def emit(event: str, **fields) -> None:
+    # The hosted server may re-apply its logging policy when a request starts.
+    # Re-enable this explicit audit channel at the emission boundary so the
+    # decision cannot disappear before the Azure Monitor handler sees it.
+    logging.disable(logging.NOTSET)
+    LOG.disabled = False
     span = trace.get_current_span().get_span_context()
-    LOG.info(json.dumps({
+    payload = {
         "event": event,
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "trace_id": format(span.trace_id, "032x") if span.is_valid else None,
         **fields,
-    }, default=json_value, sort_keys=True))
+    }
+    LOG.info(
+        json.dumps(payload, default=json_value, sort_keys=True),
+        extra=reasonfuse_log_extra(event, fields),
+    )
+    flush_reasonfuse_log_exporter()
 
 
 class ValidationStateProvider(ContextProvider):
@@ -89,6 +101,13 @@ class ValidationStateProvider(ContextProvider):
                 "agent_session_id": session.session_id,
                 "platform_session_id": get_request_context().session_id,
                 "release_role": os.environ.get("RELEASE_ROLE", "stable"),
+                "reasonfuse_telemetry": {
+                    "application_insights_configured": bool(
+                        os.environ.get("REASONFUSE_APPLICATIONINSIGHTS_CONNECTION_STRING")
+                        or os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING")
+                    ),
+                    "trace_flush_enabled": os.environ.get("REASONFUSE_TRACE_FLUSH", "").lower() == "true",
+                },
                 "python_version": platform.python_version(),
                 "build_identity": build_identity(),
                 "package_versions": {name: version(name) for name in (

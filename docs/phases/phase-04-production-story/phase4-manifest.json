@@ -1,0 +1,328 @@
+{
+  "affinity": {
+    "cookie": "ReasonFuseAffinity",
+    "fresh_client": {
+      "independent_assignment": true,
+      "role": "stable",
+      "session_id": "client-fresh-001"
+    },
+    "persistent_client": {
+      "session_id": "client-007",
+      "sticky": true,
+      "turns": [
+        "stable",
+        "stable"
+      ]
+    },
+    "sample": {
+      "candidate": 1,
+      "sessions": 20,
+      "stable": 19
+    },
+    "scope": "LOCAL_ROUTER_SIMULATION; not an APIM runtime assertion",
+    "status": "PASS"
+  },
+  "apim": {
+    "checks": {
+      "candidate_weight_5": true,
+      "pool_backend": true,
+      "session_affinity_cookie": true,
+      "sse_buffer_request_false": true,
+      "sse_buffer_response_false": true,
+      "stable_weight_95": true
+    },
+    "configured_weights": {
+      "candidate": 5,
+      "stable": 95
+    },
+    "runtime_status": "PASS - fresh clean-start hosted validation completed; temporary Azure environment removed after the run",
+    "source": "infra/apim.tf + infra/apim-policy.xml",
+    "status": "HOSTED_BOUNDED_PASS"
+  },
+  "boundaries": {
+    "cold_start": "PASS - official hosted-session stop changed active to idle, then resume restored marker/state and advanced turn 1 to 2 on the same logical session/version; unchanged identity is expected.",
+    "native_foundry_iq": "PASS - Stable and Candidate both called foundry_iq___knowledge_base_retrieve through the shared versioned Toolbox and returned source key rf-phase4-iq-001."
+  },
+  "construction_result": "PHASE 4 CONSTRUCTION COMPLETE",
+  "demos": {
+    "candidate_regression": {
+      "candidate": {
+        "failure_type": "NO_PROGRESS",
+        "healthy_completion": false,
+        "outcome": null,
+        "release_role": "candidate",
+        "scenario_id": "PH4-REG-001",
+        "steps": 2,
+        "tool_sequence": [
+          "dns_resolution",
+          "dns_resolution"
+        ],
+        "trace_id": "local-34d5eaf2036db4c5",
+        "trip": true,
+        "useful_recheck": false,
+        "valid": true
+      },
+      "stable": {
+        "failure_type": null,
+        "healthy_completion": true,
+        "outcome": null,
+        "release_role": "stable",
+        "scenario_id": "PH4-REG-001",
+        "steps": 2,
+        "tool_sequence": [
+          "dns_resolution",
+          "service_status"
+        ],
+        "trace_id": "local-a22f76c5d5019269",
+        "trip": false,
+        "useful_recheck": false,
+        "valid": true
+      },
+      "status": "PASS"
+    },
+    "off_on": {
+      "evidence": {
+        "off": {
+          "failure_type": null,
+          "healthy_completion": true,
+          "outcome": null,
+          "release_role": "stable",
+          "scenario_id": "OS-001",
+          "steps": 4,
+          "tool_sequence": [
+            "dns_resolution",
+            "service_status",
+            "dns_resolution",
+            "service_status"
+          ],
+          "trace_id": "local-3492c467480ebe50",
+          "trip": false,
+          "useful_recheck": false,
+          "valid": true
+        },
+        "on": {
+          "failure_type": "OSCILLATING",
+          "healthy_completion": false,
+          "outcome": null,
+          "release_role": "stable",
+          "scenario_id": "OS-001",
+          "steps": 3,
+          "tool_sequence": [
+            "dns_resolution",
+            "service_status",
+            "dns_resolution",
+            "service_status"
+          ],
+          "trace_id": "local-17f738f6586e58a5",
+          "trip": true,
+          "useful_recheck": false,
+          "valid": true
+        }
+      },
+      "status": "PASS"
+    },
+    "outcome_failure": {
+      "evidence": {
+        "failure_type": "POSTCONDITION_FAILED",
+        "healthy_completion": false,
+        "outcome": "POSTCONDITION_FAILED",
+        "release_role": "stable",
+        "scenario_id": "OF-001",
+        "steps": 2,
+        "tool_sequence": [
+          "restart_service",
+          "service_status"
+        ],
+        "trace_id": "local-5e3036f8e358cec6",
+        "trip": true,
+        "useful_recheck": false,
+        "valid": true
+      },
+      "status": "PASS"
+    },
+    "unknown_path": {
+      "evidence": {
+        "failure_type": null,
+        "healthy_completion": true,
+        "outcome": null,
+        "release_role": "stable",
+        "scenario_id": "H-007",
+        "steps": 2,
+        "tool_sequence": [
+          "retrieval_search",
+          "retrieval_search"
+        ],
+        "trace_id": "local-68e297573dafa2fa",
+        "trip": false,
+        "useful_recheck": false,
+        "valid": true
+      },
+      "status": "PASS"
+    }
+  },
+  "environment": {
+    "dataset": "benchmark/datasets/reasonfuse_v2.jsonl",
+    "dataset_scenarios": 15,
+    "phase3_handoff": "PASS - local 15-scenario Agentathon profile",
+    "scope": "local deterministic runner; no Azure, LLM, Native Foundry IQ, or hosted Operations call"
+  },
+  "generated_at_utc": "2026-09-09T13:47:22.863270+00:00",
+  "judge_samples": {
+    "candidate_regression": {
+      "authorization": "ALLOW",
+      "containment_latency_ms": 0.2747,
+      "evidence_delta": false,
+      "fuse_reason": "NO_PROGRESS",
+      "objective_progress": 0,
+      "postcondition_delta": false,
+      "reasonfuse_decision": "BLOCK",
+      "release_role": "candidate",
+      "retrieval_delta": false,
+      "run_id": "run-benchmark-6cbf7a7eb27fe63b",
+      "safety": "PASS",
+      "todo_delta": false,
+      "tool_sequence": [
+        "dns_resolution",
+        "dns_resolution"
+      ],
+      "trace_id": "local-34d5eaf2036db4c5",
+      "trajectory_state": "STALLED",
+      "useful_recheck": false,
+      "world_state_delta": false
+    },
+    "outcome_failure": {
+      "failure_type": "POSTCONDITION_FAILED",
+      "healthy_completion": false,
+      "outcome": "POSTCONDITION_FAILED",
+      "release_role": "stable",
+      "scenario_id": "OF-001",
+      "steps": 2,
+      "tool_sequence": [
+        "restart_service",
+        "service_status"
+      ],
+      "trace_id": "local-5e3036f8e358cec6",
+      "trip": true,
+      "useful_recheck": false,
+      "valid": true
+    }
+  },
+  "hosted_verification": {
+    "environment": "rf-phase4c-20260910",
+    "native_iq": {
+      "stable": "PASS - foundry_iq___knowledge_base_retrieve returned rf-phase4-iq-001",
+      "candidate": "PASS - foundry_iq___knowledge_base_retrieve returned rf-phase4-iq-001",
+      "toolbox": "reasonfuse-operations v2",
+      "project_connection": "reasonfuse-phase4-iq"
+    },
+    "clean_start_e2e": {
+      "status": "PASS",
+      "apim_weights": {"stable": 95, "candidate": 5},
+      "sse_chunks": 52,
+      "rollback_weights": {"stable": 100, "candidate": 0},
+      "new_session_after_rollback": "stable",
+      "hosted_candidate_regression": "PASS - repeated DNS produced NO_PROGRESS/STALLED/contained"
+    },
+    "temporary_resources_removed": true
+  },
+  "phase": "Phase 4 Production Story Construction",
+  "phase4_result": "BOUNDED P0 PASS - NATIVE IQ MCP AND CLEAN-START E2E VERIFIED",
+  "release_matrix": {
+    "candidate": {
+      "agent_framework_version": "agent-framework-core==1.17.0",
+      "agent_version": "reasonfuse-phase1-candidate-v2",
+      "azure_ai_projects_version": "azure-ai-projects==2.3.0",
+      "foundry_hosting_version": "agent-framework-foundry-hosting==1.0.0b260903",
+      "knowledge_base_version": "reasonfuse-phase4-kb / reasonfuse-phase4-ks / reasonfuse-phase4-index",
+      "model_version": "gpt-5-mini@2025-08-07",
+      "prompt_version": "reasonfuse-phase4-prompt-v1",
+      "reasonfuse_contract_version": "reasonfuse-contract-v1",
+      "release_role": "candidate",
+      "toolbox_version": "reasonfuse-operations-v2"
+    },
+    "stable": {
+      "agent_framework_version": "agent-framework-core==1.17.0",
+      "agent_version": "reasonfuse-phase1-stable-v2",
+      "azure_ai_projects_version": "azure-ai-projects==2.3.0",
+      "foundry_hosting_version": "agent-framework-foundry-hosting==1.0.0b260903",
+      "knowledge_base_version": "reasonfuse-phase4-kb / reasonfuse-phase4-ks / reasonfuse-phase4-index",
+      "model_version": "gpt-5-mini@2025-08-07",
+      "prompt_version": "reasonfuse-phase4-prompt-v1",
+      "reasonfuse_contract_version": "reasonfuse-contract-v1",
+      "release_role": "stable",
+      "toolbox_version": "reasonfuse-operations-v2"
+    }
+  },
+  "repeatability": {
+    "Demo A — OFF / ON": {
+      "runs": 3,
+      "status": "PASS"
+    },
+    "Demo B — Unknown Correct Path": {
+      "runs": 3,
+      "status": "PASS"
+    },
+    "Demo C — Outcome Failure": {
+      "runs": 3,
+      "status": "PASS"
+    },
+    "Demo D — Candidate Regression": {
+      "runs": 3,
+      "status": "PASS"
+    }
+  },
+  "rollback": {
+    "action": "hosted APIM pool changed to Stable 100 / Candidate 0; a new session routed Stable",
+    "after": {
+      "candidate": 0,
+      "stable": 100
+    },
+    "before": {
+      "candidate": 5,
+      "stable": 95
+    },
+    "existing_candidate_sessions": "not forcibly migrated; APIM session semantics require explicit validation",
+    "new_session_role_after_rollback": "stable",
+    "status": "PASS"
+  },
+  "source": {
+    "commit": "83eefebd0af6121e4f775c8f63aafec64352e8fd",
+    "working_tree_dirty": true
+  },
+  "sse": {
+    "chunks": [
+      {
+        "chunk": "stable:chunk-1",
+        "received_ms": 0.003
+      },
+      {
+        "chunk": "stable:chunk-2",
+        "received_ms": 0.019
+      },
+      {
+        "chunk": "stable:chunk-3",
+        "received_ms": 0.022
+      },
+      {
+        "chunk": "stable:chunk-4",
+        "received_ms": 0.023
+      }
+    ],
+    "final_completion_ms": 0.125,
+    "first_chunk_before_final": true,
+    "incremental_arrival": true,
+    "scope": "LOCAL_STREAM_SIMULATION; not APIM runtime evidence",
+    "status": "PASS"
+  },
+  "telemetry": {
+    "checks": {
+      "app_insights_diagnostic": true,
+      "otel_observation_event": true,
+      "otel_span_attributes": true,
+      "w3c_correlation": true
+    },
+    "runtime_status": "PASS - Log Analytics returned 17 ReasonFuse AppTraces rows and 21 APIM AppRequests rows; shared OperationId/trace_id correlation and reasonfuse_* properties were observed",
+    "scope": "source/IaC inspection plus bounded hosted APIM correlation",
+    "status": "HOSTED_CORRELATION_PASS"
+  }
+}

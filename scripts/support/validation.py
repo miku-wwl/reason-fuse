@@ -43,7 +43,8 @@ def safe_headers(headers):
     for name, value in headers.items():
         if name.lower() in {
             "content-type", "date", "x-request-id", "apim-request-id", "request-id",
-            "x-ms-request-id", "x-ms-agent-version", "x-agent-session-id", "traceparent",
+            "x-ms-request-id", "x-ms-agent-version", "x-agent-session-id", "x-platform-server",
+            "x-platform-server-version", "x-platform-error-source", "traceparent",
             "x-reasonfuse-release", "transfer-encoding", "content-length",
         }:
             result[name] = value

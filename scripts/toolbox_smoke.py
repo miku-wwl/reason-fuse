@@ -15,10 +15,13 @@ async def main():
     evidence = Evidence("toolbox-smoke")
     counters = Operations(evidence)
     counters.reset()
+    allowed_tools = ["operations___dns_resolution", "operations___restart_service"]
+    if os.environ.get("FOUNDRY_IQ_MCP_ENDPOINT"):
+        allowed_tools.extend(["foundry_iq___knowledge_base_retrieve", "knowledge_base_retrieve"])
     with AzureCliCredential() as credential:
         async with FoundryToolbox(
             credential, url=os.environ["TOOLBOX_ENDPOINT"],
-            allowed_tools=["operations___dns_resolution", "operations___restart_service"],
+            allowed_tools=allowed_tools,
             approval_mode={"always_require_approval": ["operations___restart_service"],
                            "never_require_approval": ["operations___dns_resolution"]},
         ) as toolbox:
@@ -29,6 +32,10 @@ async def main():
             print(json.dumps({"tool_names": [tool.name for tool in listed.tools], "approval_modes": modes}))
             assert "operations___dns_resolution" in [tool.name for tool in listed.tools]
             assert "operations___dns_resolution" in modes
+            if os.environ.get("FOUNDRY_IQ_MCP_ENDPOINT"):
+                iq_names = [tool.name for tool in listed.tools if "knowledge_base_retrieve" in tool.name]
+                assert iq_names, "Native IQ MCP tool missing from the versioned toolbox"
+                evidence.write("NATIVE_IQ_TOOL_LISTED", tool_names=iq_names)
             for name, mode in modes.items():
                 if "restart_service" in name:
                     assert mode == "always_require", "R2 tool missing runtime approval enforcement"
