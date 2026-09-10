@@ -7,9 +7,9 @@
     "proposed_tag": "reasonfuse-competition-rc1"
   },
   "source": {
-    "git_commit": "7b51c98430a5c8b4042b74c709270f6f71618ed9",
+    "git_commit": "6d68b9653a65e6aa134e53b9988428e223ea1dd9",
     "working_tree_dirty": true,
-    "generated_at_utc": "2026-09-10T06:37:44.263642+00:00"
+    "generated_at_utc": "2026-09-10T11:14:59.593804+00:00"
   },
   "scope": {
     "benchmark_scenarios": 15,

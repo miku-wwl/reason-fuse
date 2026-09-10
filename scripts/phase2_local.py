@@ -8,12 +8,14 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import sys
 import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+EVIDENCE_ROOT = Path(os.environ.get("REASONFUSE_EVIDENCE_ROOT", ROOT / "evidence"))
 sys.path.insert(0, str(ROOT / "src"))
 
 from agent_framework import AgentSession, FunctionInvocationContext, MiddlewareTermination, tool
@@ -27,7 +29,7 @@ from reasonfuse.core.state import ReasonFuseState
 class Evidence:
     def __init__(self, batch: str):
         stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-        self.path = ROOT / "evidence" / "phase-02-core" / batch / f"{stamp}-local-core.jsonl"
+        self.path = EVIDENCE_ROOT / "phase-02-core" / batch / f"{stamp}-local-core.jsonl"
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.write("START", batch=batch, evidence_layer="LOCAL_CORE")
 
