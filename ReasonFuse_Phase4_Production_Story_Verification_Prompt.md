@@ -1,11 +1,13 @@
 # ReasonFuse Phase 4 — Production Story Verification Prompt
 
-> **Purpose:** Independently verify that the Phase 4 production story is real, release-sticky, traceable, demoable, and competition-ready.  
+> **Purpose:** Independently verify that the Phase 4 production story is real, release-sticky, traceable, demoable, and competition-ready within an explicit bounded P0 scope.  
 > **Audience:** GPT-6 Astra / independent validation agent  
 > **Phase:** 4 — Production Story  
 > **Role:** Validator, not implementer  
 > **Prerequisite:** Phase 3 = PASS  
-> **Primary Exit Gate:** `Complete E2E demo + APIM canary + Judge Mode + tracing + rollback PASS`
+> **Primary Exit Gate:** `Complete clean-start E2E + Native Foundry IQ + APIM canary + Judge Mode + tracing + rollback PASS`
+>
+> **Scope rule:** Phase 4 P0 uses the budget-controlled `15 scenarios × 1 run` baseline. A 300-run benchmark, competition screenshot package, and large-scale hosted repetition are optional extensions, not prerequisites for the bounded P0 result.
 
 ---
 
@@ -42,8 +44,10 @@ Rollback                   PASS / FAIL
 Repeatability              PASS / FAIL
 
 PHASE 4 RESULT:
-PASS / BLOCKED
+BOUNDED P0 PASS / PASS / BLOCKED
 ```
+
+Use `BOUNDED P0 PASS` when every mandatory runtime gate in Section 32 passes within the declared scope. Use unqualified `PASS` only when the optional extended evidence package has also been executed. Use `BLOCKED` when a mandatory production-story capability fails after reasonable diagnostic work.
 
 ---
 
@@ -78,6 +82,8 @@ Do not accept hard-coded demo values.
 A rollback button or script is not sufficient.
 
 You must verify new traffic behavior after rollback.
+
+The mandatory rollback assertion is that new sessions route Stable after Candidate reaches weight zero. Behavior of an already-affined Candidate session may be recorded when practical, but it is not a P0 blocker unless the architecture explicitly promises forced migration.
 
 ---
 
@@ -647,16 +653,23 @@ The operator should not need to manually repair state between runs.
 From a clean operational state:
 
 ```text
-run preflight
+preflight
+verify Stable/Candidate release matrix
+verify Native Foundry IQ for Stable and Candidate
 start Judge Mode
+verify APIM 95/5, affinity and incremental SSE
 run OFF/ON
+run Unknown Correct Path
 run Outcome Failure
 run Candidate Regression
-rollback
+rollback to Stable 100 / Candidate 0
+create a new session
 confirm Stable
 ```
 
 This should work without manual code edits.
+
+The clean-start run must record the first warm-up failure, if any, separately from the final stabilized result. A transient platform warm-up response must not be silently counted as either a product failure or a product pass.
 
 ---
 
@@ -690,6 +703,8 @@ Judge Mode / demo may display selected Phase 3 results.
 Verify they match `PHASE3_REPORT.md`.
 
 Do not recompute marketing numbers differently in Phase 4.
+
+The Phase 4 budget baseline is `15 scenarios × 1 run`. Do not silently expand this into the historical `100 scenarios × 3 runs = 300 runs` benchmark. If larger hosted repetition is desired, declare it as an optional extension with a separate budget and result.
 
 ---
 
@@ -744,11 +759,13 @@ affinity state
 release role
 trace IDs
 conversation IDs
-Judge Mode screenshots
+Judge Mode runtime-state capture
 tool sequences
 ReasonFuse decisions
 rollback evidence
 ```
+
+UI screenshots are optional presentation evidence. Their absence must not invalidate a bounded P0 runtime result when the runtime-state payload and trace evidence are available.
 
 Do not store secrets.
 
@@ -760,6 +777,9 @@ Update:
 
 ```text
 # Phase 4 Production Story Validation Report
+
+## Scope
+Bounded P0 / extended validation
 
 ## Environment
 ...
@@ -783,6 +803,12 @@ Evidence:
 PASS / FAIL
 
 ## Foundry Tracing / App Insights
+PASS / FAIL
+
+## Native Foundry IQ
+PASS / FAIL
+
+## Hosted Cold-Start
 PASS / FAIL
 
 ## Judge Mode
@@ -809,11 +835,14 @@ PASS / FAIL
 ## Clean-Start E2E
 PASS / FAIL
 
+## Optional Extensions
+Screenshots / larger hosted repetition / existing-session semantics
+
 ## Architecture Change Required?
 YES / NO
 
 ## Phase 4 Result
-PASS / BLOCKED
+BOUNDED P0 PASS / PASS / BLOCKED
 ```
 
 ---
@@ -823,10 +852,10 @@ PASS / BLOCKED
 Return:
 
 ```text
-PHASE 4 RESULT: PASS
+PHASE 4 RESULT: BOUNDED P0 PASS
 ```
 
-only if all mandatory conditions are true:
+when all mandatory P0 conditions are true:
 
 ```text
 [ ] Stable/Candidate releases independently exist
@@ -844,6 +873,8 @@ only if all mandatory conditions are true:
 [ ] SSE arrives incrementally through APIM
 
 [ ] release lineage is observable
+
+[ ] Stable and Candidate each make the real Native Foundry IQ MCP call
 
 [ ] Foundry Tracing captures ReasonFuse decisions
 
@@ -869,10 +900,31 @@ only if all mandatory conditions are true:
 
 [ ] clean-start E2E sequence PASS
 
+[ ] hosted-session cold-start lifecycle PASS, or the declared platform limitation is explicitly recorded
+
 [ ] no Phase 2/3 core regression discovered
 
 [ ] no frozen architecture assumption failed
 ```
+
+The bounded P0 result does not require:
+
+```text
+[ ] 300 hosted benchmark runs
+[ ] a competition screenshot package
+[ ] large-scale hosted repetition beyond 15 scenarios × 1 run
+[ ] forced migration of an already-affined Candidate session after rollback
+```
+
+Those are optional extensions and must be reported separately if executed.
+
+Return:
+
+```text
+PHASE 4 RESULT: PASS
+```
+
+only when the bounded P0 conditions above pass and the declared optional extensions have also been completed. Never upgrade `BOUNDED P0 PASS` to unqualified `PASS` merely because the local construction path or a screenshot looks correct.
 
 ---
 
@@ -913,7 +965,7 @@ runtime containment
 +
 real-world outcome verification
 +
-measured benchmark evidence
+bounded benchmark evidence
 +
 versioned releases
 +
@@ -925,6 +977,8 @@ clear Judge Mode
 +
 rollback
 ```
+
+The result must state the evidence boundary explicitly. Phase 4 is complete for P0 when the real hosted path is proven; optional scale, screenshots, and presentation packaging must not be presented as if they were mandatory runtime gates.
 
 Do not optimize for more features.
 

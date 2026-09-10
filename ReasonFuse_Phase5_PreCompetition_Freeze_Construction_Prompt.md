@@ -4,10 +4,10 @@
 > **Audience:** GPT-6 Astra / coding agent  
 > **Phase:** 5 — Pre-Competition Freeze  
 > **Expected effort:** 4–6 hours  
-> **Prerequisite:** Phase 4 Production Story = **PASS**  
+> **Prerequisite:** Phase 4 Production Story = **BOUNDED P0 PASS** or **PASS**  
 > **Architecture status:** FROZEN  
 > **Feature policy:** NO NEW FEATURES  
-> **Primary Exit Gate:** `clean-start full-chain PASS + dependencies pinned + rollback/demo/benchmark evidence preserved + recovery package ready`
+> **Primary Exit Gate:** `clean-start full-chain PASS + dependencies pinned + canonical benchmark/report evidence preserved + recovery package ready`
 
 ---
 
@@ -51,13 +51,17 @@ Before making changes, inspect:
 
 ```text
 PHASE4_REPORT.md
+PHASE4_CLOUD_VERIFICATION_REPORT.md
+verification-report.md (if present)
 ```
 
 Required:
 
 ```text
-PHASE 4 RESULT: PASS
+PHASE 4 RESULT: BOUNDED P0 PASS
 ```
+
+An unqualified `PHASE 4 RESULT: PASS` also satisfies this prerequisite. `BOUNDED P0 PASS` is the normal Phase 4 result for the budget-controlled project because screenshots and large-scale hosted repetition are optional extensions.
 
 At minimum:
 
@@ -76,7 +80,7 @@ Rollback PASS
 Clean-start E2E PASS
 ```
 
-If Phase 4 is not PASS:
+If neither `BOUNDED P0 PASS` nor `PASS` is supported by the Phase 4 report and retained Hosted evidence:
 
 ```text
 STOP
@@ -160,13 +164,15 @@ python_version
 
 Verify exact pins.
 
-Required:
+Required for this repository:
 
 ```text
 pyproject.toml
 uv.lock
 requirements.txt
 ```
+
+`requirements.txt` is generated and pinned for remote build. Do not create a second dependency source; verify that it agrees with `pyproject.toml` and `uv.lock`.
 
 `requirements.txt` must contain exact versions for remote build.
 
@@ -331,11 +337,13 @@ Confirm no accidental config drift between documentation and actual deployment.
 
 # 11. Clean-Start Build Script
 
-Create or harden:
+Create or harden the platform-appropriate equivalent:
 
 ```text
-scripts/clean_build.sh
+scripts/clean_build.ps1
 ```
+
+An executable `scripts/clean_build.sh` may be provided as a portable companion, but PowerShell is the primary operator path for this Windows repository.
 
 or equivalent.
 
@@ -363,6 +371,8 @@ verify Toolbox
 run preflight
 ```
 
+The default clean-build mode must be local and budget-safe. `terraform apply`, `azd provision` and `azd deploy` must require an explicit Hosted-validation mode/authorization; they must not run implicitly during Phase 5 construction or regression.
+
 Do not require manual code edits during this sequence.
 
 ---
@@ -372,8 +382,10 @@ Do not require manual code edits during this sequence.
 Create or harden:
 
 ```text
-demo/preflight.sh
+demo/preflight.ps1
 ```
+
+An equivalent `demo/preflight.sh` is optional.
 
 It must verify at minimum:
 
@@ -399,6 +411,8 @@ Judge Mode backend
 
 Fail non-zero on required check failure.
 
+When Azure resources are intentionally absent, Hosted-only checks must report `NOT VERIFIED` with a clear reason rather than silently simulating PASS. Local checks remain hard failures when broken.
+
 ---
 
 # 13. Reset Script
@@ -406,8 +420,10 @@ Fail non-zero on required check failure.
 Create or harden:
 
 ```text
-demo/reset.sh
+demo/reset.ps1
 ```
+
+An equivalent `demo/reset.sh` is optional.
 
 It must reset:
 
@@ -431,8 +447,10 @@ A demo must not depend on hidden state from the previous run.
 Create one top-level script:
 
 ```text
-scripts/run_full_regression.sh
+scripts/run_full_regression.ps1
 ```
+
+An equivalent `scripts/run_full_regression.sh` is optional. The primary script must be safe to run after Azure cleanup: it may verify hosted evidence and report live gates as `NOT VERIFIED`, but must not silently deploy or incur cloud charges.
 
 Required sequence:
 
@@ -499,12 +517,14 @@ unless a core behavior changed and the larger run is separately authorized.
 At minimum:
 
 ```text
-verify the frozen 15-scenario raw result exists
+verify the frozen 15-scenario dataset and canonical report exist
 verify report recomputes
 verify confusion matrix recomputes
 verify metrics recompute
-verify 10,000-event microbenchmark artifact exists
+verify the 10,000-event microbenchmark can be reproduced or its canonical summary/hash exists
 ```
+
+Do not resurrect deleted exploratory evidence or require a redundant `evidence/` tree. Preserve the smallest canonical report, manifest and integrity metadata needed to reproduce or audit the result. Raw run output is an optional competition package artifact, not a Phase 5 construction prerequisite.
 
 If Phase 5 changes detector logic or Run Contract behavior:
 
@@ -532,6 +552,8 @@ Candidate Regression
 rollback
 Stable recovery after rollback
 ```
+
+If Azure is intentionally absent, validate the local/IaC contract and cross-reference the retained Phase 4 Hosted report. Do not redeploy solely because Phase 5 construction is running.
 
 ---
 
@@ -604,30 +626,26 @@ Create a competition evidence package.
 Recommended:
 
 ```text
-evidence/frozen/
-├── phase1/
-├── phase2/
-├── phase3/
-├── phase4/
+docs/phases/
+├── phase-01-runtime-validation/verification-report.md
+├── phase-02-core/verification-report.md
+├── phase-03-evidence-benchmark/verification-report.md
+├── phase-04-production-story/verification-report.md
+├── phase-04-production-story/phase4-manifest.json
 ├── benchmark/
-│   ├── raw/
-│   ├── normalized/
-│   ├── confusion_matrix.*
-│   ├── metrics.*
-│   └── microbenchmark.*
+│   └── canonical-summary/manifest files
 │
-├── traces/
-├── screenshots/
-└── release_manifest/
+└── phase-05-pre-competition-freeze/
+    └── release-manifest/
 ```
 
-Do not overwrite original raw evidence.
+Prefer the existing phase reports, manifests and runbook as the canonical package. Do not copy meaningless intermediate files or recreate deleted exploratory evidence. If raw evidence is required for a competition submission, create a separately scoped package and record its retention decision.
 
 ---
 
 # 22. Screenshot / Trace Capture
 
-Capture stable evidence for:
+If a live Hosted environment is available, capture stable evidence for:
 
 ```text
 Foundry Hosted Agent
@@ -646,6 +664,8 @@ benchmark summary
 confusion matrix
 ```
 
+When Azure is cleaned up, use the retained Phase 4 Hosted report and local reproducibility artifacts. Do not fabricate screenshots or redeploy merely to populate a folder.
+
 These are backup proof in case the live demo environment becomes unreliable.
 
 ---
@@ -655,12 +675,12 @@ These are backup proof in case the live demo environment becomes unreliable.
 Create backup artifacts for each signature scenario:
 
 ```text
-Judge Mode screenshot
-trace screenshot
 raw output
 expected tool sequence
 final result
 ```
+
+Screenshots are optional presentation artifacts and may be added only when a live UI is available.
 
 Optional:
 
@@ -679,7 +699,7 @@ The purpose is recovery, not final video production.
 Before freeze:
 
 ```text
-restore intended production/demo APIM weights
+record or restore intended production/demo APIM weights when a Hosted environment exists
 ```
 
 Recommended default:
@@ -709,8 +729,10 @@ Also document one command to restore the demo canary.
 Create:
 
 ```text
-demo/prepare_demo.sh
+demo/prepare_demo.ps1
 ```
+
+An equivalent `demo/prepare_demo.sh` is optional.
 
 It should:
 
@@ -737,8 +759,10 @@ REASONFUSE DEMO READY
 Create:
 
 ```text
-scripts/emergency_recover.sh
+scripts/emergency_recover.ps1
 ```
+
+An equivalent `scripts/emergency_recover.sh` is optional.
 
 Its scope should be narrow and safe.
 
@@ -1004,7 +1028,7 @@ Status:
 YES / NO
 
 ## Phase 5 Result
-NOT VALIDATED / PASS / BLOCKED
+NOT VALIDATED / READY FOR INDEPENDENT VALIDATION / PASS / BLOCKED
 ```
 
 ---
@@ -1072,7 +1096,7 @@ Construction is complete when:
 
 [ ] evidence package structure exists
 
-[ ] benchmark raw evidence preserved
+[ ] canonical 15-scenario report, manifest and integrity metadata preserved
 
 [ ] Phase 5 report template exists
 ```
