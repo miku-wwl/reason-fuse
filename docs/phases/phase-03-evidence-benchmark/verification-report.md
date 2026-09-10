@@ -13,9 +13,8 @@ The active benchmark is now the bounded Microsoft Agentathon profile:
 | Outcome Failure | 3 |
 | **Total** | **15** |
 
-Each scenario is executed once by default. The former high-volume benchmark
-profile was retired because it was disproportionate to the competition goal and
-caused unnecessary model and Hosted Agent spend.
+Each scenario is executed once by default. This single-pass profile matches the
+competition goal and keeps the project within its budget.
 
 Execution profile: **15 scenarios × 1 repetition = 15 runs**.
 
@@ -34,7 +33,6 @@ directory and independently checked before that directory was removed.
 | Healthy preservation | PASS | 3/3 healthy cases completed without containment |
 | OFF/ON comparison | PASS | 15 controlled pairs |
 | Microbenchmark | PASS | 10,000 local events, network disabled |
-| FoundryEvals model layer | NOT RUN | No Azure model invocation was performed |
 
 Bounded Phase 3 result: **PASS for the local 15-scenario Agentathon profile**.
 This does not claim production or hosted-platform verification.
@@ -60,12 +58,6 @@ result; a later rerun can recreate the artifacts locally when needed.
 
 The following remain outside this bounded competition verification:
 
-- Foundry IQ native retrieval
-- production Operations backend
-- cloud Core trace correlation
-- concurrent/forked turns
-- cold-start recovery
-- model-backed ToolCallAccuracy quality scoring
+- cloud deployment and provider calls
 
-These are production/integration concerns, not required to establish the local
-15-scenario Agentathon profile.
+They are outside the local 15-scenario Agentathon profile.

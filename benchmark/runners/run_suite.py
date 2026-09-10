@@ -13,7 +13,6 @@ from typing import Any
 
 from benchmark.datasets.validate_dataset import validate
 from benchmark.evaluators.confusion_matrix import compute
-from benchmark.evaluators.foundry_evals import evaluate_foundry_layer
 from benchmark.evaluators.impact_metrics import compute as compute_impact
 from benchmark.evaluators.local_evaluator import evaluate_record
 from benchmark.runners.run_single import execute_scenario
@@ -73,8 +72,6 @@ def run_suite(dataset_path: str | Path, output_dir: str | Path, repetitions: int
         "scenario_ids": [r["scenario_id"] for r in records],
         "fixture_scope": True,
     })
-    foundry = evaluate_foundry_layer(normalized)
-    _write_json(output / "summary" / "foundry_evals.json", foundry)
     impact: dict[str, Any] | None = None
     if include_impact:
         subset = records
@@ -100,12 +97,7 @@ def run_suite(dataset_path: str | Path, output_dir: str | Path, repetitions: int
         "repetitions": repetitions,
         "impact_subset": impact,
         "source": {"git_commit": normalized[0]["source_manifest"]["git_commit"] if normalized else "NOT AVAILABLE"},
-        "boundaries": [
-            "Foundry IQ native retrieval: NOT VERIFIED",
-            "production Operations backend: NOT VERIFIED",
-            "cloud Core trace correlation: NOT VERIFIED",
-            "concurrent/forked turns and cold-start recovery: NOT VERIFIED",
-        ],
+        "scope": "local deterministic 15-scenario Agentathon profile; hosted deployment is a separate one-time demo path",
     }
     _write_json(output / "manifest.json", manifest)
     print(f"PHASE3_SUITE_COMPLETE runs={len(normalized)} valid={manifest['valid_runs']} correct={manifest['correct_runs']} output={output}")

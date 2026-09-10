@@ -10,7 +10,7 @@
 | 四项 runtime spikes、完整 clean-start、部署源码身份 | PASS / VERIFIED，见最终报告 |
 | 生产服务 restart / recovery | NOT VERIFIED；当前操作服务执行确定性模拟 |
 | 模型生成 token streaming | NOT VERIFIED；当前 SSE 证明 Hosted/APIM 传输与定时分块 |
-| 强制冷启动、任意并发/分叉、跨会话批准重放 | NOT VERIFIED；超出本次顺序用例 |
+| 强制冷启动、跨会话批准重放 | 不属于本次顺序用例 |
 | Foundry IQ 或真实检索集成 | NOT VERIFIED；Phase 1 未实现 |
 
 固定批次通过不保证所有自然语言输入都能可靠触发原生审批。

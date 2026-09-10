@@ -33,7 +33,6 @@ benchmark/runners/run_suite.py
 benchmark/evaluators/local_evaluator.py
 benchmark/evaluators/confusion_matrix.py
 benchmark/evaluators/impact_metrics.py
-benchmark/evaluators/foundry_evals.py
 benchmark/microbenchmark/run_microbenchmark.py
 ```
 
@@ -70,7 +69,6 @@ raw/off_on.jsonl                       controlled OFF/ON subset
 normalized/results.jsonl               evaluated normalized records
 summary/metrics.json                   recomputable metrics
 summary/off_on_impact.json             paired impact metrics
-summary/foundry_evals.json             Foundry compatibility status
 microbenchmark.json                    10,000-event result
 PHASE3_REPORT.md                       batch report
 index.json                             SHA-256 artifact index
@@ -97,30 +95,10 @@ deterministic local benchmark. The benchmark runner is intentionally:
 no network
 no Azure calls
 no LLM invocation
-no hosted Operations backend
-no Foundry IQ native retrieval
-no cloud trace query
 ```
 
-The following remain explicit boundaries and are not required to be silently
-promoted to Phase 3 PASS claims:
-
-```text
-Foundry IQ native retrieval                 NOT VERIFIED
-production Operations restart/health        NOT VERIFIED
-cloud Core trace correlation                NOT VERIFIED
-concurrent/forked turns                     NOT VERIFIED
-cold-start recovery                         NOT VERIFIED
-```
-
-These boundaries require a later production/integration evidence path. Do not
-block the deterministic Phase 3 benchmark solely because one of these is not
-verified. Do not report them as verified because the local fixture passed.
-
-FoundryEvals is different: it is an optional Phase 3 quality layer. Attempt it
-if the pinned environment supports it. If it is unavailable or incompatible,
-record the exact limitation and use the documented `PARTIAL`/exception path;
-never claim that an unavailable evaluator ran.
+This is the complete Phase 3 benchmark scope. Do not add cloud calls, billable
+model calls, additional repetitions, or extra execution modes to this gate.
 
 ---
 
@@ -141,7 +119,6 @@ run count
 metric correctness
 false-positive handling
 OFF/ON fairness
-Foundry evaluation usage
 microbenchmark correctness
 reproducibility
 ```
@@ -157,7 +134,6 @@ Confusion Matrix         PASS / FAIL
 Core Metrics             PASS / FAIL
 Healthy Preservation     PASS / FAIL
 OFF/ON Comparison        PASS / FAIL
-FoundryEvals Layer       PASS / PARTIAL / FAIL
 Microbenchmark           PASS / FAIL
 Reproducibility          PASS / FAIL
 
@@ -845,80 +821,7 @@ Require the reported aggregate claim to match raw evidence.
 
 ---
 
-# 24. FoundryEvals Validation
-
-Confirm which Foundry evaluators actually ran.
-
-Record:
-
-```text
-evaluator name
-version/API
-scenario subset
-valid results
-```
-
-Preferred:
-
-```text
-Task Navigation Efficiency
-Tool Call Accuracy
-Tool Selection Accuracy
-Tool Input Accuracy
-Tool Output Utilization
-Tool Call Success
-Task Completion / Task Adherence where useful
-```
-
-If only a subset works:
-
-```text
-FoundryEvals Layer = PARTIAL
-```
-
-This does not automatically block Phase 3 if deterministic ReasonFuse evaluation is complete.
-
-Do not claim unavailable evaluators were used.
-
-The current construction compatibility artifact is:
-
-```text
-summary/foundry_evals.json
-status = NOT_RUN
-boundary = NOT VERIFIED
-```
-
-This is an explicit compatibility result, not a hidden FoundryEvals PASS.
-Independently check whether the pinned environment can run a real evaluator;
-if it cannot, preserve the exact `NOT_RUN` reason in the validation report and
-classify the layer as `PARTIAL` under the exception below.
-
----
-
-# 25. Runtime vs Offline Evaluation Boundary
-
-Confirm final report communicates:
-
-```text
-ReasonFuse
-→ runtime progress containment
-
-LocalEvaluator
-→ deterministic benchmark correctness
-
-FoundryEvals
-→ offline agent trajectory quality
-```
-
-Do not make the false claim:
-
-```text
-Foundry cannot analyze trajectories
-```
-
----
-
-# 26. 10,000-Event Microbenchmark Validation
+# 24. 10,000-Event Microbenchmark Validation
 
 Run the microbenchmark independently.
 
@@ -968,7 +871,7 @@ ReasonFuse-core comparison point, not as full-agent or hosted latency.
 
 ---
 
-# 27. Microbenchmark Isolation
+# 25. Microbenchmark Isolation
 
 Ensure the benchmark does not accidentally measure:
 
@@ -984,7 +887,7 @@ The result should represent ReasonFuse core processing overhead.
 
 ---
 
-# 28. Threshold Leakage Audit
+# 26. Threshold Leakage Audit
 
 Inspect git history/config timestamps if available.
 
@@ -1018,7 +921,7 @@ Do not accept post-hoc threshold tuning as final unbiased evidence.
 
 ---
 
-# 29. Reproducibility Test
+# 27. Reproducibility Test
 
 From a clean state:
 
@@ -1046,7 +949,7 @@ Core labels should remain stable.
 
 ---
 
-# 30. Report Integrity
+# 28. Report Integrity
 
 Inspect:
 
@@ -1076,7 +979,6 @@ Useful Recheck Preservation
 Postcondition Failure Detection
 Containment metrics
 OFF/ON impact
-FoundryEvals status
 microbenchmark
 limitations
 ```
@@ -1085,7 +987,7 @@ No unsupported marketing claim should appear as a measured result.
 
 ---
 
-# 31. Failure Classification
+# 29. Failure Classification
 
 Classify failures as:
 
@@ -1097,7 +999,6 @@ RUNNER_ERROR
 METRIC_ERROR
 EVALUATION_LEAKAGE
 ENVIRONMENT_ERROR
-FOUNDRY_EVAL_INCOMPATIBILITY
 MICROBENCHMARK_ERROR
 REASONFUSE_CORE_REGRESSION
 ARCHITECTURE_ASSUMPTION_FAILURE
@@ -1107,7 +1008,7 @@ Do not reopen architecture for ordinary dataset or runner bugs.
 
 ---
 
-# 32. Required Evidence Artifacts
+# 30. Required Evidence Artifacts
 
 Verify existence of:
 
@@ -1130,7 +1031,7 @@ Raw evidence is primary.
 
 ---
 
-# 33. Phase 3 PASS Gate
+# 31. Phase 3 PASS Gate
 
 Return:
 
@@ -1180,35 +1081,7 @@ only when all mandatory conditions are true:
 
 ---
 
-# 34. FoundryEvals Exception
-
-FoundryEvals may be:
-
-```text
-PASS
-or
-PARTIAL
-```
-
-without blocking Phase 3, provided:
-
-```text
-deterministic LocalEvaluator
-+
-15-scenario evidence
-+
-core metrics
-```
-
-are fully valid.
-
-If FoundryEvals is unavailable because of SDK/Preview limitations, document it exactly.
-
-Do not redesign ReasonFuse.
-
----
-
-# 35. BLOCKED Gate
+# 32. BLOCKED Gate
 
 Return:
 
@@ -1231,7 +1104,7 @@ core detector regression
 
 ---
 
-# 36. Final Validator Instruction
+# 33. Final Validator Instruction
 
 Phase 3 is the difference between:
 

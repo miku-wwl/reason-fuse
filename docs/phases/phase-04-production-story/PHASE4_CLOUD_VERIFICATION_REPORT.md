@@ -4,7 +4,7 @@
 
 - Region: `australiaeast`.
 - Fresh validation environment: `rf-phase4c-20260910`, resource group `rg-reasonfuse-phase4c-aue`; removed after verification.
-- The run used one bounded Native IQ source and one gpt-5-mini call per required hosted probe. No 300-scenario benchmark was run.
+- The run used one bounded Native IQ source and one gpt-5-mini call per required hosted probe.
 - Raw JSONL evidence was kept outside the repository during execution and removed after this summary. No secrets or tokens were retained.
 
 ## Results
@@ -46,7 +46,7 @@ The four local signature demos were each reset and executed once in this clean-s
 ## Runtime caveats
 
 - The first APIM conversation request immediately after deployment returned a transient 504 during platform warm-up. After the deployment became active, the same endpoint returned 200; the final clean-start run passed. This is recorded as an environment warm-up observation, not hidden.
-- The current evidence is bounded P0 validation, not a 300-run benchmark or a screenshot package for a competition presentation.
+- The current evidence is bounded P0 validation for the fixed competition profile.
 
 ## Conclusion
 

@@ -85,7 +85,7 @@ resource "azapi_resource" "foundry_account" {
   }
 }
 
-# Created one at a time; ARM throttles concurrent deployments on one account.
+# Created one at a time; ARM throttles rapid repeated deployments on one account.
 resource "azurerm_cognitive_deployment" "model" {
   for_each = { for d in var.deployments : d.name => d }
 

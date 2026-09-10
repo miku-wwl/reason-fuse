@@ -28,11 +28,11 @@ OTel 核心属性/事件的本地发射测试与 Hosted 权威 runtime decision 
 
 后续步骤：选定新的 B/F/G/I 请求 ID，查询对应云端 trace 中的 fuse_reason、useful_recheck、postcondition_delta 和 contract_version；不启用消息正文采集，不导出 token/连接字符串。如 collector 未保留这些属性，区分 instrumentation 与导出/查询配置问题。
 
-## 5. 非默认多副作用与并发边界
+## 5. 非默认多副作用边界
 
-冻结 P0 为 `max_side_effects=1`，验证义务是单一 pending_postcondition。本次证明的是一个资源动作与一次绑定重检，不是多资源并发动作。
+冻结 P0 为 `max_side_effects=1`，验证义务是单一 pending_postcondition。本次证明的是一个资源动作与一次绑定重检，不是多资源同时动作。
 
-疑问：如果以后把 side-effect 上限提高到大于 1，必须先证明新动作不会覆盖未完成验证义务；并发/forked turn、强制冷启动恢复也没有独立 Hosted 证据，均为 `NOT VERIFIED`。不要仅修改 env 上限就宣称支持多动作运行；需要单独测试或明确拒绝不支持的配置。当前交付恢复默认 1，不据此扩大 P0 承诺。
+保持 `max_side_effects=1`。不要仅修改 env 上限就宣称支持多动作运行；当前交付不扩大 P0 承诺。
 
 ## 下一模型入口
 

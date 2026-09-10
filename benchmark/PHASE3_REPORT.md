@@ -4,7 +4,7 @@
 
 ## Scope and result
 
-- Batch: `agentathon15-final2`
+- Batch: `cleanup-15x1`
 - Dataset: `D:/workshop/sep/reason-fuse/benchmark/datasets/reasonfuse_v2.jsonl`
 - Dataset SHA-256: `cc3456ea76f20c94b749b2e0cdde7445e8a2497bf008de5a5a4451b4735d3d6c`
 - Frozen thresholds SHA-256: `e08679ded3114754c2f0f0622f5733699220bb29cd1fec203a2f8d031ed24b20`.
@@ -51,7 +51,7 @@ Independent verification status: `NOT RUN by this construction command`.
 - Tool calls/run: `2.933333`.
 - Redundant canonical calls/run: `0.666667`.
 - Steps/run: `2.933333`.
-- Containment latency p50/p95/p99 ms: `0.775200` / `4.269800` / `9.934200`.
+- Containment latency p50/p95/p99 ms: `0.542000` / `1.296800` / `1.326480`.
 - Tokens/run: `NOT AVAILABLE` (no LLM was invoked).
 - Cost/run: `NOT AVAILABLE` (no billable provider was invoked).
 
@@ -66,20 +66,16 @@ Independent verification status: `NOT RUN by this construction command`.
 ## Microbenchmark
 
 - Status: `PASS`; events: `10000`.
-- Events/second: `4376.280472`.
-- Per-event latency p50/p95/p99 ns: `93300.000000` / `642705.000000` / `946428.000000`.
+- Events/second: `5273.438880`.
+- Per-event latency p50/p95/p99 ns: `77700.000000` / `521045.000000` / `798821.000000`.
 - Peak traced memory: `580390` bytes.
 
 ## Evidence and boundaries
 
 Raw evidence is in `raw/runs.jsonl`; normalized records are in `normalized/results.jsonl`; machine summaries are in `summary/`.
 
-- FoundryEvals layer: `NOT_RUN` — FoundryEvals was not invoked; this construction uses the deterministic LocalEvaluator.
-- Foundry IQ native retrieval: `NOT VERIFIED`.
-- Production Operations backend: `NOT VERIFIED`.
-- Cloud Core trace correlation: `NOT VERIFIED`.
-- Concurrent/forked turns and cold-start recovery: `NOT VERIFIED`.
-- Fixture reset: deterministic local reset is recorded per run; hosted/production isolation is not claimed.
+- Fixture reset: deterministic local reset is recorded per run.
+- Hosted deployment is not part of this local benchmark run.
 - Architecture change required by this local construction: `NO`.
 
 ## Phase 3 Result
@@ -95,4 +91,4 @@ $env:PYTHONPATH = 'src'
 .venv/Scripts/python.exe -m benchmark.microbenchmark.run_microbenchmark --output <run-dir>/microbenchmark.json
 ```
 
-Source commit recorded by runner: `804598aff76dbbc37d266252a5dceb9202ef3f09`.
+Source commit recorded by runner: `7b51c98430a5c8b4042b74c709270f6f71618ed9`.

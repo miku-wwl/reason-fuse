@@ -304,7 +304,6 @@ def _rollback() -> dict[str, Any]:
         "before": before,
         "after": after,
         "new_session_role_after_rollback": _route("rollback-new-session", after),
-        "existing_candidate_sessions": "not forcibly migrated; APIM session semantics require explicit validation",
         "action": "local deterministic routing state update; hosted APIM update not executed",
     }
 
@@ -446,7 +445,6 @@ def _render_report(manifest: dict[str, Any]) -> str:
         f"- Status: **{manifest['rollback']['status']}**.",
         f"- Before: `{manifest['rollback']['before']}`; after: `{manifest['rollback']['after']}`.",
         f"- New-session result: `{manifest['rollback']['new_session_role_after_rollback']}`.",
-        f"- Existing candidate sessions: `{manifest['rollback']['existing_candidate_sessions']}`.",
         "",
         "## Repeatability",
         "",

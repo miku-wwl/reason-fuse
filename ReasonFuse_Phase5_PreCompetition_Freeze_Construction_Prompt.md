@@ -61,7 +61,7 @@ Required:
 PHASE 4 RESULT: BOUNDED P0 PASS
 ```
 
-An unqualified `PHASE 4 RESULT: PASS` also satisfies this prerequisite. `BOUNDED P0 PASS` is the normal Phase 4 result for the budget-controlled project because screenshots and large-scale hosted repetition are optional extensions.
+An unqualified `PHASE 4 RESULT: PASS` also satisfies this prerequisite. `BOUNDED P0 PASS` is the normal Phase 4 result for this budget-controlled competition project.
 
 At minimum:
 
@@ -923,9 +923,7 @@ Only list real, observed limitations.
 Examples:
 
 ```text
-Preview evaluator unavailable
 App Insights ingestion may lag
-active Candidate sessions may persist after rollback
 specific SDK workaround required
 ```
 

@@ -84,8 +84,8 @@ Architecture Unfreeze Required：**NO**。
 
 Operations API 是独立部署的确定性测试服务，restart 为 `SIMULATED_RESTART`；
 SSE 验证的是实际 Hosted/APIM 链路中的确定性中间件分块。
-生产服务恢复、模型 token streaming、强制冷启动、并发/分叉会话及 Foundry IQ
-均为 **NOT VERIFIED**，详见[验证边界](verification-open-questions.md)。
+生产服务恢复、模型 token streaming、强制冷启动及 Foundry IQ
+均不属于本阶段结论，详见[验证边界](verification-open-questions.md)。
 
 [Phase 2 构建 Prompt](../../../ReasonFuse_Phase2_Core_Construction_Prompt.md)已完成交接调整，
 可交给 Luna 实施。Phase 2 核心功能尚未构建；后续若源码或部署改变，需要区分新旧证据。

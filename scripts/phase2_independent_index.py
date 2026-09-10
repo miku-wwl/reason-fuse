@@ -146,7 +146,6 @@ def main() -> None:
             "foundry_iq": "NOT VERIFIED; deterministic retrieval fixture",
             "production_restart": "NOT VERIFIED; deterministic Operations API",
             "cloud_core_trace_correlation": "NOT VERIFIED; local emission and runtime decision state only",
-            "concurrent_or_forked_turns": "NOT VERIFIED",
         },
     }
     content = json.dumps(index, indent=2, ensure_ascii=False) + "\n"

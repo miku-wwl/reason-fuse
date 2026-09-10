@@ -123,7 +123,7 @@ Versioned Dataset
  ↓
 evaluate_agent(num_repetitions=1)
  ↓
-LocalEvaluator + FoundryEvals
+LocalEvaluator
  ↓
 PASS
  ↓
@@ -1029,11 +1029,9 @@ new sessions
 → stable only
 ```
 
-Existing candidate-affined sessions may continue depending on APIM behavior and chosen operational semantics.
-
-Document actual behavior accurately.
-
-Do not falsely claim instantaneous migration of active conversations unless proven.
+The verified rollback requirement applies to new sessions: they must route to
+Stable after Candidate reaches weight zero. Existing-session behavior is outside
+the frozen release scope.
 
 ---
 

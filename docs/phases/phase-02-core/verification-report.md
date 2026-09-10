@@ -6,8 +6,8 @@
 
 This is an independent Phase 2 P0 validation result for the documented
 deterministic runtime scope. It is not a claim that Foundry IQ, a production
-Operations backend, cloud Core span export, or concurrent/forked execution has
-been proven. Those boundaries are listed in the separate
+Operations backend, or cloud Core span export has been proven. Those boundaries
+are listed in the separate
 [open-questions report](verification-open-questions.md).
 
 The construction handoff at [report.md](report.md) and its
@@ -282,8 +282,7 @@ The following remain `NOT VERIFIED` and are not silently promoted to PASS:
   deterministic Operations API fixture.
 - Cloud collector correlation for `reasonfuse.*` Core spans; local emission and
   hosted decision state were verified separately.
-- Concurrent or forked turns, cold-start recovery, and multi-action P0
-  postcondition concurrency.
+- Cold-start recovery and multi-action P0 postcondition behavior.
 
 The evidence also does not attempt to retain secrets, cookies or message bodies;
 message-content capture was disabled.

@@ -10,4 +10,3 @@
 ## Non-blocking follow-up
 
 - A competition presentation may capture fresh UI screenshots of Judge Mode and the release/affinity evidence. This is presentation packaging, not a Phase 4 runtime blocker.
-- Large-scale repeated hosted evaluation remains intentionally out of scope because the project was reduced to 15 scenarios × 1 run for budget control.

@@ -1,1132 +1,611 @@
 # ReasonFuse Phase 5 — Pre-Competition Freeze Verification Prompt
 
-> **Purpose:** Independently verify that ReasonFuse is frozen, reproducible, recoverable, and safe to carry into competition day without further architecture work.  
-> **Audience:** GPT-6 Astra / independent validation agent  
-> **Phase:** 5 — Pre-Competition Freeze  
-> **Role:** Final release validator  
-> **Prerequisite:** Phase 4 = PASS  
-> **Primary Exit Gate:** `clean-start full-chain PASS twice + frozen release reproducible + evidence/recovery package complete`
+> Purpose: independently verify the budget-controlled ReasonFuse Competition RC1 package before the Microsoft Agentathon submission.
+> Audience: independent validation agent
+> Phase: 5 — Pre-Competition Freeze
+> Role: local release validator
+> Prerequisite: Phase 4 = BOUNDED P0 PASS or PASS
+> Primary Exit Gate: local frozen package PASS + reproducible local checks + retained Phase 4 handoff consistent
 
 ---
 
-# 1. Mission
+# 0. Repository and scope handoff
 
-This is the final pre-competition release validation.
+The repository uses this root-level prompt:
 
-Your job is to determine whether ReasonFuse can be treated as a frozen competition-ready release.
+~~~
+D:\workshop\sep\reason-fuse\ReasonFuse_Phase5_PreCompetition_Freeze_Verification_Prompt.md
+~~~
 
-Do not reward feature count.
+The nested _Phase5\_PreCompetition\_Freeze\_Verification\_Prompt.md path is
+not a tracked file in the current repository. Do not create a duplicate prompt
+tree for it.
 
-Do not approve because previous phases passed.
+The construction handoff is:
 
-Revalidate the frozen build from a clean state.
+~~~
+docs/phases/phase-05-pre-competition-freeze/PHASE5_REPORT.md
+docs/phases/phase-05-pre-competition-freeze/release-manifest.json
+docs/phases/phase-05-pre-competition-freeze/COMPETITION_UPGRADE_POLICY.md
+docs/phases/phase-05-pre-competition-freeze/RECOVERY_RUNBOOK.md
+docs/phases/phase-05-pre-competition-freeze/COMPETITION_ADAPTATION_BOUNDARY.md
+docs/phases/phase-05-pre-competition-freeze/KNOWN_LIMITATIONS.md
+~~~
 
-Return:
+Do not overwrite PHASE5_REPORT.md. It is the construction report. Write the
+independent result to:
 
-```text
-Dependency Freeze           PASS / FAIL
-Config Freeze               PASS / FAIL
-Terraform / azd             PASS / FAIL
-Secret Audit                PASS / FAIL
-Clean Build                 PASS / FAIL
-Preflight                   PASS / FAIL
-Phase 1 Critical Regression PASS / FAIL
-Phase 2 Core Regression     PASS / FAIL
-Phase 3 Evidence Integrity  PASS / FAIL
-Phase 4 Production Regression PASS / FAIL
-Signature Demo              PASS / FAIL
-Recovery                    PASS / FAIL
-Evidence Package            PASS / FAIL
-Adaptation Boundary         PASS / FAIL
-Repeatability               PASS / FAIL
+~~~
+docs/phases/phase-05-pre-competition-freeze/PHASE5_VERIFICATION_REPORT.md
+docs/phases/phase-05-pre-competition-freeze/PHASE5_VERIFICATION_OPEN_QUESTIONS.md
+~~~
+
+The frozen competition profile is:
+
+~~~
+15 curated benchmark scenarios × 1 repetition
+deterministic LocalEvaluator
+local-safe default commands
+one-time Hosted evidence retained from Phase 4
+no implicit Azure deployment
+~~~
+
+This is a budget-controlled competition package. Verification must not increase
+benchmark scope, add provider calls, or create a new infrastructure obligation.
+
+---
+
+# 1. Non-negotiable safety boundary
+
+The following commands are forbidden in this verification unless the user
+explicitly authorizes a separate Hosted operation:
+
+~~~
+terraform apply
+azd provision
+azd deploy
+scripts/clean_build.ps1 -DeployHosted
+scripts/phase5_preflight.ps1 -Hosted
+~~~
+
+The default validation must not modify Azure resources or incur Azure charges.
+Use:
+
+~~~
+scripts/clean_build.ps1
+scripts/phase5_preflight.ps1
+scripts/run_full_regression.ps1
+scripts/emergency_recover.ps1 -Mode local
+~~~
+
+The Phase 4 Hosted report may be checked for consistency, but it is not a
+reason to redeploy Azure during Phase 5.
+
+---
+
+# 2. Validation result
+
+Return this table in the verification report:
+
+~~~
+Phase 4 retained handoff       PASS / FAIL
+Dependency freeze              PASS / FAIL
+Configuration freeze           PASS / FAIL
+Secret and tracked-file audit  PASS / FAIL
+Terraform static safety        PASS / FAIL
+Local clean build              PASS / FAIL
+Local preflight                PASS / FAIL
+Phase 1 local regression       PASS / FAIL
+Phase 2 core regression        PASS / FAIL
+Phase 3 15×1 integrity         PASS / FAIL
+Phase 4 retained evidence      PASS / FAIL
+Recovery tooling               PASS / FAIL
+Adaptation boundary            PASS / FAIL
+Repository hygiene             PASS / FAIL
+Repeatability                  PASS / FAIL
 
 PHASE 5 RESULT:
 PASS / BLOCKED
-```
+~~~
+
+PASS means the local RC1 package is ready for competition use. It does not
+claim that Azure resources are currently deployed.
 
 ---
 
-# 2. Final Validation Principles
+# 3. Phase 4 handoff audit
 
-## Principle 1 — No New Features During Validation
+Read:
 
-Do not add features to make validation pass.
+~~~
+docs/phases/phase-04-production-story/PHASE4_REPORT.md
+docs/phases/phase-04-production-story/PHASE4_CLOUD_VERIFICATION_REPORT.md
+docs/phases/phase-04-production-story/verification-report.md
+~~~
 
-Allowed:
+Confirm that the retained Phase 4 result supports:
 
-```text
-small bug fix
-script fix
-config correction
-missing pin
-documentation correction
-```
+~~~
+Stable/Candidate
+APIM canary and affinity
+SSE
+Operations
+Judge Mode runtime data
+Candidate regression
+rollback and new-session Stable recovery
+clean-start Hosted evidence
+~~~
 
-Any functional behavior change requires affected regression tests to rerun.
-
----
-
-## Principle 2 — Clean State Matters
-
-A system that only works because a developer shell has hidden state is not frozen.
-
-Validation must include clean-start reproduction.
-
----
-
-## Principle 3 — Evidence Must Survive Environment Failure
-
-The project must retain enough:
-
-```text
-raw benchmark data
-screenshots
-traces
-release metadata
-reports
-```
-
-to prove the project even if a live Azure dependency becomes temporarily unavailable.
+Record this as a retained-evidence handoff. Do not label it as a new live run.
+The absence of current Azure resources is an intentional budget boundary, not a
+local implementation failure.
 
 ---
 
-## Principle 4 — Architecture Reopening Is Exceptional
-
-Only a proven frozen architectural assumption failure may reopen architecture.
-
-Ordinary script, SDK, Terraform, or UI bugs do not justify redesign.
-
----
-
-# 3. Pre-Validation Inventory
-
-Record:
-
-```text
-date/time
-git commit
-
-proposed release name
-proposed release tag
-
-stable agent version
-candidate agent version
-
-model version
-prompt version
-toolbox version
-knowledge base version
-reasonfuse contract version
-dataset version
-
-Python version
-azd version
-Terraform version
-AzureRM version
-AzAPI version
-
-Agent Framework version
-Foundry hosting version
-azure-ai-projects version
-```
-
-Compare these with the frozen release manifest.
-
-Any unexplained mismatch:
-
-```text
-Config Freeze = FAIL
-```
-
----
-
-# 4. Dependency Freeze Audit
+# 4. Dependency and configuration freeze
 
 Inspect:
 
-```text
+~~~
 pyproject.toml
 uv.lock
 requirements.txt
-```
+infra/.terraform.lock.hcl
+azure.yaml
+config/release/competition_rc1.yaml
+docs/phases/phase-05-pre-competition-freeze/release-manifest.json
+~~~
 
-Confirm competition-critical dependencies are exact.
+Confirm:
 
-Search for floating specs:
+~~~
+no floating competition-critical dependency was introduced
+Python/model/Toolbox/Knowledge Base/Run Contract values agree
+Stable and Candidate versions agree with the manifest
+Terraform provider versions agree with the lock file
+benchmark_scenarios = 15
+benchmark_repetitions = 1
+hosted_deployment_default = false
+no_implicit_azure_deploy = true
+~~~
 
-```text
->=
-latest
-*
-unbounded compatible ranges
-```
+Run the available local consistency checks:
 
-Document any unavoidable exception.
+~~~powershell
+uv lock --check
+terraform -chdir=infra fmt -check -recursive
+terraform -chdir=infra validate
+~~~
 
-Check installed environment against lock files.
-
-Required:
-
-```text
-installed versions match frozen manifest
-```
-
----
-
-# 5. Upgrade Policy Audit
-
-Verify a competition-window freeze policy exists.
-
-It must explicitly prevent casual upgrades of:
-
-```text
-Agent Framework
-Foundry hosting
-azure-ai-projects
-Terraform providers
-model
-Toolbox
-knowledge base
-```
-
-unless a blocking defect requires it.
+If the manifest says working_tree_dirty = true, do not call it a final release
+manifest. Record it as READY FOR FINAL COMMIT.
 
 ---
 
-# 6. Configuration Source-of-Truth Audit
+# 5. Secret and tracked-file audit
 
-Confirm one clear frozen manifest exists.
+Inspect tracked files and generated Phase 5 documents for accidental:
 
-Verify:
-
-```text
-agent versions
-model
-prompt
-Toolbox
-KB
-ReasonFuse contract
-dataset
-APIM weights
-dependencies
-```
-
-match the deployed system.
-
-No conflicting duplicate config should claim to be current.
-
----
-
-# 7. Secret Audit
-
-Search repository and generated evidence.
-
-Look for:
-
-```text
+~~~
 API keys
-tokens
+access tokens
 passwords
-connection strings
-Authorization headers
-private certs
-secret query strings
-```
+private certificates
+unredacted Authorization values
+connection strings containing credentials
+temporary Azure environment files
+raw cookies
+~~~
 
-Also inspect:
+The following are allowed when they are code or redacted examples:
 
-```text
-logs
-screenshots metadata where practical
-raw HTTP dumps
-evidence files
-```
+~~~
+credential acquisition calls
+environment variable names
+fake/invalid example values
+redaction logic
+hashes and nonsecret version identifiers
+~~~
 
-Any exposed real secret:
+Also confirm:
 
-```text
-Secret Audit = FAIL
-```
+~~~
+.azure/, .venv/, .tools/ and temporary run directories are not tracked
+no deleted experimental evaluator is referenced
+no critical Phase 5 file is silently untracked
+~~~
 
-Rotate if necessary.
+Record Secret and tracked-file audit = PASS only after inspecting the actual
+working tree.
 
 ---
 
-# 8. Terraform Validation
+# 6. Terraform and local build safety
 
 Run:
 
-```text
-terraform fmt -check
-terraform validate
-terraform plan
-```
+~~~powershell
+.\scripts\clean_build.ps1
+~~~
 
-Record:
+This must remain local-safe. It may run dependency synchronization, Terraform
+initialization without a backend, Terraform validation and local preflight. It
+must not run terraform apply, azd provision or azd deploy.
 
-```text
-exit codes
-provider versions
-unexpected drift
-```
+Run the explicit safe plan:
 
-The plan should not reveal accidental destructive changes.
+~~~powershell
+.\scripts\terraform_plan_safe.ps1
+~~~
 
-Document expected external Foundry/data-plane assets managed outside Terraform.
+Required interpretation:
 
----
+~~~
+PASS = plan was generated with refresh=false and no apply occurred
+NOT VERIFIED = live Azure state was not queried
+~~~
 
-# 9. `azure.yaml` Validation
-
-Inspect actual deployment configuration.
-
-Confirm:
-
-```text
-Responses protocol 2.0.0
-remote build
-runtime
-entry point
-Hosted Agent config
-```
-
-matches frozen documentation.
+NOT VERIFIED for live state is expected in this budget-controlled phase.
 
 ---
 
-# 10. Clean Build Test — First Pass
+# 7. Local preflight and regression
 
-Use the documented clean-build procedure.
+Run:
 
-Required:
+~~~powershell
+.\scripts\phase5_preflight.ps1
+.\scripts\run_full_regression.ps1
+~~~
 
-```text
-fresh dependency install
-infra validation/provision
-agent deployment
-Toolbox verification
-preflight
-```
+The local regression must cover:
 
-Do not manually patch source during the run.
+~~~
+Python compilation
+unit tests
+local wiring
+15-scenario dataset validation
+15×1 benchmark suite
+10,000-event local microbenchmark
+Phase 4 local preflight
+local signature demos
+~~~
 
-Record all commands and failures.
+No cloud call is required for this gate.
 
-At completion:
+For an additional deterministic core check, use a temporary output root:
 
-```text
-Clean Build Pass 1 = PASS / FAIL
-```
+~~~powershell
+$env:REASONFUSE_EVIDENCE_ROOT = Join-Path $env:TEMP 'reasonfuse-phase5-local'
+$env:PYTHONPATH = 'src'
+.venv\Scripts\python.exe scripts\phase2_local.py
+~~~
 
----
-
-# 11. Preflight Validation
-
-Run the frozen preflight.
-
-Required checks:
-
-```text
-auth
-RBAC
-Stable endpoint
-Candidate endpoint
-Responses endpoint
-Toolbox
-tools/list
-Operations API
-AgentSession smoke
-Function Middleware interception
-R2 approval smoke
-APIM endpoint
-affinity
-SSE
-tracing
-Application Insights
-Judge Mode backend
-```
-
-A required failure blocks Phase 5.
+Do not write new raw evidence into a repository evidence directory. Keep any
+temporary output outside the repository and remove it after the report records
+the result.
 
 ---
 
-# 12. Phase 1 Critical Regression
+# 8. Phase 1 and Phase 2 local gates
 
-Revalidate architecture-critical assumptions.
+Confirm the local results cover these architecture-critical invariants:
 
-Required:
-
-```text
-history_source="agent_server"
-multi-turn history works
-AgentSession state survives
-store=False path remains correct
-no duplicate canonical history
-
+~~~
+history/session behavior
 Toolbox BEFORE/AFTER interception
-pre-execution BLOCK
-blocked tool execution count = 0
+blocked action has zero side effect
+approval allow and deny behavior
+exact loop containment
+oscillation containment
+retrieval churn containment
+useful recheck preservation
+todo-only progress is not objective progress
+accepted action is not outcome success
+Run Contract counters
+outcome success/failure/unknown handling
+~~~
 
-R2 approval pause
-approve exact action
-deny
-state survives
-
-APIM affinity
-SSE streaming
-```
-
-Any architecture-critical failure:
-
-```text
-Phase 1 Critical Regression = FAIL
-```
-
-Then classify whether architecture unfreeze is required.
+Use the existing 36 unit tests, tests/local_wiring.py and the local Phase 2
+runner. Do not start a Hosted Agent merely to recreate an already retained
+earlier phase result.
 
 ---
 
-# 13. Phase 2 Core Regression
+# 9. Phase 3 evidence integrity
 
-Run the frozen core regression.
+Verify the canonical local package:
 
-Required:
-
-```text
-OFF baseline
-ON containment
-Exact Loop
-Oscillation
-Retrieval Churn
-Useful Recheck
-Todo-only progress negative control
-Run Contract
-Outcome success
-Outcome failure
-```
-
-Required invariants:
-
-```text
-Todo Delta alone != Objective Progress
-
-Execution accepted != Outcome success
-```
-
----
-
-# 14. Phase 3 Evidence Integrity
-
-Verify frozen evidence exists.
+~~~
+benchmark/datasets/reasonfuse_v2.jsonl
+benchmark/datasets/schema.json
+benchmark/datasets/frozen_thresholds.json
+benchmark/PHASE3_REPORT.md
+docs/phases/phase-03-evidence-benchmark/verification-report.md
+~~~
 
 Required:
 
-```text
-15 curated scenarios
+~~~
+15 unique scenarios
+3 scenarios per category
+1 repetition per scenario
 15 valid runs
-raw JSONL
-normalized results
-confusion matrix
-metrics
-microbenchmark
-PHASE3_REPORT.md
-```
+confusion matrix is reproducible
+OFF/ON comparison is present
+microbenchmark is present
+no provider call is required
+~~~
 
-Independently recompute headline metrics from raw data.
+Raw run JSONL may be generated in a temporary directory for independent
+recalculation. A temporary run does not need to become a permanent repository
+artifact.
 
-At minimum:
-
-```text
-TP
-FP
-TN
-FN
-Recall
-Precision
-FPR
-FNR
-Healthy Completion
-Useful Recheck Preservation
-Postcondition Failure Detection
-```
-
-If numbers no longer match:
-
-```text
-Phase 3 Evidence Integrity = FAIL
-```
+If the current Phase 5 change altered core behavior, rerun the 15×1 suite. If
+only scripts or Markdown changed, record that the existing Phase 3 result
+remains attributable to the unchanged core.
 
 ---
 
-# 15. Benchmark Rerun Policy Check
+# 10. Phase 4 evidence boundary
 
-Determine whether Phase 5 changed:
+Do not run a new Hosted Phase 4 campaign in this prompt.
 
-```text
-detector logic
-Run Contract
-progress semantics
-Outcome Verifier semantics
-tool normalization
-retrieval normalization
-```
+Check only that:
 
-If YES:
+~~~
+the retained Phase 4 reports are present
+the reports agree with the release manifest
+the current local code does not falsely claim live Azure availability
+the default scripts are fail-closed for Hosted deployment
+~~~
 
-```text
-full 15-scenario competition profile must have been rerun
-```
+Current Azure resources being absent must be reported as:
 
-If not rerun:
+~~~
+HOSTED NOT RUN THIS TURN — intentional budget boundary
+~~~
 
-```text
-Phase 5 = BLOCKED
-```
+Do not convert that status into a Phase 5 failure when all local gates pass.
 
 ---
 
-# 16. Microbenchmark Integrity
-
-Verify the frozen 10,000-event microbenchmark result remains attributable to the current commit.
-
-If core code changed since the benchmark:
-
-```text
-rerun microbenchmark
-```
-
-Record:
-
-```text
-throughput
-p50
-p95
-p99
-```
-
----
-
-# 17. Phase 4 Production Regression
-
-Revalidate:
-
-```text
-Stable/Candidate exist
-same controlled dependencies
-APIM weighted pool
-session affinity
-Judge Mode client affinity
-SSE
-release lineage
-Foundry tracing
-Application Insights
-Candidate Regression
-rollback
-Stable recovery
-```
-
----
-
-# 18. Judge Mode Integrity
-
-Run Judge Mode live.
-
-Confirm displayed values come from real runtime state.
-
-Required:
-
-```text
-Safety
-Authorization
-ReasonFuse
-Trajectory
-Objective Progress
-Evidence Delta
-World-State Delta
-Retrieval Delta
-Todo Delta
-Postcondition Delta
-Useful Recheck
-Fuse reason
-containment latency
-release role
-```
-
-Check:
-
-```text
-Planning changed. Reality did not.
-```
-
-is used only when the data supports it.
-
----
-
-# 19. Signature Demo Validation
+# 11. Demo, recovery and runbook checks
 
 Run:
 
-```text
-A — OFF / ON
-B — Unknown Correct Path
-C — Outcome Failure
-D — Candidate Regression
-```
-
-Each scenario must be reset before execution.
-
-Required:
-
-```text
-3 consecutive PASS executions each
-```
-
-Record evidence.
-
----
-
-# 20. Clean-Start Full Chain — First Pass
-
-From a clean operational state execute:
-
-```text
-clean build
-↓
-preflight
-↓
-OFF/ON
-↓
-Unknown Correct Path
-↓
-Outcome Failure
-↓
-Candidate Regression
-↓
-rollback
-↓
-Stable recovery
-```
-
-No source edits.
-
-No hidden manual repair.
-
-Result:
-
-```text
-FULL CHAIN PASS 1
-```
-
-or FAIL.
-
----
-
-# 21. Recovery Script Validation
-
-Test the documented safe recovery path.
-
-Examples:
-
-```text
-restore APIM weights
-restore frozen agent version
-rerun preflight
-```
-
-Do not deliberately destroy production resources.
-
-Simulate or safely induce only non-destructive recoverable states.
-
-Required:
-
-```text
-recovery command works
-system returns to frozen expected state
-```
-
----
-
-# 22. Recovery Runbook Audit
-
-Inspect:
-
-```text
-RECOVERY_RUNBOOK.md
-```
-
-It should cover:
-
-```text
-agent unavailable
-Toolbox unavailable
-APIM routing wrong
-affinity lost
-SSE issue
-Judge Mode issue
-trace ingestion delay
-Candidate not removed
-dirty scenario state
-deployment drift
-```
-
-Each entry should contain:
-
-```text
-symptom
-check
-safe action
-verification
-```
-
----
-
-# 23. Backup Evidence Audit
-
-Confirm preserved evidence exists for each signature demo.
-
-At minimum:
-
-```text
-Judge Mode screenshot
-trace evidence
-raw run result
-release role
-tool sequence
-ReasonFuse decision
-Outcome result where relevant
-```
-
-These assets must remain usable if live demo becomes temporarily unavailable.
-
----
-
-# 24. Frozen Benchmark Package Audit
-
-Confirm raw evidence was not overwritten.
-
-Check:
-
-```text
-immutable/frozen copy
-dataset version
-report version
-release manifest reference
-```
-
-A summary without raw evidence is insufficient.
-
----
-
-# 25. Competition Adaptation Boundary Audit
-
-Inspect:
-
-```text
-COMPETITION_ADAPTATION_BOUNDARY.md
-```
-
-Allowed post-brief changes should be limited to:
-
-```text
-prompt
-scenario
-runbooks
-tool descriptions
-Judge Mode copy
-demo story
-benchmark subset
-README / pitch
-domain mapping
-```
-
-Core redesign should remain explicitly outside normal adaptation.
-
----
-
-# 26. Gap-Analysis Template Audit
-
-Verify:
-
-```text
-COMPETITION_GAP_ANALYSIS_TEMPLATE.md
-```
-
-contains:
-
-```text
-Official Requirement
-Current Coverage
-Gap
-Required Change
-Architecture Impact
-Estimated Hours
-Risk
-Decision
-```
-
-It should be ready to use immediately when the brief is published.
-
----
-
-# 27. Known-Limitations Audit
-
-Inspect:
-
-```text
-KNOWN_LIMITATIONS.md
-```
+~~~powershell
+.\scripts\emergency_recover.ps1 -Mode local
+.\demo\prepare_demo.ps1
+~~~
 
 Confirm:
 
-```text
-real limitations are listed
-resolved limitations are removed or marked resolved
-no critical issue is hidden
-```
+~~~
+local reset returns a clean fixture
+local preflight passes
+the four signature demos remain executable
+the recovery command is non-destructive
+the runbook commands match the actual scripts
+~~~
 
-Do not fail Phase 5 merely because non-critical limitations exist.
-
-Fail only if a known critical limitation invalidates the competition build.
-
----
-
-# 28. Repository Hygiene Audit
-
-Check:
-
-```text
-main branch/current path clearly reflects frozen architecture
-no stale experimental config can accidentally deploy
-no alternate active Terraform state path
-no accidental debug mode
-no stale Candidate behavior injected into Stable
-no untracked critical files
-```
+The retained three-repeat local signature result may be used as supporting
+evidence. Do not add another repetition campaign unless a failed local check
+requires it.
 
 ---
 
-# 29. Clean Build Test — Second Independent Pass
+# 12. Evidence retention policy
 
-Repeat the clean-start procedure a second time.
+The canonical Phase 5 evidence package is documentation-first:
 
-Prefer:
+~~~
+Phase 1 verification report
+Phase 2 report and verification report
+Phase 3 report and verification report
+Phase 4 retained Hosted summary
+Phase 5 construction report
+Phase 5 verification report
+Phase 5 open-questions report
+release manifest
+upgrade policy
+recovery runbook
+adaptation boundary
+known limitations
+~~~
 
-```text
-new shell/session
-fresh local virtual environment
-fresh generated state where practical
-```
+Do not require screenshots, raw cloud traces or permanent raw JSONL when Azure
+is intentionally absent. If a temporary local run is used, record its path,
+hashes and disposal decision in the verification report, then remove it.
 
-Do not rely on the first run's process state.
-
-Required:
-
-```text
-Clean Build Pass 2 = PASS
-```
-
----
-
-# 30. Clean-Start Full Chain — Second Pass
-
-Repeat:
-
-```text
-preflight
-OFF/ON
-Unknown Correct Path
-Outcome Failure
-Candidate Regression
-rollback
-Stable recovery
-```
-
-Required:
-
-```text
-FULL CHAIN PASS 2
-```
-
-This second full-chain pass is mandatory.
+Do not recreate deleted exploratory evidence merely to satisfy an old prompt.
 
 ---
 
-# 31. Repeatability Gate
+# 13. Competition adaptation and hygiene
 
-Phase 5 requires:
+Inspect:
 
-```text
-clean-start full-chain PASS twice
-```
+~~~
+COMPETITION_ADAPTATION_BOUNDARY.md
+COMPETITION_GAP_ANALYSIS_TEMPLATE.md
+COMPETITION_UPGRADE_POLICY.md
+KNOWN_LIMITATIONS.md
+~~~
 
-The two passes must not depend on source edits between them.
+Confirm:
 
-If the second pass requires a code change:
+~~~
+the official brief has not been guessed before publication
+presentation changes are separated from runtime changes
+a behavioral change requires a regression rerun
+the 15×1 baseline remains intact
+no stale deployment command runs implicitly
+no critical file is untracked
+~~~
 
-```text
-fix
-reset validation count
-run two clean passes again
-```
-
----
-
-# 32. Release Manifest Final Audit
-
-After all tests pass, verify the release manifest one final time.
-
-The manifest must exactly match:
-
-```text
-deployed versions
-git commit
-dependencies
-dataset
-contract
-APIM state
-```
+The gap-analysis file is a template until the official brief is available. Do
+not invent competition requirements to fill it.
 
 ---
 
-# 33. Release Tag Authorization
+# 14. Repeatability and final manifest
 
-Only now may the validator authorize a release tag.
+Repeat only the cheap local checks that can reveal nondeterminism:
 
-Recommended:
+~~~powershell
+.\scripts\phase5_preflight.ps1
+.\scripts\run_full_regression.ps1
+~~~
 
-```text
-reasonfuse-competition-rc1
-```
+If the second local run fails, record the exact failure and stop. Do not deploy
+Azure to hide a local reproducibility problem.
 
-If a tag already exists on a non-validated commit:
+After the working tree is intentionally finalized:
 
-```text
-do not reuse it
-```
+~~~powershell
+$env:PYTHONPATH = 'src'
+.venv\Scripts\python.exe scripts\write_phase5_release_manifest.py
+git diff --check
+git status --short
+~~~
 
-Create a new deterministic release tag.
+The final manifest must report:
+
+~~~
+working_tree_dirty = false
+15 scenarios / 1 repetition
+hosted deployment default = false
+no implicit Azure deployment
+canonical file hashes match the final commit
+~~~
+
+Do not create a release tag in this validation unless the user explicitly
+authorizes the final release operation after reviewing the report.
 
 ---
 
-# 34. PHASE5_REPORT.md
+# 15. Verification report format
 
-Update with real evidence:
+Write:
 
-```text
-# Phase 5 Pre-Competition Freeze Validation Report
+~~~
+docs/phases/phase-05-pre-competition-freeze/PHASE5_VERIFICATION_REPORT.md
+~~~
 
-## Release Candidate
-...
+Include:
 
-## Dependency Freeze
-PASS / FAIL
+~~~markdown
+# Phase 5 Pre-Competition Freeze — Verification Report
 
-## Config Freeze
-PASS / FAIL
+## Scope
+Local budget-controlled RC1; no Azure deployment this turn.
 
-## Secret Audit
-PASS / FAIL
+## Gate Results
+<the result table from Section 2>
 
-## Terraform / azd
-PASS / FAIL
+## Commands and Results
+<commands, exit codes, and concise outputs>
 
-## Clean Build Pass 1
-PASS / FAIL
+## Phase 4 Retained Handoff
+<what was reused and what was not rerun>
 
-## Preflight
-PASS / FAIL
+## Evidence Retention
+<temporary paths, hashes and disposal decisions>
 
-## Phase 1 Critical Regression
-PASS / FAIL
-
-## Phase 2 Core Regression
-PASS / FAIL
-
-## Phase 3 Evidence Integrity
-PASS / FAIL
-
-## Phase 4 Production Regression
-PASS / FAIL
-
-## Signature Demo
-PASS / FAIL
-
-## Recovery
-PASS / FAIL
-
-## Evidence Package
-PASS / FAIL
-
-## Adaptation Boundary
-PASS / FAIL
-
-## Clean Build Pass 2
-PASS / FAIL
-
-## Full Chain Pass 1
-PASS / FAIL
-
-## Full Chain Pass 2
-PASS / FAIL
-
-## Release Tag
-...
+## Release Manifest
+<commit, dirty state, and scope values>
 
 ## Known Limitations
-...
-
-## Architecture Change Required?
-YES / NO
+<only current, observed limitations>
 
 ## Phase 5 Result
 PASS / BLOCKED
-```
+~~~
+
+Write unresolved items separately:
+
+~~~
+docs/phases/phase-05-pre-competition-freeze/PHASE5_VERIFICATION_OPEN_QUESTIONS.md
+~~~
+
+Use NOT VERIFIED only for live/platform checks intentionally excluded by this
+budget boundary. Do not list those exclusions as unfinished implementation work.
 
 ---
 
-# 35. Phase 5 PASS Gate
+# 16. PASS gate
 
 Return:
 
-```text
+~~~
 PHASE 5 RESULT: PASS
-```
+~~~
 
-only when all mandatory conditions are true:
+only when all mandatory local conditions are true:
 
-```text
-[ ] Phase 4 prerequisite PASS
+~~~
+[ ] Phase 4 retained handoff is consistent
+[ ] dependencies are pinned and locally consistent
+[ ] release manifest values match the repository
+[ ] secret/tracked-file audit passes
+[ ] Terraform fmt/validate and safe plan pass
+[ ] local clean build passes
+[ ] local preflight passes
+[ ] Phase 1/2 local regression passes
+[ ] Phase 3 15×1 evidence is reproducible
+[ ] Phase 4 reports are not falsely represented as live this turn
+[ ] local recovery tooling passes
+[ ] runbook and adaptation boundary match the repository
+[ ] repository hygiene passes
+[ ] repeat local regression is consistent
+[ ] independent verification report and open-questions report are written
+~~~
 
-[ ] dependencies pinned
-
-[ ] frozen manifest matches deployment
-
-[ ] no exposed secret
-
-[ ] Terraform validates
-
-[ ] azure.yaml matches frozen design
-
-[ ] clean build PASS twice
-
-[ ] preflight PASS
-
-[ ] Phase 1 critical regression PASS
-
-[ ] Phase 2 core regression PASS
-
-[ ] Phase 3 evidence recomputes correctly
-
-[ ] full benchmark rerun performed if core behavior changed
-
-[ ] microbenchmark remains attributable to current core
-
-[ ] Phase 4 production regression PASS
-
-[ ] Judge Mode uses real data
-
-[ ] all four signature demos PASS three consecutive times
-
-[ ] rollback PASS
-
-[ ] Stable recovery PASS
-
-[ ] recovery tooling PASS
-
-[ ] backup evidence package complete
-
-[ ] competition adaptation boundary documented
-
-[ ] gap-analysis template ready
-
-[ ] known limitations documented
-
-[ ] full clean-start chain PASS twice
-
-[ ] no architecture assumption failed
-
-[ ] final release manifest is internally consistent
-```
+The release tag is not required for the verification PASS. It is a separate,
+user-authorized release operation after review.
 
 ---
 
-# 36. BLOCKED Gate
+# 17. BLOCKED gate
 
 Return:
 
-```text
+~~~
 PHASE 5 RESULT: BLOCKED
-```
+~~~
 
-if any competition-critical condition fails.
+if any of these occurs:
 
-Examples:
+~~~
+local clean build fails
+local preflight fails
+core regression fails
+15×1 evidence cannot be recomputed
+manifest contradicts the repository
+secret is exposed
+recovery command is destructive or broken
+critical file is missing or untracked
+verification report cannot explain the final state
+~~~
 
-```text
-second clean build fails
-hidden dependency drift
-benchmark no longer matches current core
-demo requires manual repair
-APIM rollback unreliable
-Judge Mode depends on hard-coded data
-secret leaked into evidence
-recovery path cannot restore frozen state
-```
-
----
-
-# 37. Final Release Decision
-
-If PASS:
-
-```text
-Architecture = FROZEN
-Implementation = VALIDATED
-Evidence = PRESERVED
-Recovery = READY
-Competition RC = READY
-```
-
-Allowed work after this point:
-
-```text
-bug fixes
-copy editing
-visual polish
-video editing
-submission packaging
-official-brief adaptation
-```
-
-Not allowed by default:
-
-```text
-architecture redesign
-new reliability mechanism
-new state ownership model
-new infrastructure dependency
-new agent framework
-```
+Do not block solely because Azure is currently absent, screenshots were not
+captured, or old raw exploratory evidence was intentionally deleted.
 
 ---
 
-# 38. Final Validator Instruction
+# 18. Final instruction
 
-The goal of Phase 5 is not to make ReasonFuse more sophisticated.
+This verification freezes the existing hackathon package. It must leave the
+project with:
 
-The goal is to make it hard to break.
+~~~
+one local reproducible build
+one fixed 15×1 benchmark profile
+one retained Phase 4 Hosted handoff
+one documented recovery path
+one independent Phase 5 verification report
+one separate open-questions report
+~~~
 
-A successful final state looks like:
-
-```text
-one frozen release
-one reproducible build
-one verified benchmark
-one known deployment path
-one known rollback path
-one known recovery path
-four repeatable demos
-two clean full-chain passes
-```
-
-At that point, the project is ready for the official competition brief.
+Do not expand the architecture or the validation budget during this phase.

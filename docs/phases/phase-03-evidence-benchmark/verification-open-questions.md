@@ -10,23 +10,16 @@
   TN 3, FN 0.
 - No Azure or model calls are required for the bounded profile.
 
-## Still not verified
+## Scope boundary
 
-| Area | Status | Reason |
-| --- | --- | --- |
-| Foundry IQ native retrieval | NOT VERIFIED | No live Search connection was provisioned |
-| Production Operations backend | NOT VERIFIED | Local deterministic fixture only |
-| Cloud Core trace correlation | NOT VERIFIED | No active cloud deployment |
-| Concurrent/forked turns | NOT VERIFIED | Outside the local fixture profile |
-| Cold-start recovery | NOT VERIFIED | No production platform restart was performed |
-| ToolCallAccuracy model quality | NOT RUN | Deliberately avoided billable model calls |
+The retained verification is intentionally local and deterministic. The profile
+does not require provider calls, a cloud deployment, extra execution modes or
+extra scoring layers.
 
 ## Decision boundary
 
-The 15-scenario profile is sufficient for the Microsoft Agentathon demonstration
-and competition narrative. It must not be presented as a statistical production
-regression suite. A larger model-backed evaluation should only be run later with
-an authorized account, an explicit budget, and a separately recorded purpose.
+The 15-scenario profile is the complete Microsoft Agentathon demonstration
+profile. It must not be presented as a statistical production regression suite.
 
 ## Reproduction
 

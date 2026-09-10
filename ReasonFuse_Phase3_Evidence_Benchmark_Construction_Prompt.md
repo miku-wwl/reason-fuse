@@ -67,19 +67,9 @@ stable and candidate agents. The final package identity was audited and both
 agents reported the same package content hash. Read the current capture and
 index; do not assume these values from local `HEAD` alone.
 
-Phase 2 deliberately retained these evidence boundaries as `NOT VERIFIED`:
-
-```text
-Foundry IQ native retrieval
-production Operations backend
-cloud Core trace correlation
-concurrent/forked turns and cold-start recovery
-```
-
-Phase 3 must not silently convert those boundaries into benchmark PASS claims.
-If the benchmark uses deterministic Toolbox/Operations fixtures, label them as
-fixtures. A real production capability requires a separate explicit evidence
-path and must be reported separately from the 15-scenario competition benchmark.
+Phase 3 consumes the already frozen Phase 2 handoff. This benchmark is a local
+deterministic measurement profile; it does not change runtime architecture or
+turn local fixture results into broader platform claims.
 
 ## Execution conventions
 
@@ -187,12 +177,11 @@ B. Deterministic scenario runner
 C. 15-scenario suite
 D. 1 repetition per scenario
 E. LocalEvaluator / deterministic evaluator
-F. FoundryEvals quality layer
-G. Confusion matrix
-H. Core reliability metrics
-I. OFF/ON impact comparison
-J. 10,000-event microbenchmark
-K. Reproducible report artifacts
+F. Confusion matrix
+G. Core reliability metrics
+H. OFF/ON impact comparison
+I. 10,000-event microbenchmark
+J. Reproducible report artifacts
 ```
 
 The benchmark measures the frozen Phase 2 core. It is not a vehicle to add
@@ -247,8 +236,6 @@ ReasonFuse runtime is path-agnostic.
 
 The benchmark must not require the agent to follow one exact reasoning path unless the scenario itself requires one.
 
-Foundry quality evaluation may measure trajectory quality against expected behavior.
-
 ReasonFuse LocalEvaluator must primarily evaluate:
 
 ```text
@@ -295,8 +282,7 @@ benchmark/
 ├── evaluators/
 │   ├── local_evaluator.py
 │   ├── confusion_matrix.py
-│   ├── impact_metrics.py
-│   └── foundry_evals.py
+│   └── impact_metrics.py
 │
 ├── microbenchmark/
 │   └── run_microbenchmark.py
@@ -829,55 +815,7 @@ Do not claim causal impact if inputs differ materially.
 
 ---
 
-# 23. FoundryEvals Layer
-
-Integrate Foundry evaluation where supported.
-
-Prefer relevant evaluators:
-
-```text
-Task Navigation Efficiency
-Tool Call Accuracy
-Tool Selection Accuracy
-Tool Input Accuracy
-Tool Output Utilization
-Tool Call Success
-
-Task Completion / Task Adherence where useful
-```
-
-This layer answers:
-
-```text
-Was the agent trajectory high quality?
-```
-
-ReasonFuse LocalEvaluator answers:
-
-```text
-Did runtime containment behave correctly?
-```
-
-Do not conflate them.
-
----
-
-# 24. Foundry Evaluation Failure Handling
-
-If a Foundry evaluator is unavailable, Preview-only, incompatible, or blocked by the pinned environment:
-
-```text
-record exact limitation
-continue deterministic LocalEvaluator
-do not redesign architecture
-do not block the entire Phase 3 benchmark
-```
-
-The competition-critical evidence is the ReasonFuse benchmark.
-
----
-
-# 25. 10,000-Event Microbenchmark
+# 23. 10,000-Event Microbenchmark
 
 Implement a no-network, no-LLM microbenchmark for ReasonFuse core event processing.
 
@@ -916,7 +854,7 @@ It measures only ReasonFuse core overhead.
 
 ---
 
-# 26. Reproducibility Controls
+# 24. Reproducibility Controls
 
 Every benchmark run should record:
 
@@ -940,7 +878,7 @@ Phase 3 should focus on one frozen benchmark candidate unless explicitly running
 
 ---
 
-# 27. Reset Integrity
+# 25. Reset Integrity
 
 Implement and test scenario reset.
 
@@ -961,7 +899,7 @@ A benchmark with state leakage is invalid.
 
 ---
 
-# 28. Failure Handling
+# 26. Failure Handling
 
 Classify runner failures separately from ReasonFuse outcomes.
 
@@ -982,7 +920,7 @@ Report excluded/invalid runs separately.
 
 ---
 
-# 29. Raw Results
+# 27. Raw Results
 
 Preserve raw machine-readable output.
 
@@ -1002,7 +940,7 @@ Never overwrite the only raw result file.
 
 ---
 
-# 30. Normalized Results
+# 28. Normalized Results
 
 Generate normalized CSV/JSON suitable for:
 
@@ -1016,7 +954,7 @@ submission evidence
 
 ---
 
-# 31. Charts
+# 29. Charts
 
 Generate only useful charts.
 
@@ -1039,7 +977,7 @@ Phase 4 will handle presentation.
 
 ---
 
-# 32. Acceptance Threshold Policy
+# 30. Acceptance Threshold Policy
 
 Do not secretly choose thresholds after seeing all benchmark results.
 
@@ -1063,7 +1001,7 @@ Do not tune on the final test results and report them as unbiased evidence.
 
 ---
 
-# 33. Preferred Train/Tune/Test Discipline
+# 31. Preferred Train/Tune/Test Discipline
 
 Do not claim a statistical train/tune/test split from this 15-scenario
 competition profile. Use the Phase 2-frozen thresholds and, if exploratory
@@ -1077,7 +1015,7 @@ and document this limitation.
 
 ---
 
-# 34. Phase 3 Scripts
+# 32. Phase 3 Scripts
 
 Create:
 
@@ -1110,7 +1048,7 @@ write a machine-readable result and exit non-zero on invalid evidence.
 
 ---
 
-# 35. Benchmark Completion Gate
+# 33. Benchmark Completion Gate
 
 The main evidence run is complete only if:
 
@@ -1130,7 +1068,7 @@ Do not silently replace missing runs.
 
 ---
 
-# 36. PHASE3_REPORT.md
+# 34. PHASE3_REPORT.md
 
 Create:
 
@@ -1186,9 +1124,6 @@ Runtime:
 Tokens:
 Cost:
 
-## FoundryEvals
-...
-
 ## 10,000-Event Microbenchmark
 Throughput:
 p50:
@@ -1208,7 +1143,7 @@ PASS / BLOCKED
 
 ---
 
-# 37. What Phase 3 Must NOT Do
+# 35. What Phase 3 Must NOT Do
 
 Do not spend Phase 3 on:
 
@@ -1237,7 +1172,7 @@ Do not expand product scope.
 
 ---
 
-# 38. Construction Completion Criteria
+# 36. Construction Completion Criteria
 
 Construction is complete when:
 
@@ -1254,13 +1189,12 @@ Construction is complete when:
 [ ] confusion matrix code exists
 [ ] core metric calculations exist
 [ ] OFF/ON controlled subset exists
-[ ] FoundryEvals integration exists or documented compatibility path exists
 [ ] 10,000-event microbenchmark exists
 [ ] report generator exists
 [ ] PHASE3_REPORT.md template exists
 [ ] Phase 2 reports remain unchanged; deleted evidence indexes are not recreated
 [ ] raw/normalized artifacts can be indexed in a disposable temporary batch
-[ ] fixture-based findings and NOT VERIFIED production boundaries are explicit
+[ ] fixture-based findings are explicit
 ```
 
 At the end of construction, state:

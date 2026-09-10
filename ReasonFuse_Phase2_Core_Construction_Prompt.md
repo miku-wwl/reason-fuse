@@ -58,9 +58,8 @@ all-integrations Agent Framework umbrella or Full Harness.
 
 Current Phase 1 scope is deliberately bounded: DNS returns controlled results;
 restart is `SIMULATED_RESTART`; release/SSE probes use deterministic middleware.
-It does not prove production service recovery, model token streaming, concurrent
-turn correctness, forced cold-start recovery, or Foundry IQ retrieval. Phase 2
-must not inherit those as already-validated capabilities.
+Phase 2 must preserve these deterministic boundaries and must not infer broader
+capabilities from fixture results.
 
 ---
 

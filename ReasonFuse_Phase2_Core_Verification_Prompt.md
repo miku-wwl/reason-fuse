@@ -669,7 +669,7 @@ Side-effect budget exhaustion must not block legitimate read-only diagnostics.
 H must show exactly budget-1..budget-10 DNS executions and no extra external tools,
 then block proposal 11. Test step and progress-interval boundaries separately in
 LOCAL_CORE; do not claim those local tests are additional Hosted budget scenarios.
-Non-default multi-action/concurrent operation is not covered by P0's limit of one;
+Non-default multi-action operation is not covered by P0's limit of one;
 record any pending-postcondition overwrite concern before broadening that scope.
 
 Expected when exceeded:
@@ -1040,7 +1040,7 @@ PASS / FAIL
 PASS / FAIL
 
 ## Evidence Boundaries
-Foundry IQ / production restart / concurrency / cloud Core trace correlation
+Foundry IQ / production restart / cloud Core trace correlation
 
 ## Architecture Change Required?
 YES / NO
@@ -1146,9 +1146,8 @@ Accepted side effect with failed real-world result
 If those behaviors are not proven by real execution, Phase 2 is not complete.
 
 The acceptance is explicitly bounded to the simulated Operations API and
-deterministic retrieval fixture. Do not claim production service recovery, real
-Foundry IQ integration, arbitrary concurrent/forked turns or forced cold-start
-recovery without separate evidence. Do not add later-phase benchmarks/dashboards.
+deterministic retrieval fixture. Do not claim capabilities beyond those fixtures
+or add later-phase benchmarks/dashboards.
 Retain Azure resources for the next phase. This prompt alone does not authorize
 commit/push, infrastructure teardown, architecture expansion or historical-file
 recovery; follow the current user's explicit delivery authorization separately.

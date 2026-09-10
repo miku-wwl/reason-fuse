@@ -1,1 +1,1 @@
-"""Deterministic and optional quality evaluators."""
+"""Deterministic benchmark evaluators."""

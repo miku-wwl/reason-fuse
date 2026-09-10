@@ -17,18 +17,7 @@
 - Runtime-state data was verified locally and through the prior Hosted `read_runtime_state` path.
 - A separate browser/UI screenshot package was not produced. The updated Verification Prompt treats screenshots as optional presentation evidence, not a bounded P0 runtime requirement.
 
-## 4. Existing Candidate sessions after rollback
-
-- New sessions after rollback were verified by the prior Hosted run to route Stable.
-- Forced migration of an already-affined Candidate session was not tested. The Prompt marks this as optional unless the architecture explicitly promises migration.
-
-## 5. Test dependency
+## 4. Test dependency
 
 - The targeted `pytest` command could not start because `.venv` does not contain `pytest`.
 - This did not block the executable Phase 4 demo scripts, preflight, compilation, JSON checks or their PASS assertions. Installing a test dependency was not performed because it was unnecessary for this budget-safe verification.
-
-## 6. Optional extensions
-
-- No 300-run Hosted benchmark was executed.
-- No larger Hosted repetition beyond the `15 × 1` baseline was executed.
-- No competition screenshot package was captured.

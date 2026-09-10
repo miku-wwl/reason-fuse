@@ -36,7 +36,7 @@ evidence rather than copying this dated PASS.
 Keep the four frozen assumptions and all acceptance gates below. The implemented
 Operations API is a deterministic external test service: DNS returns a controlled
 result and restart records `SIMULATED_RESTART`. These tests prove invocation,
-interception and approval behavior, not a restart of a production service.
+interception and approval behavior, not a restart of an external service.
 The routing and SSE probes use normal Agent Framework middleware through real
 Hosted Agent/APIM endpoints; they do not prove model-generated token streaming.
 
@@ -434,7 +434,7 @@ Use the independently hosted Operations API counters through the existing
 `Operations` helper. Record the counter epoch and before/after values for every
 allow, block and approval case. An epoch change or service restart within a proof
 interval invalidates the counter comparison. Never reset counters between an
-action and its after-check, and never run counter-based cases concurrently.
+action and its after-check.
 
 ---
 

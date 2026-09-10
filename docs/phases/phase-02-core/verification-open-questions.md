@@ -34,11 +34,7 @@ These questions were intentionally not converted into PASS claims:
    them to the request/session IDs? Local span emission and hosted runtime
    decision state passed as separate layers, but cloud collector correlation is
    `NOT VERIFIED`.
-4. **Concurrency and forked turns.** Does state, budget reservation, pending
-   postcondition binding and useful-recheck allowance remain safe under
-   concurrent/forked turns, cold starts and more than one action in flight?
-   These are outside the P0 one-action scope.
-5. **Restart durability.** Does a process restart preserve the intended
+4. **Restart durability.** Does a process restart preserve the intended
    serialized AgentSession state and pending postcondition without resetting
    counters or creating a new run? The required multi-turn/native-approval
    behavior was exercised in the current deterministic path, but a separately

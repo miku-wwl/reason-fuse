@@ -8,6 +8,5 @@ while it is being checked. The retained repository-level report is
 `benchmark/PHASE3_REPORT.md`; raw run directories are not permanent project
 deliverables.
 
-The FoundryEvals adapter is an explicit compatibility path. When the pinned
-environment cannot invoke FoundryEvals, it records `NOT_RUN` and leaves the
-deterministic LocalEvaluator as the ground-truth layer.
+The deterministic LocalEvaluator is the only evaluator in the competition
+profile. No provider call or billable evaluation is required.

@@ -72,4 +72,4 @@ The first post-deployment APIM request had a transient warm-up 504; after the de
 PHASE 4 RESULT: BOUNDED P0 PASS
 ```
 
-The two previously open items—Hosted Stable/Candidate Native IQ MCP invocation and full clean-start E2E—are resolved. Remaining work is optional presentation packaging or larger-scale evaluation, not a Phase 4 P0 blocker.
+The two previously open items—Hosted Stable/Candidate Native IQ MCP invocation and full clean-start E2E—are resolved. Remaining work is optional presentation packaging; no additional evaluation is part of the bounded scope.

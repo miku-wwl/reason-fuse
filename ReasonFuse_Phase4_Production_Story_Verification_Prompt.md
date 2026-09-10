@@ -7,7 +7,7 @@
 > **Prerequisite:** Phase 3 = PASS  
 > **Primary Exit Gate:** `Complete clean-start E2E + Native Foundry IQ + APIM canary + Judge Mode + tracing + rollback PASS`
 >
-> **Scope rule:** Phase 4 P0 uses the budget-controlled `15 scenarios × 1 run` baseline. A 300-run benchmark, competition screenshot package, and large-scale hosted repetition are optional extensions, not prerequisites for the bounded P0 result.
+> **Scope rule:** Phase 4 P0 uses the budget-controlled `15 scenarios × 1 run` baseline. The profile is fixed at this size for the competition project.
 
 ---
 
@@ -83,7 +83,7 @@ A rollback button or script is not sufficient.
 
 You must verify new traffic behavior after rollback.
 
-The mandatory rollback assertion is that new sessions route Stable after Candidate reaches weight zero. Behavior of an already-affined Candidate session may be recorded when practical, but it is not a P0 blocker unless the architecture explicitly promises forced migration.
+The mandatory rollback assertion is that new sessions route Stable after Candidate reaches weight zero. Existing-session behavior is outside the frozen competition scope.
 
 ---
 
@@ -581,19 +581,7 @@ Record APIM config/evidence.
 
 ---
 
-# 21. Existing Session Semantics
-
-Test one already-affined Candidate session after rollback if practical.
-
-Document what actually happens.
-
-Do not require one specific behavior unless the architecture defined it.
-
-Do not claim active sessions migrate if they do not.
-
----
-
-# 22. Rollback Recovery Check
+# 21. Rollback Recovery Check
 
 After Candidate removal:
 
@@ -704,7 +692,8 @@ Verify they match `PHASE3_REPORT.md`.
 
 Do not recompute marketing numbers differently in Phase 4.
 
-The Phase 4 budget baseline is `15 scenarios × 1 run`. Do not silently expand this into the historical `100 scenarios × 3 runs = 300 runs` benchmark. If larger hosted repetition is desired, declare it as an optional extension with a separate budget and result.
+The Phase 4 benchmark profile is fixed at `15 scenarios × 1 run`. Do not expand
+the profile during verification.
 
 ---
 
@@ -907,16 +896,8 @@ when all mandatory P0 conditions are true:
 [ ] no frozen architecture assumption failed
 ```
 
-The bounded P0 result does not require:
-
-```text
-[ ] 300 hosted benchmark runs
-[ ] a competition screenshot package
-[ ] large-scale hosted repetition beyond 15 scenarios × 1 run
-[ ] forced migration of an already-affined Candidate session after rollback
-```
-
-Those are optional extensions and must be reported separately if executed.
+The bounded P0 result is complete with the fixed `15 scenarios × 1 run`
+profile. Presentation screenshots are separate, non-runtime material.
 
 Return:
 

@@ -14,6 +14,11 @@ Phase 2 核心已实现，当前 construction 结果与实际证据见
 retrieval 使用明确标注的 fixture，不代表生产 restart 或 Foundry IQ 已验证。
 下一步是单独执行 Phase 2 独立验收，不能复用 construction PASS 代替它。
 
+Phase 3 已冻结为本地 15 场景 Agentathon profile（`15 × 1`）。Phase 4 的 bounded P0
+Hosted 验证已完成并保留报告；临时 Azure
+环境已清理，当前默认命令不会重新部署 Azure。Phase 5 施工产物位于
+[Pre-Competition Freeze](docs/phases/phase-05-pre-competition-freeze/)，目标是生成可复现、可恢复的 Competition RC1，而不是继续扩展架构。
+
 ## 目录
 
 ```text
@@ -52,8 +57,10 @@ uv sync --frozen --python 3.13
 pwsh -File scripts/preflight.ps1
 ```
 
-`preflight` 会连接当前 Azure 验证环境并执行一次 DNS smoke，不能与共享计数器的
-集成检查同时运行。Azure 区域为 Australia East；当前环境名为 `rf-phase1-aue`。
+`scripts/preflight.ps1` 是 Hosted 环境检查，会连接当前 Azure 验证环境并执行一次
+DNS smoke；没有 Hosted 环境时应使用 Phase 5 的
+`scripts/phase5_preflight.ps1`，它只运行本地检查并明确报告 Hosted `NOT VERIFIED`。
+Azure 区域配置为 Australia East，但当前没有保持运行的 ReasonFuse Hosted 环境。
 
 部署入口为 `scripts/deploy.ps1`，重置入口为 `scripts/reset.ps1`。
 全部检查命令及其边界见 [Phase 1 运行手册](docs/phases/phase-01-runtime-validation/runbook.md)。
@@ -62,6 +69,8 @@ Phase 2 部署、A–J 场景、预算续跑和证据生成见 [Core 运行手�
 
 `.azure/` 保存本地环境和 Terraform state，`.venv/`、`.tools/` 保存本地依赖与工具，
 这些目录均被 Git 忽略。在另一台机器复用已部署环境时，需要先恢复对应环境与 state。
+Phase 5 的 `clean_build.ps1` 默认是 local-safe；只有显式传入 Hosted 部署选项并设置
+授权标记时，才会调用 `terraform apply` / `azd provision` / `azd deploy`。
 
 ## 项目记录
 
@@ -72,6 +81,10 @@ Phase 2 部署、A–J 场景、预算续跑和证据生成见 [Core 运行手�
 - [Phase 2 构建报告](docs/phases/phase-02-core/report.md)
 - [Phase 2 待验证边界与疑问](docs/phases/phase-02-core/open-questions.md)
 - [Phase 2 独立验收任务](ReasonFuse_Phase2_Core_Verification_Prompt.md)
+- [Phase 4 Production Story 报告](docs/phases/phase-04-production-story/PHASE4_REPORT.md)
+- [Phase 4 Hosted 验证报告](docs/phases/phase-04-production-story/PHASE4_CLOUD_VERIFICATION_REPORT.md)
+- [Phase 5 Pre-Competition Freeze 报告](docs/phases/phase-05-pre-competition-freeze/PHASE5_REPORT.md)
 
 学习入口只保留最终结论与必要边界，不再包含旧失败复盘任务。
-Phase 1 正式验收及 Phase 2 最终批次、源码身份和部署包保留；清理不改变 Azure 资源。
+Phase 1 正式验收、Phase 2/3 的 canonical 报告、Phase 4 Hosted 摘要和 Phase 5
+release manifest 保留；原始临时 run/evidence 不作为默认项目资产。

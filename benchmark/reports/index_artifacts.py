@@ -33,7 +33,7 @@ def index(run_dir: str | Path) -> Path:
         "manifest_sha256": _sha256(run / "manifest.json"),
         "artifacts": artifacts,
         "summary": {"expected_runs": manifest["expected_runs"], "actual_runs": manifest["actual_runs"], "valid_runs": manifest["valid_runs"], "invalid_runs": manifest["invalid_runs"]},
-        "boundaries": manifest["boundaries"],
+        "scope": manifest["scope"],
     }
     destination = run / "index.json"
     destination.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")

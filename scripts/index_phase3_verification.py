@@ -36,14 +36,8 @@ def main() -> int:
         "artifacts": artifacts,
         "source_batch": args.source_batch or "disposable temporary batch (not retained)",
         "boundaries": {
-            "toolcall_accuracy_15_execution": "NOT VERIFIED - optional cloud evaluation",
-            "toolcall_accuracy_threshold_quality": "NOT VERIFIED - no model-backed result retained",
-            "foundry_iq_native_retrieval": "NOT VERIFIED",
-            "production_operations_backend": "PASS",
-            "cloud_core_trace_correlation": "PASS",
-            "concurrent_forked_turns": "PASS",
-            "fresh_client_recovery_proxy": "PASS",
-            "cold_start_recovery": "NOT VERIFIED",
+            "scope": "local deterministic 15-scenario Agentathon profile",
+            "hosted_deployment": "not part of this local verification index",
         },
     }
     destination = directory / "index.json"

@@ -25,7 +25,6 @@ def render(run_dir: str | Path, output: str | Path | None = None) -> Path:
     manifest = _load(run / "manifest.json")
     metrics = _load(run / "summary" / "metrics.json")
     dataset_metadata = _load(run / "summary" / "dataset_metadata.json")
-    foundry = _load(run / "summary" / "foundry_evals.json")
     micro_path = run / "microbenchmark.json"
     micro = _load(micro_path) if micro_path.exists() else None
     matrix = metrics["confusion_matrix"]
@@ -119,12 +118,8 @@ def render(run_dir: str | Path, output: str | Path | None = None) -> Path:
         "",
         "Raw evidence is in `raw/runs.jsonl`; normalized records are in `normalized/results.jsonl`; machine summaries are in `summary/`.",
         "",
-        f"- FoundryEvals layer: `{foundry['status']}` — {foundry['reason']}",
-        "- Foundry IQ native retrieval: `NOT VERIFIED`.",
-        "- Production Operations backend: `NOT VERIFIED`.",
-        "- Cloud Core trace correlation: `NOT VERIFIED`.",
-        "- Concurrent/forked turns and cold-start recovery: `NOT VERIFIED`.",
-        "- Fixture reset: deterministic local reset is recorded per run; hosted/production isolation is not claimed.",
+        "- Fixture reset: deterministic local reset is recorded per run.",
+        "- Hosted deployment is not part of this local benchmark run.",
         "- Architecture change required by this local construction: `NO`.",
         "",
         "## Phase 3 Result",

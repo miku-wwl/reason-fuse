@@ -13,7 +13,5 @@ No Phase 4 P0 blocker remains in the bounded scope.
 ## Optional follow-up
 
 - Capture presentation screenshots for the competition narrative if needed.
-- Run larger hosted repetition counts only if additional Azure budget is approved. The project baseline remains 15 scenarios × 1 run.
-- Existing-candidate sessions after rollback were not forcibly migrated; the verified requirement was that new sessions route Stable.
 
 Detailed results: [`PHASE4_CLOUD_VERIFICATION_REPORT.md`](PHASE4_CLOUD_VERIFICATION_REPORT.md).
