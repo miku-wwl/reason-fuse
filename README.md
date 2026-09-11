@@ -66,12 +66,24 @@ Terraform 不负责上传 Hosted Agent 业务代码。
 使用仓库固定的 `azd` 版本时，流程是：
 
 ```powershell
+# 首次准备本地工具链；会安装固定版本 azd 及项目需要的扩展
+pwsh -File scripts/bootstrap.ps1
+
 $azd = ".tools/azd-1.33.0/azd-windows-amd64.exe"
 $envName = "<azd-environment>"
 
-# 只需首次执行：登录并创建（或选择已有的）azd 环境
+# 登录 Azure
 & $azd auth login
-& $azd env new $envName       # 已存在时改用：azd env select $envName
+
+# 创建新环境；如果环境已存在，改用 azd env select
+& $azd env new $envName
+# & $azd env select $envName
+
+# 保存到被 Git 忽略的 azd 环境，不要写入仓库
+& $azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
+& $azd env set AZURE_LOCATION "australiaeast"
+& $azd env set PUBLISHER_EMAIL "<publisher-email>"
+& $azd env set OPERATIONS_ADMIN_KEY "<operations-admin-key>"
 
 # 阶段 1：由 azd 调用 infra/ 中的 Terraform 创建基础设施
 & $azd provision --environment $envName --no-prompt
@@ -86,6 +98,10 @@ Terraform 资源计划，再明确执行 Hosted Agent 发布。只做本地检�
 plan 时，不要运行 `azd provision`、`azd deploy` 或 `azd up`；这些命令会实际访问
 Azure 并可能产生费用。部署完成后，Stable/Candidate 的路由仍由 APIM 和对应的
 Terraform 配置管理。
+
+`azd env new` 与 `azd env select` 二选一，不要连续执行。`PUBLISHER_EMAIL` 和
+`OPERATIONS_ADMIN_KEY` 只作为示例变量名，实际值保存在被 Git 忽略的 azd 环境中；
+不要把真实密钥写入 `azure.yaml`、README 或 Terraform 文件。
 
 `.azure/` 保存本地环境和 Terraform state，`.venv/`、`.tools/` 保存本地依赖与工具，
 这些目录均被 Git 忽略。在另一台机器复用已部署环境时，需要先恢复对应环境与 state。
