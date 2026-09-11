@@ -3,7 +3,8 @@
 ReasonFuse 使用 Foundry Hosted Agent、Microsoft Agent Framework、Foundry Toolbox
 和 Azure API Management 构建 agent runtime。
 
-仓库按功能组织为一个工程。历史阶段报告和 Prompt 已清理，当前以源码和轻量场景清单为准。
+仓库按功能组织为一个工程。历史阶段报告和 Prompt 已清理，当前以源码、轻量场景清单和
+明确标注范围的一次性最终 Azure 审计报告为准。
 
 Phase 1 的历史验收曾覆盖四项验证、clean-start 和部署路径；相关报告已清理，
 不作为当前仓库证据。Phase 2 核心已实现，历史 construction 报告也已清理；核心代码位于 `src/reasonfuse/core/`；
@@ -15,6 +16,11 @@ Phase 3/4 的历史结论不再作为仓库资产；当前只保留一个按需�
 [15 个场景清单](benchmark/15-scenarios.md)，不再维护自动 benchmark runner、
 microbenchmark 或重复执行配置。Phase 4 的临时 Azure 环境已清理，当前默认命令不会重新部署 Azure；
 历史结论不作为当前验证资产。Phase 5 的 root prompt 和历史报告也已清理。
+
+最近一次最小 Azure E2E 审计已在本地完成：Hosted Agent 多轮会话和
+`NO_PROGRESS → COMPLETE_AND_CONTAIN → BLOCK` 通过；Approval/Outcome 仅有本地
+实现证据，云端仍未验证。详细 Azure 审计报告是本地-only 文件，已明确排除在 GitHub
+仓库之外，不作为仓库提交资产或生产验证声明。
 
 ## 目录
 
@@ -111,5 +117,6 @@ Terraform 配置管理。
 ## 项目记录
 
 历史 Phase 报告、runbook 和阶段 Prompt 已删除；
-`benchmark/15-scenarios.md` 仅作为按需人工场景清单保留。
+`benchmark/15-scenarios.md` 仅作为按需人工场景清单保留；最终 Azure 审计报告只记录
+本轮临时验证及其限制，并保持在本地，不进入 GitHub 仓库。
 最终范围说明见 [v5.0.0 Agent-a-thon 冻结文档](ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md)。

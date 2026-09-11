@@ -995,24 +995,38 @@ ReasonFuse v5 is competition-ready when the project has the following evidence.
 ## Local behavior evidence
 
 ```text
-[ ] healthy progress demonstrated
-[ ] Todo-only is shown as non-objective progress
-[ ] exact loop demonstrated locally
-[ ] oscillation demonstrated locally
-[ ] retrieval churn demonstrated locally
-[ ] outcome verification success demonstrated
-[ ] failed/unknown postcondition demonstrated
+[ ] healthy progress demonstrated as a standalone 15-scenario run
+[x] Todo-only is shown as non-objective progress
+[x] exact loop demonstrated locally
+[x] oscillation demonstrated locally
+[x] retrieval churn demonstrated locally
+[x] outcome verification success demonstrated locally
+[x] failed/unknown postcondition demonstrated locally
 ```
+
+Approval and outcome are `LOCAL PASS` through the deterministic core and local
+boundary tests. The corresponding native Hosted Agent approval/postcondition
+flow remains `CLOUD E2E NOT VERIFIED` because the temporary validation deployment
+did not include Operations or Toolbox.
 
 ## Live Microsoft evidence
 
 ```text
-[ ] Hosted Agent run captured
-[ ] local ReasonFuse middleware behavior visible in hosted flow
-[ ] one approval flow captured
-[ ] one genuine Toolbox/IQ/tool integration captured if used in the submission claim
-[ ] APIM canary/affinity shown if included in the final story
+[x] Hosted Agent run captured
+[x] normal multi-turn Hosted Agent behavior observed
+[x] local ReasonFuse middleware behavior visible in hosted flow
+[x] NO_PROGRESS → COMPLETE_AND_CONTAIN → BLOCK observed in hosted flow
+[ ] optional native approval flow (cloud E2E not verified)
+[ ] optional Toolbox/IQ live proof (not verified)
+[ ] optional Application Insights trace proof (not verified)
+[ ] optional APIM canary/affinity live proof (not verified)
 ```
+
+The bounded Hosted Foundry proof was completed locally and is not a production
+readiness claim. Detailed Azure reports remain local-only and are intentionally
+excluded from the repository. No Application Insights
+`REASONFUSE_FUSE_TRIPPED` telemetry event is claimed, because that optional
+monitoring resource was not deployed.
 
 ## Presentation evidence
 
@@ -1287,8 +1301,12 @@ These are the remaining submission activities, not repository repair defects.
 
 [x] Run existing unit/boundary/local checks on the current freeze.
 
-[ ] Capture a small final live Foundry evidence set, only if the final submission
-    claims live Hosted Agent behavior.
+[x] Complete a bounded local Azure audit for the Hosted Agent claim.
+    - Hosted Foundry proof: PASS
+    - multi-turn Hosted Agent: PASS
+    - NO_PROGRESS → COMPLETE_AND_CONTAIN → BLOCK: PASS
+    - approval/outcome: LOCAL PASS; CLOUD E2E NOT VERIFIED
+    - detailed Azure reports remain local-only
 
 [ ] Record the final competition demo/video.
 ```
@@ -1305,15 +1323,15 @@ These are the remaining submission activities, not repository repair defects.
 ## Do not spend time on
 
 ```text
-[ ] large repeated benchmark
-[ ] event-scale performance benchmark
-[ ] production load test
-[ ] large dashboard
-[ ] new database
-[ ] multi-agent architecture
-[ ] new governance layer
-[ ] Kubernetes / service mesh
-[ ] infrastructure added only for visual complexity
+[OUT OF SCOPE] large repeated benchmark
+[OUT OF SCOPE] event-scale performance benchmark
+[OUT OF SCOPE] production load test
+[OUT OF SCOPE] large dashboard
+[OUT OF SCOPE] new database
+[OUT OF SCOPE] multi-agent architecture
+[OUT OF SCOPE] new governance layer
+[OUT OF SCOPE] Kubernetes / service mesh
+[OUT OF SCOPE] infrastructure added only for visual complexity
 ```
 
 ---
