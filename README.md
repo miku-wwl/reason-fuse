@@ -3,20 +3,18 @@
 ReasonFuse 使用 Foundry Hosted Agent、Microsoft Agent Framework、Foundry Toolbox
 和 Azure API Management 构建 agent runtime。
 
-仓库按功能组织为一个工程。Phase 是建设与验收里程碑；历史阶段报告已清理，
-当前以根目录的任务 prompt、源码和轻量场景清单为准。
+仓库按功能组织为一个工程。历史阶段报告和 Prompt 已清理，当前以源码和轻量场景清单为准。
 
-Phase 1 独立验收已通过：四项验证、完整 clean-start 及部署源码身份均有实跑证据；
-历史报告已清理。Phase 2 核心已实现，历史 construction 报告也已清理；核心代码位于 `src/reasonfuse/core/`；
-`src/reasonfuse/validation/` 保留兼容性回归探针。Operations API 是可部署的模拟测试服务，
-retrieval 使用明确标注的 fixture，不代表生产 restart 或 Foundry IQ 已验证。
-下一步是单独执行 Phase 2 独立验收，不能复用 construction PASS 代替它。
+Phase 1 的历史验收曾覆盖四项验证、clean-start 和部署路径；相关报告已清理，
+不作为当前仓库证据。Phase 2 核心已实现，历史 construction 报告也已清理；核心代码位于 `src/reasonfuse/core/`；
+`src/reasonfuse/validation/` 保留兼容性回归探针。Terraform 仍保留 Operations Web App
+和 APIM 的基础设施声明，但当前仓库不包含配套的 `server.py` 服务源码；本地场景使用
+明确标注的 fixture，不代表生产 restart 或 Foundry IQ 已验证。
 
-Phase 3/4 的历史结论保留在根目录 prompt 中；当前只保留一个按需人工执行的
+Phase 3/4 的历史结论不再作为仓库资产；当前只保留一个按需人工执行的
 [15 个场景清单](benchmark/15-scenarios.md)，不再维护自动 benchmark runner、
-microbenchmark 或重复执行配置。Phase 4 的 bounded P0 Hosted 验证已完成并保留报告；临时 Azure
-环境已清理，当前默认命令不会重新部署 Azure。Phase 5 的 root prompt 仍保留，
-但不再保留单独的报告目录。
+microbenchmark 或重复执行配置。Phase 4 的临时 Azure 环境已清理，当前默认命令不会重新部署 Azure；
+历史结论不作为当前验证资产。Phase 5 的 root prompt 和历史报告也已清理。
 
 ## 目录
 
@@ -25,6 +23,7 @@ reason-fuse/
 ├── azure.yaml                    # 统一部署入口
 ├── pyproject.toml                # 工程依赖声明
 ├── uv.lock / requirements.txt    # 依赖锁与远程构建输入
+├── ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md # 最终 hackathon 冻结说明
 ├── src/
 │   ├── main.py                   # Hosted Agent 启动入口
 │   └── reasonfuse/
@@ -47,7 +46,10 @@ reason-fuse/
 ```powershell
 pwsh -File scripts/bootstrap.ps1
 uv sync --frozen --python 3.13
+$env:PYTHONPATH = (Join-Path $PWD 'src')
+.venv/Scripts/python.exe -m unittest discover -s tests -p 'test*.py'
 .venv/Scripts/python.exe tests/local_wiring.py
+.venv/Scripts/python.exe tests/local_history_audit.py
 pwsh -File scripts/terraform_plan_safe.ps1
 ```
 
@@ -108,5 +110,6 @@ Terraform 配置管理。
 
 ## 项目记录
 
-历史 Phase 报告、runbook 和根目录 Phase prompt 已删除；
+历史 Phase 报告、runbook 和阶段 Prompt 已删除；
 `benchmark/15-scenarios.md` 仅作为按需人工场景清单保留。
+最终范围说明见 [v5.0.0 Agent-a-thon 冻结文档](ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md)。

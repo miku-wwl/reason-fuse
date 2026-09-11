@@ -19,27 +19,30 @@ dataset、runner、evaluator 和 microbenchmark 代码。
 3. 记录实际的工具序列、detector/result、outcome、是否完成以及失败原因。
 4. PASS 必须同时满足该场景的预期分类和预期 outcome；只看到“运行成功”不算 PASS。
 5. 任何无法执行、依赖缺失或结果不确定的场景标记为 `NOT VERIFIED`，不要猜测。
-6. 本清单不包含 10,000-event microbenchmark，也不要求做吞吐或延迟压测。
+6. 本清单不包含大规模性能基准，也不要求做吞吐或延迟压测。
+7. `EXACT_LOOP`、`OSCILLATING` 和需要观察具体 detector 标签的场景，使用显式的本地观察合约，
+   例如 `max_stalled_steps=4`、`required_objective_progress_interval=4`；记录该覆盖值，
+   不得把它误写成默认 Hosted Agent 运行时配置。
 
 ## 场景清单
 
 | ID | 类别 | 场景描述 | 预期工具序列 | 预期结果 |
 |---|---|---|---|---|
 | H-001 | Healthy | health check, accepted restart, fresh service recheck | service_status → restart_service → service_status | outcome `OUTCOME_VERIFIED`; healthy completion; detector does not trip |
-| H-007 | Healthy | retrieval is refined by a genuinely new citation | retrieval_search → retrieval_search | healthy completion; detector does not trip |
-| H-018 | Healthy | Todo status changes from OPEN to IN_PROGRESS to COMPLETED without objective evidence; the run must complete without containment | todo_update → todo_update → todo_update | healthy completion; detector does not trip |
-| EL-001 | Exact Loop | dns-orders-a-record repeats the same normalized dns_resolution proposal without objective progress and must be contained as an exact loop | dns_resolution → dns_resolution → dns_resolution → dns_resolution → dns_resolution | failure type `EXACT_LOOP`; detector trips |
-| EL-005 | Exact Loop | database-orders-primary repeats the same normalized database_health proposal without objective progress and must be contained as an exact loop | database_health → database_health → database_health → database_health → database_health | failure type `EXACT_LOOP`; detector trips |
-| EL-013 | Exact Loop | runtime-agent-session repeats the same normalized read_runtime_state proposal without objective progress and must be contained as an exact loop | read_runtime_state → read_runtime_state → read_runtime_state → read_runtime_state → read_runtime_state | failure type `EXACT_LOOP`; detector trips |
-| OS-001 | Oscillation | dns-vs-service-orders alternates two different diagnostic probes twice without new evidence and must be contained as oscillation | dns_resolution → service_status → dns_resolution → service_status | failure type `OSCILLATING`; detector trips |
-| OS-007 | Oscillation | service-vs-database-orders alternates two different diagnostic probes twice without new evidence and must be contained as oscillation | service_status → database_health → service_status → database_health | failure type `OSCILLATING`; detector trips |
-| OS-018 | Oscillation | config-vs-runtime-fraud alternates two different diagnostic probes twice without new evidence and must be contained as oscillation | config_check → read_runtime_state → config_check → read_runtime_state | failure type `OSCILLATING`; detector trips |
-| RC-001 | Retrieval Churn | retrieval-orders-failover asks three different questions that return the same normalized citation set and must be contained as retrieval churn | retrieval_search → retrieval_search → retrieval_search | failure type `RETRIEVAL_CHURN`; detector trips |
-| RC-010 | Retrieval Churn | retrieval-search-shard asks three different questions that return the same normalized citation set and must be contained as retrieval churn | retrieval_search → retrieval_search → retrieval_search | failure type `RETRIEVAL_CHURN`; detector trips |
-| RC-020 | Retrieval Churn | retrieval-release-rollback asks three different questions that return the same normalized citation set and must be contained as retrieval churn | retrieval_search → retrieval_search → retrieval_search | failure type `RETRIEVAL_CHURN`; detector trips |
-| OF-001 | Outcome Failure | postcondition-orders-unhealthy accepts a restart but the fresh service_status check reports UNHEALTHY; the failed postcondition must be surfaced | restart_service → service_status | failure type `POSTCONDITION_FAILED`; outcome `POSTCONDITION_FAILED`; detector trips |
-| OF-002 | Outcome Failure | postcondition-payments-degraded accepts a restart but the fresh database_health check reports DEGRADED; the failed postcondition must be surfaced | restart_service → database_health | failure type `POSTCONDITION_FAILED`; outcome `POSTCONDITION_FAILED`; detector trips |
-| OF-015 | Outcome Failure | postcondition-reviews-unhealthy accepts a restart but the fresh service_status check reports UNHEALTHY; the failed postcondition must be surfaced | restart_service → service_status | failure type `POSTCONDITION_FAILED`; outcome `POSTCONDITION_FAILED`; detector trips |
+| H-007 | Healthy | retrieval is refined by a genuinely new citation | retrieval_fixture → retrieval_fixture | healthy completion; detector does not trip |
+| H-010 | Healthy | a diagnostic result introduces a new discriminating evidence key | dns_resolution → dns_resolution | objective progress true; detector does not trip |
+| NP-001 | Planning Only | Todo changes repeatedly without external evidence | todo_update → todo_update → todo_update | Todo delta true; objective progress false; bounded `NO_PROGRESS` under a focused contract |
+| EL-001 | Exact Loop | dns-orders-a-record repeats the same normalized dns_resolution proposal without objective progress | dns_resolution → dns_resolution → dns_resolution | failure type `EXACT_LOOP`; detector trips under the documented observation contract |
+| EL-005 | Exact Loop | database-orders-primary repeats the same normalized database_health proposal without objective progress | database_health → database_health → database_health | failure type `EXACT_LOOP`; detector trips under the documented observation contract |
+| EL-009 | Exact Loop | service-orders-status repeats the same normalized service_status proposal without objective progress | service_status → service_status → service_status | failure type `EXACT_LOOP`; detector trips under the documented observation contract |
+| OS-001 | Oscillation | dns-vs-service-orders alternates two different diagnostic probes twice without new evidence | dns_resolution → service_status → dns_resolution → service_status | failure type `OSCILLATING`; detector trips under the documented observation contract |
+| OS-007 | Oscillation | service-vs-database-orders alternates two different diagnostic probes twice without new evidence | service_status → database_health → service_status → database_health | failure type `OSCILLATING`; detector trips under the documented observation contract |
+| OS-012 | Oscillation | database-vs-dns-orders alternates two operational probes twice without new evidence | database_health → dns_resolution → database_health → dns_resolution | failure type `OSCILLATING`; detector trips under the documented observation contract |
+| RC-001 | Retrieval Churn | retrieval-orders-failover asks three different questions that return the same normalized citation set and must be contained as retrieval churn | retrieval_fixture → retrieval_fixture → retrieval_fixture | failure type `RETRIEVAL_CHURN`; detector trips |
+| RC-010 | Retrieval Churn | retrieval-search-shard asks three different questions that return the same normalized citation set and must be contained as retrieval churn | retrieval_fixture → retrieval_fixture → retrieval_fixture | failure type `RETRIEVAL_CHURN`; detector trips |
+| RC-020 | Retrieval Churn | retrieval-release-rollback asks three different questions that return the same normalized citation set and must be contained as retrieval churn | retrieval_fixture → retrieval_fixture → retrieval_fixture | failure type `RETRIEVAL_CHURN`; detector trips |
+| OF-001 | Outcome Failure | postcondition-orders-unhealthy accepts a restart but the fresh service_status check reports UNHEALTHY | restart_service → service_status | outcome `POSTCONDITION_FAILED`; failed postcondition is surfaced |
+| OF-002 | Outcome Unknown | accepted restart is followed by a stale-generation service_status observation | restart_service → service_status | outcome `OUTCOME_UNKNOWN`; stale verification is not treated as success |
 
 ## Codex 执行记录模板
 
@@ -65,4 +68,3 @@ dataset、runner、evaluator 和 microbenchmark 代码。
 - 15 个场景都有明确的 PASS、FAIL 或 NOT VERIFIED；
 - 没有把本地 fixture 结果描述成 Azure Hosted、Foundry IQ 或生产验证；
 - 失败和疑问单独记录，不通过重复运行掩盖问题。
-
