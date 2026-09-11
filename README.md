@@ -108,5 +108,5 @@ Terraform 配置管理。
 
 ## 项目记录
 
-历史 Phase 报告和 runbook 已删除；根目录的 Phase prompt 仍可用于全局学习，
+历史 Phase 报告、runbook 和根目录 Phase prompt 已删除；
 `benchmark/15-scenarios.md` 仅作为按需人工场景清单保留。
