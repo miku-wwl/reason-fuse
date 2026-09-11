@@ -35,8 +35,7 @@ reason-fuse/
 │       └── validation/           # 需要随 agent 部署的验证钩子
 ├── infra/                        # 同一个 Terraform root module
 ├── config/toolbox/               # Toolbox OpenAPI 配置
-├── scripts/                      # 部署、预检、重置、采集
-│   └── support/                  # 脚本和集成检查共用的辅助代码
+├── scripts/                      # 仅保留最小维护、演示和安全 Terraform plan 脚手架
 ├── tests/
 │   ├── local_wiring.py
 │   ├── unit/                     # Phase 2 核心与边界测试
@@ -48,29 +47,23 @@ reason-fuse/
 
 ## 本地使用
 
-在仓库根目录运行，需要 PowerShell 7、Azure CLI、uv 和 Terraform：
+在仓库根目录运行。当前 Azure Hosted 环境已清理，仓库只保留四个最小维护脚本：
 
 ```powershell
 pwsh -File scripts/bootstrap.ps1
 uv sync --frozen --python 3.13
 .venv/Scripts/python.exe tests/local_wiring.py
-pwsh -File scripts/preflight.ps1
+pwsh -File scripts/terraform_plan_safe.ps1
 ```
 
-`scripts/preflight.ps1` 是 Hosted 环境检查，会连接当前 Azure 验证环境并执行一次
-DNS smoke；没有 Hosted 环境时应使用 Phase 5 的
-`scripts/phase5_preflight.ps1`，它只运行本地检查并明确报告 Hosted `NOT VERIFIED`。
-Azure 区域配置为 Australia East，但当前没有保持运行的 ReasonFuse Hosted 环境。
-
-部署入口为 `scripts/deploy.ps1`，重置入口为 `scripts/reset.ps1`。
-全部检查命令及其边界见 [Phase 1 运行手册](docs/phases/phase-01-runtime-validation/runbook.md)。
-Phase 2 部署、A–J 场景、预算续跑和证据生成见 [Core 运行手册](docs/phases/phase-02-core/runbook.md)。
-`.sh` 入口通过 `pwsh` 调用对应 PowerShell 脚本，面向 Windows/Git Bash。
+`terraform_plan_safe.ps1` 使用 `refresh=false`，只生成计划，不执行 apply，
+不会改变 Azure 资源。`phase4_production_story.py` 只运行本地 bounded story，
+`write_phase5_release_manifest.py` 只生成冻结版本 manifest；二者都不部署 Azure。
+Phase 1–5 文档中的其他脚本命令属于历史施工/验证记录，不再作为当前部署入口；
+当前没有保持运行的 ReasonFuse Hosted 环境。
 
 `.azure/` 保存本地环境和 Terraform state，`.venv/`、`.tools/` 保存本地依赖与工具，
 这些目录均被 Git 忽略。在另一台机器复用已部署环境时，需要先恢复对应环境与 state。
-Phase 5 的 `clean_build.ps1` 默认是 local-safe；只有显式传入 Hosted 部署选项并设置
-授权标记时，才会调用 `terraform apply` / `azd provision` / `azd deploy`。
 
 ## 项目记录
 
