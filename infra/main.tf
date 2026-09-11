@@ -19,7 +19,9 @@ locals {
     var.resource_token_salt,
   ]))), 0, 13)
 
-  foundry_account_name = "cog-${local.resource_token}"
+  # Use a deterministic fresh name; the previous name was restored from a
+  # soft-deleted account whose policy state rejected model deployment.
+  foundry_account_name = "cog-${local.resource_token}-fresh2"
 
   # Project name. Falls back to a sanitized environment_name (3-32 chars) when
   # not provided.
@@ -86,22 +88,28 @@ resource "azapi_resource" "foundry_account" {
 }
 
 # Created one at a time; ARM throttles rapid repeated deployments on one account.
-resource "azurerm_cognitive_deployment" "model" {
+# AzAPI keeps the deployment on the stable 2025-06-01 ARM contract.
+resource "azapi_resource" "model" {
   for_each = { for d in var.deployments : d.name => d }
 
-  name                 = each.value.name
-  cognitive_account_id = azapi_resource.foundry_account.id
+  type      = "Microsoft.CognitiveServices/accounts/deployments@2025-06-01"
+  name      = each.value.name
+  parent_id = azapi_resource.foundry_account.id
 
-  model {
-    format  = each.value.model.format
-    name    = each.value.model.name
-    version = each.value.model.version
+  body = {
+    properties = {
+      model = {
+        format  = each.value.model.format
+        name    = each.value.model.name
+        version = each.value.model.version
+      }
+    }
+    sku = {
+      name     = each.value.sku.name
+      capacity = each.value.sku.capacity
+    }
   }
 
-  sku {
-    name     = each.value.sku.name
-    capacity = each.value.sku.capacity
-  }
 }
 
 # Created after all model deployments complete.
@@ -124,7 +132,7 @@ resource "azapi_resource" "project" {
 
   response_export_values = ["identity.principalId"]
 
-  depends_on = [azurerm_cognitive_deployment.model]
+  depends_on = [azapi_resource.model]
 }
 
 # Grants the developer Cognitive Services User on the project to call the
