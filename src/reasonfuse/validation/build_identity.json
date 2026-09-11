@@ -2,7 +2,6 @@
   "git_revision": "6f16c64a9c0b5f2aa5d5c6fa72eaf09140847845",
   "source_manifest_sha256": "8b8c1247360c93469bfc982920136d2adc0ec8dd800ea1bb286927712773b11e",
   "files": {
-    ".agentignore": "60623aebc8b69d268cadf4dac63b9f826e2f19b97d6a96f3399ef1e311a491d8",
     ".gitattributes": "920422a538c860fd9a7621270883e76a44ff702df9237ee0f1c0b31a06ac86e7",
     ".gitignore": "bcb4b65c98620cd8275298b76c692e58a3c67018b03c3d32769aba9d8d64e060",
     "azure.yaml": "1587691accec78ba8a828f5a3b228b191fa93315b718c9eb6b53f7b06f8c2dae",
