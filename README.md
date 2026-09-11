@@ -62,6 +62,36 @@ pwsh -File scripts/terraform_plan_safe.ps1
 Phase 1–5 文档中的其他脚本命令属于历史施工/验证记录，不再作为当前部署入口；
 当前没有保持运行的 ReasonFuse Hosted 环境。
 
+## Azure Hosted Agent 部署（显式执行）
+
+本项目采用混合部署边界：Terraform 创建和更新 Azure 基础设施，`azd` 根据
+`azure.yaml` 打包并上传 `src/main.py`，然后发布两个 Foundry Hosted Agent。
+Terraform 不负责上传 Hosted Agent 业务代码。
+
+使用仓库固定的 `azd` 版本时，流程是：
+
+```powershell
+$azd = ".tools/azd-1.33.0/azd-windows-amd64.exe"
+$envName = "<azd-environment>"
+
+# 只需首次执行：登录并创建（或选择已有的）azd 环境
+& $azd auth login
+& $azd env new $envName       # 已存在时改用：azd env select $envName
+
+# 阶段 1：由 azd 调用 infra/ 中的 Terraform 创建基础设施
+& $azd provision --environment $envName --no-prompt
+
+# 阶段 2：由 azd 根据 azure.yaml 上传并发布 src/main.py
+& $azd deploy stable --environment $envName --no-prompt
+& $azd deploy candidate --environment $envName --no-prompt
+```
+
+`azd up` 可以把 provision 和 deploy 合并执行，但预算受限时建议分开，先确认
+Terraform 资源计划，再明确执行 Hosted Agent 发布。只做本地检查或 Terraform
+plan 时，不要运行 `azd provision`、`azd deploy` 或 `azd up`；这些命令会实际访问
+Azure 并可能产生费用。部署完成后，Stable/Candidate 的路由仍由 APIM 和对应的
+Terraform 配置管理。
+
 `.azure/` 保存本地环境和 Terraform state，`.venv/`、`.tools/` 保存本地依赖与工具，
 这些目录均被 Git 忽略。在另一台机器复用已部署环境时，需要先恢复对应环境与 state。
 
