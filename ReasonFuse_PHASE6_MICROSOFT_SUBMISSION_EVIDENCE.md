@@ -13,14 +13,14 @@
 | Operations demo surface | PASS | local deterministic `server.py` fixture; no real service mutation |
 | OFF vs ON comparison | PASS | two bounded local comparisons, no model calls |
 | Hosted Agent / multi-turn / hosted containment | PASS (retained) | bounded Azure audit was completed locally in an earlier run; detailed report is local-only and not linked or committed |
-| Native approval + cloud outcome verification | CLOUD E2E NOT VERIFIED | no Operations/Toolbox deployment in this construction run |
-| Application Insights / Toolbox / Foundry IQ / APIM live proof | NOT VERIFIED / OPTIONAL | no new Azure resources created |
+| Native approval + cloud outcome verification | PASS (bounded Azure) | temporary V7 deployment; approval continuation used explicit `store=true` |
+| Application Insights / Toolbox / Foundry IQ / APIM live proof | PASS for App Insights and Toolbox/Operations; IQ/APIM NOT VERIFIED | bounded temporary deployment; IQ and APIM were not exercised |
 | Final video and submission links | PENDING | presentation assets are prepared; recording remains a human step |
 
 The retained Azure PASS is intentionally narrow: it covers the bounded Hosted
-Agent path and hosted containment claim recorded by the v5.0.0 freeze. It does
-not upgrade local fixture evidence into proof of Operations, native approval,
-Foundry IQ, Application Insights, or APIM behavior.
+Agent path and hosted containment claim recorded by the v5.0.0 freeze. The
+additional V7 audit below also proves one real native approval and cloud outcome
+flow. Neither audit upgrades the evidence into native Foundry IQ or APIM proof.
 
 ## 1. Baseline execution
 
@@ -185,12 +185,118 @@ APIM sticky affinity / SSE pass-through
 full clean-start Azure replay
 ```
 
+These items describe the earlier construction run only. The later bounded V7
+audit below closes the native approval, cloud Operations outcome, and
+Application Insights trace gates without changing product code.
+
 No large benchmark, repeated model run, load test, or always-on Azure resource
 was created. These remain outside the hackathon-grade construction run.
+
+## 6. Verification Plan execution — 2026-09-13
+
+The Phase 6 Verification Plan was executed against commit
+`ef69f45116f02569246eb832e2153e28c59fe94b` on local `main`.
+
+| Gate | Result | Boundary / note |
+|---|---|---|
+| V0 prerequisites and repository state | PASS | Python, uv, Terraform, Azure CLI, azd, pinned Azure extensions, and clean starting Git state checked |
+| V1 local baseline | PASS | 36 unit/boundary tests, `local_wiring.py`, `local_history_audit.py`, compileall, and 15 unique scenario IDs |
+| V2 15-scenario matrix | PASS | 15/15 deterministic cases passed, one execution each |
+| V3 Terraform static/safe plan | PASS | fmt, backendless init, validate, and refresh-free safe plan; no apply |
+| V4 reusable Azure environment | BLOCKED | no Phase 6 project resource group or azd environment exists; only `NetworkWatcherRG` was present |
+| V5 Hosted Agent | PASS (retained) | prior bounded Azure evidence remains local-only; not rerun in this low-cost local pass |
+| V6 ReasonFuse containment | PASS (retained) | prior bounded Azure/local-only evidence remains valid; current local matrix independently passed |
+| V7 Operations path | LOCAL PASS / CLOUD E2E NOT VERIFIED (at this point in the plan) | construction-run gate; the later bounded V7 audit below provides the live result |
+| V8 cloud trace | NOT VERIFIED (at this point in the plan) | construction-run gate; the later bounded V7 audit below provides the live result |
+| V9 APIM optional path | NOT RUN | no APIM deployment was created for this audit |
+| V10 cost-controlled comparison | PASS | local OFF/ON oscillation and accepted-but-unhealthy outcome comparisons passed |
+| V11 claim and repository audit | PASS | markdown links resolved; stale contract/deployment terms absent; no tracked sensitive evidence files |
+| V12 closure checks | PASS | compileall, documentation/evidence review, and clean-up checks passed |
+
+The Azure read-only check found no reusable project environment. The safe
+Terraform plan showed resources that would be created, so `terraform apply`,
+`azd provision`, `azd deploy`, model calls, and benchmark execution were
+intentionally not performed. This keeps the result honest and within the
+cost-controlled Phase 6 scope.
 
 ## Final assessment
 
 The Phase 6 local construction work is **PASS for the frozen core, 15 local
 scenarios, deterministic Operations fixture, and bounded OFF/ON evidence**.
-Phase 6 is **not a complete cloud-verified submission** until the explicitly
-listed Azure gates are either run and captured or honestly left as limitations.
+The bounded Azure audit below additionally verifies the main Hosted Agent,
+Toolbox-to-Operations, ReasonFuse containment, and cloud telemetry paths. It
+does **not** claim a complete cloud PASS because native Foundry IQ and APIM
+sticky affinity/SSE were not verified.
+
+## 7. Minimal bounded Azure E2E audit — 2026-09-13
+
+This audit used a temporary `phase6-e2e-20260913` environment in
+Australia East. It was provisioned through the repository's Terraform
+deployment via `azd`, used only a few short model requests, did not run the
+15-scenario matrix in Azure, and did not run any 300-run or 10k benchmark. The
+temporary resource group was deleted successfully after evidence capture; the
+local azd environment and its ignored temporary files were also removed.
+
+| Gate | Result | Evidence / boundary |
+|---|---|---|
+| Terraform/Hosted deployment | PASS | Stable and Candidate Hosted Agent version 3 became active; Responses 2.0.0, `history_source=agent_server`, `store=False`, ReasonFuse, Toolbox, and App Insights settings were present. |
+| Hosted Agent normal multi-turn | PASS | Stable session `3ea2ee81864a1257812253bd457e34eb6494e6bf07b4ecd45c37d035e82d883`, conversation `conv_01973b506a24250000Lzif65w1CzH8wRl8LcuKr2HC9rbCipaz`; the second turn returned the first-turn marker and runtime state reported `history_audit=true` and `restored_at_turn_start=true`. |
+| Real Toolbox → Operations path | PASS | Five Toolbox tools were listed; DNS probe passed; Hosted containment used the real `operations___retrieval_fixture` tool; Operations health returned HTTP 200. |
+| ReasonFuse containment | PASS | Three identical `retrieval_fixture(query=incident)` proposals reached `COMPLETE_AND_CONTAIN` with `NO_PROGRESS`; a fourth identical proposal in the same conversation returned `BLOCK` with no tool result. |
+| Cloud telemetry | PASS | Log Analytics captured `REASONFUSE_FUSE_TRIPPED` with `decision=BLOCK`, `fuse_reason=NO_PROGRESS`, tool `operations___retrieval_fixture`, request trace `104b748067767c66db34c7b57d2bda29`, and a matching `RUN_END contained=true`. |
+| Operations outcome branches | PASS | Direct cloud fixture checks produced verified `HEALTHY/g2`, failed `UNHEALTHY/g2`, and unknown stale `g1` outcomes; unauthenticated restart returned 403. This is cloud Operations branch evidence, not Hosted accepted-approval evidence. |
+| Native approval request | PASS | Hosted Responses emitted `mcp_approval_request` for `operations___restart_service`; no execution result appeared and the fixture remained at `g1/UNHEALTHY`. |
+| Hosted approval accepted continuation | BLOCKED / NOT VERIFIED | Continuation using the returned `previous_response_id` and approval response was attempted, but the Hosted endpoint reported that the previous agent session could not be found; azd replay returned another approval request. No accepted Hosted restart or Hosted postcondition is claimed. |
+| Native Foundry IQ | NOT VERIFIED | No Search/IQ resource was created for this low-budget audit, so native IQ retrieval remains outside this evidence set. |
+| APIM sticky affinity / SSE | NOT VERIFIED | APIM was created by the temporary Terraform plan but was not exercised because it was optional and not required for the main chain. |
+
+## 8. V7/V8 completion audit — 2026-09-13
+
+This follow-up used a separate temporary `phase6-v7-20260913` environment in
+Australia East. It corrected only temporary deployment configuration, used
+four short Hosted requests for the approval/postcondition path plus a harmless
+follow-up, and did not run the 15-scenario matrix, a 300-run/10k benchmark, or
+APIM/IQ validation. The resource group and local azd environment were removed
+after evidence capture.
+
+| Gate | Result | Evidence / boundary |
+|---|---|---|
+| Temporary Terraform/Hosted deployment | PASS | Stable Hosted Agent was active with Responses 2.0.0, `history_source=agent_server`, frozen ReasonFuse middleware, Operations Toolbox, and App Insights configuration. |
+| Native approval request | PASS | Hosted Responses emitted `mcp_approval_request` for `operations___restart_service`; before approval Operations remained `g1/UNHEALTHY`. |
+| Approved side effect | PASS | JSON-body `agent_session_id` plus `previous_response_id` and `mcp_approval_response` continued the same session; exactly one Operations result returned `accepted=true`, `status_code=202`, `operation_id=demo-orders-g2`. |
+| Outcome verification | PASS | A fresh Hosted `service_status` read returned `HEALTHY/g2`; the exported cloud state contained `last_postcondition_result.outcome=OUTCOME_VERIFIED`, proving accepted execution was not treated as success. |
+| Cloud ReasonFuse telemetry | PASS | App Insights/Log Analytics trace `1dcc233834acf377866295f336de1c9e` captured `BEFORE → AFTER` for restart and status, `REASONFUSE_OBSERVATION`, and `REASONFUSE_RUN_END`; the retained containment trace `104b748067767c66db34c7b57d2bda29` proves `REASONFUSE_FUSE_TRIPPED` / `NO_PROGRESS` / `BLOCK`. |
+| Harmless follow-up | PASS | One subsequent status-only request returned `HEALTHY/g2` and emitted zero `operations___restart_service` calls. |
+| Native Foundry IQ / APIM sticky affinity / SSE | NOT VERIFIED | Intentionally outside this low-budget chain. |
+
+Current V7/V8 identifiers captured before cleanup:
+
+```text
+agent_session_id = e2932a8e86dbe1c173a61d878883d9cf6f3203bb6f95c10fcfaba557bbf05f3
+approval_response_id = caresp_06e5da452158f58200WPo6JUNu3IctIDG0F794U1Q59eurZxh6
+approved_continuation_id = caresp_06e5da452158f58200QI3VjHfKOsbUpdIvANXd8MbYRdJeXco7
+postcondition_status_id = caresp_06e5da452158f58200t8MWTcvWexF0Zps70ApLE5HASIk4Fgpd
+harmless_followup_id = caresp_06e5da452158f58200FeKY3JBBnMiLKKWBo8dNGjQrxfB4s3RB
+approval_request_id = mcpr_06e5da452158f58200nU0TmS4X0vV6i0Z5hmnysn1On1ygYvCk
+postcondition_trace_id = 1dcc233834acf377866295f336de1c9e
+run_id = run-fa803090f1614bc6a4698695e749d615
+```
+
+No product code was changed. The temporary OpenAPI Toolbox auth was corrected
+to the service-accepted `project_connection` shape. Initial failed attempts
+were diagnostic: the client first put `agent_session_id` in a request header,
+and a `store=false` response was unavailable through `previous_response_id`.
+The successful continuation therefore used the JSON-body session ID and
+explicit `store=true`; the normal frozen Hosted request still uses `store=false`
+and was validated separately. These request-level choices did not alter
+repository product behavior. The detailed Azure raw reports remain local-only
+and are not part of the repository.
+
+## Current cloud conclusion
+
+The main low-cost cloud chain is **PASS** for deployment, Hosted multi-turn
+history, real Toolbox-to-Operations invocation, native approval continuation,
+accepted-but-not-successful handling, fresh `OUTCOME_VERIFIED` postcondition,
+ReasonFuse fail-closed containment, and cloud telemetry. Overall validation is
+**PARTIAL**, not a claim of every optional integration: native Foundry IQ and
+APIM sticky affinity/SSE remain unverified, and the final video remains pending.
