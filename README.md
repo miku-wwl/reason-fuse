@@ -4,13 +4,13 @@ ReasonFuse 使用 Foundry Hosted Agent、Microsoft Agent Framework、Foundry Too
 和 Azure API Management 构建 agent runtime。
 
 仓库按功能组织为一个工程。历史阶段报告和 Prompt 已清理，当前以源码、轻量场景清单和
-明确标注范围的一次性最终 Azure 审计报告为准。
+仓库内的 Phase 6 evidence 为准；详细 Azure 审计报告仍是 local-only，不属于仓库资产。
 
 Phase 1 的历史验收曾覆盖四项验证、clean-start 和部署路径；相关报告已清理，
 不作为当前仓库证据。Phase 2 核心已实现，历史 construction 报告也已清理；核心代码位于 `src/reasonfuse/core/`；
 `src/reasonfuse/validation/` 保留兼容性回归探针。Terraform 仍保留 Operations Web App
-和 APIM 的基础设施声明，但当前仓库不包含配套的 `server.py` 服务源码；本地场景使用
-明确标注的 fixture，不代表生产 restart 或 Foundry IQ 已验证。
+和 APIM 的基础设施声明；根目录 `server.py` 是与现有 App Service 启动命令匹配的、无依赖的
+可 reset demo fixture，不是生产 Operations 后端，也不代表 Foundry IQ 已验证。
 
 Phase 3/4 的历史结论不再作为仓库资产；当前只保留一个按需人工执行的
 [15 个场景清单](benchmark/15-scenarios.md)，不再维护自动 benchmark runner、
@@ -37,12 +37,15 @@ reason-fuse/
 │       ├── agent.py
 │       ├── core/                 # 状态、进展、检测器、预算、outcome 与 middleware
 │       └── validation/           # 需要随 agent 部署的验证钩子
+├── server.py                    # Phase 6 本地/演示 Operations fixture
 ├── infra/                        # 同一个 Terraform root module
 ├── scripts/                      # 仅保留工具链检查与安全 Terraform plan 脚手架
 ├── tests/
 │   ├── local_wiring.py
 │   ├── local_history_audit.py
 │   ├── unit/                     # Phase 2 核心与边界测试
+├── docs/phase6/                  # 竞赛架构边界与 3 分钟演示稿
+├── ReasonFuse_PHASE6_MICROSOFT_SUBMISSION_EVIDENCE.md
 ```
 
 ## 本地使用
@@ -64,6 +67,17 @@ pwsh -File scripts/terraform_plan_safe.ps1
 `benchmark/15-scenarios.md` 由 Codex 逐项执行并另存结果报告，不再依赖自动 runner。
 Phase 1–5 文档中的其他脚本命令属于历史施工/验证记录，不再作为当前部署入口；
 当前没有保持运行的 ReasonFuse Hosted 环境。
+
+本地启动 Operations fixture（仅用于演示和确定性验证）：
+
+```powershell
+$env:OPERATIONS_ADMIN_KEY = "local-demo-key"
+$env:PORT = "8000"
+.venv/Scripts/python.exe server.py
+```
+
+它只在内存中维护 `orders` 等 fixture 状态，`restart_service` 返回 accepted
+后必须再读取 `service_status` 才能得到 verified/failed/unknown 结果。
 
 ## Azure Hosted Agent 部署（显式执行）
 
@@ -116,7 +130,12 @@ Terraform 配置管理。
 
 ## 项目记录
 
-历史 Phase 报告、runbook 和阶段 Prompt 已删除；
+历史 Phase 1–5 报告、runbook 和阶段 Prompt 已删除；当前保留 Phase 6/7 的计划文档和 Phase 6
+提交材料；
 `benchmark/15-scenarios.md` 仅作为按需人工场景清单保留；最终 Azure 审计报告只记录
 本轮临时验证及其限制，并保持在本地，不进入 GitHub 仓库。
 最终范围说明见 [v5.0.0 Agent-a-thon 冻结文档](ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md)。
+
+Phase 6 架构边界见 [architecture.md](docs/phase6/architecture.md)，演示稿见
+[demo-script.md](docs/phase6/demo-script.md)，本地/受限云证据见
+[Phase 6 evidence](ReasonFuse_PHASE6_MICROSOFT_SUBMISSION_EVIDENCE.md)。

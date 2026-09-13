@@ -7,6 +7,22 @@
 > **Core rule:** **Verification proves the frozen design. It does not create a new design.**  
 > **Phase 7:** 1010 competition verification is separate and will add formal Skill-package acceptance criteria.
 
+## Current execution snapshot — 2026-09-13
+
+The current repository has completed the local construction evidence described
+by this plan: 36 unit/boundary tests, local wiring/history audits, compileall,
+the 15-scenario matrix, Terraform static checks, the resettable Operations
+fixture HTTP smoke, and a bounded local OFF/ON comparison all pass. The
+consolidated record is
+`ReasonFuse_PHASE6_MICROSOFT_SUBMISSION_EVIDENCE.md`.
+
+The retained bounded Hosted Agent/multi-turn/containment result is a prior
+local-only Azure audit claim. Native approval, cloud Operations outcome
+verification, Application Insights export, Toolbox/IQ, APIM live behavior, and
+the final video remain `NOT VERIFIED` or pending. This plan continues to define
+the required acceptance gates; the snapshot is not a substitute for missing
+cloud evidence.
+
 ---
 
 # 0. Purpose
@@ -265,6 +281,7 @@ terraform version
 az version
 
 pwsh -File scripts/bootstrap.ps1
+uv sync --frozen --python 3.13
 ```
 
 Expected pinned deployment tooling from the current repository:
@@ -311,7 +328,7 @@ $env:PYTHONPATH = (Join-Path $PWD 'src')
 .venv/Scripts/python.exe -m unittest discover -s tests -p 'test*.py'
 .venv/Scripts/python.exe tests/local_wiring.py
 .venv/Scripts/python.exe tests/local_history_audit.py
-.venv/Scripts/python.exe -m compileall -q src tests
+.venv/Scripts/python.exe -m compileall -q src tests server.py
 git diff --check
 ```
 
@@ -422,8 +439,8 @@ OF-002
 Detector-focused local scenarios may use the documented focused observation contract, e.g.:
 
 ```text
-max_stalled_steps=4
-required_objective_progress_interval=4
+max_stalled_steps=10
+required_objective_progress_interval=10
 ```
 
 If an override is used:
@@ -516,9 +533,10 @@ Its success marker is:
 TERRAFORM_PLAN_SAFE=PASS (refresh=false; no apply; no Azure resources changed)
 ```
 
-The script currently contains historical placeholder names containing `phase5-plan`.
-
-That text by itself is **not evidence of a Phase 5 deployment**; it is only a local safe-plan placeholder. It may be renamed during Phase 6 cleanup, but this is not a core correctness issue.
+The Phase 6 cleanup changed the script's local-only placeholders to
+`rg-reasonfuse-phase6-plan`, `reasonfuse-phase6-plan`, and
+`phase6-local-plan-only`. These are plan-only values, not deployed resource
+identities.
 
 ---
 
@@ -620,6 +638,12 @@ Operations App Service resources
 APIM resources if still enabled in infrastructure
 ```
 
+The Operations App Service now has the matching repository source at
+`server.py`; Terraform's `app_command_line` points to it. The current
+`azure.yaml` deploy services are still only the two Hosted Agents, so a live
+Operations code-delivery path must be verified separately and must not be
+assumed from infrastructure creation alone.
+
 ---
 
 ## Hosted deployment
@@ -637,6 +661,13 @@ version: 2.0.0
 Python 3.13
 entryPoint: src/main.py
 model: gpt-5-mini
+```
+
+The current logical Hosted Agent names are:
+
+```text
+reasonfuse-phase6-stable
+reasonfuse-phase6-candidate
 ```
 
 ## PASS
@@ -929,7 +960,12 @@ service state unchanged
 no accepted restart record
 ```
 
-The exact proof depends on the Phase 6 deterministic Operations service implementation.
+The repository's local boundary is the dependency-free root `server.py` fixture,
+aligned with Terraform's `python /home/site/wwwroot/server.py` command. It
+supports `POST /v1/reset` with `verified`, `failed`, or `unknown` mode and
+`POST /v1/restart_service` followed by `GET /v1/service_status`. That local
+HTTP proof is L1 evidence; it must not be presented as Hosted Agent or Azure
+Operations proof.
 
 ---
 
@@ -1197,6 +1233,11 @@ successful verified recovery
 deterministic containment
 ```
 
+If Application Insights was not deployed or queried, this gate is
+`NOT VERIFIED`; local OTel/in-memory span evidence remains L1 only. Do not claim
+that a cloud `REASONFUSE_FUSE_TRIPPED` event was captured without that resource
+and a query result.
+
 ---
 
 # 14. V9 — Microsoft Integration Extras
@@ -1402,6 +1443,16 @@ Final Phase 6 evidence should support a table like:
 
 Only populate cells supported by captured runs.
 
+The current consolidated local evidence records the measured bounded pair:
+
+```text
+oscillating diagnostics: OFF 4 executed / 0 blocked; ON 3 executed / 1 blocked
+accepted unhealthy restart: naive OFF 1 call with no verification; ON 2 calls → POSTCONDITION_FAILED
+```
+
+These are local deterministic controls, not cloud model-quality or latency
+measurements.
+
 ---
 
 # 16. V11 — Submission Claim Audit
@@ -1418,8 +1469,8 @@ Example:
 |---|---|---|---|
 | ReasonFuse detects exact loops | local scenarios/tests | PASS | “detects” |
 | ReasonFuse runs in Foundry Hosted Agent | Hosted deployment trace | PASS | “runs in” |
-| native approval gates restart | live approval flow | PASS | “gates” |
-| side effects are postcondition-verified | live verification | PASS | “verifies” |
+| native approval gates restart | live approval flow | LOCAL PASS / CLOUD E2E NOT VERIFIED | “native approval is configured; cloud gate is not yet proven” |
+| side effects are postcondition-verified | live verification | LOCAL PASS / CLOUD E2E NOT VERIFIED | “core verifies postconditions locally; cloud proof is not yet verified” |
 | Foundry IQ integrated | live IQ call | NOT VERIFIED | “designed to integrate” only |
 | APIM sticky canary validated | live APIM test | NOT VERIFIED | “IaC includes” only |
 | production-ready | production certification | NOT DONE | **do not claim** |
@@ -1469,12 +1520,16 @@ Finish with a reproducible submission and no unnecessary cloud residue.
 .venv/Scripts/python.exe -m unittest discover -s tests -p 'test*.py'
 .venv/Scripts/python.exe tests/local_wiring.py
 .venv/Scripts/python.exe tests/local_history_audit.py
-.venv/Scripts/python.exe -m compileall -q src tests
+.venv/Scripts/python.exe -m compileall -q src tests server.py
 terraform -chdir=infra fmt -check -recursive
 terraform -chdir=infra validate
 git diff --check
 git status --short
 ```
+
+Also verify the consolidated evidence links resolve locally and that no
+required `build_identity.json`, Azure report, Terraform state, or private
+evidence file is being referenced as a tracked submission asset.
 
 Run the final 15 scenarios if any core or detector-related code changed after the previous V2 run.
 
@@ -1534,6 +1589,11 @@ reason
 expected cost exposure
 ```
 
+Current read-only Azure inspection found no project resource group (only the
+subscription's `NetworkWatcherRG`). The Terraform safe plan showed 17 possible
+creates, but no `apply`, `azd provision`, or `azd deploy` should be run solely
+to turn this checklist green without explicit budget authorization.
+
 ---
 
 # 18. Phase 6 Verification Evidence Folder
@@ -1578,6 +1638,10 @@ The final submission may instead consolidate public results into:
 ```text
 ReasonFuse_PHASE6_MICROSOFT_SUBMISSION_EVIDENCE.md
 ```
+
+For the current cost-controlled repository, the consolidated public artifact is
+the chosen layout. Do not create a large `evidence/` tree merely to satisfy this
+example; retain sensitive/raw Azure material locally and untracked.
 
 ---
 
@@ -1784,6 +1848,10 @@ Phase 6 verification is complete when the evidence proves the thesis.
 [ ] Terraform validate PASS
 [ ] safe plan PASS
 ```
+
+The checklist remains an acceptance template. The current local results and
+their evidence are recorded in the consolidated Phase 6 evidence document;
+cloud checkboxes must not be checked from local fixture results.
 
 ## Azure / Microsoft
 

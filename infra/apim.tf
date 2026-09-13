@@ -6,7 +6,7 @@ resource "azurerm_api_management" "validation" {
   name                = "apim-rf-${local.resource_token}"
   location            = var.location
   resource_group_name = azurerm_resource_group.this.name
-  publisher_name      = "ReasonFuse Phase 1"
+  publisher_name      = "ReasonFuse Phase 6"
   publisher_email     = var.publisher_email
   sku_name            = "Consumption_0"
 }
@@ -17,7 +17,7 @@ resource "azurerm_api_management_backend" "release" {
   resource_group_name = azurerm_resource_group.this.name
   api_management_name = azurerm_api_management.validation.name
   protocol            = "http"
-  url                 = "https://${azapi_resource.foundry_account.name}.services.ai.azure.com/api/projects/${azapi_resource.project.name}/agents/reasonfuse-phase1-${each.key}/endpoint/protocols/openai"
+  url                 = "https://${azapi_resource.foundry_account.name}.services.ai.azure.com/api/projects/${azapi_resource.project.name}/agents/reasonfuse-phase6-${each.key}/endpoint/protocols/openai"
 }
 
 # AzureRM's Single backend resource does not expose the pool/affinity fields.
@@ -46,7 +46,7 @@ resource "azurerm_api_management_api" "responses" {
   resource_group_name = azurerm_resource_group.this.name
   api_management_name = azurerm_api_management.validation.name
   revision            = "1"
-  display_name        = "ReasonFuse Phase 1"
+  display_name        = "ReasonFuse Phase 6"
   path                = "reasonfuse"
   protocols           = ["https"]
   # The original Entra bearer token passes through; Foundry enforces caller RBAC.
@@ -73,7 +73,7 @@ resource "azurerm_api_management_api_policy" "streaming" {
 }
 
 resource "azurerm_api_management_logger" "metadata" {
-  name                = "phase1-metadata"
+  name                = "phase6-metadata"
   api_management_name = azurerm_api_management.validation.name
   resource_group_name = azurerm_resource_group.this.name
   application_insights {

@@ -8,7 +8,7 @@ variable "location" {
   type        = string
   validation {
     condition     = var.location == "australiaeast"
-    error_message = "Phase 1 must use the authorized Australia East region."
+    error_message = "Phase 6 must use the authorized Australia East region."
   }
 }
 

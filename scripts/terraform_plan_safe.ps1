@@ -20,10 +20,10 @@ terraform -chdir=infra plan `
     -no-color `
     -var="subscription_id=$subscription" `
     -var='location=australiaeast' `
-    -var='resource_group_name=rg-reasonfuse-phase5-plan' `
-    -var='environment_name=reasonfuse-phase5-plan' `
-    -var='publisher_email=phase5-plan@example.invalid' `
-    -var='operations_admin_key=phase5-local-plan-only'
+    -var='resource_group_name=rg-reasonfuse-phase6-plan' `
+    -var='environment_name=reasonfuse-phase6-plan' `
+    -var='publisher_email=phase6-plan@example.invalid' `
+    -var='operations_admin_key=phase6-local-plan-only'
 if ($LASTEXITCODE -ne 0) { throw "terraform plan failed: $LASTEXITCODE" }
 
 Write-Output 'TERRAFORM_PLAN_SAFE=PASS (refresh=false; no apply; no Azure resources changed)'

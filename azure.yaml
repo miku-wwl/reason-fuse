@@ -24,8 +24,8 @@ services:
         uses:
             - ai-project
         kind: hosted
-        name: reasonfuse-phase1-stable
-        description: Frozen architecture Phase 1 runtime validation stable backend.
+        name: reasonfuse-phase6-stable
+        description: Frozen architecture Phase 6 submission stable backend.
         codeConfiguration:
             runtime: python_3_13
             entryPoint: src/main.py
@@ -54,8 +54,8 @@ services:
         uses:
             - ai-project
         kind: hosted
-        name: reasonfuse-phase1-candidate
-        description: Frozen architecture Phase 1 runtime validation candidate backend.
+        name: reasonfuse-phase6-candidate
+        description: Frozen architecture Phase 6 submission candidate backend.
         codeConfiguration:
             runtime: python_3_13
             entryPoint: src/main.py
