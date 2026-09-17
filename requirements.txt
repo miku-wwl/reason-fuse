@@ -4,14 +4,19 @@ agent-framework-core==1.17.0
     # via
     #   agent-framework-foundry
     #   agent-framework-foundry-hosting
+    #   agent-framework-foundry-local
     #   agent-framework-openai
     #   reasonfuse
 agent-framework-foundry==1.12.0
     # via reasonfuse
 agent-framework-foundry-hosting==1.0.0b260903
     # via reasonfuse
+agent-framework-foundry-local==1.0.0b260730
+    # via reasonfuse
 agent-framework-openai==1.14.2
-    # via agent-framework-foundry
+    # via
+    #   agent-framework-foundry
+    #   agent-framework-foundry-local
 aiohappyeyeballs==2.7.1
     # via aiohttp
 aiohttp==3.14.3
@@ -94,12 +99,16 @@ charset-normalizer==3.5.1
     # via requests
 click==8.5.0 ; sys_platform != 'emscripten'
     # via uvicorn
+colorama==0.4.6 ; sys_platform == 'win32'
+    # via tqdm
 cryptography==50.0.1
     # via
     #   azure-identity
     #   azure-storage-blob
     #   msal
     #   pyjwt
+foundry-local-sdk==0.5.1
+    # via agent-framework-foundry-local
 frozenlist==1.8.0
     # via
     #   aiohttp
@@ -125,6 +134,7 @@ httpx==0.28.1
     # via
     #   agent-framework-foundry
     #   agent-framework-foundry-hosting
+    #   foundry-local-sdk
     #   mcp
     #   reasonfuse
 httpx-sse==0.4.3
@@ -329,6 +339,7 @@ pycparser==3.0 ; implementation_name != 'PyPy' and platform_python_implementatio
 pydantic==2.14.0b1
     # via
     #   agent-framework-core
+    #   foundry-local-sdk
     #   mcp
     #   openai
     #   pydantic-settings
@@ -379,6 +390,8 @@ starlette==1.6.0
     #   azure-ai-agentserver-core
     #   mcp
     #   sse-starlette
+tqdm==4.70.1
+    # via foundry-local-sdk
 truststore==0.10.4 ; sys_platform != 'emscripten'
     # via
     #   httpcore2

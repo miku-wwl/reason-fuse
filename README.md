@@ -80,6 +80,47 @@ $env:PORT = "8000"
 `restart_service` 返回 accepted 后必须重新读取 `service_status`，才能得到
 verified/failed/unknown 结果。
 
+## Microsoft Foundry Local（低成本 E2E）
+
+仓库还提供一个可选的本地模型审计路径。它使用官方
+`agent-framework-foundry-local` 客户端、同一组 ReasonFuse providers/middleware，以及
+`server.py` 的 HTTP fixture；不会访问 Azure，也不会运行 15 场景清单或大规模 benchmark。
+Foundry Local 运行时本身必须由本机按 Microsoft 文档安装并启动，Python 依赖已经锁定在
+`pyproject.toml`/`uv.lock` 中。
+
+```powershell
+uv sync --frozen --python 3.13
+$env:PYTHONPATH = (Join-Path $PWD 'src')
+$env:FOUNDRY_LOCAL_MODEL = "phi-4-mini"
+.venv/Scripts/python.exe scripts/foundry_local_e2e.py --report foundry-local-e2e.json
+```
+
+首次使用 Windows CLI 时可先检查 daemon 和模型目录：
+
+```powershell
+foundry server start
+foundry server status
+foundry model list --type chat
+foundry model download phi-4-mini
+foundry model load phi-4-mini
+```
+
+本地适配层只在这个审计入口内兼容当前 CLI 的 `server`/catalog 接口与 Python SDK
+旧版探测方式；它不改变 Hosted Agent 的部署代码。
+
+该审计执行有界的本地场景：正常多轮会话、真实 read-only function call、native approval、
+accepted-but-not-success 后的 VERIFIED/FAILED/UNKNOWN fresh postcondition、no-progress
+containment、blocked-hostname validation，以及 verified restart 后的 no-replay。它还会通过
+`FoundryLocalClient.manager` 检查选定模型是否支持 tool calling；Foundry Local CLI/服务未
+安装或未启动时，它会诚实报告 `BLOCKED`，不会把 Hosted Agent 的
+`history_source="agent_server"` 伪称为本地等价物。
+
+这些本地检查可以证明 Foundry Local 推理、function calling、Agent Framework approval、
+ReasonFuse middleware/core、本地 HTTP fixture、outcome verification、containment 和
+no-replay；不能证明 Microsoft Foundry Hosted Agent infrastructure、Azure RBAC、Hosted
+Responses endpoint、Foundry IQ、Foundry Toolbox、Application Insights 或 cloud tracing。
+详细 Azure Hosted 验证仍以 Hosted 路径的本地-only 审计材料为准。
+
 ## Azure Hosted Agent 部署（显式执行）
 
 标准资源由 `azure.yaml` 中的 `azure.ai.project` 和 `azure.ai.agent` hosts 交给
