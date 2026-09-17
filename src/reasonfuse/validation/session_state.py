@@ -2,11 +2,9 @@
 
 import json
 import logging
-import os
 import platform
 import hashlib
 import re
-from pathlib import Path
 from datetime import datetime, timezone
 from importlib.metadata import version
 
@@ -14,16 +12,7 @@ from agent_framework import Content, ContextProvider, tool
 from azure.ai.agentserver.core import get_request_context
 from opentelemetry import trace
 
-from reasonfuse.telemetry import flush_reasonfuse_log_exporter, reasonfuse_log_extra
-
 LOG = logging.getLogger("reasonfuse.validation")
-
-
-def build_identity():
-    path = Path(__file__).with_name("build_identity.json")
-    if not path.exists():
-        return None
-    return {k: v for k, v in json.loads(path.read_text()).items() if k != "files"}
 
 
 def message_summary(message):
@@ -50,9 +39,8 @@ def json_value(value):
 
 
 def emit(event: str, **fields) -> None:
-    # The hosted server may re-apply its logging policy when a request starts.
-    # Re-enable this explicit audit channel at the emission boundary so the
-    # decision cannot disappear before the Azure Monitor handler sees it.
+    # Keep a deterministic JSON audit event. Hosted Agent platform logging and
+    # tracing own delivery; ReasonFuse only supplies decision semantics.
     logging.disable(logging.NOTSET)
     LOG.disabled = False
     span = trace.get_current_span().get_span_context()
@@ -62,11 +50,7 @@ def emit(event: str, **fields) -> None:
         "trace_id": format(span.trace_id, "032x") if span.is_valid else None,
         **fields,
     }
-    LOG.info(
-        json.dumps(payload, default=json_value, sort_keys=True),
-        extra=reasonfuse_log_extra(event, fields),
-    )
-    flush_reasonfuse_log_exporter()
+    LOG.info(json.dumps(payload, default=json_value, sort_keys=True))
 
 
 class ValidationStateProvider(ContextProvider):
@@ -100,16 +84,7 @@ class ValidationStateProvider(ContextProvider):
                 "reasonfuse_core": session.state.get("reasonfuse_core_v1"),
                 "agent_session_id": session.session_id,
                 "platform_session_id": get_request_context().session_id,
-                "release_role": os.environ.get("RELEASE_ROLE", "stable"),
-                "reasonfuse_telemetry": {
-                    "application_insights_configured": bool(
-                        os.environ.get("REASONFUSE_APPLICATIONINSIGHTS_CONNECTION_STRING")
-                        or os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING")
-                    ),
-                    "trace_flush_enabled": os.environ.get("REASONFUSE_TRACE_FLUSH", "").lower() == "true",
-                },
                 "python_version": platform.python_version(),
-                "build_identity": build_identity(),
                 "package_versions": {name: version(name) for name in (
                     "agent-framework-core", "agent-framework-foundry", "agent-framework-foundry-hosting",
                     "azure-ai-projects", "azure-identity", "azure-ai-agentserver-responses",
@@ -118,7 +93,7 @@ class ValidationStateProvider(ContextProvider):
 
         @tool(approval_mode="never_require")
         def read_runtime_state() -> str:
-            """Read validation state and release role directly from the current AgentSession."""
+            """Read validation state directly from the current AgentSession."""
             result = snapshot()
             emit("RUNTIME_STATE", **result)
             return json.dumps(result, sort_keys=True)

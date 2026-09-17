@@ -1,5 +1,9 @@
 # Phase 6 Submission Architecture
 
+> **Repository closure note (2026-09-17):** This architecture note is retained as a
+> historical Phase 6 record. The active repository no longer deploys Terraform, APIM,
+> or a Stable/Candidate pair; see the root `README.md` for the lean current boundary.
+
 ## One-sentence story
 
 **Foundry runs the agent. ReasonFuse decides whether the run is still making

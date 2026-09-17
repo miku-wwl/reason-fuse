@@ -1,5 +1,10 @@
 # ReasonFuse Phase 6 — Microsoft Agent-a-thon Submission Evidence
 
+> **Repository closure note (2026-09-17):** This evidence predates the lean repository
+> refactor. Terraform/APIM/dual-agent results are historical and must not be read as
+> current active infrastructure. Current deployment ownership is `azure.yaml` + `azd`;
+> the detailed historical claims below are preserved for record only.
+
 > Scope: bounded local construction evidence and the retained bounded Azure
 > claim. This is hackathon evidence, not production certification.
 

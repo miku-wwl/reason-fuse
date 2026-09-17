@@ -1,56 +1,59 @@
 # ReasonFuse
 
-ReasonFuse 使用 Foundry Hosted Agent、Microsoft Agent Framework、Foundry Toolbox
-和 Azure API Management 构建 agent runtime。
+ReasonFuse 是一个精简的 Microsoft Foundry Hosted Agent submission。Microsoft Foundry
+负责 Hosted Agent、身份、模型调用和平台 tracing；ReasonFuse 负责确定性的 progress
+判断、containment 和 outcome verification。
 
-仓库按功能组织为一个工程。历史阶段报告和 Prompt 已清理，当前以源码、轻量场景清单和
-仓库内的 Phase 6 evidence 为准；详细 Azure 审计报告仍是 local-only，不属于仓库资产。
+## 当前边界
 
-Phase 1 的历史验收曾覆盖四项验证、clean-start 和部署路径；相关报告已清理，
-不作为当前仓库证据。Phase 2 核心已实现，历史 construction 报告也已清理；核心代码位于 `src/reasonfuse/core/`；
-`src/reasonfuse/validation/` 保留兼容性回归探针。Terraform 仍保留 Operations Web App
-和 APIM 的基础设施声明；根目录 `server.py` 是与现有 App Service 启动命令匹配的、无依赖的
-可 reset demo fixture，不是生产 Operations 后端，也不代表 Foundry IQ 已验证。
+```text
+User
+  ↓
+Microsoft Foundry Hosted Agent (one agent)
+  ↓
+Microsoft Agent Framework
+  ↓
+ReasonFuse Function Middleware
+  ↓
+Tool / server.py local deterministic fixture
 
-Phase 3/4 的历史结论不再作为仓库资产；当前只保留一个按需人工执行的
-[15 个场景清单](benchmark/15-scenarios.md)，不再维护自动 benchmark runner、
-microbenchmark 或重复执行配置。Phase 4 的临时 Azure 环境已清理，当前默认命令不会重新部署 Azure；
-历史结论不作为当前验证资产。Phase 5 的 root prompt 和历史报告也已清理。
+Observability:
+Foundry native tracing → Application Insights
+ReasonFuse → custom OpenTelemetry span attributes/events + JSON application logs
+```
 
-最近一次最小 Azure E2E 审计已在本地完成：Hosted Agent 多轮会话和
-`NO_PROGRESS → COMPLETE_AND_CONTAIN → BLOCK` 通过；Approval/Outcome 仅有本地
-实现证据，云端仍未验证。详细 Azure 审计报告是本地-only 文件，已明确排除在 GitHub
-仓库之外，不作为仓库提交资产或生产验证声明。
+当前 lean build 明确不包含 APIM/canary、Operations App Service、Terraform root 或
+自定义 Azure Monitor exporter。`azure.yaml` 是标准 Foundry project/model/Hosted Agent
+部署入口；没有第二个 stable/candidate agent，也没有 release-probe middleware。
+
+`server.py` 仅是本地、内存中的 deterministic Operations/outcome fixture，不是生产
+Operations 后端，也不代表 Foundry IQ/Toolbox 已经部署或验证。
 
 ## 目录
 
 ```text
 reason-fuse/
-├── azure.yaml                    # 统一部署入口
+├── azure.yaml                    # 唯一的 Foundry/azd 部署入口
 ├── pyproject.toml                # 工程依赖声明
 ├── uv.lock / requirements.txt    # 依赖锁与远程构建输入
-├── ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md # 最终 hackathon 冻结说明
+├── ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md
+├── benchmark/15-scenarios.md     # 按需人工场景清单
+├── server.py                     # 本地 deterministic Operations fixture
+├── docs/phase6/                  # 竞赛说明材料
 ├── src/
 │   ├── main.py                   # Hosted Agent 启动入口
 │   └── reasonfuse/
 │       ├── main.py
 │       ├── agent.py
-│       ├── core/                 # 状态、进展、检测器、预算、outcome 与 middleware
-│       └── validation/           # 需要随 agent 部署的验证钩子
-├── server.py                    # Phase 6 本地/演示 Operations fixture
-├── infra/                        # 同一个 Terraform root module
-├── scripts/                      # 仅保留工具链检查与安全 Terraform plan 脚手架
-├── tests/
-│   ├── local_wiring.py
-│   ├── local_history_audit.py
-│   ├── unit/                     # Phase 2 核心与边界测试
-├── docs/phase6/                  # 竞赛架构边界与 3 分钟演示稿
-├── ReasonFuse_PHASE6_MICROSOFT_SUBMISSION_EVIDENCE.md
+│       ├── core/                 # 冻结的 progress/containment/outcome 核心
+│       └── validation/           # AgentSession 与本地 wiring 钩子
+├── scripts/bootstrap.ps1         # 固定 azd/扩展工具链准备
+└── tests/                        # 本地 unit、wiring、history audit
 ```
 
-## 本地使用
+## 本地检查
 
-在仓库根目录运行。当前 Azure Hosted 环境已清理，仓库只保留两个最小维护脚本：
+在仓库根目录运行；这些命令不访问 Azure：
 
 ```powershell
 pwsh -File scripts/bootstrap.ps1
@@ -59,83 +62,62 @@ $env:PYTHONPATH = (Join-Path $PWD 'src')
 .venv/Scripts/python.exe -m unittest discover -s tests -p 'test*.py'
 .venv/Scripts/python.exe tests/local_wiring.py
 .venv/Scripts/python.exe tests/local_history_audit.py
-pwsh -File scripts/terraform_plan_safe.ps1
+python -m compileall src tests
+uv lock --check
+git diff --check
 ```
 
-`terraform_plan_safe.ps1` 使用 `refresh=false`，只生成计划，不执行 apply，
-不会改变 Azure 资源。需要进行功能回归时，按
-`benchmark/15-scenarios.md` 由 Codex 逐项执行并另存结果报告，不再依赖自动 runner。
-Phase 1–5 文档中的其他脚本命令属于历史施工/验证记录，不再作为当前部署入口；
-当前没有保持运行的 ReasonFuse Hosted 环境。
+`benchmark/15-scenarios.md` 只是低成本、按需执行的故障场景清单；仓库不再维护
+300-run benchmark、10k microbenchmark 或自动重复 runner。
 
-本地启动 Operations fixture（仅用于演示和确定性验证）：
+本地 fixture 可用于低成本 outcome 验证：
 
 ```powershell
-$env:OPERATIONS_ADMIN_KEY = "local-demo-key"
 $env:PORT = "8000"
 .venv/Scripts/python.exe server.py
 ```
 
-它只在内存中维护 `orders` 等 fixture 状态，`restart_service` 返回 accepted
-后必须再读取 `service_status` 才能得到 verified/failed/unknown 结果。
+`restart_service` 返回 accepted 后必须重新读取 `service_status`，才能得到
+verified/failed/unknown 结果。
 
 ## Azure Hosted Agent 部署（显式执行）
 
-本项目采用混合部署边界：Terraform 创建和更新 Azure 基础设施，`azd` 根据
-`azure.yaml` 打包并上传 `src/main.py`，然后发布两个 Foundry Hosted Agent。
-Terraform 不负责上传 Hosted Agent 业务代码。
-
-使用仓库固定的 `azd` 版本时，流程是：
+标准资源由 `azure.yaml` 中的 `azure.ai.project` 和 `azure.ai.agent` hosts 交给
+`azd` 管理。部署前需要 Azure 登录、目标订阅/区域，以及 Foundry project/model 和
+Hosted Agent 所需权限。Hosted Agent 的专用 Entra identity、平台 tracing 和
+Application Insights 接线由 Microsoft Foundry 负责；不要把平台注入的
+`FOUNDRY_PROJECT_ENDPOINT` 或 `APPLICATIONINSIGHTS_CONNECTION_STRING` 写进
+`azure.yaml`。
 
 ```powershell
-# 首次准备本地工具链；会安装固定版本 azd 及项目需要的扩展
 pwsh -File scripts/bootstrap.ps1
-
 $azd = ".tools/azd-1.33.0/azd-windows-amd64.exe"
-$envName = "<azd-environment>"
 
-# 登录 Azure
 & $azd auth login
-
-# 创建新环境；如果环境已存在，改用 azd env select
-& $azd env new $envName
-# & $azd env select $envName
-
-# 保存到被 Git 忽略的 azd 环境，不要写入仓库
+& $azd env new <azd-environment>
 & $azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 & $azd env set AZURE_LOCATION "australiaeast"
-& $azd env set PUBLISHER_EMAIL "<publisher-email>"
-& $azd env set OPERATIONS_ADMIN_KEY "<operations-admin-key>"
+& $azd env set REASONFUSE_ENABLED "true"
+& $azd env set REASONFUSE_CONTRACT_JSON "{}"
 
-# 阶段 1：由 azd 调用 infra/ 中的 Terraform 创建基础设施
-& $azd provision --environment $envName --no-prompt
-
-# 阶段 2：由 azd 根据 azure.yaml 上传并发布 src/main.py
-& $azd deploy stable --environment $envName --no-prompt
-& $azd deploy candidate --environment $envName --no-prompt
+# provision + deploy；会真实访问 Azure 并可能产生费用
+& $azd up --no-prompt
 ```
 
-`azd up` 可以把 provision 和 deploy 合并执行，但预算受限时建议分开，先确认
-Terraform 资源计划，再明确执行 Hosted Agent 发布。只做本地检查或 Terraform
-plan 时，不要运行 `azd provision`、`azd deploy` 或 `azd up`；这些命令会实际访问
-Azure 并可能产生费用。部署完成后，Stable/Candidate 的路由仍由 APIM 和对应的
-Terraform 配置管理。
+也可以把 `azd up` 拆成 `azd provision` 和 `azd deploy reasonfuse`，以便在资源
+创建前单独检查环境。当前仓库禁止在本地审计中自动执行这些命令。按需部署前应先
+确认 Foundry 配额、区域可用性和费用；本项目默认不创建 APIM、Operations Web App
+或额外的 canary 基础设施。
 
-`azd env new` 与 `azd env select` 二选一，不要连续执行。`PUBLISHER_EMAIL` 和
-`OPERATIONS_ADMIN_KEY` 只作为示例变量名，实际值保存在被 Git 忽略的 azd 环境中；
-不要把真实密钥写入 `azure.yaml`、README 或 Terraform 文件。
+可选的外部 Toolbox/IQ 接线不属于默认 `azure.yaml` 资源图。若部署环境提供对应
+endpoint，agent 仍可通过环境变量加载它们；仓库不把这类外部后端误报为已部署或已验证。
 
-`.azure/` 保存本地环境和 Terraform state，`.venv/`、`.tools/` 保存本地依赖与工具，
-这些目录均被 Git 忽略。在另一台机器复用已部署环境时，需要先恢复对应环境与 state。
+## 证据边界
 
-## 项目记录
+`src/reasonfuse/core/` 保持以下语义：planning changed 不等于 reality changed、Todo
+不等于 objective progress、accepted 不等于 verified success、fresh postcondition
+verification、重复 non-progress fuse，以及 containment 后禁止继续执行 operational
+tools。Foundry 观察执行；ReasonFuse 验证进展和结果。
 
-历史 Phase 1–5 报告、runbook 和阶段 Prompt 已删除；当前保留 Phase 6/7 的计划文档和 Phase 6
-提交材料；
-`benchmark/15-scenarios.md` 仅作为按需人工场景清单保留；最终 Azure 审计报告只记录
-本轮临时验证及其限制，并保持在本地，不进入 GitHub 仓库。
-最终范围说明见 [v5.0.0 Agent-a-thon 冻结文档](ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md)。
-
-Phase 6 架构边界见 [architecture.md](docs/phase6/architecture.md)，演示稿见
-[demo-script.md](docs/phase6/demo-script.md)，本地/受限云证据见
-[Phase 6 evidence](ReasonFuse_PHASE6_MICROSOFT_SUBMISSION_EVIDENCE.md)。
+历史 Phase 6/7 计划和证据材料保留为竞赛记录，不是当前部署入口。最终范围说明见
+[v5.0.0 Agent-a-thon 冻结文档](ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md)。

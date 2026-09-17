@@ -3,7 +3,7 @@
 This is a demo-safe HTTP surface, not a production operations backend.  It
 keeps the accepted side effect separate from the later observed service state
 so the ReasonFuse outcome contract can be demonstrated without mutating a real
-service.  The Terraform App Service command points at this file.
+service.  It is launched locally and has no cloud deployment dependency.
 """
 
 from __future__ import annotations

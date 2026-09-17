@@ -1,5 +1,10 @@
 # ReasonFuse Phase 6 — Microsoft Agent-a-thon Submission Construction Plan
 
+> **Repository closure note (2026-09-17):** This plan preserves the historical Phase 6
+> construction record. Its Terraform/APIM/dual-agent sections are no longer active
+> dependencies. The current lean implementation path is `azure.yaml` + `azd` with one
+> Hosted Agent; use the root `README.md` for current commands.
+
 > **Phase:** 6  
 > **Target:** Microsoft Agent-a-thon submission version  
 > **Status at entry:** Phase 1–5 completed; ReasonFuse v5.0.0 architecture/core freeze already established  

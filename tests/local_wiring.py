@@ -1,15 +1,13 @@
 """Verify local wiring only; never use this result as hosted integration PASS."""
 
 import asyncio
-import os
-import json
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from agent_framework import AgentContext, AgentSession, Content, FunctionInvocationContext, Message, tool
-from reasonfuse.validation.middleware import StreamingProbeMiddleware, ValidationMiddleware
+from agent_framework import AgentSession, Content, FunctionInvocationContext, tool
+from reasonfuse.validation.middleware import ValidationMiddleware
 
 
 async def check():
@@ -34,13 +32,6 @@ async def check():
     await ValidationMiddleware().process(context, execute)
     assert calls == 1
     assert "INCONCLUSIVE" in session.state["reasonfuse"]["middleware_events"][-1]["result"]
-    os.environ["RELEASE_ROLE"] = "stable"
-    probe = AgentContext(agent=None, messages=[Message("user", ["RF_RELEASE_PROBE"])], stream=True)
-    async def forbidden():
-        raise AssertionError("Deterministic probe reached model execution")
-    await StreamingProbeMiddleware().process(probe, forbidden)
-    chunks = [update.text async for update in probe.result]
-    assert len(chunks) == 1 and json.loads(chunks[0])["release_role"] == "stable"
     print("LOCAL_WIRING_PASS (not hosted integration validation)")
 
 

@@ -17,15 +17,15 @@ services:
               sku:
                 name: GlobalStandard
                 capacity: 10
-    stable:
+    reasonfuse:
         host: azure.ai.agent
         project: .
         language: python
         uses:
             - ai-project
         kind: hosted
-        name: reasonfuse-phase6-stable
-        description: Frozen architecture Phase 6 submission stable backend.
+        name: reasonfuse
+        description: Lean ReasonFuse Microsoft Foundry Hosted Agent.
         codeConfiguration:
             runtime: python_3_13
             entryPoint: src/main.py
@@ -34,48 +34,10 @@ services:
               version: 2.0.0
         env:
             AZURE_AI_MODEL_DEPLOYMENT_NAME: gpt-5-mini
-            RELEASE_ROLE: stable
-            TOOLBOX_ENDPOINT: ${TOOLBOX_ENDPOINT}
-            FOUNDRY_IQ_MCP_ENDPOINT: ${FOUNDRY_IQ_MCP_ENDPOINT}
-            REASONFUSE_APPLICATIONINSIGHTS_CONNECTION_STRING: ${REASONFUSE_APPLICATIONINSIGHTS_CONNECTION_STRING}
-            REASONFUSE_TRACE_FLUSH: 'true'
             OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: 'false'
-            REASONFUSE_PROFILE: ${REASONFUSE_PROFILE}
             REASONFUSE_ENABLED: ${REASONFUSE_ENABLED}
             REASONFUSE_CONTRACT_JSON: ${REASONFUSE_CONTRACT_JSON}
         container:
             resources:
                 cpu: '1'
                 memory: 2Gi
-    candidate:
-        host: azure.ai.agent
-        project: .
-        language: python
-        uses:
-            - ai-project
-        kind: hosted
-        name: reasonfuse-phase6-candidate
-        description: Frozen architecture Phase 6 submission candidate backend.
-        codeConfiguration:
-            runtime: python_3_13
-            entryPoint: src/main.py
-        protocols:
-            - protocol: responses
-              version: 2.0.0
-        env:
-            AZURE_AI_MODEL_DEPLOYMENT_NAME: gpt-5-mini
-            RELEASE_ROLE: candidate
-            TOOLBOX_ENDPOINT: ${TOOLBOX_ENDPOINT}
-            FOUNDRY_IQ_MCP_ENDPOINT: ${FOUNDRY_IQ_MCP_ENDPOINT}
-            REASONFUSE_APPLICATIONINSIGHTS_CONNECTION_STRING: ${REASONFUSE_APPLICATIONINSIGHTS_CONNECTION_STRING}
-            REASONFUSE_TRACE_FLUSH: 'true'
-            OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: 'false'
-            REASONFUSE_PROFILE: ${REASONFUSE_PROFILE}
-            REASONFUSE_ENABLED: ${REASONFUSE_ENABLED}
-            REASONFUSE_CONTRACT_JSON: ${REASONFUSE_CONTRACT_JSON}
-        container:
-            resources:
-                cpu: '1'
-                memory: 2Gi
-infra:
-    provider: terraform

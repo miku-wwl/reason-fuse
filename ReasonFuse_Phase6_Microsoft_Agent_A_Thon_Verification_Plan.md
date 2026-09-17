@@ -1,5 +1,9 @@
 # ReasonFuse Phase 6 — Microsoft Agent-a-thon Verification Plan
 
+> **Repository closure note (2026-09-17):** This is a historical verification plan.
+> Terraform/APIM/Stable-Candidate checks below are retained as prior evidence context,
+> not as current deployment instructions. The current lean path is documented in `README.md`.
+
 > **Phase:** 6  
 > **Target:** Microsoft Agent-a-thon submission version  
 > **Companion document:** `ReasonFuse_Phase6_Microsoft_Agent_A_Thon_Construction_Plan.md`  

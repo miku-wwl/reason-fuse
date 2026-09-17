@@ -2,12 +2,18 @@
 
 > **Positioning:** Runtime Progress Control for Open-Ended AI Agent Trajectories  
 > **Architecture:** History-Safe / Primitive-Native / Local Tool Interception / Cost-Controlled Evidence  
-> **Built on:** Microsoft Foundry + Microsoft Agent Framework + Foundry Toolbox / Foundry IQ + Azure API Management  
+> **Built on:** Microsoft Foundry + Microsoft Agent Framework  
 > **Core Rule:** Microsoft owns platform capabilities. ReasonFuse owns deterministic runtime progress control.  
 > **Project Standard:** **Agent-a-thon / Hackathon-grade engineering proof — not production certification**  
 > **Source of Truth:** **The current repository is authoritative. Documentation follows the implementation, not the reverse.**  
 > **Architecture Status:** **FROZEN**  
 > **Implementation Status:** **CORE IMPLEMENTED / LOCAL FREEZE COMPLETE / LIVE DEMO CAPTURE OPTIONAL**
+
+> **Current repository closure (2026-09-17):** The active submission path is the lean
+> `azure.yaml` + `azd` deployment with one Hosted Agent. APIM/canary, the cloud Operations
+> App Service, Terraform root, custom Azure Monitor exporter, and release-probe code are
+> historical material recorded below, not active dependencies of this checkout. Toolbox/IQ
+> integrations are optional external endpoints and are not claimed as deployed by this repo.
 
 ---
 

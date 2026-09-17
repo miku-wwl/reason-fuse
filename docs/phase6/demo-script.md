@@ -1,5 +1,9 @@
 # Phase 6 Three-Minute Demo Script
 
+> **Repository closure note (2026-09-17):** This script is a historical Phase 6 demo
+> record. Do not execute its Terraform/APIM/dual-agent steps as current deployment
+> instructions; the active path is the lean `azure.yaml` + `azd` flow in `README.md`.
+
 This script is bounded to the evidence currently available. Replace no metric
 with an invented customer or production claim.
 
