@@ -8,7 +8,7 @@ Microsoft Agent-a-thon submission.
 | Capability | Result | Evidence |
 |---|---|---|
 | Frozen ReasonFuse core behavior | PASS | Existing tests and local boundary checks |
-| Local Foundry Local inference/function calling | PASS | [`foundry-local-e2e.json`](../../foundry-local-e2e.json) |
+| Local Foundry Local inference/function calling | PASS | [`foundry-local-e2e.json`](foundry-local-e2e.json) |
 | Local approval and outcome branches | PASS | `VERIFIED`, `FAILED`, and `UNKNOWN` in the local report |
 | Local containment/no replay | PASS | Local report and existing tests |
 | Hosted Agent deployment | PASS | [`cloud-e2e.md`](cloud-e2e.md) |

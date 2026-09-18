@@ -55,11 +55,9 @@ reason-fuse/
 ├── azure.yaml                    # 唯一的 Foundry/azd 部署入口
 ├── pyproject.toml                # 工程依赖声明
 ├── uv.lock / requirements.txt    # 依赖锁与远程构建输入
-├── ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md
-├── benchmark/15-scenarios.md     # 按需人工场景清单
 ├── server.py                     # 本地 deterministic Operations fixture
-├── docs/phase6/                  # 竞赛说明材料
 ├── docs/evidence/                # 精简的本地/云端证据索引
+├── cloud/operations-mcp/         # 可复现的 bounded MCP fixture
 ├── src/
 │   ├── main.py                   # Hosted Agent 启动入口
 │   └── reasonfuse/
@@ -87,8 +85,7 @@ uv lock --check
 git diff --check
 ```
 
-`benchmark/15-scenarios.md` 只是低成本、按需执行的故障场景清单；仓库不再维护
-300-run benchmark、10k microbenchmark 或自动重复 runner。
+仓库不维护 300-run benchmark、10k microbenchmark 或自动重复 runner。
 
 本地 fixture 可用于低成本 outcome 验证：
 
@@ -104,12 +101,12 @@ verified/failed/unknown 结果。
 
 仓库还提供一个可选的本地模型审计路径。它使用官方
 `agent-framework-foundry-local` 客户端、同一组 ReasonFuse providers/middleware，以及
-`server.py` 的 HTTP fixture；不会访问 Azure，也不会运行 15 场景清单或大规模 benchmark。
+`server.py` 的 HTTP fixture；不会访问 Azure，也不会运行大规模 benchmark。
 Foundry Local 运行时本身必须由本机按 Microsoft 文档安装并启动，Python 依赖已经锁定在
 `pyproject.toml`/`uv.lock` 中。
 
 已保存的本地证据使用 Foundry Local CLI `0.10.3` 和模型 `phi-4-mini`，见
-[`foundry-local-e2e.json`](foundry-local-e2e.json)。其中真实 function calling、native
+[`docs/evidence/foundry-local-e2e.json`](docs/evidence/foundry-local-e2e.json)。其中真实 function calling、native
 approval、`OUTCOME_VERIFIED`、`POSTCONDITION_FAILED`、`OUTCOME_UNKNOWN`、containment、
 blocked-host validation 和 no-replay 均为 `PASS`。
 
@@ -117,7 +114,7 @@ blocked-host validation 和 no-replay 均为 `PASS`。
 uv sync --frozen --python 3.13
 $env:PYTHONPATH = (Join-Path $PWD 'src')
 $env:FOUNDRY_LOCAL_MODEL = "phi-4-mini"
-.venv/Scripts/python.exe scripts/foundry_local_e2e.py --report foundry-local-e2e.json
+.venv/Scripts/python.exe scripts/foundry_local_e2e.py --report docs/evidence/foundry-local-e2e.json
 ```
 
 首次使用 Windows CLI 时可先检查 daemon 和模型目录：
@@ -237,7 +234,8 @@ No cloud `REASONFUSE_FUSE_TRIPPED` telemetry event is claimed. The containment
 claim above is based on observed Hosted Agent behavior and runtime state, not on
 Application Insights evidence.
 
-历史 Phase 6/7 计划和证据材料保留为竞赛记录，不是当前部署入口。证据索引见
-[`docs/evidence/validation-summary.md`](docs/evidence/validation-summary.md) 和
-[`docs/evidence/cloud-e2e.md`](docs/evidence/cloud-e2e.md)。最终范围说明见
-[`v5.0.0 Agent-a-thon 冻结文档`](ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md)。
+Evidence index:
+
+- [`docs/evidence/validation-summary.md`](docs/evidence/validation-summary.md)
+- [`docs/evidence/cloud-e2e.md`](docs/evidence/cloud-e2e.md)
+- [`docs/evidence/foundry-local-e2e.json`](docs/evidence/foundry-local-e2e.json)
