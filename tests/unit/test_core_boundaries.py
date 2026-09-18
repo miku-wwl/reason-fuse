@@ -196,6 +196,35 @@ class ConstructionBoundaryTests(unittest.TestCase):
             self.assertEqual(core["stall_counter"], 1)
         asyncio.run(scenario())
 
+    def test_middleware_normalizes_foundry_toolbox_namespace(self):
+        async def scenario():
+            session = AgentSession()
+            session.state["reasonfuse_core_v1"] = ReasonFuseState().to_dict()
+            middleware = ReasonFuseFunctionMiddleware()
+
+            async def invoke(name, args, result):
+                context = FunctionInvocationContext(SimpleNamespace(name=name), args, session=session)
+
+                async def call_next():
+                    context.result = result
+
+                await middleware.process(context, call_next)
+
+            await invoke(
+                "reasonfuse-operations___operations___restart_service",
+                {"service_name": "orders"},
+                {"accepted": True, "generation": "g1"},
+            )
+            await invoke(
+                "reasonfuse-operations___operations___service_status",
+                {"service_name": "orders"},
+                {"resource": "orders", "generation": "g1", "service_health": "HEALTHY"},
+            )
+            core = session.state["reasonfuse_core_v1"]
+            self.assertEqual(core["last_postcondition_result"]["outcome"], "OUTCOME_VERIFIED")
+
+        asyncio.run(scenario())
+
     def test_malformed_state_fails_closed(self):
         for updates in ({"contained": "false"}, {"core_state_version": "unknown"}, {"tool_call_count": True}):
             with self.subTest(updates=updates), self.assertRaises(ValueError):

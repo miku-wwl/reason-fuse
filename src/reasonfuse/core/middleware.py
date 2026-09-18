@@ -53,8 +53,12 @@ def _result(value: Any) -> dict[str, Any]:
 
 
 def _core_tool_name(name: str) -> str:
-    """Map a namespaced Toolbox function to the registry's operation name."""
-    return name.split("___", 1)[-1]
+    """Map local or multi-prefixed Toolbox names to the registry operation."""
+    # Local tools use ``operations___restart_service``.  Foundry Toolbox can
+    # add its server label as another namespace, producing
+    # ``reasonfuse-operations___operations___restart_service``.  The core
+    # registry must receive the final operation segment in both cases.
+    return name.rsplit("___", 1)[-1]
 
 
 class ReasonFuseFunctionMiddleware(FunctionMiddleware):

@@ -19,15 +19,33 @@ services:
               sku:
                 name: GlobalStandard
                 capacity: 10
+    operations-tools:
+        host: azure.ai.toolbox
+        uses:
+            - ai-project
+        description: Bounded deterministic Operations MCP tools for ReasonFuse cloud validation.
+        tools:
+            - type: mcp
+              server_label: reasonfuse-operations
+              server_url: ${OPERATIONS_MCP_ENDPOINT}
+              require_approval:
+                  never:
+                      - operations___service_status
+                  always:
+                      - operations___restart_service
+                      - operations___reset
     reasonfuse:
         host: azure.ai.agent
         project: .
         language: python
         uses:
             - ai-project
+            - operations-tools
         kind: hosted
         name: reasonfuse
         description: Lean ReasonFuse Microsoft Foundry Hosted Agent.
+        toolboxes:
+            - operations-tools
         codeConfiguration:
             runtime: python_3_13
             entryPoint: src/main.py
@@ -39,6 +57,7 @@ services:
             OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: 'false'
             REASONFUSE_ENABLED: ${REASONFUSE_ENABLED}
             REASONFUSE_CONTRACT_JSON: ${REASONFUSE_CONTRACT_JSON}
+            TOOLBOX_NAME: operations-tools
         container:
             resources:
                 cpu: '1'

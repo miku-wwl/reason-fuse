@@ -15,14 +15,34 @@ from reasonfuse.validation.session_state import ValidationStateProvider
 def build_agent() -> Agent:
     credential = DefaultAzureCredential()
     tools = []
-    if os.environ.get("TOOLBOX_ENDPOINT"):
+    toolbox_endpoint = os.environ.get("TOOLBOX_ENDPOINT")
+    toolbox_name = os.environ.get("TOOLBOX_NAME")
+    if toolbox_endpoint or toolbox_name:
+        toolbox_options = {"url": toolbox_endpoint} if toolbox_endpoint else {"name": toolbox_name}
+        # The Foundry Toolbox definition carries approval metadata, but the
+        # hosted Agent Framework MCP adapter also needs the local approval map
+        # to emit a native approval request before side effects.  Include both
+        # the server's raw names and the Hosted Toolbox namespace used by the
+        # Responses tool surface.
         tools.append(FoundryToolbox(
             credential,
-            url=os.environ["TOOLBOX_ENDPOINT"],
+            **toolbox_options,
             load_prompts=False,
+            approval_mode={
+                "always_require_approval": [
+                    "operations___restart_service",
+                    "operations___reset",
+                    "reasonfuse-operations___operations___restart_service",
+                    "reasonfuse-operations___operations___reset",
+                ],
+                "never_require_approval": [
+                    "operations___service_status",
+                    "reasonfuse-operations___operations___service_status",
+                ],
+            },
         ))
     iq_endpoint = os.environ.get("FOUNDRY_IQ_MCP_ENDPOINT")
-    if iq_endpoint and not os.environ.get("TOOLBOX_ENDPOINT"):
+    if iq_endpoint and not (toolbox_endpoint or toolbox_name):
         # Azure AI Search exposes the native Knowledge Base retrieval surface as
         # a streamable MCP server.  The token is acquired per request so a
         # long-lived Hosted Agent does not retain an expired access token.
@@ -56,6 +76,11 @@ def build_agent() -> Agent:
             "Recall incident details only from the supplied conversation. "
             "When asked for runtime state, call read_runtime_state and report its exact JSON. "
             "Never invent tool results. "
+            + (
+                "For Operations validation, use operations___service_status for fresh reads and "
+                "operations___restart_service only for an explicitly approved restart. "
+                if toolbox_endpoint or toolbox_name else ""
+            )
             + (
                 "For questions about ReasonFuse policy or containment, call the native "
                 "knowledge_base_retrieve tool exactly once and ground the answer in its "
