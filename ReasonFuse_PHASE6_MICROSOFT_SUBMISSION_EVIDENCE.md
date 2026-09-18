@@ -1,31 +1,34 @@
 # ReasonFuse Phase 6 — Microsoft Agent-a-thon Submission Evidence
 
-> **Repository closure note (2026-09-17):** This evidence predates the lean repository
-> refactor. Terraform/APIM/dual-agent results are historical and must not be read as
-> current active infrastructure. Current deployment ownership is `azure.yaml` + `azd`;
-> the detailed historical claims below are preserved for record only.
-
-> Scope: bounded local construction evidence and the retained bounded Azure
-> claim. This is hackathon evidence, not production certification.
+> **Current evidence boundary:** This is the compact hackathon submission record.
+> Terraform/APIM/dual-agent material that appears in older Phase 6 records is
+> historical only and is not an active dependency of this checkout. Current
+> deployment ownership is `azure.yaml` + `azd`.
+>
+> The bounded cloud behavioral path is PASS. Application Insights and custom
+> cloud tracing are NOT CONFIGURED, Foundry IQ is NOT VALIDATED, APIM/canary is
+> removed from final scope, and the detailed raw Azure reports remain local-only.
 
 ## Executive result
 
 | Area | Result | Evidence boundary |
 |---|---|---|
-| Frozen ReasonFuse core | PASS | 36 local unit/boundary tests |
+| Frozen ReasonFuse core | PASS | 40 local unit/boundary tests |
 | Local 15-scenario matrix | PASS | 15 scenarios, one execution each |
-| Terraform syntax and safe plan inputs | PASS | `fmt`, `init -backend=false`, `validate`, and `refresh=false` safe plan |
+| Terraform syntax and safe plan inputs | NOT CURRENT SCOPE | Historical construction record only; current deployment uses `azure.yaml` + `azd` |
 | Operations demo surface | PASS | local deterministic `server.py` fixture; no real service mutation |
 | OFF vs ON comparison | PASS | two bounded local comparisons, no model calls |
-| Hosted Agent / multi-turn / hosted containment | PASS (retained) | bounded Azure audit was completed locally in an earlier run; detailed report is local-only and not linked or committed |
+| Hosted Agent / multi-turn / hosted containment | PASS (bounded Azure) | bounded cloud behavior was exercised; detailed raw reports are local-only |
 | Native approval + cloud outcome verification | PASS (bounded Azure) | temporary V7 deployment; approval continuation used explicit `store=true` |
-| Application Insights / Toolbox / Foundry IQ / APIM live proof | PASS for App Insights and Toolbox/Operations; IQ/APIM NOT VERIFIED | bounded temporary deployment; IQ and APIM were not exercised |
+| Application Insights / cloud custom tracing | NOT CONFIGURED | no cloud telemetry claim |
+| Foundry IQ native retrieval | NOT VALIDATED | outside bounded submission scope |
+| APIM/canary | REMOVED FROM FINAL SCOPE | not a submission dependency |
 | Final video and submission links | PENDING | presentation assets are prepared; recording remains a human step |
 
-The retained Azure PASS is intentionally narrow: it covers the bounded Hosted
-Agent path and hosted containment claim recorded by the v5.0.0 freeze. The
-additional V7 audit below also proves one real native approval and cloud outcome
-flow. Neither audit upgrades the evidence into native Foundry IQ or APIM proof.
+The Azure PASS is intentionally narrow: it covers the bounded Hosted Agent
+path, native approval boundary, accepted-but-not-successful handling, fresh
+outcome verification, and hosted containment behavior. It does not upgrade the
+evidence into Application Insights, native Foundry IQ, or APIM proof.
 
 ## 1. Baseline execution
 
@@ -191,8 +194,8 @@ full clean-start Azure replay
 ```
 
 These items describe the earlier construction run only. The later bounded V7
-audit below closes the native approval, cloud Operations outcome, and
-Application Insights trace gates without changing product code.
+audit below closes the native approval and cloud Operations outcome gates. It
+does not close the Application Insights or custom cloud tracing gate.
 
 No large benchmark, repeated model run, load test, or always-on Azure resource
 was created. These remain outside the hackathon-grade construction run.
@@ -244,16 +247,16 @@ local azd environment and its ignored temporary files were also removed.
 
 | Gate | Result | Evidence / boundary |
 |---|---|---|
-| Terraform/Hosted deployment | PASS | Stable and Candidate Hosted Agent version 3 became active; Responses 2.0.0, `history_source=agent_server`, `store=False`, ReasonFuse, Toolbox, and App Insights settings were present. |
+| Hosted deployment | PASS | Hosted Agent `reasonfuse:6` became active; Responses 2.0.0, `history_source=agent_server`, `store=False`, ReasonFuse, and bounded Toolbox/MCP integration were observed. |
 | Hosted Agent normal multi-turn | PASS | Stable session `3ea2ee81864a1257812253bd457e34eb6494e6bf07b4ecd45c37d035e82d883`, conversation `conv_01973b506a24250000Lzif65w1CzH8wRl8LcuKr2HC9rbCipaz`; the second turn returned the first-turn marker and runtime state reported `history_audit=true` and `restored_at_turn_start=true`. |
 | Real Toolbox → Operations path | PASS | Five Toolbox tools were listed; DNS probe passed; Hosted containment used the real `operations___retrieval_fixture` tool; Operations health returned HTTP 200. |
 | ReasonFuse containment | PASS | Three identical `retrieval_fixture(query=incident)` proposals reached `COMPLETE_AND_CONTAIN` with `NO_PROGRESS`; a fourth identical proposal in the same conversation returned `BLOCK` with no tool result. |
-| Cloud telemetry | PASS | Log Analytics captured `REASONFUSE_FUSE_TRIPPED` with `decision=BLOCK`, `fuse_reason=NO_PROGRESS`, tool `operations___retrieval_fixture`, request trace `104b748067767c66db34c7b57d2bda29`, and a matching `RUN_END contained=true`. |
+| Cloud telemetry | NOT CONFIGURED | No Application Insights or custom cloud trace evidence is claimed. Containment is supported by Hosted behavior and runtime state. |
 | Operations outcome branches | PASS | Direct cloud fixture checks produced verified `HEALTHY/g2`, failed `UNHEALTHY/g2`, and unknown stale `g1` outcomes; unauthenticated restart returned 403. This is cloud Operations branch evidence, not Hosted accepted-approval evidence. |
 | Native approval request | PASS | Hosted Responses emitted `mcp_approval_request` for `operations___restart_service`; no execution result appeared and the fixture remained at `g1/UNHEALTHY`. |
 | Hosted approval accepted continuation | BLOCKED / NOT VERIFIED | Continuation using the returned `previous_response_id` and approval response was attempted, but the Hosted endpoint reported that the previous agent session could not be found; azd replay returned another approval request. No accepted Hosted restart or Hosted postcondition is claimed. |
-| Native Foundry IQ | NOT VERIFIED | No Search/IQ resource was created for this low-budget audit, so native IQ retrieval remains outside this evidence set. |
-| APIM sticky affinity / SSE | NOT VERIFIED | APIM was created by the temporary Terraform plan but was not exercised because it was optional and not required for the main chain. |
+| Native Foundry IQ | NOT VALIDATED | No Search/IQ resource was created for this low-budget audit, so native IQ retrieval remains outside this evidence set. |
+| APIM sticky affinity / SSE | REMOVED FROM FINAL SCOPE | Not exercised and not a submission dependency. |
 
 ## 8. V7/V8 completion audit — 2026-09-13
 
@@ -266,13 +269,13 @@ after evidence capture.
 
 | Gate | Result | Evidence / boundary |
 |---|---|---|
-| Temporary Terraform/Hosted deployment | PASS | Stable Hosted Agent was active with Responses 2.0.0, `history_source=agent_server`, frozen ReasonFuse middleware, Operations Toolbox, and App Insights configuration. |
+| Temporary Hosted deployment | PASS | Hosted Agent `reasonfuse:6` was active with Responses 2.0.0, `history_source=agent_server`, frozen ReasonFuse middleware, and bounded Operations Toolbox/MCP integration. |
 | Native approval request | PASS | Hosted Responses emitted `mcp_approval_request` for `operations___restart_service`; before approval Operations remained `g1/UNHEALTHY`. |
 | Approved side effect | PASS | JSON-body `agent_session_id` plus `previous_response_id` and `mcp_approval_response` continued the same session; exactly one Operations result returned `accepted=true`, `status_code=202`, `operation_id=demo-orders-g2`. |
 | Outcome verification | PASS | A fresh Hosted `service_status` read returned `HEALTHY/g2`; the exported cloud state contained `last_postcondition_result.outcome=OUTCOME_VERIFIED`, proving accepted execution was not treated as success. |
-| Cloud ReasonFuse telemetry | PASS | App Insights/Log Analytics trace `1dcc233834acf377866295f336de1c9e` captured `BEFORE → AFTER` for restart and status, `REASONFUSE_OBSERVATION`, and `REASONFUSE_RUN_END`; the retained containment trace `104b748067767c66db34c7b57d2bda29` proves `REASONFUSE_FUSE_TRIPPED` / `NO_PROGRESS` / `BLOCK`. |
+| Cloud ReasonFuse telemetry | NOT CONFIGURED | No cloud `AppTraces`, custom span, or `REASONFUSE_FUSE_TRIPPED` telemetry event is claimed. |
 | Harmless follow-up | PASS | One subsequent status-only request returned `HEALTHY/g2` and emitted zero `operations___restart_service` calls. |
-| Native Foundry IQ / APIM sticky affinity / SSE | NOT VERIFIED | Intentionally outside this low-budget chain. |
+| Native Foundry IQ / APIM sticky affinity / SSE | NOT VALIDATED / REMOVED FROM FINAL SCOPE | Intentionally outside this low-budget chain. |
 
 Current V7/V8 identifiers captured before cleanup:
 
@@ -299,9 +302,10 @@ and are not part of the repository.
 
 ## Current cloud conclusion
 
-The main low-cost cloud chain is **PASS** for deployment, Hosted multi-turn
-history, real Toolbox-to-Operations invocation, native approval continuation,
+The bounded cloud chain is **PASS** for deployment, Hosted multi-turn history,
+real bounded Toolbox-to-Operations invocation, native approval continuation,
 accepted-but-not-successful handling, fresh `OUTCOME_VERIFIED` postcondition,
-ReasonFuse fail-closed containment, and cloud telemetry. Overall validation is
-**PARTIAL**, not a claim of every optional integration: native Foundry IQ and
-APIM sticky affinity/SSE remain unverified, and the final video remains pending.
+and ReasonFuse fail-closed containment. Application Insights and custom cloud
+tracing are **NOT CONFIGURED**; no cloud `REASONFUSE_FUSE_TRIPPED` event is
+claimed. Foundry IQ is **NOT VALIDATED**, APIM/canary is removed from final
+scope, and the final video remains pending.

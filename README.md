@@ -1,33 +1,52 @@
 # ReasonFuse
 
-ReasonFuse 是一个精简的 Microsoft Foundry Hosted Agent submission。Microsoft Foundry
-负责 Hosted Agent、身份、模型调用和平台 tracing；ReasonFuse 负责确定性的 progress
-判断、containment 和 outcome verification。
+ReasonFuse is a deterministic reliability layer for AI agents. It detects
+non-progress, contains unsafe or repeated execution, and verifies that an
+accepted action actually changed the external world before the agent claims
+success.
 
-## 当前边界
+## The problem
+
+Agents can appear busy without making progress:
+
+- `Todo != objective progress`. A changed plan is not evidence that the real
+  system changed.
+- `HTTP 202` or `accepted=true != successful outcome`. Acceptance only means
+  that an operation was accepted for processing.
+- An agent must obtain fresh external evidence before claiming success.
+- Repeated non-progress must eventually be contained so another operational
+  dispatch is blocked.
+
+ReasonFuse makes those boundaries explicit and fail-closed.
+
+## Architecture
 
 ```text
-User
-  ↓
-Microsoft Foundry Hosted Agent (one agent)
-  ↓
+Microsoft Foundry Hosted Agent
+        ↓
 Microsoft Agent Framework
-  ↓
-ReasonFuse Function Middleware
-  ↓
-Tool / server.py local deterministic fixture
-
-Observability:
-Foundry native tracing → Application Insights
-ReasonFuse → custom OpenTelemetry span attributes/events + JSON application logs
+        ↓
+ReasonFuse
+        ↓
+Foundry Toolbox / MCP
+        ↓
+External Operations State
 ```
 
-当前 lean build 明确不包含 APIM/canary、Operations App Service、Terraform root 或
-自定义 Azure Monitor exporter。`azure.yaml` 是标准 Foundry project/model/Hosted Agent
-部署入口；没有第二个 stable/candidate agent，也没有 release-probe middleware。
+The Hosted Agent is the competition deployment runtime. ReasonFuse owns the
+progress, containment, approval-boundary, and outcome-verification decisions;
+the model and tool platform provide proposals, execution, and observations.
 
-`server.py` 仅是本地、内存中的 deterministic Operations/outcome fixture，不是生产
-Operations 后端，也不代表 Foundry IQ/Toolbox 已经部署或验证。
+Foundry Local is an additional low-cost validation path using the same
+ReasonFuse core. It is not the competition deployment runtime and does not
+prove Microsoft Foundry cloud infrastructure.
+
+The final lean scope does not include APIM/canary infrastructure, an
+Operations App Service, Terraform, or a custom Azure Monitor exporter.
+
+`server.py` is a local in-memory fixture. The bounded cloud Operations MCP
+fixture lives under `cloud/operations-mcp/`; neither is a production
+Operations backend.
 
 ## 目录
 
@@ -40,6 +59,7 @@ reason-fuse/
 ├── benchmark/15-scenarios.md     # 按需人工场景清单
 ├── server.py                     # 本地 deterministic Operations fixture
 ├── docs/phase6/                  # 竞赛说明材料
+├── docs/evidence/                # 精简的本地/云端证据索引
 ├── src/
 │   ├── main.py                   # Hosted Agent 启动入口
 │   └── reasonfuse/
@@ -80,13 +100,18 @@ $env:PORT = "8000"
 `restart_service` 返回 accepted 后必须重新读取 `service_status`，才能得到
 verified/failed/unknown 结果。
 
-## Microsoft Foundry Local（低成本 E2E）
+## Foundry Local validation — LOCAL ONLY
 
 仓库还提供一个可选的本地模型审计路径。它使用官方
 `agent-framework-foundry-local` 客户端、同一组 ReasonFuse providers/middleware，以及
 `server.py` 的 HTTP fixture；不会访问 Azure，也不会运行 15 场景清单或大规模 benchmark。
 Foundry Local 运行时本身必须由本机按 Microsoft 文档安装并启动，Python 依赖已经锁定在
 `pyproject.toml`/`uv.lock` 中。
+
+已保存的本地证据使用 Foundry Local CLI `0.10.3` 和模型 `phi-4-mini`，见
+[`foundry-local-e2e.json`](foundry-local-e2e.json)。其中真实 function calling、native
+approval、`OUTCOME_VERIFIED`、`POSTCONDITION_FAILED`、`OUTCOME_UNKNOWN`、containment、
+blocked-host validation 和 no-replay 均为 `PASS`。
 
 ```powershell
 uv sync --frozen --python 3.13
@@ -119,16 +144,54 @@ containment、blocked-hostname validation，以及 verified restart 后的 no-re
 ReasonFuse middleware/core、本地 HTTP fixture、outcome verification、containment 和
 no-replay；不能证明 Microsoft Foundry Hosted Agent infrastructure、Azure RBAC、Hosted
 Responses endpoint、Foundry IQ、Foundry Toolbox、Application Insights 或 cloud tracing。
-详细 Azure Hosted 验证仍以 Hosted 路径的本地-only 审计材料为准。
+本地多轮记录使用 local `AgentSession`，不把它改称为
+`history_source="agent_server"`。云端证据见
+[`docs/evidence/cloud-e2e.md`](docs/evidence/cloud-e2e.md)。
+
+## Proven bounded cloud E2E
+
+The bounded Hosted Agent behavioral path is **PASS**. The temporary Operations
+MCP resources used for that audit were deleted after evidence capture; the
+detailed raw Azure reports are local-only and are not part of this repository.
+
+Observed deployment and protocol:
+
+- Hosted Agent: `reasonfuse:6`
+- Responses protocol: `2.0.0`
+- Model: `gpt-5-mini`
+- Normal multi-turn Hosted Agent behavior: `PASS`
+- Normal request contract: `history_source="agent_server"`, `store=False`
+
+```text
+BEFORE: UNHEALTHY / g1
+  → native MCP approval request
+  → no execution before approval
+  → approved restart
+  → accepted=true / status_code=202
+  → execution_count=1 / side_effect_count=1
+  → fresh service_status
+  → HEALTHY / g2
+  → OUTCOME_VERIFIED
+```
+
+Repeated no-progress then produced `NO_PROGRESS` containment; a subsequent
+restart was `BLOCKED` and `side_effect_count` remained `1`. No accidental
+replay: **PASS**. The detailed identifiers and runtime state are in
+[`docs/evidence/cloud-e2e.md`](docs/evidence/cloud-e2e.md).
+
+The approval continuation temporarily used `store=True` because a
+`previous_response_id` continuation with `store=False` does not persist the
+server-side response state required by that continuation. The normal frozen
+Hosted request remains `store=False`; no `store=False` approval-continuation
+PASS is claimed.
 
 ## Azure Hosted Agent 部署（显式执行）
 
 标准资源由 `azure.yaml` 中的 `azure.ai.project` 和 `azure.ai.agent` hosts 交给
 `azd` 管理。部署前需要 Azure 登录、目标订阅/区域，以及 Foundry project/model 和
-Hosted Agent 所需权限。Hosted Agent 的专用 Entra identity、平台 tracing 和
-Application Insights 接线由 Microsoft Foundry 负责；不要把平台注入的
-`FOUNDRY_PROJECT_ENDPOINT` 或 `APPLICATIONINSIGHTS_CONNECTION_STRING` 写进
-`azure.yaml`。
+Hosted Agent 所需权限。不要把平台注入的 `FOUNDRY_PROJECT_ENDPOINT` 或
+`APPLICATIONINSIGHTS_CONNECTION_STRING` 写进 `azure.yaml`。当前提交没有配置
+Application Insights 或自定义云 tracing，因此不要把它们描述成已验证能力。
 
 ```powershell
 pwsh -File scripts/bootstrap.ps1
@@ -153,12 +216,28 @@ $azd = ".tools/azd-1.33.0/azd-windows-amd64.exe"
 可选的外部 Toolbox/IQ 接线不属于默认 `azure.yaml` 资源图。若部署环境提供对应
 endpoint，agent 仍可通过环境变量加载它们；仓库不把这类外部后端误报为已部署或已验证。
 
-## 证据边界
+## Submission boundaries
 
 `src/reasonfuse/core/` 保持以下语义：planning changed 不等于 reality changed、Todo
 不等于 objective progress、accepted 不等于 verified success、fresh postcondition
 verification、重复 non-progress fuse，以及 containment 后禁止继续执行 operational
 tools。Foundry 观察执行；ReasonFuse 验证进展和结果。
 
-历史 Phase 6/7 计划和证据材料保留为竞赛记录，不是当前部署入口。最终范围说明见
-[v5.0.0 Agent-a-thon 冻结文档](ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md)。
+Current limitations are explicit:
+
+- Application Insights / cloud custom tracing: **NOT CONFIGURED**
+- Foundry IQ native retrieval: **NOT VALIDATED**
+- APIM/canary: **REMOVED FROM FINAL SCOPE**
+- The bounded Operations MCP service is a deterministic fixture, not a
+  production backend.
+- The final video is **PENDING**.
+- Large benchmarks and repeated model runs are **OUT OF SCOPE**.
+
+No cloud `REASONFUSE_FUSE_TRIPPED` telemetry event is claimed. The containment
+claim above is based on observed Hosted Agent behavior and runtime state, not on
+Application Insights evidence.
+
+历史 Phase 6/7 计划和证据材料保留为竞赛记录，不是当前部署入口。证据索引见
+[`docs/evidence/validation-summary.md`](docs/evidence/validation-summary.md) 和
+[`docs/evidence/cloud-e2e.md`](docs/evidence/cloud-e2e.md)。最终范围说明见
+[`v5.0.0 Agent-a-thon 冻结文档`](ReasonFuse_v5.0.0_AGENT_A_THON_IMPLEMENTATION_FREEZE.md)。
