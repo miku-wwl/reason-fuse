@@ -22,6 +22,8 @@ from agent_framework.foundry import FoundryLocalClient
 
 from reasonfuse.core.middleware import ReasonFuseFunctionMiddleware
 from reasonfuse.core.provider import CoreStateProvider
+from reasonfuse.completion import ReasonFuseCompletionMiddleware
+from reasonfuse.config import runtime_configuration
 from reasonfuse.validation.middleware import HistoryAuditMiddleware, ValidationMiddleware
 from reasonfuse.validation.session_state import ValidationStateProvider
 
@@ -263,6 +265,7 @@ def build_local_agent(
 ) -> LocalAgentBundle:
     """Build a local Agent with the existing providers and middleware."""
 
+    runtime_configuration()
     client = FoundryLocalClient(model=model, bootstrap=bootstrap, prepare_model=prepare_model)
     tools = build_local_tools(base_url)
     agent = Agent(
@@ -284,7 +287,8 @@ def build_local_agent(
             ValidationStateProvider(),
             CoreStateProvider(),
         ],
-        middleware=[ValidationMiddleware(), ReasonFuseFunctionMiddleware(), HistoryAuditMiddleware()],
+        middleware=[ReasonFuseCompletionMiddleware(), ValidationMiddleware(),
+                    ReasonFuseFunctionMiddleware(), HistoryAuditMiddleware()],
     )
     return LocalAgentBundle(agent=agent, client=client, base_url=base_url, tools=tools)
 

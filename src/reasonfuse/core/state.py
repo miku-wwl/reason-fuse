@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from copy import deepcopy
 from typing import Any
 from uuid import uuid4
 
@@ -38,6 +39,9 @@ class ReasonFuseState:
     run_contract_version: str = "reasonfuse-contract-v1"
     contract_limits: dict[str, Any] = field(default_factory=dict)
     reasonfuse_enabled: bool = True
+    runtime_profile: str = "runtime"
+    action_lifecycle: dict[str, Any] | None = None
+    last_proposal: dict[str, Any] | None = None
     contained: bool = False
     fuse_reason: str | None = None
     verification_reserve_available: bool = False
@@ -59,14 +63,14 @@ class ReasonFuseState:
             "progress_history": self.progress_history[-32:],
             "retrieval_attempts": self.retrieval_attempts[-32:],
         }
-        return value
+        return deepcopy(value)
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "ReasonFuseState":
         if value.get("core_state_version") != CORE_STATE_VERSION:
             raise ValueError("unsupported ReasonFuse state version")
         allowed = {field for field in cls.__dataclass_fields__}
-        data = {key: value[key] for key in allowed if key in value}
+        data = {key: deepcopy(value[key]) for key in allowed if key in value}
         data.setdefault("run_id", f"run-{uuid4().hex}")
         # A malformed persisted state must not become an implicit bypass.
         for name in ("step_index", "tool_call_count", "side_effect_count", "stall_counter",
@@ -77,4 +81,24 @@ class ReasonFuseState:
         for name in ("reasonfuse_enabled", "contained", "verification_reserve_available"):
             if name in data and type(data[name]) is not bool:
                 raise ValueError(f"invalid {name}")
+        pending = data.get("pending_postcondition")
+        if pending is not None and (
+            not isinstance(pending, dict)
+            or pending.get("action") != "restart_service"
+            or not isinstance(pending.get("resource"), str)
+            or not pending["resource"]
+            or type(pending.get("consumed")) is not bool
+            or not isinstance(pending.get("accepted_result"), dict)
+        ):
+            raise ValueError("invalid pending postcondition")
+        lifecycle = data.get("action_lifecycle")
+        if lifecycle is not None and (
+            not isinstance(lifecycle, dict)
+            or lifecycle.get("status") not in {
+                "DISPATCHING", "VERIFICATION_PENDING", "ACCEPTED", "VERIFIED", "FAILED", "UNKNOWN",
+            }
+            or lifecycle.get("action") != "restart_service"
+            or not isinstance(lifecycle.get("resource"), str)
+        ):
+            raise ValueError("invalid action lifecycle")
         return cls(**data)

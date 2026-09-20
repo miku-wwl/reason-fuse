@@ -5,7 +5,10 @@ bounded Hosted Agent cloud validation. It exposes:
 
 - `operations___service_status` — read-only status (`UNHEALTHY/g1` initially)
 - `operations___restart_service` — one accepted `202` restart that advances to `g2`
-- `operations___reset` — test-state reset for `verified`, `failed`, or `unknown`
+
+Reset is fixture administration outside MCP: send `POST /test/reset` with
+`{"mode":"verified"}`, `{"mode":"failed"}`, or `{"mode":"unknown"}`.
+It is absent from the agent tool inventory and native approval configuration.
 
 The service does not touch real infrastructure, persist data, or contain
 credentials. It is not a production Operations backend.

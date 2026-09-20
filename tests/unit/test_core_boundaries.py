@@ -128,7 +128,7 @@ class ConstructionBoundaryTests(unittest.TestCase):
         self.assertFalse(result.signals["useful_recheck"])
         self.assertFalse(engine.state.pending_postcondition["consumed"])
 
-    def test_database_health_alias_preserves_useful_recheck(self):
+    def test_database_health_does_not_consume_restart_recheck(self):
         engine = ReasonFuseEngine()
         engine.record("restart_service", {"service_name": "orders"}, {"accepted": True, "generation": "g1"},
                       executed=True, side_effect=True)
@@ -136,7 +136,8 @@ class ConstructionBoundaryTests(unittest.TestCase):
         self.assertTrue(engine.before_dispatch("database_health", {"service_name": "orders"}).allow)
         result = engine.record("database_health", {"service_name": "orders"},
                                {"resource": "orders", "generation": "g1"}, executed=True)
-        self.assertTrue(result.signals["useful_recheck"])
+        self.assertFalse(result.signals["useful_recheck"])
+        self.assertFalse(engine.state.pending_postcondition["consumed"])
 
     def test_optional_postcondition_configuration_is_honored(self):
         engine = ReasonFuseEngine(contract=RunContract(require_postcondition_for_side_effects=False))
@@ -158,7 +159,8 @@ class ConstructionBoundaryTests(unittest.TestCase):
             saved = ReasonFuseState(reasonfuse_enabled=False, tool_call_count=3,
                                    contract_limits=RunContract().to_dict()).to_dict()
             run_id = saved["run_id"]
-            with patch.dict("os.environ", {"REASONFUSE_ENABLED": "true", "REASONFUSE_CONTRACT_JSON": "{}"}):
+            with patch.dict("os.environ", {"REASONFUSE_PROFILE": "evaluation", "REASONFUSE_ENABLED": "true",
+                                           "REASONFUSE_CONTRACT_JSON": "{}"}):
                 await provider.before_run(agent=None, session=session, context=None, state=saved)
             self.assertFalse(saved["reasonfuse_enabled"])
             self.assertEqual(saved["run_id"], run_id)

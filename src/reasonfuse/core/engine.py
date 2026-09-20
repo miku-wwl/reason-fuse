@@ -10,6 +10,7 @@ from .detectors import UsefulRecheckClassifier, exact_loop, oscillation, retriev
 from .fingerprint import tool_fingerprint
 from .progress import normalize_world_state, normalized_result_class, result_signals
 from .state import ReasonFuseState
+from .outcome import PostconditionRegistry
 
 SIDE_EFFECT_TO_RESOURCE = {"restart_service": "service_name"}
 VERIFICATION_TO_RESOURCE = {"service_status": "service_name", "database_health": "service_name"}
@@ -46,8 +47,11 @@ class ReasonFuseEngine:
 
     def pending_verification(self, tool_name: str, arguments: Any) -> bool:
         pending = self.state.pending_postcondition
-        return bool(pending and not pending.get("consumed") and tool_name in VERIFICATION_TO_RESOURCE
-                    and self._resource(tool_name, self._args(arguments)) == pending["resource"])
+        if not pending or pending.get("consumed"):
+            return False
+        registered = PostconditionRegistry().get(pending["action"])
+        return (tool_name == registered.verifier_tool
+                and self._resource(tool_name, self._args(arguments)) == pending["resource"])
 
     def _stalled(self) -> bool:
         return self.state.stall_counter >= min(self.contract.max_stalled_steps,
@@ -71,8 +75,14 @@ class ReasonFuseEngine:
         side_effect = tool_name in SIDE_EFFECT_TO_RESOURCE
         if not self.state.reasonfuse_enabled:
             return Decision(True)
+        if (self.state.action_lifecycle or {}).get("status") == "DISPATCHING":
+            self.set_outcome({"outcome": "OUTCOME_UNKNOWN", "reason": "interrupted_dispatch"})
         if self.state.contained:
             return self._block(self.state.fuse_reason or "NO_PROGRESS", fingerprint)
+        if side_effect and self.state.pending_postcondition:
+            # Block the sibling proposal without taking away the accepted action's
+            # already-reserved verification. The function loop still terminates.
+            return self._block("POSTCONDITION_PENDING", fingerprint)
         budget_reason = self.contract.before_dispatch(
             steps=self.state.step_index,
             tool_calls=self.state.tool_call_count,
@@ -117,9 +127,23 @@ class ReasonFuseEngine:
             self.state.blocked_proposal_count -= 1
         return decision
 
+    def begin_dispatch(self, tool_name: str, arguments: Any, *, call_id: str | None = None) -> None:
+        """Reserve accounting before awaiting I/O; caller owns the session lock."""
+        self.state.step_index += 1
+        self.state.tool_call_count += 1
+        if tool_name in SIDE_EFFECT_TO_RESOURCE:
+            self.state.side_effect_count += 1
+            self.state.last_postcondition_result = None
+            self.state.last_proposal = None
+            self.state.action_lifecycle = {
+                "action": tool_name, "resource": self._resource(tool_name, self._args(arguments)),
+                "status": "DISPATCHING", "call_id": call_id,
+            }
+            self.state.verification_reserve_available = self.contract.require_postcondition_for_side_effects
+
     def record(self, tool_name: str, arguments: Any, result: dict[str, Any] | Any,
                *, executed: bool, side_effect: bool = False, approved: bool = True,
-               todo_snapshot: dict[str, Any] | None = None) -> Observation:
+               todo_snapshot: dict[str, Any] | None = None, reserved: bool = False) -> Observation:
         args = self._args(arguments)
         fingerprint = tool_fingerprint(tool_name, args)
         result = result if isinstance(result, dict) else {"value": str(result)}
@@ -127,9 +151,10 @@ class ReasonFuseEngine:
                   "world_state": self.state.world_state_snapshot,
                   "retrieval": self._last_retrieval}
         previous_todo = dict(self.state.todo_snapshot)
-        self.state.step_index += 1
+        if not reserved:
+            self.state.step_index += 1
         self.state.event_count += 1
-        if executed:
+        if executed and not reserved:
             self.state.tool_call_count += 1
             if side_effect:
                 self.state.side_effect_count += 1
@@ -150,7 +175,7 @@ class ReasonFuseEngine:
                 observed.pop("world_state")
             else:
                 snapshot = dict(self.state.world_state_snapshot)
-                snapshot[resource] = world
+                snapshot[resource] = {**snapshot.get(resource, {}), **world}
                 observed["world_state"] = snapshot
         signals = result_signals(before, observed, previous_todo, todo_snapshot)
         self.state.evidence_keys = list(dict.fromkeys([*self.state.evidence_keys, *signals.evidence_keys]))[-64:]
@@ -193,6 +218,13 @@ class ReasonFuseEngine:
                                                 "before_state": self.state.world_state_snapshot.get(resource)}
             self.state.verification_reserve_available = True
             self._recheck.accepted_side_effect(tool_name, resource or "", result.get("generation"))
+        if side_effect and executed:
+            previous = self.state.action_lifecycle or {}
+            self.state.action_lifecycle = {
+                **previous, "action": tool_name, "resource": resource,
+                "status": "VERIFICATION_PENDING" if self.state.pending_postcondition else "ACCEPTED",
+                "accepted": result.get("accepted") is True, "generation": result.get("generation"),
+            }
         if signals.retrieval_delta is False and result.get("retrieval"):
             self.state.retrieval_churn_counter += 1
         elif signals.retrieval_delta:
@@ -218,6 +250,12 @@ class ReasonFuseEngine:
 
     def set_outcome(self, outcome: dict[str, Any]) -> None:
         self.state.last_postcondition_result = outcome
+        if self.state.action_lifecycle:
+            self.state.action_lifecycle["status"] = {
+                "OUTCOME_VERIFIED": "VERIFIED", "POSTCONDITION_FAILED": "FAILED", "OUTCOME_UNKNOWN": "UNKNOWN",
+            }[outcome["outcome"]]
+            self.state.action_lifecycle["reason"] = outcome.get("reason")
+        self.state.verification_reserve_available = False
         if outcome.get("outcome") == "OUTCOME_VERIFIED":
             self.state.pending_postcondition = None
             self.state.verification_reserve_available = False

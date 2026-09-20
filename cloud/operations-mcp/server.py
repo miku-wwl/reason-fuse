@@ -140,10 +140,19 @@ def restart_service(service_name: str) -> str:
     return _json(state.restart_service(service_name))
 
 
-@mcp.tool(name="operations___reset")
 def reset(mode: str = "verified") -> str:
-    """Reset the test fixture to verified, failed, or unknown behavior."""
+    """Out-of-band test setup; deliberately not an MCP tool."""
     return _json(state.reset(mode))
+
+
+@mcp.custom_route("/test/reset", methods=["POST"])
+async def reset_fixture(request) -> JSONResponse:
+    """Fixture administration outside the agent's MCP inventory."""
+    try:
+        body = await request.json()
+        return JSONResponse(state.reset(body.get("mode", "verified")))
+    except (ValueError, AttributeError):
+        return JSONResponse({"error": "invalid reset mode"}, status_code=400)
 
 
 @mcp.custom_route("/healthz", methods=["GET"])

@@ -126,14 +126,14 @@ class EngineTests(unittest.TestCase):
 class OutcomeTests(unittest.TestCase):
     def test_accepted_202_is_not_success_without_postcondition(self):
         verifier = OutcomeVerifier()
-        accepted = {"accepted": True, "status_code": 202}
+        accepted = {"accepted": True, "status_code": 202, "generation": "g2"}
         self.assertEqual(verifier.verify("restart_service", accepted, {
-            "resource": "orders", "service_health": "UNHEALTHY"
+            "resource": "orders", "service_health": "UNHEALTHY", "generation": "g2"
         }, requested_resource="orders")["outcome"], "POSTCONDITION_FAILED")
         self.assertEqual(verifier.verify("restart_service", accepted, None,
                                          requested_resource="orders")["outcome"], "OUTCOME_UNKNOWN")
         self.assertEqual(verifier.verify("restart_service", accepted, {
-            "resource": "orders", "service_health": "HEALTHY"
+            "resource": "orders", "service_health": "HEALTHY", "generation": "g2"
         }, requested_resource="orders")["outcome"], "OUTCOME_VERIFIED")
         self.assertEqual(verifier.verify("restart_service", accepted, {
             "resource": "payments", "service_health": "HEALTHY"

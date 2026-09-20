@@ -8,11 +8,14 @@ from azure.identity import DefaultAzureCredential
 
 from reasonfuse.core.middleware import ReasonFuseFunctionMiddleware
 from reasonfuse.core.provider import CoreStateProvider
+from reasonfuse.completion import ReasonFuseCompletionMiddleware
+from reasonfuse.config import runtime_configuration
 from reasonfuse.validation.middleware import ValidationMiddleware, HistoryAuditMiddleware
 from reasonfuse.validation.session_state import ValidationStateProvider
 
 
 def build_agent() -> Agent:
+    runtime_configuration()
     credential = DefaultAzureCredential()
     tools = []
     toolbox_endpoint = os.environ.get("TOOLBOX_ENDPOINT")
@@ -28,12 +31,15 @@ def build_agent() -> Agent:
             credential,
             **toolbox_options,
             load_prompts=False,
+            allowed_tools=[
+                "operations___restart_service", "operations___service_status",
+                "reasonfuse-operations___operations___restart_service",
+                "reasonfuse-operations___operations___service_status",
+            ],
             approval_mode={
                 "always_require_approval": [
                     "operations___restart_service",
-                    "operations___reset",
                     "reasonfuse-operations___operations___restart_service",
-                    "reasonfuse-operations___operations___reset",
                 ],
                 "never_require_approval": [
                     "operations___service_status",
@@ -102,5 +108,6 @@ def build_agent() -> Agent:
             ValidationStateProvider(),
             CoreStateProvider(),
         ],
-        middleware=[ValidationMiddleware(), ReasonFuseFunctionMiddleware(), HistoryAuditMiddleware()],
+        middleware=[ReasonFuseCompletionMiddleware(), ValidationMiddleware(),
+                    ReasonFuseFunctionMiddleware(), HistoryAuditMiddleware()],
     )

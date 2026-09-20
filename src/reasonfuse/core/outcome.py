@@ -13,6 +13,7 @@ class Postcondition:
     resource_argument: str
     expected_field: str
     expected_value: Any
+    require_generation: bool = True
 
 
 class PostconditionRegistry:
@@ -37,12 +38,17 @@ class OutcomeVerifier:
                *, requested_resource: str) -> dict[str, Any]:
         if accepted_result.get("accepted") is not True:
             return {"outcome": "OUTCOME_UNKNOWN", "reason": "action_not_accepted"}
+        if accepted_result.get("resource", requested_resource) != requested_resource:
+            return {"outcome": "OUTCOME_UNKNOWN", "reason": "mismatched_accepted_resource"}
         postcondition = self.registry.get(action)
+        generation = accepted_result.get("generation")
+        if postcondition.require_generation and (not isinstance(generation, str) or not generation.strip()):
+            return {"outcome": "OUTCOME_UNKNOWN", "reason": "missing_accepted_generation"}
         if not isinstance(observation, dict) or observation.get("resource") != requested_resource:
             return {"outcome": "OUTCOME_UNKNOWN", "reason": "missing_or_mismatched_observation"}
         if observation.get("status") in ("timeout", "unavailable", "malformed", "stale"):
             return {"outcome": "OUTCOME_UNKNOWN", "reason": observation["status"]}
-        if accepted_result.get("generation") is not None and observation.get("generation") != accepted_result["generation"]:
+        if observation.get("generation") != generation:
             return {"outcome": "OUTCOME_UNKNOWN", "reason": "stale_or_missing_generation"}
         if observation.get(postcondition.expected_field) not in ("HEALTHY", "UNHEALTHY", "DEGRADED"):
             return {"outcome": "OUTCOME_UNKNOWN", "reason": "malformed_observation"}

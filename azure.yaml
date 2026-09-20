@@ -33,7 +33,6 @@ services:
                       - operations___service_status
                   always:
                       - operations___restart_service
-                      - operations___reset
     reasonfuse:
         host: azure.ai.agent
         project: .
@@ -53,9 +52,10 @@ services:
             - protocol: responses
               version: 2.0.0
         env:
+            REASONFUSE_PROFILE: runtime
             AZURE_AI_MODEL_DEPLOYMENT_NAME: gpt-5-mini
             OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT: 'false'
-            REASONFUSE_ENABLED: ${REASONFUSE_ENABLED}
+            REASONFUSE_ENABLED: 'true'
             REASONFUSE_CONTRACT_JSON: ${REASONFUSE_CONTRACT_JSON}
             TOOLBOX_NAME: operations-tools
         container:

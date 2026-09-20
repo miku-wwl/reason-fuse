@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 from typing import Any
 
-from agent_framework import FunctionInvocationContext, FunctionMiddleware, MiddlewareTermination
+from agent_framework import FunctionInvocationContext, FunctionMiddleware, FunctionTool, MiddlewareTermination
 from opentelemetry import trace
 
-from reasonfuse.validation.session_state import emit, json_value
+from reasonfuse.telemetry import emit, json_value
+from reasonfuse.runtime import CURRENT_TURN, session_locks
 
 from .contract import RunContract
 from .engine import ReasonFuseEngine, SIDE_EFFECT_TO_RESOURCE
@@ -83,19 +85,47 @@ class ReasonFuseFunctionMiddleware(FunctionMiddleware):
         raw.update(engine.state.to_dict())
 
     async def process(self, context: FunctionInvocationContext, call_next):
+        # A tool batch is concurrent in Agent Framework. Load the snapshot only
+        # after acquiring the lock and hold it through reservation, I/O and save.
+        async with session_locks(context.session).dispatch:
+            try:
+                await self._process_locked(context, call_next)
+            except BaseException:
+                # Include normalization/accounting failures after the actual I/O.
+                # A blocked sibling must leave an unconsumed obligation intact.
+                engine, raw = self._engine(context)
+                lifecycle = engine.state.action_lifecycle or {}
+                pending = engine.state.pending_postcondition or {}
+                if (lifecycle.get("status") == "DISPATCHING"
+                        or pending.get("consumed") and not engine.state.last_postcondition_result):
+                    engine.set_outcome({"outcome": "OUTCOME_UNKNOWN", "reason": "accounting_interrupted"})
+                    self._persist(context, engine, raw)
+                raise
+
+    async def _process_locked(self, context: FunctionInvocationContext, call_next):
         engine, raw = self._engine(context)
+        turn = CURRENT_TURN.get()
+        if turn is not None:
+            turn.tools.update({item.name: item for item in context.tools or [] if isinstance(item, FunctionTool)})
         tool_name = context.function.name
         # Observability must remain callable after containment so the harness can
         # obtain authoritative state. This is read-only and cannot execute an
         # external operation or bypass the fuse for an operational tool.
-        if tool_name == "read_runtime_state":
+        if tool_name in {"read_runtime_state", "read_reasonfuse_state"}:
             await call_next()
             return
         arguments = _arguments(context.arguments)
         core_tool_name = _core_tool_name(tool_name)
         side_effect = core_tool_name in SIDE_EFFECT_TO_RESOURCE
+        if side_effect and not engine._resource(core_tool_name, arguments):
+            raise ValueError("A side effect requires a nonempty resource identity")
         decision = engine.before_dispatch(core_tool_name, arguments)
         if not decision.allow:
+            if side_effect:
+                engine.state.last_proposal = {
+                    "status": "BLOCKED", "action": core_tool_name,
+                    "resource": engine._resource(core_tool_name, arguments), "reason": decision.reason,
+                }
             self._persist(context, engine, raw)
             trace.get_current_span().set_attributes({"reasonfuse.fuse_reason": decision.reason or "",
                                                      "reasonfuse.contract_version": engine.contract.version,
@@ -105,11 +135,20 @@ class ReasonFuseFunctionMiddleware(FunctionMiddleware):
             raise MiddlewareTermination("ReasonFuse contained the run", result=decision.structured_result)
 
         verification = engine.pending_verification(core_tool_name, arguments)
+        engine.begin_dispatch(core_tool_name, arguments, call_id=context.metadata.get("call_id"))
+        if side_effect:
+            engine.state.action_lifecycle["tool_name"] = tool_name
+        self._persist(context, engine, raw)
         failure = None
         try:
             await call_next()
             tool_result = _result(context.result)
-        except MiddlewareTermination:
+        except (asyncio.CancelledError, KeyboardInterrupt, SystemExit, MiddlewareTermination):
+            # A sync tool may still be running in its worker thread. Never infer
+            # rollback from cancellation: retain the reserved attempt and contain.
+            if side_effect or verification:
+                engine.set_outcome({"outcome": "OUTCOME_UNKNOWN", "reason": "dispatch_interrupted"})
+            self._persist(context, engine, raw)
             raise
         except Exception as error:
             failure = error
@@ -121,12 +160,8 @@ class ReasonFuseFunctionMiddleware(FunctionMiddleware):
         todo_state = context.session.state.get("todo", {})
         todo = {str(item["id"]): item.get("status") for item in todo_state.get("items", [])}
         observation = engine.record(core_tool_name, arguments, tool_result, executed=True,
-                                    side_effect=side_effect, approved=approved, todo_snapshot=todo)
+                                    side_effect=side_effect, approved=approved, todo_snapshot=todo, reserved=True)
 
-        if side_effect and approved and tool_result.get("accepted"):
-            pending = engine.state.pending_postcondition or {}
-            pending["accepted_result"] = tool_result
-            engine.state.pending_postcondition = pending
         if verification and engine.state.pending_postcondition:
             pending = engine.state.pending_postcondition
             outcome = OutcomeVerifier().verify(
@@ -135,12 +170,13 @@ class ReasonFuseFunctionMiddleware(FunctionMiddleware):
             )
             engine.set_outcome(outcome)
             tool_result = {"tool_result": tool_result, "outcome": outcome}
-        elif side_effect and failure:
-            engine.set_outcome({"outcome": "OUTCOME_UNKNOWN", "reason": "side_effect_dispatch_failed"})
+        elif side_effect and (failure or tool_result.get("accepted") is not True):
+            engine.set_outcome({"outcome": "OUTCOME_UNKNOWN", "reason": "side_effect_not_confirmed_accepted"})
 
         signals = dict(observation.signals)
         if verification:
             signals["postcondition_delta"] = engine.state.last_postcondition_result["outcome"] == "OUTCOME_VERIFIED"
+            context.result = tool_result
         engine.state.last_signals = signals
         self._persist(context, engine, raw)
         attributes = {f"reasonfuse.{key}": value for key, value in signals.items()}
