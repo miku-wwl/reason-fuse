@@ -1,0 +1,318 @@
+{
+  "created_utc": "2026-09-20T19:43:58.914421+00:00",
+  "purpose": "Integrity index of Git-normalized published file bytes; no self-hash or external attestation. Deployment archive hashes remain in deployment evidence.",
+  "files": {
+    "docs/evidence/p0-foundry/CLEANUP-final.json": {
+      "bytes": 3325,
+      "sha256": "cc07eb633319a291e42f38ae02a55718b2274f86837740a9778b28bd6c793a95"
+    },
+    "docs/evidence/p0-foundry/CLEANUP-fixture-inventory.json": {
+      "bytes": 4980,
+      "sha256": "bb722b25a5d91a0c5002fe59ee07899e483353f3fe92bc1264eff97a8acfc076"
+    },
+    "docs/evidence/p0-foundry/CLEANUP-fixture-request.json": {
+      "bytes": 159,
+      "sha256": "da8211c6e6b4638093a1f2fbff34cb69a1997a5dcdbc616966fdebc5a685d10c"
+    },
+    "docs/evidence/p0-foundry/CLEANUP-owned-sessions-before.json": {
+      "bytes": 3025,
+      "sha256": "eac3e526ba137cc55f0e2893c6494aef4a36897cf3cdc42da7525ff4e2b03bef"
+    },
+    "docs/evidence/p0-foundry/CLEANUP-owned-sessions-result.json": {
+      "bytes": 1108,
+      "sha256": "00da0c0e0fd896135835dc82e025960535b18d46374b89b1c82c559d21f9ba70"
+    },
+    "docs/evidence/p0-foundry/CLEANUP-session-inventory.json": {
+      "bytes": 483,
+      "sha256": "cd92dfec67f5b4508e48a4f6269e27162e93973efa5feb8566c9c58367cf2a65"
+    },
+    "docs/evidence/p0-foundry/CLOUD-1-continuation.json": {
+      "bytes": 20038,
+      "sha256": "9bf88c06599c15ec53c752390ef41bb1422e239602316ebc4ae1634a72802785"
+    },
+    "docs/evidence/p0-foundry/CLOUD-1-initial-fixture.json": {
+      "bytes": 369,
+      "sha256": "d7e042080530ea095005aef2ceff8d35cf35f0cc5ea9ae9f525a0f22079a7b0f"
+    },
+    "docs/evidence/p0-foundry/CLOUD-1-initial-retry.json": {
+      "bytes": 11189,
+      "sha256": "4eec982329e03ee44905cdefbde7779c3427b1c9ca58491dd874b5e1f7c6e257"
+    },
+    "docs/evidence/p0-foundry/CLOUD-1-initial.json": {
+      "bytes": 2272,
+      "sha256": "01ad2599a4ed31b99f14c3d5f520879ef00d110dcf5f7ed8552c16cf5a91cd03"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-agent-conversation.json": {
+      "bytes": 292,
+      "sha256": "a0b1808126eda0b8bf4313b5e74aff602574cbf625beda41c3df623ed0bf91fe"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-conversation-fixture.json": {
+      "bytes": 572,
+      "sha256": "32526819e69712e11666731bc59a38557f796ffa0ac8e4952b6cf5207a0ef5fc"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-conversation-request.json": {
+      "bytes": 2153,
+      "sha256": "3574c4bf9d0e910027191566bb618e24a61ed67396509847958e8dbde8e54aa2"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-conversation.json": {
+      "bytes": 259,
+      "sha256": "cea173498f7d2d8571f55aa720de19607554e3ed8010fa0c8a8075be86bf4038"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-explicit-approved-a.json": {
+      "bytes": 4519,
+      "sha256": "f01b16faaedf3a3948ea5f501b9cbb672836c04c22bc7fbf8dd1c3a5e7d01fcb"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-explicit-approved-b.json": {
+      "bytes": 13307,
+      "sha256": "8f052dd0ed3f48185ad071030d871557c6d57532936150299efb6aaea726cd8a"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-explicit-fixture.json": {
+      "bytes": 572,
+      "sha256": "5e263bca05bde860bbe5d8b75f83f3504eab5f9299fffa7d2c13360acca92b72"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-explicit-request.json": {
+      "bytes": 4023,
+      "sha256": "6d496635bc2d087a9da206a7cc1a22f3b15d3976d65c63ebf583a90955f0ae25"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-fork-approved-a.json": {
+      "bytes": 4458,
+      "sha256": "afdfeca67bf5b51416cc725ea63600591234f049df78b13b5e7cf50d5c3bdfbd"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-fork-approved-b.json": {
+      "bytes": 9526,
+      "sha256": "2f98b4a6eda1d7874d208199da7687d0f2a279c509637a0ab4cf1e10ef74936b"
+    },
+    "docs/evidence/p0-foundry/CLOUD-11-fork-request.json": {
+      "bytes": 3905,
+      "sha256": "12f86f170ebff5263591f5714f442ee6d2720a52c77cb3581adcd71cb35b49f1"
+    },
+    "docs/evidence/p0-foundry/CLOUD-12-composed-inventory.json": {
+      "bytes": 421,
+      "sha256": "678eec4cb6a7380773e7af75811a30449c0ef0f674e488779462db4473706bf3"
+    },
+    "docs/evidence/p0-foundry/CLOUD-12-fixture-inventory.json": {
+      "bytes": 2015,
+      "sha256": "a23748d3351cf070f67edf71bbe15366a60bcb723dbdaac43aee048f18e2f6ba"
+    },
+    "docs/evidence/p0-foundry/CLOUD-12-toolbox-inventory.json": {
+      "bytes": 576,
+      "sha256": "357f3ac425a3ec72a58b523b9df9ff899dca3b3dfdbe5a42a3acebe8892d7f43"
+    },
+    "docs/evidence/p0-foundry/CLOUD-2-request.json": {
+      "bytes": 3793,
+      "sha256": "527e68bcb0c83c81809cf53b2082abcbe277d0463cc8075114214d160f889916"
+    },
+    "docs/evidence/p0-foundry/CLOUD-3-continuation.json": {
+      "bytes": 5311,
+      "sha256": "d38f74838f22462a358e0ac8c9861507e27942dab9e36cc1e751392ce2da50e1"
+    },
+    "docs/evidence/p0-foundry/CLOUD-3-denied.json": {
+      "bytes": 3618,
+      "sha256": "e7fe81b798d2baac7836f9a040a45f470ccff043cb881365a979522777daf837"
+    },
+    "docs/evidence/p0-foundry/CLOUD-4-approved.json": {
+      "bytes": 5819,
+      "sha256": "35610a5413f983ef8326b9666fdcc2a2625a156a4e9fa84a957e9b7a9f5374c8"
+    },
+    "docs/evidence/p0-foundry/CLOUD-4-fixture.json": {
+      "bytes": 572,
+      "sha256": "a9ada485c6d28eed120dfa25c1f2a106f13e244a9fdbd37496cb2568f58d0d92"
+    },
+    "docs/evidence/p0-foundry/CLOUD-4-persisted.json": {
+      "bytes": 8594,
+      "sha256": "3353edb0f79d6fd774bae871b9680ef9b7cc23e189ea9430f4173ff8ded7e15e"
+    },
+    "docs/evidence/p0-foundry/CLOUD-4-request.json": {
+      "bytes": 4386,
+      "sha256": "302b6b3516e72f149e2fe308c2ce0530a03fcf1be0797788c041c0823a0f424c"
+    },
+    "docs/evidence/p0-foundry/CLOUD-5-6-9-stream.json": {
+      "bytes": 25331,
+      "sha256": "2cf45da15cbf5ac97cfdf9d7ac713bed28216513b38acc2b20daf654b2885448"
+    },
+    "docs/evidence/p0-foundry/CLOUD-5-fixture.json": {
+      "bytes": 572,
+      "sha256": "6caf390d02a81c8d956f6ffc41bf57a3e15ee1261441b7bdf923ae63541f9998"
+    },
+    "docs/evidence/p0-foundry/CLOUD-5-request.json": {
+      "bytes": 3711,
+      "sha256": "b29ff671516dba37cdc8d6fed268cdd944e9f5fb269fb56884be8a00b4ae74b3"
+    },
+    "docs/evidence/p0-foundry/CLOUD-7-approved.json": {
+      "bytes": 9312,
+      "sha256": "f7a81d5499fa40df5e7fecfceb58d6d60c58a8e8136b0a6c52b1738961984ebd"
+    },
+    "docs/evidence/p0-foundry/CLOUD-7-fixture.json": {
+      "bytes": 570,
+      "sha256": "4fceef4d9ded2c565fdf239acc9c2692fd2bbbcd055c8a015a831a99b42a68fd"
+    },
+    "docs/evidence/p0-foundry/CLOUD-7-replay-approved.json": {
+      "bytes": 5381,
+      "sha256": "de63442a041e0a38f42d301b92e27e13f2195e47912877d0b7f46f0d5b17f1c9"
+    },
+    "docs/evidence/p0-foundry/CLOUD-7-replay-request.json": {
+      "bytes": 5924,
+      "sha256": "97a0deb935c0ec02bd96c580d8a9630af8711e891f1c029d10bbed1bc888d4ff"
+    },
+    "docs/evidence/p0-foundry/CLOUD-7-request.json": {
+      "bytes": 3955,
+      "sha256": "3d07e01d8ddf240af85035f773a02dab744c22b8dc99022b4792fc4f671f13ca"
+    },
+    "docs/evidence/p0-foundry/CLOUD-8-approved.json": {
+      "bytes": 5791,
+      "sha256": "dbe84c9234920d10e067ae28b9b510c16d563f34bede683b0fd1b2744a887413"
+    },
+    "docs/evidence/p0-foundry/CLOUD-8-fixture.json": {
+      "bytes": 571,
+      "sha256": "77b0b731bc323d976fd91267b2a2386cd210c66342a48465d2cddf3cdbdad398"
+    },
+    "docs/evidence/p0-foundry/CLOUD-8-replay-approved.json": {
+      "bytes": 5073,
+      "sha256": "e4816f48a9e6b968a1354f6a8353a09ad966b0b628bee7d3fa34c07658c1fe86"
+    },
+    "docs/evidence/p0-foundry/CLOUD-8-replay-request.json": {
+      "bytes": 5638,
+      "sha256": "3562358b2e6eaea206f7ce140cd98c67266137b542db0194ed0c2b577214610b"
+    },
+    "docs/evidence/p0-foundry/CLOUD-8-request.json": {
+      "bytes": 4611,
+      "sha256": "09378b64d8279fcd829f5f58cf52ff70edf0decaba417aa52bc4d135af61c7c0"
+    },
+    "docs/evidence/p0-foundry/DEPLOY-agent-v7.json": {
+      "bytes": 2086,
+      "sha256": "d37d09cd14bdc0560ee190a1768197af757558ac2209eec87349dd2259e99d3a"
+    },
+    "docs/evidence/p0-foundry/DEPLOY-agent-v8.json": {
+      "bytes": 1777,
+      "sha256": "6b5d22889f415abf0306768ed6c5c05f586226a55e81f92273be83fcfd8062f7"
+    },
+    "docs/evidence/p0-foundry/DEPLOY-source-verification.json": {
+      "bytes": 1369,
+      "sha256": "f1ef3c0261cf4be5c909acbb61097577292577178182d5a4552671becfda7327"
+    },
+    "docs/evidence/p0-foundry/DEPLOY-toolbox-default-correction.json": {
+      "bytes": 1075,
+      "sha256": "3a201db297b7574c0a624b19db6e6908e53dd14bc3836fcfc723ade62e4f8176"
+    },
+    "docs/evidence/p0-foundry/DEPLOY-v8-allowlist-verification.json": {
+      "bytes": 1149,
+      "sha256": "0302ea78d5ca37726b12d75e7964d8284d9d698939197e2cac73ddd698e3384d"
+    },
+    "docs/evidence/p0-foundry/DEPLOY-v8-package-retry.json": {
+      "bytes": 1267,
+      "sha256": "13daf2d3eba176fe9b4242c19166771337f2b4db52c782bf2e515d65fc6e0f4d"
+    },
+    "docs/evidence/p0-foundry/DEPLOY-v8-package.json": {
+      "bytes": 4809,
+      "sha256": "125319455a22520f803e116746433d5347c3e61812b208b54da8999a0ffd06a8"
+    },
+    "docs/evidence/p0-foundry/DEPLOY-v8-source-verification.json": {
+      "bytes": 1122,
+      "sha256": "0ebed3987ca46d54f70cc47effb4f326d4844df9f353916e58a7b10c6463e6b8"
+    },
+    "docs/evidence/p0-foundry/LOCAL-final-validation.json": {
+      "bytes": 685,
+      "sha256": "cdce08fe1b51fe322fe8efb0d28d815b01f47cabb7ad0ee176366ec10c2d4f4a"
+    },
+    "docs/evidence/p0-foundry/LOCAL-v8-regression.json": {
+      "bytes": 857345,
+      "sha256": "a9bfe508ca9ab99ab9d9aae3eebce335fb02a2f708017073746c7834ddd90a19"
+    },
+    "docs/evidence/p0-foundry/scenario-index.json": {
+      "bytes": 4922,
+      "sha256": "8b80e1d0c41a0b4313b53060fabc6875e645b36d1f2c445a7ca4daed6732ddf6"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-1-initial.json": {
+      "bytes": 17606,
+      "sha256": "4d5dc9da01503e0b4d2c54599953a1fb0bc00566ee710de09f00ac5303758fd0"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-1-persisted.json": {
+      "bytes": 8325,
+      "sha256": "29ba2573c1cc87a1799ac853d7e36e55f0de1a4981417d232ad5e0aca3c537a3"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-conversation.json": {
+      "bytes": 287,
+      "sha256": "72ac2a17d9e6dd0aa73e7c1f1bc8fa6ee2585dfc4583e1eebe956a584bc1ad18"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-explicit-approved-a.json": {
+      "bytes": 4519,
+      "sha256": "63fe9f451da056bd6792c4628ab8a42bac3ff92b4079e36172b94dbe0a5283d5"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-explicit-approved-b.json": {
+      "bytes": 9590,
+      "sha256": "95b3ce9610762b0b7fda97bdedb7fb6dfc1e3555639a97c87808ac6b4c8af32c"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-explicit-fixture.json": {
+      "bytes": 572,
+      "sha256": "af9e1826df738d3914860176ff3f3d2969193e5db7c7422da3812d14594f5be0"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-explicit-readback.json": {
+      "bytes": 9175,
+      "sha256": "356078157a9011c766ddcc041a633c9d76a37f3c1e7e006ccd741e6ceffbb312"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-explicit-request.json": {
+      "bytes": 4017,
+      "sha256": "47fe63b4b489b09b8ea866a477249efe6d841beebd5d4b1d9103930f5af3df21"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-fork-approved-a.json": {
+      "bytes": 9165,
+      "sha256": "878178b6ffd3bb851b2eeaeae2e9ba5675ff6ea123ac85293e086e41611edcf1"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-fork-approved-b.json": {
+      "bytes": 2119,
+      "sha256": "58e8d64cb4570c2a46a57eee04b057c2b5d35356e7dd23d0149d520163b95b89"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-fork-fixture.json": {
+      "bytes": 572,
+      "sha256": "efe7a2af4969964c5c701a48b63baa7d19cb9fa917af768a0f91975c34016bdf"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-fork-request.json": {
+      "bytes": 6158,
+      "sha256": "d4cb858df2e16838f2aa97c33fc697b56b4070d282debb6b3f68077447f0536e"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-native-logs.json": {
+      "bytes": 55069,
+      "sha256": "4af67efdb9759871bad8c2daa6ae0b6982e2749921b3df54e98fa5a6c07adaa3"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-stale-replay.json": {
+      "bytes": 3690,
+      "sha256": "40d7f0e39229b0fa4c952622648c9989ca2c03c1491e14e3de89c048da16dd28"
+    },
+    "docs/evidence/p0-foundry/V8-CLOUD-11-store-false.json": {
+      "bytes": 3561,
+      "sha256": "52c7d47bf64f0ecb5853b1d9d68a0a6ba2756cfe6ad64acc049ff7c9862cb1c6"
+    },
+    "docs/evidence/p0-foundry-cloud-validation.md": {
+      "bytes": 19641,
+      "sha256": "5fbc8d4db77d590201b7d88940c5b7f5e32f23ee029f2aadf0763e45f0587a4c"
+    },
+    "scripts/p0_foundry_cloud.py": {
+      "bytes": 10492,
+      "sha256": "69e19cbb3eccad3406fa3fa6e3223a0f63437a46826066ce1e72fe5a1cdd5611"
+    },
+    "scripts/check_p0_cloud_evidence.py": {
+      "bytes": 9020,
+      "sha256": "7991a31dbe4c0beea061a51b85968e1ff59ad9622b274cadebf2cf2eb421be1f"
+    },
+    "src/reasonfuse/main.py": {
+      "bytes": 1651,
+      "sha256": "721ccf2522e90a9d54d2c1d02c31e3d8f30fdf605f2e9d4fd1fab1038e920841"
+    },
+    "tests/test_cloud_hosting.py": {
+      "bytes": 2941,
+      "sha256": "b1e0f0814b44a7737d70bc338c64471679e0a65b77528770ab610d33f2bcd0ba"
+    },
+    "tests/test_cloud_fixture_evidence.py": {
+      "bytes": 2233,
+      "sha256": "a536396744437b132e5eff3efdae057bc395020ed662f0c400d860e069124c2e"
+    },
+    "cloud/operations-mcp/server.py": {
+      "bytes": 7281,
+      "sha256": "76cb38d1807f980835cd768ea10a9f62c4e5a428649e2502236e8178545738f7"
+    },
+    "cloud/operations-mcp/README.md": {
+      "bytes": 1305,
+      "sha256": "4bace8f95a683f43a6c3faf77a49fd6342989b92bb832827d8a960f75a87e1fe"
+    }
+  }
+}

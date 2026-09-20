@@ -1,0 +1,136 @@
+{
+  "timestamp_utc": "2026-09-20T10:29:46.854503+00:00",
+  "group": {
+    "id": "/subscriptions/redacted-c47f784e01bbe4e7/resourceGroups/rg-reasonfuse-p0-validation",
+    "location": "australiaeast",
+    "managedBy": null,
+    "name": "rg-reasonfuse-p0-validation",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": {
+      "purpose": "reasonfuse-p0-cloud-validation",
+      "source": "e781349",
+      "temporary": "true"
+    },
+    "type": "Microsoft.Resources/resourceGroups"
+  },
+  "resources": [
+    {
+      "changedTime": "2026-09-20T01:00:34.082871+00:00",
+      "createdTime": "2026-09-20T00:49:01.755578+00:00",
+      "extendedLocation": null,
+      "id": "/subscriptions/redacted-c47f784e01bbe4e7/resourceGroups/rg-reasonfuse-p0-validation/providers/Microsoft.App/managedEnvironments/reasonfuse-p0-env",
+      "identity": null,
+      "kind": null,
+      "location": "australiaeast",
+      "managedBy": null,
+      "name": "reasonfuse-p0-env",
+      "plan": null,
+      "properties": null,
+      "provisioningState": "Succeeded",
+      "resourceGroup": "rg-reasonfuse-p0-validation",
+      "sku": null,
+      "systemData": {
+        "createdAt": "2026-09-20T00:49:01.7751026Z",
+        "createdBy": "<redacted-email>",
+        "createdByType": "User",
+        "lastModifiedAt": "2026-09-20T00:49:01.7751026Z",
+        "lastModifiedBy": "<redacted-email>",
+        "lastModifiedByType": "User"
+      },
+      "tags": null,
+      "type": "Microsoft.App/managedEnvironments"
+    },
+    {
+      "changedTime": "2026-09-20T00:59:07.587065+00:00",
+      "createdTime": "2026-09-20T00:49:07.001118+00:00",
+      "extendedLocation": null,
+      "id": "/subscriptions/redacted-c47f784e01bbe4e7/resourceGroups/rg-reasonfuse-p0-validation/providers/Microsoft.ContainerRegistry/registries/rfp0e7813490920",
+      "identity": null,
+      "kind": null,
+      "location": "australiaeast",
+      "managedBy": null,
+      "name": "rfp0e7813490920",
+      "plan": null,
+      "properties": null,
+      "provisioningState": "Succeeded",
+      "resourceGroup": "rg-reasonfuse-p0-validation",
+      "sku": {
+        "capacity": null,
+        "family": null,
+        "model": null,
+        "name": "Basic",
+        "size": null,
+        "tier": "Basic"
+      },
+      "systemData": {
+        "createdAt": "2026-09-20T00:49:07.0166729Z",
+        "createdBy": "<redacted-email>",
+        "createdByType": "User",
+        "lastModifiedAt": "2026-09-20T00:49:07.0166729Z",
+        "lastModifiedBy": "<redacted-email>",
+        "lastModifiedByType": "User"
+      },
+      "tags": {
+        "purpose": "reasonfuse-p0-cloud-validation"
+      },
+      "type": "Microsoft.ContainerRegistry/registries"
+    },
+    {
+      "changedTime": "2026-09-20T01:00:08.817205+00:00",
+      "createdTime": "2026-09-20T00:50:07.760028+00:00",
+      "extendedLocation": null,
+      "id": "/subscriptions/redacted-c47f784e01bbe4e7/resourceGroups/rg-reasonfuse-p0-validation/providers/Microsoft.ManagedIdentity/userAssignedIdentities/reasonfuse-p0-pull",
+      "identity": null,
+      "kind": null,
+      "location": "australiaeast",
+      "managedBy": null,
+      "name": "reasonfuse-p0-pull",
+      "plan": null,
+      "properties": null,
+      "provisioningState": "Succeeded",
+      "resourceGroup": "rg-reasonfuse-p0-validation",
+      "sku": null,
+      "tags": {},
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+    },
+    {
+      "changedTime": "2026-09-20T01:03:22.299576+00:00",
+      "createdTime": "2026-09-20T00:52:42.869074+00:00",
+      "extendedLocation": null,
+      "id": "/subscriptions/redacted-c47f784e01bbe4e7/resourceGroups/rg-reasonfuse-p0-validation/providers/Microsoft.App/containerApps/reasonfuse-p0-operations",
+      "identity": {
+        "principalId": null,
+        "tenantId": null,
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/7c73b89d-485e-43a9-8d66-b12b766d567f/resourcegroups/rg-reasonfuse-p0-validation/providers/Microsoft.ManagedIdentity/userAssignedIdentities/reasonfuse-p0-pull": {
+            "clientId": "redacted-80107c2f61d73a4c",
+            "principalId": "redacted-8e2dc1297e620708"
+          }
+        }
+      },
+      "kind": null,
+      "location": "australiaeast",
+      "managedBy": null,
+      "name": "reasonfuse-p0-operations",
+      "plan": null,
+      "properties": null,
+      "provisioningState": "Succeeded",
+      "resourceGroup": "rg-reasonfuse-p0-validation",
+      "sku": null,
+      "systemData": {
+        "createdAt": "2026-09-20T00:52:42.8798001Z",
+        "createdBy": "<redacted-email>",
+        "createdByType": "User",
+        "lastModifiedAt": "2026-09-20T00:58:59.0216844Z",
+        "lastModifiedBy": "<redacted-email>",
+        "lastModifiedByType": "User"
+      },
+      "tags": null,
+      "type": "Microsoft.App/containerApps"
+    }
+  ],
+  "decision": "delete only this gate-created temporary resource group after all backend evidence captured"
+}

@@ -1,0 +1,12 @@
+{
+  "timestamp_utc": "2026-09-20T10:23:02.524860+00:00",
+  "namespace": "agent endpoint",
+  "conversation": {
+    "id": "redacted-ca0b3c88befb934f",
+    "created_at": 1789899781,
+    "metadata": {
+      "purpose": "reasonfuse-p0-v8-concurrency"
+    },
+    "object": "conversation"
+  }
+}

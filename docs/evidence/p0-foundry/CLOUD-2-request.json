@@ -1,0 +1,119 @@
+{
+  "started_utc": "2026-09-20T07:02:23.979047+00:00",
+  "request": {
+    "input": "Request one restart of orders by calling the restart_service operation now. Use native approval. Do not call service_status first.",
+    "store": true,
+    "stream": false,
+    "max_output_tokens": 5000,
+    "previous_response_id": "redacted-74314d7599624ce0"
+  },
+  "agent_version": "7",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 200,
+  "response": {
+    "id": "redacted-2b8a49363d42aa95",
+    "object": "response",
+    "output": [
+      {
+        "type": "function_call",
+        "id": "fc_0ca2f43672f1d03a00tUjweBRHyXNBl4hQDZIBEVUAQxSWtnNO",
+        "call_id": "call_6D0dvz2vCVbYWyBm7hYTQ0dM",
+        "name": "reasonfuse-operations___operations___restart_service",
+        "arguments": "{\"service_name\":\"orders\"}",
+        "status": "completed",
+        "response_id": "redacted-2b8a49363d42aa95",
+        "agent_reference": null
+      },
+      {
+        "type": "mcp_approval_request",
+        "id": "redacted-abf35d1f3b9acf8e",
+        "server_label": "agent_framework",
+        "name": "reasonfuse-operations___operations___restart_service",
+        "arguments": "{\"service_name\":\"orders\"}",
+        "response_id": "redacted-2b8a49363d42aa95",
+        "agent_reference": null
+      },
+      {
+        "type": "message",
+        "id": "msg_0ca2f43672f1d03a0015v91P0kTUStCjedg1ECAJVZhHsBiyXl",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "{\"action_lifecycle\": null, \"contained\": false, \"outcome\": \"APPROVAL_REQUIRED\", \"postcondition\": null, \"proposal\": {\"action\": \"restart_service\", \"approval_id\": \"af-call-898b35af90184f5284a9048a3513a9a9\", \"resource\": \"orders\", \"status\": \"APPROVAL_REQUIRED\"}, \"side_effect_count\": 0}",
+            "annotations": [],
+            "logprobs": []
+          }
+        ],
+        "status": "completed",
+        "response_id": "redacted-2b8a49363d42aa95",
+        "agent_reference": null
+      }
+    ],
+    "created_at": 1789887744,
+    "parallel_tool_calls": false,
+    "status": "completed",
+    "completed_at": 1789887751,
+    "usage": {
+      "input_tokens": 6564,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 506,
+      "output_tokens_details": {
+        "reasoning_tokens": 448
+      },
+      "total_tokens": 7070
+    },
+    "response_id": "redacted-2b8a49363d42aa95",
+    "agent_reference": {
+      "type": "agent_reference",
+      "name": "reasonfuse",
+      "version": "7"
+    },
+    "model": "",
+    "agent_session_id": "redacted-5ac80b5c5698038e",
+    "background": false
+  },
+  "unsupported_claim_leaked": false,
+  "elapsed_seconds": 7.090458,
+  "completed_utc": "2026-09-20T07:02:31.404291+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

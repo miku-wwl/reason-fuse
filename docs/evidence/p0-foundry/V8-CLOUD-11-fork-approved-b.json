@@ -1,0 +1,74 @@
+{
+  "started_utc": "2026-09-20T10:22:36.696035+00:00",
+  "request": {
+    "input": [
+      {
+        "type": "mcp_approval_response",
+        "approval_request_id": "redacted-52e7608a756c350a",
+        "approve": true
+      }
+    ],
+    "store": true,
+    "stream": false,
+    "max_output_tokens": 5000,
+    "previous_response_id": "redacted-5e418532449760ce"
+  },
+  "agent_version": "8",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 409,
+  "response_headers": {
+    "date": "Sun, 20 Sep 2026 10:22:36 GMT",
+    "x-agent-session-id": "redacted-29e6b00ba473fb18"
+  },
+  "response": {
+    "error": {
+      "message": "This agent does not support conversation forking. previous_response_id must reference the most recent response in the conversation.",
+      "type": "conflict",
+      "code": "conversation_fork_not_supported",
+      "param": "previous_response_id"
+    }
+  },
+  "exception": {
+    "type": "HTTPStatusError",
+    "message": "Client error '409 Conflict' for url 'redacted-af561d4ead8431fb'\nFor more information check: redacted-716c9a1efe85a2b6"
+  },
+  "elapsed_seconds": 0.528207,
+  "completed_utc": "2026-09-20T10:22:37.398602+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

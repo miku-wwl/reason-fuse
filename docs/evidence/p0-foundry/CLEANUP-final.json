@@ -1,0 +1,124 @@
+{
+  "timestamp_utc": "2026-09-20T10:35:08.253001+00:00",
+  "temporary_resource_group_exists": false,
+  "owned_sessions_remaining": [
+    {
+      "agent_session_id": "redacted-27292c2c111d62a0",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "7"
+      },
+      "status": "deleted",
+      "created_at": 1789888567,
+      "last_accessed_at": 1789888567,
+      "expires_at": 1792480567
+    },
+    {
+      "agent_session_id": "redacted-5ac80b5c5698038e",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "7"
+      },
+      "status": "deleted",
+      "created_at": 1789888853,
+      "last_accessed_at": 1789888853,
+      "expires_at": 1792480853
+    },
+    {
+      "agent_session_id": "redacted-96e0f2b24f524794",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "7"
+      },
+      "status": "deleted",
+      "created_at": 1789889163,
+      "last_accessed_at": 1789889163,
+      "expires_at": 1792481163
+    },
+    {
+      "agent_session_id": "redacted-4dd28f3e1b7f3718",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "7"
+      },
+      "status": "deleted",
+      "created_at": 1789889347,
+      "last_accessed_at": 1789889347,
+      "expires_at": 1792481347
+    },
+    {
+      "agent_session_id": "redacted-face07277e0ba33a",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "7"
+      },
+      "status": "deleted",
+      "created_at": 1789900027,
+      "last_accessed_at": 1789900027,
+      "expires_at": 1792492027
+    },
+    {
+      "agent_session_id": "redacted-026beb35fe7d8466",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "7"
+      },
+      "status": "deleted",
+      "created_at": 1789900087,
+      "last_accessed_at": 1789900087,
+      "expires_at": 1792492087
+    },
+    {
+      "agent_session_id": "redacted-5a050452885d9ae3",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "7"
+      },
+      "status": "deleted",
+      "created_at": 1789900276,
+      "last_accessed_at": 1789900276,
+      "expires_at": 1792492276
+    },
+    {
+      "agent_session_id": "redacted-5890cfb829b3b963",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "7"
+      },
+      "status": "deleted",
+      "created_at": 1789899169,
+      "last_accessed_at": 1789899169,
+      "expires_at": 1792491169
+    },
+    {
+      "agent_session_id": "redacted-29e6b00ba473fb18",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "8"
+      },
+      "status": "deleted",
+      "created_at": 1789899637,
+      "last_accessed_at": 1789899637,
+      "expires_at": 1792491637
+    },
+    {
+      "agent_session_id": "redacted-b4ce70a24a1f3624",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "8"
+      },
+      "status": "deleted",
+      "created_at": 1789899868,
+      "last_accessed_at": 1789899868,
+      "expires_at": 1792491868
+    }
+  ],
+  "agent_v8_status": "AgentVersionStatus.ACTIVE",
+  "preserved": [
+    "rg-reason-fuse",
+    "Foundry project reason-fuse",
+    "reasonfuse agent versions 6/7/8",
+    "operations-tools Toolbox definitions"
+  ],
+  "fixture_endpoint_retired": true
+}

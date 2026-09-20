@@ -1,0 +1,137 @@
+{
+  "started_utc": "2026-09-20T07:05:31.749956+00:00",
+  "request": {
+    "input": "Restart the orders service once. Submit the restart operation immediately for native approval.",
+    "store": true,
+    "stream": false,
+    "max_output_tokens": 5000
+  },
+  "agent_version": "7",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 200,
+  "response": {
+    "id": "redacted-0b396c92475499b1",
+    "object": "response",
+    "output": [
+      {
+        "type": "function_call",
+        "id": "fc_0c5ee35f470ffd3a00e9Fmc48uzjvmPz5vy9E3tkSZ1dXKmH2y",
+        "call_id": "call_4q3oHfNtP05L1aM36wcE3JCY",
+        "name": "mode_get",
+        "arguments": "{}",
+        "status": "completed",
+        "response_id": "redacted-0b396c92475499b1",
+        "agent_reference": null
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_0c5ee35f470ffd3a00ny6GRBx3Biqo6tsSwgYM9rhRjIQpyjIQ",
+        "call_id": "call_4q3oHfNtP05L1aM36wcE3JCY",
+        "output": "{\"mode\": \"validate\"}",
+        "status": "completed",
+        "response_id": "redacted-0b396c92475499b1",
+        "agent_reference": null
+      },
+      {
+        "type": "function_call",
+        "id": "fc_0c5ee35f470ffd3a005PMcTK2gzOKIjSJ4Nwk1Ofi4co4ofNUd",
+        "call_id": "call_XF607NSLVryJoGN4c7Dclx24",
+        "name": "reasonfuse-operations___operations___restart_service",
+        "arguments": "{\"service_name\":\"orders\"}",
+        "status": "completed",
+        "response_id": "redacted-0b396c92475499b1",
+        "agent_reference": null
+      },
+      {
+        "type": "mcp_approval_request",
+        "id": "redacted-cce13eb6daa35f4f",
+        "server_label": "agent_framework",
+        "name": "reasonfuse-operations___operations___restart_service",
+        "arguments": "{\"service_name\":\"orders\"}",
+        "response_id": "redacted-0b396c92475499b1",
+        "agent_reference": null
+      },
+      {
+        "type": "message",
+        "id": "msg_0c5ee35f470ffd3a001ZQhQ7PBsz1Ut92rk7OeAARJpVR7Hkev",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "{\"action_lifecycle\": null, \"contained\": false, \"outcome\": \"APPROVAL_REQUIRED\", \"postcondition\": null, \"proposal\": {\"action\": \"restart_service\", \"approval_id\": \"af-call-ed5ffeff4237403eb94cb58260144f64\", \"resource\": \"orders\", \"status\": \"APPROVAL_REQUIRED\"}, \"side_effect_count\": 0}",
+            "annotations": [],
+            "logprobs": []
+          }
+        ],
+        "status": "completed",
+        "response_id": "redacted-0b396c92475499b1",
+        "agent_reference": null
+      }
+    ],
+    "created_at": 1789887940,
+    "parallel_tool_calls": false,
+    "status": "completed",
+    "completed_at": 1789887950,
+    "usage": {
+      "input_tokens": 2063,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 620,
+      "output_tokens_details": {
+        "reasoning_tokens": 576
+      },
+      "total_tokens": 2683
+    },
+    "response_id": "redacted-0b396c92475499b1",
+    "agent_reference": {
+      "type": "agent_reference",
+      "name": "reasonfuse",
+      "version": "7"
+    },
+    "model": "",
+    "agent_session_id": "redacted-96e0f2b24f524794",
+    "background": false
+  },
+  "unsupported_claim_leaked": false,
+  "elapsed_seconds": 18.413085,
+  "completed_utc": "2026-09-20T07:05:51.626656+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

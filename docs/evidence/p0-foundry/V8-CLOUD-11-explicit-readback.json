@@ -1,0 +1,208 @@
+{
+  "started_utc": "2026-09-20T10:28:18.047512+00:00",
+  "request": {
+    "input": "Read read_reasonfuse_state exactly once. Do not invoke restart or service_status. Return the current state.",
+    "store": true,
+    "stream": false,
+    "max_output_tokens": 5000,
+    "conversation": "redacted-ca0b3c88befb934f"
+  },
+  "agent_version": "8",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "HEALTHY",
+    "generation": "g2",
+    "restart_pending": false,
+    "restart_count": 1,
+    "restart_attempt_count": 2,
+    "status_read_count": 1,
+    "last_action": "restart_service",
+    "events": [
+      {
+        "sequence": 1,
+        "timestamp_utc": "2026-09-20T10:25:05.821033+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": true,
+          "status_code": 202,
+          "resource": "orders",
+          "operation_id": "test-orders-g2",
+          "generation": "g2",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp_utc": "2026-09-20T10:25:06.213379+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": false,
+          "status_code": 409,
+          "resource": "orders",
+          "reason": "restart already executed for this test state",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 3,
+        "timestamp_utc": "2026-09-20T10:25:25.065542+00:00",
+        "operation": "service_status",
+        "result": {
+          "resource": "orders",
+          "generation": "g2",
+          "service_health": "HEALTHY",
+          "world_state": {
+            "service_name": "orders",
+            "service_health": "HEALTHY",
+            "generation": "g2"
+          }
+        }
+      }
+    ],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 200,
+  "response_headers": {
+    "date": "Sun, 20 Sep 2026 10:28:31 GMT",
+    "x-agent-session-id": "redacted-b4ce70a24a1f3624"
+  },
+  "response": {
+    "id": "redacted-68eb53914edf14a0",
+    "object": "response",
+    "output": [
+      {
+        "type": "function_call",
+        "id": "fc_0bf10ccc876a796000CFgQ5ScUQd8EaaH84jSFhVVfunLPioES",
+        "call_id": "call_KUTmXTpWVRyr1t2YwYuOI50w",
+        "name": "read_reasonfuse_state",
+        "arguments": "{}",
+        "status": "completed",
+        "response_id": "redacted-68eb53914edf14a0",
+        "agent_reference": null
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_0bf10ccc876a796000jUZ4OWh5icUfNl7cRzxneTblBcq7qtVY",
+        "call_id": "call_KUTmXTpWVRyr1t2YwYuOI50w",
+        "output": "{\"action_lifecycle\": {\"accepted\": true, \"action\": \"restart_service\", \"call_id\": \"call_SSarg8gDO59KXrK3zHee20Jh\", \"generation\": \"g2\", \"reason\": \"fresh_postcondition_observation\", \"resource\": \"orders\", \"status\": \"VERIFIED\", \"tool_name\": \"reasonfuse-operations___operations___restart_service\"}, \"agent_session_id\": \"redacted-b4ce70a24a1f3624\", \"blocked_proposal_count\": 0, \"contained\": false, \"contract_limits\": {\"max_oscillation_cycles\": 2, \"max_retrieval_churn\": 3, \"max_side_effects\": 1, \"max_stalled_steps\": 2, \"max_steps\": 12, \"max_tool_calls\": 10, \"require_postcondition_for_side_effects\": true, \"required_objective_progress_interval\": 2, \"version\": \"reasonfuse-contract-v1\"}, \"conversation_id\": null, \"core_state_version\": \"reasonfuse-core-v1\", \"denied_proposal_count\": 0, \"event_count\": 2, \"evidence_keys\": [], \"failed_call_count\": 0, \"framework_session_id\": \"redacted-c11d4b44b315044a\", \"fuse_reason\": null, \"last_objective_progress_step\": 2, \"last_postcondition_result\": {\"outcome\": \"OUTCOME_VERIFIED\", \"reason\": \"fresh_postcondition_observation\"}, \"last_proposal\": null, \"last_retrieval\": {}, \"last_signals\": {\"evidence_delta\": false, \"postcondition_delta\": true, \"retrieval_delta\": false, \"todo_delta\": false, \"useful_recheck\": true, \"world_state_delta\": true}, \"oscillation_counter\": 0, \"pending_postcondition\": null, \"progress_history\": [false, true], \"progress_state\": \"PROGRESS\", \"reasonfuse_enabled\": true, \"recent_action_fingerprints\": [\"2d67f599c00e371435f3f02f01856541629388c196475b2151f1ae7f1726e8dd\", \"a22488bc22afc0ba31844b675664005b81838bcfc8cf500db6fe68530a36136c\"], \"recent_actions\": [{\"executed\": true, \"fingerprint\": \"2d67f599c00e371435f3f02f01856541629388c196475b2151f1ae7f1726e8dd\", \"result_class\": \"58b20a160ed7772c\", \"side_effect\": true, \"tool_name\": \"restart_service\", \"useful_recheck\": false}, {\"executed\": true, \"fingerprint\": \"a22488bc22afc0ba31844b675664005b81838bcfc8cf500db6fe68530a36136c\", \"result_class\": \"de912fbf26cac70f\", \"side_effect\": false, \"tool_name\": \"service_status\", \"useful_recheck\": true}], \"retrieval_attempts\": [], \"retrieval_churn_counter\": 0, \"retrieval_evidence_keys\": [], \"run_contract_version\": \"reasonfuse-contract-v1\", \"run_id\": \"run-1d68684a97a74ebea4f753b4d1169c2f\", \"runtime_profile\": \"runtime\", \"side_effect_count\": 1, \"stall_counter\": 0, \"step_index\": 2, \"todo_snapshot\": {}, \"tool_call_count\": 2, \"trajectory_state\": \"ACTIVE\", \"verification_reserve_available\": false, \"world_state_snapshot\": {\"orders\": {\"generation\": \"g2\", \"service_health\": \"HEALTHY\", \"service_name\": \"orders\"}}}",
+        "status": "completed",
+        "response_id": "redacted-68eb53914edf14a0",
+        "agent_reference": null
+      },
+      {
+        "type": "message",
+        "id": "msg_0bf10ccc876a796000Fmp7ag5AmnBxPQ7mve86wez5f6tSeVdJ",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "{\"action_lifecycle\": {\"accepted\": true, \"action\": \"restart_service\", \"call_id\": \"call_SSarg8gDO59KXrK3zHee20Jh\", \"generation\": \"g2\", \"reason\": \"fresh_postcondition_observation\", \"resource\": \"orders\", \"status\": \"VERIFIED\", \"tool_name\": \"reasonfuse-operations___operations___restart_service\"}, \"contained\": false, \"outcome\": \"OUTCOME_VERIFIED\", \"postcondition\": {\"outcome\": \"OUTCOME_VERIFIED\", \"reason\": \"fresh_postcondition_observation\"}, \"proposal\": null, \"side_effect_count\": 1}",
+            "annotations": [],
+            "logprobs": []
+          }
+        ],
+        "status": "completed",
+        "response_id": "redacted-68eb53914edf14a0",
+        "agent_reference": null
+      }
+    ],
+    "created_at": 1789900099,
+    "parallel_tool_calls": false,
+    "status": "completed",
+    "completed_at": 1789900111,
+    "usage": {
+      "input_tokens": 5878,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1179,
+      "output_tokens_details": {
+        "reasoning_tokens": 384
+      },
+      "total_tokens": 7057
+    },
+    "response_id": "redacted-68eb53914edf14a0",
+    "agent_reference": {
+      "type": "agent_reference",
+      "name": "reasonfuse",
+      "version": "8"
+    },
+    "model": "",
+    "agent_session_id": "redacted-b4ce70a24a1f3624",
+    "conversation": {
+      "id": "redacted-ca0b3c88befb934f"
+    },
+    "background": false
+  },
+  "unsupported_claim_leaked": false,
+  "elapsed_seconds": 13.7468,
+  "completed_utc": "2026-09-20T10:28:32.308555+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "HEALTHY",
+    "generation": "g2",
+    "restart_pending": false,
+    "restart_count": 1,
+    "restart_attempt_count": 2,
+    "status_read_count": 1,
+    "last_action": "restart_service",
+    "events": [
+      {
+        "sequence": 1,
+        "timestamp_utc": "2026-09-20T10:25:05.821033+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": true,
+          "status_code": 202,
+          "resource": "orders",
+          "operation_id": "test-orders-g2",
+          "generation": "g2",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp_utc": "2026-09-20T10:25:06.213379+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": false,
+          "status_code": 409,
+          "resource": "orders",
+          "reason": "restart already executed for this test state",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 3,
+        "timestamp_utc": "2026-09-20T10:25:25.065542+00:00",
+        "operation": "service_status",
+        "result": {
+          "resource": "orders",
+          "generation": "g2",
+          "service_health": "HEALTHY",
+          "world_state": {
+            "service_name": "orders",
+            "service_health": "HEALTHY",
+            "generation": "g2"
+          }
+        }
+      }
+    ],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

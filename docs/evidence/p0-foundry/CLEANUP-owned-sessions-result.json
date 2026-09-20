@@ -1,0 +1,45 @@
+{
+  "timestamp_utc": "2026-09-20T10:31:30.547587+00:00",
+  "outcomes": [
+    {
+      "agent_session_id": "redacted-27292c2c111d62a0",
+      "delete_request": "accepted"
+    },
+    {
+      "agent_session_id": "redacted-5ac80b5c5698038e",
+      "delete_request": "accepted"
+    },
+    {
+      "agent_session_id": "redacted-96e0f2b24f524794",
+      "delete_request": "accepted"
+    },
+    {
+      "agent_session_id": "redacted-4dd28f3e1b7f3718",
+      "delete_request": "accepted"
+    },
+    {
+      "agent_session_id": "redacted-face07277e0ba33a",
+      "delete_request": "accepted"
+    },
+    {
+      "agent_session_id": "redacted-026beb35fe7d8466",
+      "delete_request": "accepted"
+    },
+    {
+      "agent_session_id": "redacted-5a050452885d9ae3",
+      "delete_request": "accepted"
+    },
+    {
+      "agent_session_id": "redacted-5890cfb829b3b963",
+      "delete_request": "accepted"
+    },
+    {
+      "agent_session_id": "redacted-29e6b00ba473fb18",
+      "delete_request": "accepted"
+    },
+    {
+      "agent_session_id": "redacted-b4ce70a24a1f3624",
+      "delete_request": "accepted"
+    }
+  ]
+}

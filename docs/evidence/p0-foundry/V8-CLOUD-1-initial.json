@@ -1,0 +1,232 @@
+{
+  "started_utc": "2026-09-20T10:20:36.175205+00:00",
+  "request": {
+    "input": "Call read_runtime_state once and report its exact JSON. Do not call any operations tool.",
+    "store": true,
+    "stream": false,
+    "max_output_tokens": 5000
+  },
+  "agent_version": "8",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "HEALTHY",
+    "generation": "g2",
+    "restart_pending": false,
+    "restart_count": 1,
+    "restart_attempt_count": 2,
+    "status_read_count": 1,
+    "last_action": "restart_service",
+    "events": [
+      {
+        "sequence": 1,
+        "timestamp_utc": "2026-09-20T10:13:34.935642+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": true,
+          "status_code": 202,
+          "resource": "orders",
+          "operation_id": "test-orders-g2",
+          "generation": "g2",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp_utc": "2026-09-20T10:13:34.950517+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": false,
+          "status_code": 409,
+          "resource": "orders",
+          "reason": "restart already executed for this test state",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 3,
+        "timestamp_utc": "2026-09-20T10:14:03.425359+00:00",
+        "operation": "service_status",
+        "result": {
+          "resource": "orders",
+          "generation": "g2",
+          "service_health": "HEALTHY",
+          "world_state": {
+            "service_name": "orders",
+            "service_health": "HEALTHY",
+            "generation": "g2"
+          }
+        }
+      }
+    ],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 200,
+  "response_headers": {
+    "date": "Sun, 20 Sep 2026 10:20:58 GMT",
+    "x-agent-session-id": "redacted-29e6b00ba473fb18"
+  },
+  "response": {
+    "id": "redacted-a1a6ddadfd7b4b78",
+    "object": "response",
+    "output": [
+      {
+        "type": "reasoning",
+        "id": "rs_02f4d1ec4b5fabd5016aafb37fcd908194a1443cfacc857929",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": ""
+          }
+        ],
+        "encrypted_content": "gAAAAABqr7OBzwRi7KYWmeBqgeHyzewpSoEtypx7KrPxkO22JpJOwLTiS2XiyNHoUEXNdqk3MSvm8VummbWveeep9PqweZ0kM-5y9R0FJvePr_fQWC0I1u0V3jey-WgdsIz6FwWmjAWgBVzzYaEO1v7C8JoprcUhk_j7QISfc2u4fYnAw228-Pxo9E0PEF3I6k_AhlJmx2K4d9OOgCJITgjjKf2dcPCkUOUcJ3OE7LiGeQkcIqCDalTrAyidpeuKaFd5y0LszPwe0hOizYRP9AHqIPub-kbRtYPDiQt61KsF-14qobMszl9HOShgrMTS7CvKwPJ3Pm6jqvjpiZ_wmtz4emETu7FdfXv9b24l3MaYO8p1LvXwYQdABW1DTAZfpv62IZ4Fau-9OCeNwF8UT1coWThpvvxq-iEuIAijXmGZeiD6tgkZRRiuXFsANL6Y_dpN9ceowMo3URE3fqcOW0NVLh5i3MjJ8lnmijf9YRGznsV5XS19hobPc1G_2BlpPla_KFuuZ757ykt2RMWzVx9b4mLLIboY9cVXQ6M_E1e85c8Fd3i3uTAUN4fntCHYsIfmoon-yVMNbjyrMQMXtr0n1CqvqLGiiW2EFlBogLky5YOxDK-tZ9Z3x5tqY88w1v8hKf-Q8PAkhNK_0NAack9hYTMMR23qgzgDiL5DleqYHFqLbJKkVtjYT_bdFw9g43yQSqanIc_phWL4_pxHFoM3Smb6E-z4gtx4Hgt4_Fx9aB-Pp4LDaFC7Bk7db7VII9r0SMiL_gIm3K1rRlf753CUGt8ATG4TBXNToJSh-cg0Y-erlej9xitJjDFCAMeNq8f_2OxLLl3zZIpgpqTAq5wZkdwRzXps_oAosFmD3mgXlzB7AOFu1zOAdc6AJEgOZv2km8VMX2n_YB1McIdnWi8R4QB2h__orD7eR5HNK61jLDcDL2UuWwuy2pObbUmvaa20O2wwlT0nF67XmN29IZPlPZeaIrfK9qLxYMQx5GCCR9OaCpEgnwPqhECEo0EXAgmiteJcBk1KPMyVekERhQ8-H88d62B_pjmqvobqlOt6UoolleNnFDuFVkvXINm4VG2Or57_4-PSXyIbMSKyBN93rSHfB6awe78fKey0n3gVLUyMqtOxB1n_odol0TPwX2Mu1LmOot4uuex5fyV4M3_GG-RgpJUev8efsO36yFFtH5Wc49vA7XdkrquAHOphAZC_1T8baMPWsM42JSLQWmAC8TGYgzai6ofiA-1Ng6k5WGFY2kzZWwB0oQuVojvnWWU6K-cvHkXfE02MVrYy-GSehAMIRbuePl2hgMeZhzSr9Yfo8E-6hMTROiJJRXcox5KsmIh99CHKpeIWkSDKH3qP7nfn9DGkcatEC6DiY-5fwyKX8jRnjY3v1Mh4tuv_gPkW_ky7BOSqVBCBLmOXIIHIj2af-oqDMcUlDtnfpG2p-Pubim6VevYATWdOr755RNoESVW6rzok9Q_QptVoapLy7VYXmoo7r07F9rO4-mCQYdKPgU3_Ts0BETF8Qtkiuuha283OzlYAt_YsIhQdNyVzk4aYRui4Su-uk7sD2BXp9le_qwJDMbAx5ToxyypQgq1Dk0cF5iznxgmk6ILp_WdFbT8_pDOnKrFoe1uI-7BZHhnNSTnD88guppVJzslMLpxz8F7a6z3nkX1y71mDImDfHy_rtDvx83TsDvJwATYcA4aDNDcJ5BUnBUyfFigyaFVGR2amRDakQBHKlIo5JOunJVo_H3C-uYAJuZMsQsTuoTzPig3UaasliyBogML4sEi0OsihnCrUTDIxOhwWBhiB9xLNA65n9n2DRW7NPI3H_CGaF7w_hC8RY5fLyF4bC_J6ZWQ4CTnuv2rcoqWmbOFe5bBVvDrw2OO7cTxthFtxJfzz7bGODrQ4PSk_ST0GPgsqNQCIGWwBJxjyMkCBQlLOIWF4OHKiBSNmQkh-DIgu3yrLOregSyX6zhKH_w_lhWHsK4i8sib8CRjhYdLN5s2if8sbrQRD9MYrW7zC19tTdBc-qq_QpPHry_LUuRc2IVh2bLebDz-QcECGBnul7MgvDKbWnREjK3MSlpacu3aLyBhtoME5jpELERRwlSf2oJEqaqYbwA2cc2Q_U4NZU5nUeG4x1mU-XNOoBPhkBArs3uikhl9jStN-smdKh2KJkIRMr2qp9UgJB4Gv_cJSR6-sXhl6PGvA7WMXxe__5X-m4Kg9mIv0IQFwCr7DA1g9lCNeyA9Wo6iluhnIqz6MpOn4A1mj5Me1nIPok7l0EAx0XYVAS-vPEYqXuHHeeToX6gkQYS-l0SQbpFJA_bExyWP0RO0RckZSIqFlB3TR-BBooKtQn4NvllAK9G0QCyHcJTX_hfZkjTTKI3JXGhiqym3HN8_JU_sc_lPIPrHyxgpTW_nrlD5b1vR7Ey6bT7mLlHdVrfN0TPUrPnOynHf2oYjWcPBIbhZuZaK-UUsSMaU-Iw8OyvRgHXrk0kDpzerUcw5T3A4P6upXHtG12aN2rc7_xxkKLluRFEKux6mfmLi3DMtaRbKJ40iFumkFPa_hmxwfKLOnrKeZGl7FbN0MAvdyzKxJ2d1jjfV21SVALD4osKz0gUC9Vi6YKg5ZTAyB8sOPCo1_1hmRMTm5Np5OnfKc56q2TqIEjrqhV7-uJjptRfyjFuac6chUXUYcJ3zDinhiuYMZ-53TUXF4EjCFPmzORf90xeG2cg==",
+        "status": "completed",
+        "response_id": "redacted-a1a6ddadfd7b4b78",
+        "agent_reference": null
+      },
+      {
+        "type": "function_call",
+        "id": "fc_0d5538433168a6c5009MmZnBiuquWkWHl0WsgN0IySYBQjdLlH",
+        "call_id": "call_BaYiMKMc9w0HILXltuT81ozD",
+        "name": "read_runtime_state",
+        "arguments": "{}",
+        "status": "completed",
+        "response_id": "redacted-a1a6ddadfd7b4b78",
+        "agent_reference": null
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_0d5538433168a6c5002VbtAwI1FF6kUWVWg5z6muMCviReTdRl",
+        "call_id": "call_BaYiMKMc9w0HILXltuT81ozD",
+        "output": "{\"agent_session_id\": \"redacted-720b682fb71c1e09\", \"chat_requests\": [], \"downstream_service_session_id\": null, \"history_audit\": false, \"history_providers\": [{\"class\": \"InMemoryHistoryProvider\", \"load_messages\": true, \"source_id\": \"_foundry_responses_history\", \"state_at_turn_start\": null}], \"input_message_count\": 1, \"input_messages\": [], \"middleware_events\": [{\"agent_session_id\": \"redacted-720b682fb71c1e09\", \"arguments\": {}, \"event\": \"BEFORE\", \"result\": null, \"tool_name\": \"read_runtime_state\"}], \"package_versions\": {\"agent-framework-core\": \"1.17.0\", \"agent-framework-foundry\": \"1.12.0\", \"agent-framework-foundry-hosting\": \"1.0.0b260903\", \"azure-ai-agentserver-responses\": \"2.2.0b1\", \"azure-ai-projects\": \"2.3.0\", \"azure-identity\": \"1.25.3\"}, \"platform_session_id\": \"redacted-29e6b00ba473fb18\", \"previous_chat_requests\": [], \"python_version\": \"3.13.15\", \"reasonfuse_core\": {\"action_lifecycle\": null, \"agent_session_id\": \"redacted-29e6b00ba473fb18\", \"blocked_proposal_count\": 0, \"contained\": false, \"contract_limits\": {\"max_oscillation_cycles\": 2, \"max_retrieval_churn\": 3, \"max_side_effects\": 1, \"max_stalled_steps\": 2, \"max_steps\": 12, \"max_tool_calls\": 10, \"require_postcondition_for_side_effects\": true, \"required_objective_progress_interval\": 2, \"version\": \"reasonfuse-contract-v1\"}, \"conversation_id\": null, \"core_state_version\": \"reasonfuse-core-v1\", \"denied_proposal_count\": 0, \"event_count\": 0, \"evidence_keys\": [], \"failed_call_count\": 0, \"framework_session_id\": \"redacted-720b682fb71c1e09\", \"fuse_reason\": null, \"last_objective_progress_step\": null, \"last_postcondition_result\": null, \"last_proposal\": null, \"last_retrieval\": {}, \"last_signals\": {}, \"oscillation_counter\": 0, \"pending_postcondition\": null, \"progress_history\": [], \"progress_state\": \"UNKNOWN\", \"reasonfuse_enabled\": true, \"recent_action_fingerprints\": [], \"recent_actions\": [], \"retrieval_attempts\": [], \"retrieval_churn_counter\": 0, \"retrieval_evidence_keys\": [], \"run_contract_version\": \"reasonfuse-contract-v1\", \"run_id\": \"run-1a0e9dfc602f445a954b9eefe28bf0c6\", \"runtime_profile\": \"runtime\", \"side_effect_count\": 0, \"stall_counter\": 0, \"step_index\": 0, \"todo_snapshot\": {}, \"tool_call_count\": 0, \"trajectory_state\": \"ACTIVE\", \"verification_reserve_available\": false, \"world_state_snapshot\": {}}, \"reasonfuse_test_counter\": 7, \"reasonfuse_test_state\": \"RF-STATE-001\", \"restored_at_turn_start\": false, \"turn_number\": 1}",
+        "status": "completed",
+        "response_id": "redacted-a1a6ddadfd7b4b78",
+        "agent_reference": null
+      },
+      {
+        "type": "reasoning",
+        "id": "rs_02f4d1ec4b5fabd5016aafb383bc7c8194bcc50de88165dd4f",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": ""
+          }
+        ],
+        "encrypted_content": "gAAAAABqr7OF8ISbdVr5GQBlngsM3Iph6GODfltTvQIcRjJQwgfbP_CweLskgxGHOrbtp5JikB45iifFQfry2Y-HEru3lyGQ7PoVSSSESe9N2RsmfDPUd77oDKQ8gcG9z00Q_spyOZAE8bQMDAkada6yKco-FKd7Fnjlpqz-FJTSLY-tpzY8fnp4SGbSnWInM9WXjY2YFoiWH_lZbwxAFcJYQZhmE28Uym6oJkpuVfsSnoteFELjS6E-kjXSHa3iYUb5FeL9_yiOQQ4MOq7Fa5WJdsy0eymYjHZwF89dr-bOBm2TteJcncqmXiISRB9nJ2Lus2JA3nK86QnUZf0a54A07wA_sqqHnU6MkBX71_z8kFrIDACfVMcakOiSM-B46fbEUy_zamicPrKxGGdUyl2AWfF4hHLnKOPaSpN-91JvkYg5-tVm3V8xK9TrO7_iPITzIsdNH2_ai9X32hPWqM7XUKmlK74qnpWIW5KM2nt4nJiKrRNX6hLUG3dMwl0gQaGUuHOosU9w6nWUJdtV-LZAf_QkepvRVL4KCHsFwA5A7h3-zlT0y9TauWwB8NxHQIp5TVUs-w_lymuP3x_CKVl-L5IwzBDFt_3NBXuceTNHEpFWQ9epQUw-ZQjVrcjuPNxqb09dZp-e--5mYPFv557Ieri45N2gwW4apVLhIoAPFC1DdYNJhJ_DMlMtd-tsLUddY3x9afHvjvc8M_rvWmXAY3l5nUVEidyfOo1hYPHaoOVxWAgzCZ5G31MzFDvQNVDhKrsgmAznMU5fmaofH4wus5zBRDes1X5rgGrYhaF4wjupsj-ELgbjdlwmuMJPF2QcNQDhkb1E94KNtRjQN41EjldnYUrVI-uw9Lf8GrvfiwdmzT_l7pwol9Y2HBrBMKNnNrk3omHvl8lbq8Vqh7PQVWfIFNApVirSl68nbbuu43cLxqHN2jgT11FgfZzylSma2F6SoYwvTm7aCDkg9sBUyPKEusU4nel8LDe4VdPmu4Jdjso-h_1m4Hq9P6NiREkkBvuhk4K1rapJXyB_A7b1zP2_oWdkRZva-drbxl2nfh_ZaTZVFtzsqg8YQzY9DPFQo8b3l2NJlaaYaU55SdbyHIGV7ioY339a_f4--CiG7QN-maP9p-MmUHNvYdklYh_8Lj5yTlg7Tip5jfxdkkfEMx8ytKiwXyYnclMbuyh4L_ay6LXy37-kVvxKgqN1w01xwv5yW-3C32EAgfJH9uHdygpjKOhvZNZRz8MIeR5Qd0Kt6JzFANOKUNnDvT0AiQuGoaEYyjUMS0Ger46oGK9BITyvVARsDUyQaUKA1ODzORm6zHeBFwv4NmoC37Yry0Cazynflm9sJxUwz3M4VboNVY_aNmeTPD_OYFTbPC-L5GIijaT4WsdJA1s0vEGSKESzf3ukfKOwjZ4XDaKnH1MzSFqSQKrrqUgeVXFaZimiQMozTo0OituH1dVP_R8USfy83Gklk4oDGjiPTyT_X3Cq8NxTXVNmyqT6EWo8paD93_IRE3tmeVQwZXI3HDDPQfHCDxhMdwZ412vWstVBWR8IQeaey4_VqjltEsudeGA_FW9qGAckLtoTx5o7Qq8eU3-Urn6sFqs3GJZfhkvl_nzIjWWPjxgXwSh_IcugnMxrYG2O3TRSMkHgBrvlPdu2ZfiHadIWOi54aSECQLlotYPdhVe5GiW2FB_qMwT7YzxxkR8iZV-V-PR7AVsfxFSSS5uj1uCTAATD1bVxIIXBoAUwoMgXFBm5Fs7nE54gG8voPPEkbql9drCpHUBfEqAUqu2o4rOhMhdqjHmhW7BGahVD-YZ8NXNdYAUkiDJERc6M3jBAKrZuN91ufco74lTcIhLBplXAkF-f1v5A2ckKjHh4fEjSpTHp9Uwd6jaiiP9G6NgWc5smBGBSl2BjMwPo6wfxP1f4z8_ZYg9NrldkLW0ei_KhalG6nZNqo0pIWECEnkfacgZy1cNtetQuC9xtPP3g88E3oZArkXGCYniCowB9wakLEzt58iFx2q3asiO2X2VdUMEkmsk2QJxD5qRCoLQ6oHyDnHVkcxvbfAfundLTDJSMnmHUcTizK6L3t3kiJNaY8f0-qmI_QJ_QjCUJxyRo5lz394vefdmqju6w8UpFlY_IVX0PojtRKp81TRJp1zdzE6VAgDf0w0iikNJlex0YktGwxMVKeP4cF1raxH8ogLHRuj6H5HyC_zlw7jrUO861-DP8AG7t7jfP1ILor5k2_yvUKvEWbQt5OJoeRxSEg-66tfcuIsbynltePRdkm31okVYlFrtuN_7mJ8HALTMNJY5ji7ErMTwbuDXFRZ7wWWXPymnVbrH1bT0crZf3ToUwRUv_mNcBLueT2CCX1KkYraPIJm1Z0SpnTswTsJPVlbLygKMuh2KWfGOyT3wMYSUEsRC0Bo2sY6PiaVdNCPSO8d17soD5Tx4Uxh4scLsBvjFPRUVjH7-gNYm_3TXTJULwcLhEuCD60sNfW9FlRz4Af5s1l9Xh5sGXfvv5zL0W1wgPaHQ0nn2AjMzOSEKNaRr8-lbF7a1MlcUsYiIvCgv8nbOQanbKfPyAfyuNLJMY23k3Ub_Xidn6MkwHuZrL-GlQhzhAKGiwEioLc13Tjk_NlQMAmYdlt6-khq2s7YHUV9kANoSntBIN3BC9BQzA2csXZSTlFNg04GxNI-tjJqF2HVCFxqnu81EQ3SikQbH5jiBpnCBlzmqxAdVPIQ_Xu2nQU2fpSY2F0ofzQBy7waM-WDASW7noWqtm_LYPmHVmEE87EydwZeDSYqGxiMaq9D71t-AwKtURLeeYsqirsbSi-82T4nH31JD52IdCsXyrq6yPBqgSraY2BzBCyrMA5vglPWKQrHHwunj02Xavdc8kziLM0Oe_IopjUu9OsZNcIC-FdjjZBW4xs27UjppqJBTPaoPeCXPmM5z63flLhnj7QeKci1S8f3rUglJ9fctPiZxWaP0QZ6HM61AK6SywKo7MF0T98IS-hYe2etLJD0kUVBsLQ4F52_tVR9R3keC0umXqaOytyGyjavs1847tls9WIhkLehxkWT0yEOV0zFM8fZ1QIzqqO5r-_nvdZQKR-9iCvR6KQnbOYgfchrJ5h39vrm31DgzhJ3zELE4imgNEP4bJ437cV2T7AekrFH4IqhppRe_9OIUM6BxPjqByXofSoKQZb1A_aLdoCu5Y8AElFCKLngZvvf0-RMsBHXa-EWj2Wcai0eFQJjYXtT7TOIrFdr-9QdgRTFsBHDBhCmU0iERBEplilmOR9POWRvU8ucMgdrAM0SxHnm22cW3LbNExCLtvNbY=",
+        "status": "completed",
+        "response_id": "redacted-a1a6ddadfd7b4b78",
+        "agent_reference": null
+      },
+      {
+        "type": "message",
+        "id": "msg_0d5538433168a6c5008ck7pHSlNHCeAbGyXBzF9khBmVfKEwbb",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "{\"agent_session_id\":\"redacted-720b682fb71c1e09\",\"chat_requests\":[],\"downstream_service_session_id\":null,\"history_audit\":false,\"history_providers\":[{\"class\":\"InMemoryHistoryProvider\",\"load_messages\":true,\"source_id\":\"_foundry_responses_history\",\"state_at_turn_start\":null}],\"input_message_count\":1,\"input_messages\":[],\"middleware_events\":[{\"agent_session_id\":\"redacted-720b682fb71c1e09\",\"arguments\":{},\"event\":\"BEFORE\",\"result\":null,\"tool_name\":\"read_runtime_state\"}],\"package_versions\":{\"agent-framework-core\":\"1.17.0\",\"agent-framework-foundry\":\"1.12.0\",\"agent-framework-foundry-hosting\":\"1.0.0b260903\",\"azure-ai-agentserver-responses\":\"2.2.0b1\",\"azure-ai-projects\":\"2.3.0\",\"azure-identity\":\"1.25.3\"},\"platform_session_id\":\"redacted-29e6b00ba473fb18\",\"previous_chat_requests\":[],\"python_version\":\"3.13.15\",\"reasonfuse_core\":{\"action_lifecycle\":null,\"agent_session_id\":\"redacted-29e6b00ba473fb18\",\"blocked_proposal_count\":0,\"contained\":false,\"contract_limits\":{\"max_oscillation_cycles\":2,\"max_retrieval_churn\":3,\"max_side_effects\":1,\"max_stalled_steps\":2,\"max_steps\":12,\"max_tool_calls\":10,\"require_postcondition_for_side_effects\":true,\"required_objective_progress_interval\":2,\"version\":\"reasonfuse-contract-v1\"},\"conversation_id\":null,\"core_state_version\":\"reasonfuse-core-v1\",\"denied_proposal_count\":0,\"event_count\":0,\"evidence_keys\":[],\"failed_call_count\":0,\"framework_session_id\":\"redacted-720b682fb71c1e09\",\"fuse_reason\":null,\"last_objective_progress_step\":null,\"last_postcondition_result\":null,\"last_proposal\":null,\"last_retrieval\":{},\"last_signals\":{},\"oscillation_counter\":0,\"pending_postcondition\":null,\"progress_history\":[],\"progress_state\":\"UNKNOWN\",\"reasonfuse_enabled\":true,\"recent_action_fingerprints\":[],\"recent_actions\":[],\"retrieval_attempts\":[],\"retrieval_churn_counter\":0,\"retrieval_evidence_keys\":[],\"run_contract_version\":\"reasonfuse-contract-v1\",\"run_id\":\"run-1a0e9dfc602f445a954b9eefe28bf0c6\",\"runtime_profile\":\"runtime\",\"side_effect_count\":0,\"stall_counter\":0,\"step_index\":0,\"todo_snapshot\":{},\"tool_call_count\":0,\"trajectory_state\":\"ACTIVE\",\"verification_reserve_available\":false,\"world_state_snapshot\":{}},\"reasonfuse_test_counter\":7,\"reasonfuse_test_state\":\"RF-STATE-001\",\"restored_at_turn_start\":false,\"turn_number\":1}",
+            "annotations": [],
+            "logprobs": []
+          }
+        ],
+        "status": "completed",
+        "response_id": "redacted-a1a6ddadfd7b4b78",
+        "agent_reference": null
+      }
+    ],
+    "created_at": 1789899644,
+    "parallel_tool_calls": false,
+    "status": "completed",
+    "completed_at": 1789899658,
+    "usage": {
+      "input_tokens": 2514,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1251,
+      "output_tokens_details": {
+        "reasoning_tokens": 448
+      },
+      "total_tokens": 3765
+    },
+    "response_id": "redacted-a1a6ddadfd7b4b78",
+    "agent_reference": {
+      "type": "agent_reference",
+      "name": "reasonfuse",
+      "version": "8"
+    },
+    "model": "",
+    "agent_session_id": "redacted-29e6b00ba473fb18",
+    "background": false
+  },
+  "unsupported_claim_leaked": false,
+  "elapsed_seconds": 22.841563,
+  "completed_utc": "2026-09-20T10:20:59.422299+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "HEALTHY",
+    "generation": "g2",
+    "restart_pending": false,
+    "restart_count": 1,
+    "restart_attempt_count": 2,
+    "status_read_count": 1,
+    "last_action": "restart_service",
+    "events": [
+      {
+        "sequence": 1,
+        "timestamp_utc": "2026-09-20T10:13:34.935642+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": true,
+          "status_code": 202,
+          "resource": "orders",
+          "operation_id": "test-orders-g2",
+          "generation": "g2",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp_utc": "2026-09-20T10:13:34.950517+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": false,
+          "status_code": 409,
+          "resource": "orders",
+          "reason": "restart already executed for this test state",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 3,
+        "timestamp_utc": "2026-09-20T10:14:03.425359+00:00",
+        "operation": "service_status",
+        "result": {
+          "resource": "orders",
+          "generation": "g2",
+          "service_health": "HEALTHY",
+          "world_state": {
+            "service_name": "orders",
+            "service_health": "HEALTHY",
+            "generation": "g2"
+          }
+        }
+      }
+    ],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

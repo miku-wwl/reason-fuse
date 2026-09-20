@@ -1,0 +1,80 @@
+{
+  "timestamp_utc": "2026-09-20T06:59:58.401626+00:00",
+  "source": "actual deployed MCP tools/list",
+  "result": {
+    "meta": null,
+    "nextCursor": null,
+    "tools": [
+      {
+        "name": "operations___service_status",
+        "title": null,
+        "description": "Read the current deterministic status for the orders test service.",
+        "inputSchema": {
+          "properties": {
+            "service_name": {
+              "title": "Service Name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "service_name"
+          ],
+          "title": "service_statusArguments",
+          "type": "object"
+        },
+        "outputSchema": {
+          "properties": {
+            "result": {
+              "title": "Result",
+              "type": "string"
+            }
+          },
+          "required": [
+            "result"
+          ],
+          "title": "service_statusOutput",
+          "type": "object"
+        },
+        "icons": null,
+        "annotations": null,
+        "meta": null,
+        "execution": null
+      },
+      {
+        "name": "operations___restart_service",
+        "title": null,
+        "description": "Submit one test restart; a later status call must verify the outcome.",
+        "inputSchema": {
+          "properties": {
+            "service_name": {
+              "title": "Service Name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "service_name"
+          ],
+          "title": "restart_serviceArguments",
+          "type": "object"
+        },
+        "outputSchema": {
+          "properties": {
+            "result": {
+              "title": "Result",
+              "type": "string"
+            }
+          },
+          "required": [
+            "result"
+          ],
+          "title": "restart_serviceOutput",
+          "type": "object"
+        },
+        "icons": null,
+        "annotations": null,
+        "meta": null,
+        "execution": null
+      }
+    ]
+  }
+}

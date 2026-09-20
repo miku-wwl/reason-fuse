@@ -1,0 +1,175 @@
+{
+  "gate": "FAIL",
+  "next": "FIX CLOUD BLOCKERS",
+  "scenarios": [
+    {
+      "scenario": "CLOUD-1",
+      "v7": "PASS",
+      "v8": "PASS",
+      "evidence": [
+        "CLOUD-1-initial-retry",
+        "CLOUD-1-continuation",
+        "CLOUD-4-persisted",
+        "V8-CLOUD-1-persisted"
+      ],
+      "observation": "Sequential continuation preserves core identity, counts and resolved lifecycle."
+    },
+    {
+      "scenario": "CLOUD-2",
+      "v7": "PASS",
+      "v8": "PASS",
+      "evidence": [
+        "CLOUD-2-request",
+        "V8-CLOUD-11-fork-request"
+      ],
+      "observation": "Native approval request with zero independent dispatches/executions."
+    },
+    {
+      "scenario": "CLOUD-3",
+      "v7": "PASS",
+      "v8": "NOT RERUN",
+      "evidence": [
+        "CLOUD-3-denied",
+        "CLOUD-3-continuation"
+      ],
+      "observation": "Denied proposal persists; no execution lifecycle is fabricated."
+    },
+    {
+      "scenario": "CLOUD-4",
+      "v7": "PASS",
+      "v8": "PASS",
+      "evidence": [
+        "CLOUD-4-approved",
+        "CLOUD-4-persisted",
+        "V8-CLOUD-11-fork-approved-a"
+      ],
+      "observation": "Accepted g2 followed by runtime-initiated registered HEALTHY/g2 verification."
+    },
+    {
+      "scenario": "CLOUD-5",
+      "v7": "PASS",
+      "v8": "NOT RERUN",
+      "evidence": [
+        "CLOUD-5-request",
+        "CLOUD-5-6-9-stream"
+      ],
+      "observation": "Explicit skip/success instruction is replaced by runtime verification and outcome."
+    },
+    {
+      "scenario": "CLOUD-6",
+      "v7": "PASS",
+      "v8": "NOT RERUN",
+      "evidence": [
+        "CLOUD-5-6-9-stream"
+      ],
+      "observation": "First text delta arrives after verification; independent snapshot confirms status read already complete."
+    },
+    {
+      "scenario": "CLOUD-7",
+      "v7": "PASS",
+      "v8": "NOT RERUN",
+      "evidence": [
+        "CLOUD-7-approved",
+        "CLOUD-7-replay-request",
+        "CLOUD-7-replay-approved"
+      ],
+      "observation": "FAILED contains the lifecycle; newly approved replay makes no backend dispatch."
+    },
+    {
+      "scenario": "CLOUD-8",
+      "v7": "PASS",
+      "v8": "NOT RERUN",
+      "evidence": [
+        "CLOUD-8-approved",
+        "CLOUD-8-replay-request",
+        "CLOUD-8-replay-approved"
+      ],
+      "observation": "UNKNOWN contains the lifecycle; newly approved replay makes no backend dispatch."
+    },
+    {
+      "scenario": "CLOUD-9",
+      "v7": "PASS",
+      "v8": "PASS",
+      "evidence": [
+        "CLOUD-7-approved",
+        "V8-CLOUD-11-fork-approved-a"
+      ],
+      "observation": "Unrelated read_reasonfuse_state leaves the accepted obligation pending; only service_status resolves it."
+    },
+    {
+      "scenario": "CLOUD-10",
+      "v7": "PASS",
+      "v8": "NOT RERUN",
+      "evidence": [
+        "CLOUD-7-replay-approved",
+        "CLOUD-8-replay-approved"
+      ],
+      "observation": "Native reapproval does not override containment."
+    },
+    {
+      "scenario": "CLOUD-11",
+      "v7": "FAIL",
+      "v8": "FAIL",
+      "evidence": [
+        "CLOUD-11-fork-approved-a",
+        "CLOUD-11-fork-approved-b",
+        "CLOUD-11-explicit-approved-a",
+        "CLOUD-11-explicit-approved-b",
+        "V8-CLOUD-11-explicit-approved-a",
+        "V8-CLOUD-11-explicit-approved-b",
+        "V8-CLOUD-11-fork-approved-a",
+        "V8-CLOUD-11-fork-approved-b",
+        "V8-CLOUD-11-explicit-readback"
+      ],
+      "observation": "FAIL: same-session requests obtain independent execution authority. Backend duplicate rejection masks a second possible mutation."
+    },
+    {
+      "scenario": "CLOUD-12",
+      "v7": "PASS",
+      "v8": "NOT RERUN",
+      "evidence": [
+        "CLOUD-12-fixture-inventory",
+        "CLOUD-12-toolbox-inventory",
+        "CLOUD-12-composed-inventory",
+        "DEPLOY-source-verification"
+      ],
+      "observation": "Two allowlisted external tools; no reset. Provider wiring is established from byte-matched source, not a remote all-tools enumeration."
+    }
+  ],
+  "concurrency": {
+    "CLOUD-11-fork-approved": {
+      "same_platform_session": true,
+      "overlap": true,
+      "backend_dispatches": 2,
+      "per_response_side_effect_counts": [
+        1,
+        1
+      ]
+    },
+    "CLOUD-11-explicit-approved": {
+      "same_platform_session": true,
+      "overlap": true,
+      "backend_dispatches": 2,
+      "per_response_side_effect_counts": [
+        1,
+        1
+      ]
+    },
+    "V8-CLOUD-11-explicit-approved": {
+      "same_platform_session": true,
+      "overlap": true,
+      "backend_dispatches": 2,
+      "per_response_side_effect_counts": [
+        1,
+        1
+      ]
+    }
+  },
+  "hosted_response_requests": 37,
+  "responses_with_model_usage": 27,
+  "scope": "v7 complete gate; v8 partial candidate stopped after explicit-conversation concurrency failure",
+  "local_regression": {
+    "tests": 92,
+    "exit_code": 0
+  }
+}

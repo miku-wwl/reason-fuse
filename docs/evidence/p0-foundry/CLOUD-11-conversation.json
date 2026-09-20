@@ -1,0 +1,11 @@
+{
+  "timestamp_utc": "2026-09-20T07:08:50.043299+00:00",
+  "conversation": {
+    "id": "redacted-b833419b6d55335f",
+    "created_at": 1789888129,
+    "metadata": {
+      "purpose": "reasonfuse-p0-bounded-concurrency"
+    },
+    "object": "conversation"
+  }
+}

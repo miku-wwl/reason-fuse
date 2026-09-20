@@ -1,0 +1,16 @@
+{
+  "timestamp_utc": "2026-09-20T07:01:07.512134+00:00",
+  "source": "real Foundry Toolbox using pinned Agent Framework adapter",
+  "tools": [
+    {
+      "name": "reasonfuse-operations___operations___restart_service",
+      "approval_mode": "never_require",
+      "description": "Submit one test restart; a later status call must verify the outcome."
+    },
+    {
+      "name": "reasonfuse-operations___operations___service_status",
+      "approval_mode": "never_require",
+      "description": "Read the current deterministic status for the orders test service."
+    }
+  ]
+}

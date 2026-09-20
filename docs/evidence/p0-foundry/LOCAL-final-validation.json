@@ -1,0 +1,21 @@
+{
+  "timestamp_utc": "2026-09-20T19:43:01.283191+00:00",
+  "compilation": "PASS",
+  "compiled_files": [
+    "src/reasonfuse/main.py",
+    "cloud/operations-mcp/server.py",
+    "tests/test_cloud_fixture_evidence.py",
+    "tests/test_cloud_hosting.py",
+    "scripts/p0_foundry_cloud.py",
+    "scripts/check_p0_cloud_evidence.py"
+  ],
+  "deployed_v8_files_still_match": true,
+  "git_diff_check_exit_code": 0,
+  "private_paths_ignored": true,
+  "public_json_and_links": "PASS",
+  "secret_scan_patterns": "<redacted>",
+  "secret_scan_findings": "<redacted>",
+  "known_session_identifiers_redacted": true,
+  "offline_gate": "FAIL",
+  "full_regression_evidence": "LOCAL-v8-regression.json"
+}

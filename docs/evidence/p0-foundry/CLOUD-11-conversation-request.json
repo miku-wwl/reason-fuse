@@ -1,0 +1,71 @@
+{
+  "started_utc": "2026-09-20T10:10:11.099057+00:00",
+  "request": {
+    "input": "Restart orders using restart_service; submit for native approval immediately. After approval, call read_reasonfuse_state once before finishing. Do not call service_status.",
+    "store": true,
+    "stream": false,
+    "max_output_tokens": 5000,
+    "conversation": "redacted-b833419b6d55335f"
+  },
+  "agent_version": "7",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 404,
+  "response_headers": {
+    "date": "Sun, 20 Sep 2026 10:10:18 GMT",
+    "x-agent-session-id": "redacted-4d79fa8f2dc98d19"
+  },
+  "response": {
+    "error": {
+      "code": "not_found",
+      "message": "Conversation 'redacted-b833419b6d55335f' not found. [Request ID: 4dd538571cb60fca091b0bbee1c45fca]",
+      "type": "error",
+      "details": [],
+      "additionalInfo": {
+        "request_id": "4dd538571cb60fca091b0bbee1c45fca"
+      }
+    }
+  },
+  "exception": {
+    "type": "HTTPStatusError",
+    "message": "Client error '404 Not Found' for url 'redacted-af561d4ead8431fb'\nFor more information check: redacted-0720e959d892593d"
+  },
+  "elapsed_seconds": 7.464631,
+  "completed_utc": "2026-09-20T10:10:19.376508+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

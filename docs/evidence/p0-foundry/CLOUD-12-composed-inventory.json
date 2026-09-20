@@ -1,0 +1,14 @@
+{
+  "timestamp_utc": "2026-09-20T07:06:03.961232+00:00",
+  "source": "deployed source constructor settings with real Toolbox discovery, local CLI credential",
+  "tools": [
+    {
+      "name": "reasonfuse-operations___operations___restart_service",
+      "approval_mode": "always_require"
+    },
+    {
+      "name": "reasonfuse-operations___operations___service_status",
+      "approval_mode": "never_require"
+    }
+  ]
+}

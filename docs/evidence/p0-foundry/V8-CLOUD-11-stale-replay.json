@@ -1,0 +1,131 @@
+{
+  "started_utc": "2026-09-20T10:23:37.242891+00:00",
+  "request": {
+    "input": [
+      {
+        "type": "mcp_approval_response",
+        "approval_request_id": "redacted-52e7608a756c350a",
+        "approve": true
+      }
+    ],
+    "previous_response_id": "redacted-5e418532449760ce",
+    "store": true,
+    "stream": false
+  },
+  "agent_version": "8",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "HEALTHY",
+    "generation": "g2",
+    "restart_pending": false,
+    "restart_count": 1,
+    "restart_attempt_count": 1,
+    "status_read_count": 1,
+    "last_action": "restart_service",
+    "events": [
+      {
+        "sequence": 1,
+        "timestamp_utc": "2026-09-20T10:22:37.649933+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": true,
+          "status_code": 202,
+          "resource": "orders",
+          "operation_id": "test-orders-g2",
+          "generation": "g2",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp_utc": "2026-09-20T10:22:49.599526+00:00",
+        "operation": "service_status",
+        "result": {
+          "resource": "orders",
+          "generation": "g2",
+          "service_health": "HEALTHY",
+          "world_state": {
+            "service_name": "orders",
+            "service_health": "HEALTHY",
+            "generation": "g2"
+          }
+        }
+      }
+    ],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 409,
+  "response_headers": {
+    "date": "Sun, 20 Sep 2026 10:23:37 GMT",
+    "x-agent-session-id": "redacted-29e6b00ba473fb18"
+  },
+  "response": {
+    "error": {
+      "message": "This agent does not support conversation forking. previous_response_id must reference the most recent response in the conversation.",
+      "type": "conflict",
+      "code": "conversation_fork_not_supported",
+      "param": "previous_response_id"
+    }
+  },
+  "exception": {
+    "type": "HTTPStatusError",
+    "message": "Client error '409 Conflict' for url 'redacted-af561d4ead8431fb'\nFor more information check: redacted-716c9a1efe85a2b6"
+  },
+  "elapsed_seconds": 0.688697,
+  "completed_utc": "2026-09-20T10:23:38.213440+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "HEALTHY",
+    "generation": "g2",
+    "restart_pending": false,
+    "restart_count": 1,
+    "restart_attempt_count": 1,
+    "status_read_count": 1,
+    "last_action": "restart_service",
+    "events": [
+      {
+        "sequence": 1,
+        "timestamp_utc": "2026-09-20T10:22:37.649933+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": true,
+          "status_code": 202,
+          "resource": "orders",
+          "operation_id": "test-orders-g2",
+          "generation": "g2",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp_utc": "2026-09-20T10:22:49.599526+00:00",
+        "operation": "service_status",
+        "result": {
+          "resource": "orders",
+          "generation": "g2",
+          "service_health": "HEALTHY",
+          "world_state": {
+            "service_name": "orders",
+            "service_health": "HEALTHY",
+            "generation": "g2"
+          }
+        }
+      }
+    ],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

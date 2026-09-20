@@ -38,13 +38,29 @@ class OperationsState:
             self.restart_pending = False
             self.pending_generation = None
             self.restart_count = 0
+            self.restart_attempt_count = 0
+            self.status_read_count = 0
+            self.events = []
             self.last_action = None
             return self._snapshot()
+
+    def _event(self, operation: str, result: dict[str, Any]) -> dict[str, Any]:
+        self.events.append({"sequence": len(self.events) + 1,
+                            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+                            "operation": operation, "result": dict(result)})
+        self.events = self.events[-128:]
+        return result
+
+    def snapshot(self) -> dict[str, Any]:
+        """Independent fixture observation; does not consume a status check."""
+        with self._lock:
+            return {**self._snapshot(), "events": list(self.events)}
 
     def service_status(self, service_name: str) -> dict[str, Any]:
         if service_name != SERVICE_NAME:
             return {"resource": service_name, "status": "unknown", "error": "unknown service"}
         with self._lock:
+            self.status_read_count += 1
             if self.restart_pending:
                 self.restart_pending = False
                 if self.mode == "verified":
@@ -54,13 +70,13 @@ class OperationsState:
                 else:
                     # Deliberately return an old generation: accepted action
                     # exists, but the external observation is insufficient.
-                    return {
+                    return self._event("service_status", {
                         "resource": service_name,
                         "status": "stale",
                         "generation": self.generation,
                         "service_health": self.health,
-                    }
-            return {
+                    })
+            return self._event("service_status", {
                 "resource": service_name,
                 "generation": self.generation,
                 "service_health": self.health,
@@ -69,33 +85,34 @@ class OperationsState:
                     "service_health": self.health,
                     "generation": self.generation,
                 },
-            }
+            })
 
     def restart_service(self, service_name: str) -> dict[str, Any]:
         if service_name != SERVICE_NAME:
             return {"accepted": False, "http_status": 404, "service_name": service_name}
         with self._lock:
+            self.restart_attempt_count += 1
             if self.restart_count:
-                return {
+                return self._event("restart_service", {
                     "accepted": False,
                     "status_code": 409,
                     "resource": service_name,
                     "reason": "restart already executed for this test state",
                     "execution_count": self.restart_count,
-                }
+                })
             self.restart_count = 1
             current_number = int(self.generation[1:]) if self.generation[1:].isdigit() else 1
             self.pending_generation = f"g{current_number + 1}"
             self.restart_pending = True
             self.last_action = "restart_service"
-            return {
+            return self._event("restart_service", {
                 "accepted": True,
                 "status_code": 202,
                 "resource": service_name,
                 "operation_id": f"test-{service_name}-{self.pending_generation}",
                 "generation": self.pending_generation,
                 "execution_count": 1,
-            }
+            })
 
     def _snapshot(self) -> dict[str, Any]:
         return {
@@ -105,6 +122,8 @@ class OperationsState:
             "generation": self.generation,
             "restart_pending": self.restart_pending,
             "restart_count": self.restart_count,
+            "restart_attempt_count": self.restart_attempt_count,
+            "status_read_count": self.status_read_count,
             "last_action": self.last_action,
         }
 
@@ -158,6 +177,13 @@ async def reset_fixture(request) -> JSONResponse:
 @mcp.custom_route("/healthz", methods=["GET"])
 async def healthz(_request) -> JSONResponse:
     return JSONResponse({"status": "ok", "service": "reasonfuse-operations"})
+
+
+@mcp.custom_route("/test/state", methods=["GET"])
+async def inspect_fixture(request) -> JSONResponse:
+    """Read bounded test evidence outside the agent's MCP tool inventory."""
+    return JSONResponse({**state.snapshot(), "request_host": request.headers.get("host"),
+                         "configured_allowed_hosts": allowed_hosts})
 
 
 app = mcp.streamable_http_app()

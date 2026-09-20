@@ -1,0 +1,16 @@
+{
+  "timestamp_utc": "2026-09-20T06:55:31.912630+00:00",
+  "operation": "reset",
+  "state": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": []
+  }
+}

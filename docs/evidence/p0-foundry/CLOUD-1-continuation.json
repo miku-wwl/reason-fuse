@@ -1,0 +1,133 @@
+{
+  "started_utc": "2026-09-20T07:01:25.157217+00:00",
+  "request": {
+    "input": "Call read_runtime_state exactly once again to inspect persisted state. Do not call an Operations tool.",
+    "store": true,
+    "stream": false,
+    "max_output_tokens": 5000,
+    "previous_response_id": "redacted-ead661d0d08724f3"
+  },
+  "agent_version": "7",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 200,
+  "response": {
+    "id": "redacted-74314d7599624ce0",
+    "object": "response",
+    "output": [
+      {
+        "type": "reasoning",
+        "id": "rs_07010f96c34d8577016aaf84c8c7bc8194ba52a58242f8d30e",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": ""
+          }
+        ],
+        "encrypted_content": "gAAAAABqr4TJD07KqNVrAJybFO4NZAtFJKIPmEs9Bkhj5cgPMz22vFAdE2wfbUM91AIvU_zgJgnuDrHiKx49wC3_41lWr94gwX2zVT3ZBGFFI-gw_I3vL4zmQODwnNV6b28NhI_CUK1sxnSnn5koNN9Jod4J3S8zm37syE8e2NRCNyvZUwXHXeDxuUUgHvM-Uo9wm6cIroTR00vRqOuIdGR0U22mrHNrzf7k46dSxe-f3IE7O_BI21oHeVilb1GeCZ7HTxiFbukup7mz6cMzNbeYS6U4KTs72rYXALxohOvNl46pRMSOvUTQrXk6Kl9SSUqnbk6p-M3JSV1odTaD9xXymxlVVxAh92pvJF0Br8grGGDOsplxfYu3TQrXlvzLSjYoFwpuGF-7p9e7pq8jWX2Vcw6eElyOm3D93h-2OTKVyUu_Da-0nJcuwHVoS9wC6SMfVsZylalVg0LOrXdS_7C9Z6aDm7KdttkAAzZzCkPp0bbdR8ZRoGl4SMVYpaUbmMf6-tPtvnzqEvUUzdzBkOCM4bOUB2jPyct4z_EkCXXrd-2Qrvwoi6CaS2pHX4mp_47UemtJ8bAZpE_vSSDJGL9Ta0m8UXhGQDO9MVaGyGok1Ds79ksswODankrhagpD_E6nEZbrTVtBPT_eVS_umh3ZVHmtbUCNseqkfwtizJRBV3cXNzBZW2QvVX3eul7SBbyNVZNK_SYIHoNJJIdawCYtfVb1ayqHlCNeCYJSFMWRF2l7qz-1N0ofRfMyQmTt_lQj0oEdzeDkvaekiJZ3MF04oAIyyYsjx_Y8404qoXwMQa3M49yAg0YQMQkxPAYtayCGPep6I7Zh2HFI3XLC_sFimUiyoru8BKIzcY4JuJSUIev-5hblm4pTmSUZC6uOibi1Zl2I6WTL9b1v49rH8c7f-X4j4s2gnFIKzFYgOe34jamzT8xiT2G493oGu0F6LHQSxgWjyg2UX_f0e3jzjD12CmGQhP_ESmzQzbX7RQ7TzmMNa0Slfwg0fFjaPBFn0s-cmkU5TUsdCUcp78ZpmVD4xlTbG-NXL_paL__8jz6UugMBBBJvfSCyMJeFrtElIMcFixIS2z4nFUZdtjoqxhV4lizL8DNAKx-ySG7o4kXAXvmFlZup00JrSOizL9dtzJjONuCDQQZvNW_B4DHzAGG67_sodivO5_XxqCjbw_6H9m_dTI2nY0uecVdfvs7_oQYk6OZUMkTnxkhrM7trFY3PZppk7AZbxiATOC-97DKDcDbt0K37I05ZFAYSGFhXoaVJLa_v31CL_mZamOu-30Q3g1vMTcMDVGTeE9R4I-HGxA2DA_Vfcp3a6BfrpoEn9tNXDna9S_2pdnS3WxaJPMj5ZrnyLNUmh1v0MTEgyZ2vDt9jWTCmFnVXKD3Bt1ZeZePPJgQue_LGIife5WOQ6RFYf7v3b2iT15vgFR_5Wcfr8mCGubZR-llxQr-Jt4f_XPJvzuh0RNyWHXiMv1XJAt8Q-xDE8SlrbaskNKVTPKY4WYPXczqrJ_MBPKVEp6s_WTQaSpRMwtoOO4mJuKuEyc0NX-ZgtF1F_Nx3FmlzkIq9NxVVudfLQI24f90wxQDkHXnrgNut1WWirOiwsEvNtgGOO-aKNYe_kaM_zmmghf2AJkvg0EIOxGpsW20XCV4ELcRFoMB7ErplEHGHqKW-IpvEnrrYfiGlsD9bqbYt-iBJPvTPrT_RjWmZMzXKwapoW1Y3yhiwnRSNZy9tyXXTKF3F9jE37lOYG8VpE5FnzNv28BLGSC0kcjf1qU1KB5Yb7iNEPLX-qsrlZ73lT9k_7AXyt4JgT2ZE5qD2sWTHZF1KkBiv4yCUj8Jl7QIQidOrT9DQwthrG3f2_lLAtBAFCgrugYEDjss6b94HANgO4bDUvEiMqmhv661u-eStWeQZM4_HaQ-PIOUzch1nT_hq2_2MYPU9vOex-OaKLqWWMYHi4L18eE2HCynTmNEPtw3lHxgKYcvdSj9HKVvUozueby4DkSWkzZ4qpFadodkQPm_ZXTUA9NCZQ_ktIY0nVfPMok9R1IcUut9D3XHy_wdHuCtQY5QCcJMGLaDJ7qSe-QIXxbZnO4xfDpo=",
+        "status": "completed",
+        "response_id": "redacted-74314d7599624ce0",
+        "agent_reference": null
+      },
+      {
+        "type": "function_call",
+        "id": "fc_0ca2f43672f1d03a00Uk7IXhfNrvhlHfOw10lEE0DoUt9cwoo5",
+        "call_id": "call_xoZYcK8xyYjrJCExRNbNOmuU",
+        "name": "read_runtime_state",
+        "arguments": "{}",
+        "status": "completed",
+        "response_id": "redacted-74314d7599624ce0",
+        "agent_reference": null
+      },
+      {
+        "type": "function_call_output",
+        "id": "fco_0ca2f43672f1d03a008Fee4a5XmuXfCtVMc7sS2lBmpFZYZ25t",
+        "call_id": "call_xoZYcK8xyYjrJCExRNbNOmuU",
+        "output": "{\"agent_session_id\": \"redacted-c616c54ff616c3a6\", \"chat_requests\": [], \"downstream_service_session_id\": null, \"history_audit\": false, \"history_providers\": [{\"class\": \"InMemoryHistoryProvider\", \"load_messages\": true, \"source_id\": \"_foundry_responses_history\", \"state_at_turn_start\": null}], \"input_message_count\": 6, \"input_messages\": [], \"middleware_events\": [{\"agent_session_id\": \"redacted-c616c54ff616c3a6\", \"arguments\": {}, \"event\": \"BEFORE\", \"result\": null, \"tool_name\": \"read_runtime_state\"}, {\"agent_session_id\": \"redacted-c616c54ff616c3a6\", \"arguments\": {}, \"event\": \"AFTER\", \"result\": \"[{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"{\\\\\\\"agent_session_id\\\\\\\": \\\\\\\"redacted-c616c54ff616c3a6\\\\\\\", \\\\\\\"chat_requests\\\\\\\": [], \\\\\\\"downstream_service_session_id\\\\\\\": null, \\\\\\\"history_audit\\\\\\\": false, \\\\\\\"history_providers\\\\\\\": [{\\\\\\\"class\\\\\\\": \\\\\\\"InMemoryHistoryProvider\\\\\\\", \\\\\\\"load_messages\\\\\\\": true, \\\\\\\"source_id\\\\\\\": \\\\\\\"_foundry_responses_history\\\\\\\", \\\\\\\"state_at_turn_start\\\\\\\": null}], \\\\\\\"input_message_count\\\\\\\": 1, \\\\\\\"input_messages\\\\\\\": [], \\\\\\\"middleware_events\\\\\\\": [{\\\\\\\"agent_session_id\\\\\\\": \\\\\\\"redacted-c616c54ff616c3a6\\\\\\\", \\\\\\\"arguments\\\\\\\": {}, \\\\\\\"event\\\\\\\": \\\\\\\"BEFORE\\\\\\\", \\\\\\\"result\\\\\\\": null, \\\\\\\"tool_name\\\\\\\": \\\\\\\"read_runtime_state\\\\\\\"}], \\\\\\\"package_versions\\\\\\\": {\\\\\\\"agent-framework-core\\\\\\\": \\\\\\\"1.17.0\\\\\\\", \\\\\\\"agent-framework-foundry\\\\\\\": \\\\\\\"1.12.0\\\\\\\", \\\\\\\"agent-framework-foundry-hosting\\\\\\\": \\\\\\\"1.0.0b260903\\\\\\\", \\\\\\\"azure-ai-agentserver-responses\\\\\\\": \\\\\\\"2.2.0b1\\\\\\\", \\\\\\\"azure-ai-projects\\\\\\\": \\\\\\\"2.3.0\\\\\\\", \\\\\\\"azure-identity\\\\\\\": \\\\\\\"1.25.3\\\\\\\"}, \\\\\\\"platform_session_id\\\\\\\": \\\\\\\"redacted-5ac80b5c5698038e\\\\\\\", \\\\\\\"previous_chat_requests\\\\\\\": [], \\\\\\\"python_version\\\\\\\": \\\\\\\"3.13.15\\\\\\\", \\\\\\\"reasonfuse_core\\\\\\\": {\\\\\\\"action_lifecycle\\\\\\\": null, \\\\\\\"agent_session_id\\\\\\\": \\\\\\\"redacted-5ac80b5c5698038e\\\\\\\", \\\\\\\"blocked_proposal_count\\\\\\\": 0, \\\\\\\"contained\\\\\\\": false, \\\\\\\"contract_limits\\\\\\\": {\\\\\\\"max_oscillation_cycles\\\\\\\": 2, \\\\\\\"max_retrieval_churn\\\\\\\": 3, \\\\\\\"max_side_effects\\\\\\\": 1, \\\\\\\"max_stalled_steps\\\\\\\": 2, \\\\\\\"max_steps\\\\\\\": 12, \\\\\\\"max_tool_calls\\\\\\\": 10, \\\\\\\"require_postcondition_for_side_effects\\\\\\\": true, \\\\\\\"required_objective_progress_interval\\\\\\\": 2, \\\\\\\"version\\\\\\\": \\\\\\\"reasonfuse-contract-v1\\\\\\\"}, \\\\\\\"conversation_id\\\\\\\": null, \\\\\\\"core_state_version\\\\\\\": \\\\\\\"reasonfuse-core-v1\\\\\\\", \\\\\\\"denied_proposal_count\\\\\\\": 0, \\\\\\\"event_count\\\\\\\": 0, \\\\\\\"evidence_keys\\\\\\\": [], \\\\\\\"failed_call_count\\\\\\\": 0, \\\\\\\"framework_session_id\\\\\\\": \\\\\\\"redacted-c616c54ff616c3a6\\\\\\\", \\\\\\\"fuse_reason\\\\\\\": null, \\\\\\\"last_objective_progress_step\\\\\\\": null, \\\\\\\"last_postcondition_result\\\\\\\": null, \\\\\\\"last_proposal\\\\\\\": null, \\\\\\\"last_retrieval\\\\\\\": {}, \\\\\\\"last_signals\\\\\\\": {}, \\\\\\\"oscillation_counter\\\\\\\": 0, \\\\\\\"pending_postcondition\\\\\\\": null, \\\\\\\"progress_history\\\\\\\": [], \\\\\\\"progress_state\\\\\\\": \\\\\\\"UNKNOWN\\\\\\\", \\\\\\\"reasonfuse_enabled\\\\\\\": true, \\\\\\\"recent_action_fingerprints\\\\\\\": [], \\\\\\\"recent_actions\\\\\\\": [], \\\\\\\"retrieval_attempts\\\\\\\": [], \\\\\\\"retrieval_churn_counter\\\\\\\": 0, \\\\\\\"retrieval_evidence_keys\\\\\\\": [], \\\\\\\"run_contract_version\\\\\\\": \\\\\\\"reasonfuse-contract-v1\\\\\\\", \\\\\\\"run_id\\\\\\\": \\\\\\\"run-822f58fadb194c55bc29d7da6ea3a43d\\\\\\\", \\\\\\\"runtime_profile\\\\\\\": \\\\\\\"runtime\\\\\\\", \\\\\\\"side_effect_count\\\\\\\": 0, \\\\\\\"stall_counter\\\\\\\": 0, \\\\\\\"step_index\\\\\\\": 0, \\\\\\\"todo_snapshot\\\\\\\": {}, \\\\\\\"tool_call_count\\\\\\\": 0, \\\\\\\"trajectory_state\\\\\\\": \\\\\\\"ACTIVE\\\\\\\", \\\\\\\"verification_reserve_available\\\\\\\": false, \\\\\\\"world_state_snapshot\\\\\\\": {}}, \\\\\\\"reasonfuse_test_counter\\\\\\\": 7, \\\\\\\"reasonfuse_test_state\\\\\\\": \\\\\\\"RF-STATE-001\\\\\\\", \\\\\\\"restored_at_turn_start\\\\\\\": false, \\\\\\\"turn_number\\\\\\\": 1}\\\"}]\", \"tool_name\": \"read_runtime_state\"}, {\"agent_session_id\": \"redacted-c616c54ff616c3a6\", \"arguments\": {}, \"event\": \"BEFORE\", \"result\": null, \"tool_name\": \"read_runtime_state\"}], \"package_versions\": {\"agent-framework-core\": \"1.17.0\", \"agent-framework-foundry\": \"1.12.0\", \"agent-framework-foundry-hosting\": \"1.0.0b260903\", \"azure-ai-agentserver-responses\": \"2.2.0b1\", \"azure-ai-projects\": \"2.3.0\", \"azure-identity\": \"1.25.3\"}, \"platform_session_id\": \"redacted-5ac80b5c5698038e\", \"previous_chat_requests\": [], \"python_version\": \"3.13.15\", \"reasonfuse_core\": {\"action_lifecycle\": null, \"agent_session_id\": \"redacted-5ac80b5c5698038e\", \"blocked_proposal_count\": 0, \"contained\": false, \"contract_limits\": {\"max_oscillation_cycles\": 2, \"max_retrieval_churn\": 3, \"max_side_effects\": 1, \"max_stalled_steps\": 2, \"max_steps\": 12, \"max_tool_calls\": 10, \"require_postcondition_for_side_effects\": true, \"required_objective_progress_interval\": 2, \"version\": \"reasonfuse-contract-v1\"}, \"conversation_id\": null, \"core_state_version\": \"reasonfuse-core-v1\", \"denied_proposal_count\": 0, \"event_count\": 0, \"evidence_keys\": [], \"failed_call_count\": 0, \"framework_session_id\": \"redacted-c616c54ff616c3a6\", \"fuse_reason\": null, \"last_objective_progress_step\": null, \"last_postcondition_result\": null, \"last_proposal\": null, \"last_retrieval\": {}, \"last_signals\": {}, \"oscillation_counter\": 0, \"pending_postcondition\": null, \"progress_history\": [], \"progress_state\": \"UNKNOWN\", \"reasonfuse_enabled\": true, \"recent_action_fingerprints\": [], \"recent_actions\": [], \"retrieval_attempts\": [], \"retrieval_churn_counter\": 0, \"retrieval_evidence_keys\": [], \"run_contract_version\": \"reasonfuse-contract-v1\", \"run_id\": \"run-822f58fadb194c55bc29d7da6ea3a43d\", \"runtime_profile\": \"runtime\", \"side_effect_count\": 0, \"stall_counter\": 0, \"step_index\": 0, \"todo_snapshot\": {}, \"tool_call_count\": 0, \"trajectory_state\": \"ACTIVE\", \"verification_reserve_available\": false, \"world_state_snapshot\": {}}, \"reasonfuse_test_counter\": 7, \"reasonfuse_test_state\": \"RF-STATE-001\", \"restored_at_turn_start\": true, \"turn_number\": 2}",
+        "status": "completed",
+        "response_id": "redacted-74314d7599624ce0",
+        "agent_reference": null
+      },
+      {
+        "type": "message",
+        "id": "msg_0ca2f43672f1d03a00zuY828iKkerY8hhGarLl2yXuAzYutpgl",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "{\n  \"agent_session_id\": \"redacted-c616c54ff616c3a6\",\n  \"chat_requests\": [],\n  \"downstream_service_session_id\": null,\n  \"history_audit\": false,\n  \"history_providers\": [\n    {\n      \"class\": \"InMemoryHistoryProvider\",\n      \"load_messages\": true,\n      \"source_id\": \"_foundry_responses_history\",\n      \"state_at_turn_start\": null\n    }\n  ],\n  \"input_message_count\": 6,\n  \"input_messages\": [],\n  \"middleware_events\": [\n    {\n      \"agent_session_id\": \"redacted-c616c54ff616c3a6\",\n      \"arguments\": {},\n      \"event\": \"BEFORE\",\n      \"result\": null,\n      \"tool_name\": \"read_runtime_state\"\n    },\n    {\n      \"agent_session_id\": \"redacted-c616c54ff616c3a6\",\n      \"arguments\": {},\n      \"event\": \"AFTER\",\n      \"result\": \"[{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"{\\\\\\\"agent_session_id\\\\\\\": \\\\\\\"redacted-c616c54ff616c3a6\\\\\\\", \\\\\\\"chat_requests\\\\\\\": [], \\\\\\\"downstream_service_session_id\\\\\\\": null, \\\\\\\"history_audit\\\\\\\": false, \\\\\\\"history_providers\\\\\\\": [{\\\\\\\"class\\\\\\\": \\\\\\\"InMemoryHistoryProvider\\\\\\\", \\\\\\\"load_messages\\\\\\\": true, \\\\\\\"source_id\\\\\\\": \\\\\\\"_foundry_responses_history\\\\\\\", \\\\\\\"state_at_turn_start\\\\\\\": null}], \\\\\\\"input_message_count\\\\\\\": 1, \\\\\\\"input_messages\\\\\\\": [], \\\\\\\"middleware_events\\\\\\\": [{\\\\\\\"agent_session_id\\\\\\\": \\\\\\\"redacted-c616c54ff616c3a6\\\\\\\", \\\\\\\"arguments\\\\\\\": {}, \\\\\\\"event\\\\\\\": \\\\\\\"BEFORE\\\\\\\", \\\\\\\"result\\\\\\\": null, \\\\\\\"tool_name\\\\\\\": \\\\\\\"read_runtime_state\\\\\\\"}], \\\\\\\"package_versions\\\\\\\": {\\\\\\\"agent-framework-core\\\\\\\": \\\\\\\"1.17.0\\\\\\\", \\\\\\\"agent-framework-foundry\\\\\\\": \\\\\\\"1.12.0\\\\\\\", \\\\\\\"agent-framework-foundry-hosting\\\\\\\": \\\\\\\"1.0.0b260903\\\\\\\", \\\\\\\"azure-ai-agentserver-responses\\\\\\\": \\\\\\\"2.2.0b1\\\\\\\", \\\\\\\"azure-ai-projects\\\\\\\": \\\\\\\"2.3.0\\\\\\\", \\\\\\\"azure-identity\\\\\\\": \\\\\\\"1.25.3\\\\\\\"}, \\\\\\\"platform_session_id\\\\\\\": \\\\\\\"redacted-5ac80b5c5698038e\\\\\\\", \\\\\\\"previous_chat_requests\\\\\\\": [], \\\\\\\"python_version\\\\\\\": \\\\\\\"3.13.15\\\\\\\", \\\\\\\"reasonfuse_core\\\\\\\": {\\\\\\\"action_lifecycle\\\\\\\": null, \\\\\\\"agent_session_id\\\\\\\": \\\\\\\"redacted-5ac80b5c5698038e\\\\\\\", \\\\\\\"blocked_proposal_count\\\\\\\": 0, \\\\\\\"contained\\\\\\\": false, \\\\\\\"contract_limits\\\\\\\": {\\\\\\\"max_oscillation_cycles\\\\\\\": 2, \\\\\\\"max_retrieval_churn\\\\\\\": 3, \\\\\\\"max_side_effects\\\\\\\": 1, \\\\\\\"max_stalled_steps\\\\\\\": 2, \\\\\\\"max_steps\\\\\\\": 12, \\\\\\\"max_tool_calls\\\\\\\": 10, \\\\\\\"require_postcondition_for_side_effects\\\\\\\": true, \\\\\\\"required_objective_progress_interval\\\\\\\": 2, \\\\\\\"version\\\\\\\": \\\\\\\"reasonfuse-contract-v1\\\\\\\"}, \\\\\\\"conversation_id\\\\\\\": null, \\\\\\\"core_state_version\\\\\\\": \\\\\\\"reasonfuse-core-v1\\\\\\\", \\\\\\\"denied_proposal_count\\\\\\\": 0, \\\\\\\"event_count\\\\\\\": 0, \\\\\\\"evidence_keys\\\\\\\": [], \\\\\\\"failed_call_count\\\\\\\": 0, \\\\\\\"framework_session_id\\\\\\\": \\\\\\\"redacted-c616c54ff616c3a6\\\\\\\", \\\\\\\"fuse_reason\\\\\\\": null, \\\\\\\"last_objective_progress_step\\\\\\\": null, \\\\\\\"last_postcondition_result\\\\\\\": null, \\\\\\\"last_proposal\\\\\\\": null, \\\\\\\"last_retrieval\\\\\\\": {}, \\\\\\\"last_signals\\\\\\\": {}, \\\\\\\"oscillation_counter\\\\\\\": 0, \\\\\\\"pending_postcondition\\\\\\\": null, \\\\\\\"progress_history\\\\\\\": [], \\\\\\\"progress_state\\\\\\\": \\\\\\\"UNKNOWN\\\\\\\", \\\\\\\"reasonfuse_enabled\\\\\\\": true, \\\\\\\"recent_action_fingerprints\\\\\\\": [], \\\\\\\"recent_actions\\\\\\\": [], \\\\\\\"retrieval_attempts\\\\\\\": [], \\\\\\\"retrieval_churn_counter\\\\\\\": 0, \\\\\\\"retrieval_evidence_keys\\\\\\\": [], \\\\\\\"run_contract_version\\\\\\\": \\\\\\\"reasonfuse-contract-v1\\\\\\\", \\\\\\\"run_id\\\\\\\": \\\\\\\"run-822f58fadb194c55bc29d7da6ea3a43d\\\\\\\", \\\\\\\"runtime_profile\\\\\\\": \\\\\\\"runtime\\\\\\\", \\\\\\\"side_effect_count\\\\\\\": 0, \\\\\\\"stall_counter\\\\\\\": 0, \\\\\\\"step_index\\\\\\\": 0, \\\\\\\"todo_snapshot\\\\\\\": {}, \\\\\\\"tool_call_count\\\\\\\": 0, \\\\\\\"trajectory_state\\\\\\\": \\\\\\\"ACTIVE\\\\\\\", \\\\\\\"verification_reserve_available\\\\\\\": false, \\\\\\\"world_state_snapshot\\\\\\\": {}}, \\\\\\\"reasonfuse_test_counter\\\\\\\": 7, \\\\\\\"reasonfuse_test_state\\\\\\\": \\\\\\\"RF-STATE-001\\\\\\\", \\\\\\\"restored_at_turn_start\\\\\\\": false, \\\\\\\"turn_number\\\\\\\": 1}\\\"}]\",\n      \"tool_name\": \"read_runtime_state\"\n    },\n    {\n      \"agent_session_id\": \"redacted-c616c54ff616c3a6\",\n      \"arguments\": {},\n      \"event\": \"BEFORE\",\n      \"result\": null,\n      \"tool_name\": \"read_runtime_state\"\n    }\n  ],\n  \"package_versions\": {\n    \"agent-framework-core\": \"1.17.0\",\n    \"agent-framework-foundry\": \"1.12.0\",\n    \"agent-framework-foundry-hosting\": \"1.0.0b260903\",\n    \"azure-ai-agentserver-responses\": \"2.2.0b1\",\n    \"azure-ai-projects\": \"2.3.0\",\n    \"azure-identity\": \"1.25.3\"\n  },\n  \"platform_session_id\": \"redacted-5ac80b5c5698038e\",\n  \"previous_chat_requests\": [],\n  \"python_version\": \"3.13.15\",\n  \"reasonfuse_core\": {\n    \"action_lifecycle\": null,\n    \"agent_session_id\": \"redacted-5ac80b5c5698038e\",\n    \"blocked_proposal_count\": 0,\n    \"contained\": false,\n    \"contract_limits\": {\n      \"max_oscillation_cycles\": 2,\n      \"max_retrieval_churn\": 3,\n      \"max_side_effects\": 1,\n      \"max_stalled_steps\": 2,\n      \"max_steps\": 12,\n      \"max_tool_calls\": 10,\n      \"require_postcondition_for_side_effects\": true,\n      \"required_objective_progress_interval\": 2,\n      \"version\": \"reasonfuse-contract-v1\"\n    },\n    \"conversation_id\": null,\n    \"core_state_version\": \"reasonfuse-core-v1\",\n    \"denied_proposal_count\": 0,\n    \"event_count\": 0,\n    \"evidence_keys\": [],\n    \"failed_call_count\": 0,\n    \"framework_session_id\": \"redacted-c616c54ff616c3a6\",\n    \"fuse_reason\": null,\n    \"last_objective_progress_step\": null,\n    \"last_postcondition_result\": null,\n    \"last_proposal\": null,\n    \"last_retrieval\": {},\n    \"last_signals\": {},\n    \"oscillation_counter\": 0,\n    \"pending_postcondition\": null,\n    \"progress_history\": [],\n    \"progress_state\": \"UNKNOWN\",\n    \"reasonfuse_enabled\": true,\n    \"recent_action_fingerprints\": [],\n    \"recent_actions\": [],\n    \"retrieval_attempts\": [],\n    \"retrieval_churn_counter\": 0,\n    \"retrieval_evidence_keys\": [],\n    \"run_contract_version\": \"reasonfuse-contract-v1\",\n    \"run_id\": \"run-822f58fadb194c55bc29d7da6ea3a43d\",\n    \"runtime_profile\": \"runtime\",\n    \"side_effect_count\": 0,\n    \"stall_counter\": 0,\n    \"step_index\": 0,\n    \"todo_snapshot\": {},\n    \"tool_call_count\": 0,\n    \"trajectory_state\": \"ACTIVE\",\n    \"verification_reserve_available\": false,\n    \"world_state_snapshot\": {}\n  },\n  \"reasonfuse_test_counter\": 7,\n  \"reasonfuse_test_state\": \"RF-STATE-001\",\n  \"restored_at_turn_start\": true,\n  \"turn_number\": 2\n}",
+            "annotations": [],
+            "logprobs": []
+          }
+        ],
+        "status": "completed",
+        "response_id": "redacted-74314d7599624ce0",
+        "agent_reference": null
+      }
+    ],
+    "created_at": 1789887686,
+    "parallel_tool_calls": false,
+    "status": "completed",
+    "completed_at": 1789887706,
+    "usage": {
+      "input_tokens": 7097,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 2219,
+      "output_tokens_details": {
+        "reasoning_tokens": 128
+      },
+      "total_tokens": 9316
+    },
+    "response_id": "redacted-74314d7599624ce0",
+    "agent_reference": {
+      "type": "agent_reference",
+      "name": "reasonfuse",
+      "version": "7"
+    },
+    "model": "",
+    "agent_session_id": "redacted-5ac80b5c5698038e",
+    "background": false
+  },
+  "unsupported_claim_leaked": false,
+  "elapsed_seconds": 21.14274,
+  "completed_utc": "2026-09-20T07:01:46.620396+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-f9927d064c258bfd",
+    "configured_allowed_hosts": [
+      "redacted-f9927d064c258bfd",
+      "redacted-f9927d064c258bfd:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}
