@@ -1,0 +1,32 @@
+{
+  "timestamp_utc": "2026-09-20T20:14:14.063873+00:00",
+  "note": "Captured during two concurrent read_runtime_state requests after the failed approval race; both same conversation, same native chain, distinct handlers, neither steered. Approval-entry logs aged out of the 300-line log tail.",
+  "observations": [
+    {
+      "timestamp": "2026-09-20T20:08:44.385657224+00:00",
+      "identity": {
+        "chain": "a61b0078a6cbe2a5",
+        "context_conversation": "59b87b0715e44472",
+        "platform_session": "42554da78607d98d",
+        "previous_response": null,
+        "recovery": false,
+        "request_conversation": "59b87b0715e44472",
+        "response": "67defff4324817e9",
+        "steered": false
+      }
+    },
+    {
+      "timestamp": "2026-09-20T20:08:44.646465020+00:00",
+      "identity": {
+        "chain": "a61b0078a6cbe2a5",
+        "context_conversation": "59b87b0715e44472",
+        "platform_session": "42554da78607d98d",
+        "previous_response": null,
+        "recovery": false,
+        "request_conversation": "59b87b0715e44472",
+        "response": "f6d5143fd1a6fbfc",
+        "steered": false
+      }
+    }
+  ]
+}

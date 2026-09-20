@@ -1,0 +1,15 @@
+{
+  "timestamp_utc": "2026-09-20T20:17:39.520898+00:00",
+  "tests": 100,
+  "result": "PASS",
+  "runner_summary": "Ran 100 tests in 6.871s",
+  "test_log_sha256": "57b3a09be6cc7c1c72079880015ff73bea90d1ba01dd0d5d75a8807af916fcca",
+  "pins": {
+    "agent-framework-core": "1.17.0",
+    "agent-framework-foundry": "1.12.0",
+    "agent-framework-foundry-hosting": "1.0.0b260903",
+    "azure-ai-projects": "2.3.0",
+    "azure-ai-agentserver-responses": "2.2.0b1",
+    "azure-ai-agentserver-core": "2.1.0"
+  }
+}

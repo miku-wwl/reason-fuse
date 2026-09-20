@@ -1,0 +1,25 @@
+{
+  "timestamp_utc": "2026-09-20T20:22:17.827397+00:00",
+  "observations": [
+    {
+      "timestamp": "2026-09-20T20:21:15.036234330+00:00",
+      "stream": "stderr",
+      "message": "REASONFUSE_HOST_IDENTITY {\"chain\": \"8148b7b7f17353ff\", \"context_conversation\": \"6560bbcbe235a936\", \"platform_session\": \"c4498f46f6d8fd85\", \"previous_response\": null, \"recovery\": false, \"request_conversation\": \"6560bbcbe235a936\", \"response\": \"a098aac813f5e6ab\", \"steered\": false}"
+    },
+    {
+      "timestamp": "2026-09-20T20:21:15.281024519+00:00",
+      "stream": "stderr",
+      "message": "REASONFUSE_HOST_IDENTITY {\"chain\": \"8148b7b7f17353ff\", \"context_conversation\": \"6560bbcbe235a936\", \"platform_session\": \"c4498f46f6d8fd85\", \"previous_response\": null, \"recovery\": false, \"request_conversation\": \"6560bbcbe235a936\", \"response\": \"5008055a54c56d55\", \"steered\": false}"
+    },
+    {
+      "timestamp": "2026-09-20T20:21:15.472232083+00:00",
+      "stream": "stderr",
+      "message": "REASONFUSE_HOST_ADMISSION rejected: AdmissionRejected"
+    },
+    {
+      "timestamp": "2026-09-20T20:22:17.058411877+00:00",
+      "stream": "stderr",
+      "message": "REASONFUSE_HOST_IDENTITY {\"chain\": \"8148b7b7f17353ff\", \"context_conversation\": \"6560bbcbe235a936\", \"platform_session\": \"c4498f46f6d8fd85\", \"previous_response\": null, \"recovery\": false, \"request_conversation\": \"6560bbcbe235a936\", \"response\": \"b908cf3a9aa62ddb\", \"steered\": false}"
+    }
+  ]
+}

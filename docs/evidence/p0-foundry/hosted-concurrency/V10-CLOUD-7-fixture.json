@@ -1,0 +1,23 @@
+{
+  "timestamp_utc": "2026-09-20T20:27:52.067917+00:00",
+  "operation": "reset",
+  "state": {
+    "service_name": "orders",
+    "mode": "failed",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-4fff18e79e0d9f70",
+    "configured_allowed_hosts": [
+      "redacted-4fff18e79e0d9f70",
+      "redacted-4fff18e79e0d9f70:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "timestamp_utc": "2026-09-20T20:36:45.609791+00:00",
+  "sessions": [
+    {
+      "agent_session_id": "redacted-42554da78607d98d",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "9"
+      },
+      "status": "deleted",
+      "created_at": 1789934813,
+      "last_accessed_at": 1789934813,
+      "expires_at": 1792526813
+    },
+    {
+      "agent_session_id": "redacted-c4498f46f6d8fd85",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "status": "deleted",
+      "created_at": 1789935630,
+      "last_accessed_at": 1789935630,
+      "expires_at": 1792527630
+    },
+    {
+      "agent_session_id": "redacted-cb20beb1c845a3c1",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "status": "deleted",
+      "created_at": 1789935777,
+      "last_accessed_at": 1789935777,
+      "expires_at": 1792527777
+    },
+    {
+      "agent_session_id": "redacted-b328ea8b61e2ef13",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "status": "deleted",
+      "created_at": 1789935980,
+      "last_accessed_at": 1789935980,
+      "expires_at": 1792527980
+    },
+    {
+      "agent_session_id": "redacted-e491183b9ecc53cc",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "status": "deleted",
+      "created_at": 1789936016,
+      "last_accessed_at": 1789936016,
+      "expires_at": 1792528016
+    },
+    {
+      "agent_session_id": "redacted-c56088edccbff918",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "status": "deleted",
+      "created_at": 1789936073,
+      "last_accessed_at": 1789936073,
+      "expires_at": 1792528073
+    },
+    {
+      "agent_session_id": "redacted-8dd829e151cd3a8d",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "status": "deleted",
+      "created_at": 1789936129,
+      "last_accessed_at": 1789936129,
+      "expires_at": 1792528129
+    },
+    {
+      "agent_session_id": "redacted-a2dd4ffba61af0c2",
+      "version_indicator": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "status": "deleted",
+      "created_at": 1789936362,
+      "last_accessed_at": 1789936362,
+      "expires_at": 1792528362
+    }
+  ]
+}

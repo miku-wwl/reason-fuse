@@ -1,0 +1,122 @@
+{
+  "started_utc": "2026-09-20T20:26:54.369210+00:00",
+  "request": {
+    "input": "Submit exactly one restart_service call for orders for native approval. After approval and acceptance, call read_reasonfuse_state exactly once to inspect the pending obligation, then stop. Do not call service_status yourself.",
+    "store": true,
+    "stream": false,
+    "max_output_tokens": 5000
+  },
+  "agent_version": "10",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-4fff18e79e0d9f70",
+    "configured_allowed_hosts": [
+      "redacted-4fff18e79e0d9f70",
+      "redacted-4fff18e79e0d9f70:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 200,
+  "response_headers": {
+    "date": "Sun, 20 Sep 2026 20:27:11 GMT",
+    "x-agent-session-id": "redacted-e491183b9ecc53cc"
+  },
+  "response": {
+    "id": "redacted-b58e5f871ed403a9",
+    "object": "response",
+    "output": [
+      {
+        "type": "function_call",
+        "id": "fc_0f4d594cd4f477f200xhseXS15w25vGntzRtYxfv6rQrb8cyWB",
+        "call_id": "call_UieqdXNfkRyX4IWss6HCcWPH",
+        "name": "reasonfuse-operations___operations___restart_service",
+        "arguments": "{\"service_name\":\"orders\"}",
+        "status": "completed",
+        "response_id": "redacted-b58e5f871ed403a9",
+        "agent_reference": null
+      },
+      {
+        "type": "mcp_approval_request",
+        "id": "redacted-b965defe14a58a2a",
+        "server_label": "agent_framework",
+        "name": "reasonfuse-operations___operations___restart_service",
+        "arguments": "{\"service_name\":\"orders\"}",
+        "response_id": "redacted-b58e5f871ed403a9",
+        "agent_reference": null
+      },
+      {
+        "type": "message",
+        "id": "msg_0f4d594cd4f477f2002UnkEyTDJKyK3Bd0URf578dyNHxIJAbT",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "{\"action_lifecycle\": null, \"contained\": false, \"outcome\": \"APPROVAL_REQUIRED\", \"postcondition\": null, \"proposal\": {\"action\": \"restart_service\", \"approval_id\": \"af-call-b8f2db9f89ea4e1fa3a84db59aebcbe1\", \"resource\": \"orders\", \"status\": \"APPROVAL_REQUIRED\"}, \"side_effect_count\": 0}",
+            "annotations": [],
+            "logprobs": []
+          }
+        ],
+        "status": "completed",
+        "response_id": "redacted-b58e5f871ed403a9",
+        "agent_reference": null
+      }
+    ],
+    "created_at": 1789936022,
+    "parallel_tool_calls": false,
+    "status": "completed",
+    "completed_at": 1789936030,
+    "usage": {
+      "input_tokens": 754,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 893,
+      "output_tokens_details": {
+        "reasoning_tokens": 832
+      },
+      "total_tokens": 1647
+    },
+    "response_id": "redacted-b58e5f871ed403a9",
+    "agent_reference": {
+      "type": "agent_reference",
+      "name": "reasonfuse",
+      "version": "10"
+    },
+    "model": "",
+    "agent_session_id": "redacted-e491183b9ecc53cc",
+    "background": false
+  },
+  "unsupported_claim_leaked": false,
+  "elapsed_seconds": 17.028115,
+  "completed_utc": "2026-09-20T20:27:11.532619+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "UNHEALTHY",
+    "generation": "g1",
+    "restart_pending": false,
+    "restart_count": 0,
+    "restart_attempt_count": 0,
+    "status_read_count": 0,
+    "last_action": null,
+    "events": [],
+    "request_host": "redacted-4fff18e79e0d9f70",
+    "configured_allowed_hosts": [
+      "redacted-4fff18e79e0d9f70",
+      "redacted-4fff18e79e0d9f70:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

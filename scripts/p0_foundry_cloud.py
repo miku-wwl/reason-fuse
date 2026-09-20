@@ -11,6 +11,7 @@ import asyncio
 from datetime import datetime, timezone
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import time
@@ -22,6 +23,12 @@ from dotenv import dotenv_values
 ROOT = Path(__file__).resolve().parents[1]
 PRIVATE = ROOT / ".tools/p0-cloud/private"
 EVIDENCE = ROOT / "docs/evidence/p0-foundry"
+RUN = os.environ.get("REASONFUSE_EVIDENCE_RUN", "")
+if RUN:
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", RUN):
+        raise ValueError("REASONFUSE_EVIDENCE_RUN must be a simple label")
+    PRIVATE = PRIVATE / RUN
+    EVIDENCE = EVIDENCE / RUN
 CLAIM = "UNSUPPORTED_CLOUD_SUCCESS"
 
 

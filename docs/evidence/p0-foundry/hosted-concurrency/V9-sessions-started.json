@@ -1,0 +1,5 @@
+{
+  "timestamp_utc": "2026-09-20T20:07:32.424835+00:00",
+  "sessions": [],
+  "inventory_filter_error": "This diagnostic filter compared structured version_indicator values to the string '9' and returned an empty list. It is not evidence that no session existed. Correct version_indicator.agent_version inventory and deletion readback are in CLEANUP-session-inventory.json and CLEANUP-final.json."
+}

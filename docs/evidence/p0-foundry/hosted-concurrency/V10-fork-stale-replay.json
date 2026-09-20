@@ -1,0 +1,142 @@
+{
+  "started_utc": "2026-09-20T20:26:16.276168+00:00",
+  "request": {
+    "input": [
+      {
+        "type": "mcp_approval_response",
+        "approval_request_id": "redacted-bdd87a9d38b6b704",
+        "approve": true
+      }
+    ],
+    "store": true,
+    "stream": false,
+    "max_output_tokens": 5000,
+    "previous_response_id": "redacted-ef7a9fefa672cfc4"
+  },
+  "agent_version": "10",
+  "backend_before": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "HEALTHY",
+    "generation": "g2",
+    "restart_pending": false,
+    "restart_count": 1,
+    "restart_attempt_count": 1,
+    "status_read_count": 1,
+    "last_action": "restart_service",
+    "events": [
+      {
+        "sequence": 1,
+        "timestamp_utc": "2026-09-20T20:23:36.113395+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": true,
+          "status_code": 202,
+          "resource": "orders",
+          "operation_id": "test-orders-g2",
+          "generation": "g2",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp_utc": "2026-09-20T20:23:53.815911+00:00",
+        "operation": "service_status",
+        "result": {
+          "resource": "orders",
+          "generation": "g2",
+          "service_health": "HEALTHY",
+          "world_state": {
+            "service_name": "orders",
+            "service_health": "HEALTHY",
+            "generation": "g2"
+          }
+        }
+      }
+    ],
+    "request_host": "redacted-4fff18e79e0d9f70",
+    "configured_allowed_hosts": [
+      "redacted-4fff18e79e0d9f70",
+      "redacted-4fff18e79e0d9f70:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  },
+  "http_status": 200,
+  "response_headers": {
+    "date": "Sun, 20 Sep 2026 20:26:17 GMT",
+    "x-agent-session-id": "redacted-cb20beb1c845a3c1"
+  },
+  "response": {
+    "id": "redacted-6c0617346ba55f23",
+    "object": "response",
+    "output": [],
+    "created_at": 1789935977,
+    "error": {
+      "code": "server_error",
+      "message": "ReasonFuse: stale continuation cannot obtain execution authority"
+    },
+    "parallel_tool_calls": false,
+    "status": "failed",
+    "response_id": "redacted-6c0617346ba55f23",
+    "agent_reference": {
+      "type": "agent_reference",
+      "name": "reasonfuse",
+      "version": "10"
+    },
+    "model": "",
+    "agent_session_id": "redacted-cb20beb1c845a3c1",
+    "background": false
+  },
+  "unsupported_claim_leaked": false,
+  "elapsed_seconds": 1.521907,
+  "completed_utc": "2026-09-20T20:26:17.949094+00:00",
+  "backend_after": {
+    "service_name": "orders",
+    "mode": "verified",
+    "service_health": "HEALTHY",
+    "generation": "g2",
+    "restart_pending": false,
+    "restart_count": 1,
+    "restart_attempt_count": 1,
+    "status_read_count": 1,
+    "last_action": "restart_service",
+    "events": [
+      {
+        "sequence": 1,
+        "timestamp_utc": "2026-09-20T20:23:36.113395+00:00",
+        "operation": "restart_service",
+        "result": {
+          "accepted": true,
+          "status_code": 202,
+          "resource": "orders",
+          "operation_id": "test-orders-g2",
+          "generation": "g2",
+          "execution_count": 1
+        }
+      },
+      {
+        "sequence": 2,
+        "timestamp_utc": "2026-09-20T20:23:53.815911+00:00",
+        "operation": "service_status",
+        "result": {
+          "resource": "orders",
+          "generation": "g2",
+          "service_health": "HEALTHY",
+          "world_state": {
+            "service_name": "orders",
+            "service_health": "HEALTHY",
+            "generation": "g2"
+          }
+        }
+      }
+    ],
+    "request_host": "redacted-4fff18e79e0d9f70",
+    "configured_allowed_hosts": [
+      "redacted-4fff18e79e0d9f70",
+      "redacted-4fff18e79e0d9f70:*",
+      "127.0.0.1:*",
+      "localhost:*"
+    ]
+  }
+}

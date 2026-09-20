@@ -1,0 +1,58 @@
+{
+  "timestamp_utc": "2026-09-20T20:20:03.836495+00:00",
+  "version": {
+    "metadata": {
+      "enableVnextExperience": "true"
+    },
+    "object": "agent.version",
+    "id": "reasonfuse:10",
+    "name": "reasonfuse",
+    "version": "10",
+    "description": "Lean ReasonFuse Microsoft Foundry Hosted Agent.",
+    "created_at": 1789935523,
+    "definition": {
+      "kind": "hosted",
+      "container_protocol_versions": [],
+      "cpu": "1",
+      "memory": "2Gi",
+      "environment_variables": {
+        "AZURE_AI_MODEL_DEPLOYMENT_NAME": "gpt-5-mini",
+        "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT": "false",
+        "REASONFUSE_CONTRACT_JSON": "{}",
+        "REASONFUSE_ENABLED": "true",
+        "REASONFUSE_PROFILE": "runtime",
+        "TOOLBOX_NAME": "operations-tools"
+      },
+      "protocol_versions": [
+        {
+          "protocol": "responses",
+          "version": "2.0.0"
+        }
+      ],
+      "code_configuration": {
+        "runtime": "python_3_13",
+        "entry_point": [
+          "python",
+          "src/main.py"
+        ],
+        "dependency_resolution": "remote_build",
+        "content_hash": "1ebeb782fa7ebf71dee65f6975599c0b916afd740d77e47abf28144248999425"
+      }
+    },
+    "draft": false,
+    "status": "active",
+    "instance_identity": {
+      "principal_id": "redacted-f1291f86c0f99ae5",
+      "client_id": "redacted-f1291f86c0f99ae5"
+    },
+    "blueprint": {
+      "principal_id": "redacted-39431d4d89fa48b2",
+      "client_id": "redacted-93563f2b1352083d"
+    },
+    "blueprint_reference": {
+      "type": "ManagedAgentIdentityBlueprint",
+      "blueprint_id": "reasonfuse-5aa6a"
+    },
+    "agent_guid": "redacted-b72f5a5df9494b11"
+  }
+}

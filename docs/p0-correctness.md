@@ -5,6 +5,13 @@ compositions, using the unchanged dependency pins. Validation uses scripted
 model transports, native Agent Framework approval/invocation/history layers,
 and deterministic fixtures. It does not establish live Foundry acceptance.
 
+The local-cycle results below are historical. The later Hosted correction adds
+admission before session restoration: native conditional storage owns each
+conversation through saved completion, and stale/uncertain continuations fail
+closed. See the [v10 cloud validation report](evidence/p0-hosted-concurrency-validation.md)
+for the 100-test regression result, CLOUD-1 through CLOUD-12 PASS, migration and
+availability limits. This does not expand the per-object lock's own guarantee.
+
 ## Authority and concurrency scope
 
 The supported ownership boundary is one canonical live `AgentSession` object,

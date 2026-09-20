@@ -1,0 +1,34 @@
+{
+  "timestamp_utc": "2026-09-20T20:26:39.251833+00:00",
+  "toolbox": {
+    "id": "toolbox_c839f4d4adc1a6d91e9a6cc895c93d6f36088324",
+    "name": "operations-tools",
+    "default_version": "5",
+    "object": "toolbox"
+  },
+  "version": {
+    "metadata": {},
+    "id": "toolbox_c839f4d4adc1a6d91e9a6cc895c93d6f36088324:5",
+    "name": "operations-tools",
+    "version": "5",
+    "description": "Bounded deterministic Operations MCP tools for ReasonFuse cloud validation.",
+    "created_at": 1789934659,
+    "tools": [
+      {
+        "type": "mcp",
+        "server_label": "reasonfuse-operations",
+        "server_url": "redacted-d071ce18e7b6e8ce",
+        "require_approval": {
+          "always": [
+            "operations___restart_service"
+          ],
+          "never": [
+            "operations___service_status"
+          ]
+        }
+      }
+    ],
+    "skills": [],
+    "object": "toolbox.version"
+  }
+}

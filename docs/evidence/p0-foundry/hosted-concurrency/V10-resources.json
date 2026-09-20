@@ -1,0 +1,38 @@
+{
+  "timestamp_utc": "2026-09-20T20:26:39.686158+00:00",
+  "created": [
+    {
+      "location": "australiaeast",
+      "name": "rfp0e2dc1620921",
+      "type": "Microsoft.ContainerRegistry/registries"
+    },
+    {
+      "location": "australiaeast",
+      "name": "reasonfuse-p0-env",
+      "type": "Microsoft.App/managedEnvironments"
+    },
+    {
+      "location": "australiaeast",
+      "name": "reasonfuse-p0-pull",
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+    },
+    {
+      "location": "australiaeast",
+      "name": "reasonfuse-p0-operations",
+      "type": "Microsoft.App/containerApps"
+    }
+  ],
+  "reused": [
+    "Foundry project reason-fuse",
+    "agent reasonfuse",
+    "gpt-5-mini deployment",
+    "operations-tools toolbox"
+  ],
+  "fixture_image_digest": "sha256:b2c9928e163ec4926676ace1768fe1284c43dfd858cf182b800cfffa53378ce5",
+  "fixture_source": "e2dc162",
+  "new_agent_versions": [
+    "9",
+    "10"
+  ],
+  "native_state_store": "reasonfuse_host_admission_v1; user isolated; admission records retained for safety"
+}

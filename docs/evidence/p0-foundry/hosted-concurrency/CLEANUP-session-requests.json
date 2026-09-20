@@ -1,0 +1,69 @@
+{
+  "timestamp_utc": "2026-09-20T20:36:45.269759+00:00",
+  "results": [
+    {
+      "agent_session_id": "redacted-42554da78607d98d",
+      "version": {
+        "type": "version_ref",
+        "agent_version": "9"
+      },
+      "delete_requested": true
+    },
+    {
+      "agent_session_id": "redacted-c4498f46f6d8fd85",
+      "version": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "delete_requested": true
+    },
+    {
+      "agent_session_id": "redacted-cb20beb1c845a3c1",
+      "version": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "delete_requested": true
+    },
+    {
+      "agent_session_id": "redacted-b328ea8b61e2ef13",
+      "version": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "delete_requested": true
+    },
+    {
+      "agent_session_id": "redacted-e491183b9ecc53cc",
+      "version": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "delete_requested": true
+    },
+    {
+      "agent_session_id": "redacted-c56088edccbff918",
+      "version": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "delete_requested": true
+    },
+    {
+      "agent_session_id": "redacted-8dd829e151cd3a8d",
+      "version": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "delete_requested": true
+    },
+    {
+      "agent_session_id": "redacted-a2dd4ffba61af0c2",
+      "version": {
+        "type": "version_ref",
+        "agent_version": "10"
+      },
+      "delete_requested": true
+    }
+  ]
+}

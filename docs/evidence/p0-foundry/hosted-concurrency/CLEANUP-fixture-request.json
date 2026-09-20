@@ -1,0 +1,32 @@
+{
+  "timestamp_utc": "2026-09-20T20:38:33.612574+00:00",
+  "group": {
+    "id": "/subscriptions/redacted-c47f784e01bbe4e7/resourceGroups/rg-reasonfuse-p0-validation",
+    "name": "rg-reasonfuse-p0-validation",
+    "tags": {
+      "purpose": "hosted-concurrency-fix",
+      "source": "e2dc162",
+      "temporary": "true"
+    }
+  },
+  "verified_inventory": [
+    {
+      "name": "rfp0e2dc1620921",
+      "type": "Microsoft.ContainerRegistry/registries"
+    },
+    {
+      "name": "reasonfuse-p0-env",
+      "type": "Microsoft.App/managedEnvironments"
+    },
+    {
+      "name": "reasonfuse-p0-pull",
+      "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+    },
+    {
+      "name": "reasonfuse-p0-operations",
+      "type": "Microsoft.App/containerApps"
+    }
+  ],
+  "delete_request_accepted": true,
+  "completion": "pending readback"
+}
