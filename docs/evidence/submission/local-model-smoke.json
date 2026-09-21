@@ -1,0 +1,33 @@
+{
+  "started_utc": "2026-09-21T08:06:15.835357+00:00",
+  "model": "qwen2.5-0.5b-instruct-generic-gpu:4",
+  "source_commit": "97738312e7d3ee6e6eb8066ac795fc7755c06a38",
+  "azure_model_calls": 0,
+  "azure_resources_created": 0,
+  "scope": "one real local model happy-path smoke; not Hosted proof",
+  "approval_count": 1,
+  "side_effect_count_before_approval": 0,
+  "final_text": "{\"action_lifecycle\": {\"accepted\": true, \"action\": \"restart_service\", \"call_id\": \"zZudr7nT3\", \"generation\": \"g2\", \"reason\": \"fresh_postcondition_observation\", \"resource\": \"orders\", \"status\": \"VERIFIED\", \"tool_name\": \"operations___restart_service\"}, \"contained\": false, \"outcome\": \"OUTCOME_VERIFIED\", \"postcondition\": {\"outcome\": \"OUTCOME_VERIFIED\", \"reason\": \"fresh_postcondition_observation\"}, \"proposal\": null, \"side_effect_count\": 1}",
+  "outcome": {
+    "outcome": "OUTCOME_VERIFIED",
+    "reason": "fresh_postcondition_observation"
+  },
+  "side_effect_count": 1,
+  "lifecycle": {
+    "action": "restart_service",
+    "resource": "orders",
+    "status": "VERIFIED",
+    "call_id": "zZudr7nT3",
+    "tool_name": "operations___restart_service",
+    "accepted": true,
+    "generation": "g2",
+    "reason": "fresh_postcondition_observation"
+  },
+  "status": "PASS",
+  "local_inference_http_requests": 0,
+  "completed_utc": "2026-09-21T08:06:26.303277+00:00",
+  "reported_usage": null,
+  "cleanup": "Ephemeral local HTTP fixture stopped; pre-existing model and daemon retained.",
+  "actual_local_model_call_count": null,
+  "instrumentation_limit": "The original local_inference_http_requests field counts only requests observed by an async httpx hook. The SDK used another transport, so zero is not the total model inference count. Actual local model calls were not measured; no second run was performed to improve this metric."
+}

@@ -1,0 +1,104 @@
+{
+  "validated_utc": "2026-09-21T22:26:42.565016+00:00",
+  "baseline_source_commit": "97738312e7d3ee6e6eb8066ac795fc7755c06a38",
+  "source_at_validation": "working tree, runtime unchanged; final auxiliary source pinned by hashes below and delivery Git commit",
+  "python": "3.13.9",
+  "sdk_versions": {
+    "agent-framework-core": "1.17.0",
+    "agent-framework-foundry": "1.12.0",
+    "agent-framework-foundry-hosting": "1.0.0b260903",
+    "azure-ai-projects": "2.3.0",
+    "azure-ai-agentserver-responses": "2.2.0b1",
+    "azure-ai-agentserver-core": "2.1.0"
+  },
+  "full_regression": {
+    "result": "PASS",
+    "tests": 131,
+    "elapsed_seconds": 10.481,
+    "command": ".venv/Scripts/python.exe -X utf8 -B -m unittest discover -s tests -p test*.py",
+    "private_log_sha256_lf": "9298a4192611325b6b821a7695b733c57fbc1433381c24c0cb5c978a6300262b"
+  },
+  "historical_cloud_evidence_check": {
+    "result": "PASS",
+    "gate": "HOSTED_CONCURRENCY_CLOUD_GATE",
+    "scenarios": 12,
+    "cloud_reexecution": false
+  },
+  "integrity": {
+    "frozen_runtime_and_deployment_files": 32,
+    "historical_evidence_files_unchanged": 139,
+    "historical_manifests_entries": [
+      78,
+      70,
+      28
+    ],
+    "original_harness_snapshot_files": 4,
+    "original_protocol_unchanged": true
+  },
+  "offline_rescore": {
+    "existing_rows": 30,
+    "metric_differences": [],
+    "new_scored_executions": 0,
+    "model_calls": 0
+  },
+  "powershell": {
+    "ast": "PASS",
+    "dry_run": "PASS",
+    "invocations": [
+      "demo-up",
+      "demo-smoke",
+      "demo-down",
+      "demo-run A",
+      "demo-run B",
+      "demo-run C"
+    ],
+    "initial_check_correction": "Initial generic loop omitted the mandatory Story parameter; rerun supplied A/B/C and all six DryRuns passed. No cloud actions."
+  },
+  "evaluation_cloud_prepare_and_run_default_dry_run": "PASS",
+  "security_check": {
+    "result": "PASS",
+    "scope": "UTF-8 submission candidates, heuristic secret patterns, forbidden private paths, historical/source/evidence hashes and local Markdown links; deployment ZIP explicit allowlist",
+    "limit": "Not a formal security audit or exhaustive secret guarantee",
+    "private_state_logs_and_pdf": "ignored and excluded from submission"
+  },
+  "sprint_calls": {
+    "local_scored_responses": 64,
+    "scripted_transport_requests": 83,
+    "scripted_real_model_network_calls": 0,
+    "cloud_evaluation_responses": 0,
+    "azure_model_calls": 0,
+    "azure_resource_mutations": 0,
+    "cloud_readonly_resource_operations": 8,
+    "local_real_model_smoke_flows": 1,
+    "actual_local_model_inference_count": null,
+    "local_model_usage": null
+  },
+  "cloud_status_evidence": [
+    "cloud-readonly-status.json",
+    "cloud-readonly-final.json"
+  ],
+  "cleanup": "No Azure resources created/deleted. Local temporary fixture/session state disposed. Pre-existing local model and daemon retained. Private evidence retained outside Git.",
+  "auxiliary_source_sha256_lf": {
+    "evaluation/__init__.py": "4ab6751fe5996d8b305591e8b058338df945be1d265b10e8a465d24658ac1b04",
+    "evaluation/protocol.json": "f840071ecc3ab9c2e5451db2dcd8f0f7fe330f2bfed0bab32a02be2a87f53f13",
+    "evaluation/runtime.py": "a0be3cbb051921d861a750271ce63bb228b7680319a4b5c78d99e8794cbd596c",
+    "evaluation/scoring.py": "5998b456856bcd592327f408711e819633d3ed1854d1acd45c25a6bbbd7c7204",
+    "scripts/check_submission.py": "75d74d3edaf36a2651a5c39ab52da7f30f4e88ce1e8702e23e87911900209c48",
+    "scripts/demo-down.ps1": "adeabea0d17b11f74e2d6f8cfd24ed7f66178e153dcd0004bbc5e5ead5a62e3c",
+    "scripts/demo-run.ps1": "172e9ad53dafca9b6339406ad47965083a803413a1c209728934418f00ebb252",
+    "scripts/demo-smoke.ps1": "c68014b7e2b466ff84dc48f968c595f7e26a47907cf1c87f157fc67d8f7339a3",
+    "scripts/demo-up.ps1": "ab01ddfd00068c458792aa3fa2ffd6247716d8a8b17f13641758287f2a4b640f",
+    "scripts/demo_stories.py": "eb8469232693dff180dd0d362bdcb258ab7927bf206006f11da6e5aa968de335",
+    "scripts/demo_support.py": "2eeb2cd051f9438d5c6bd544125057257304ac833c0d6b0a297a0acf315d3eb0",
+    "scripts/evaluate.py": "d5d4e8becd0ab24d71ab466254d00c7f797bb29f0bc589d27b774c0ccbb571ae",
+    "scripts/evaluate_cloud.py": "e86500f00751e0a390bc74e529c6601374f545f21dd141f2037a98ea54d3a990",
+    "scripts/local_final_smoke.py": "490e894f2372823622bdecfec3a7e777fdc6d33935dcdeb760defb67b4746896",
+    "tests/test_demo_scripts.py": "69bfd7f6c9f42076b241e8b777f4799241eec9421a2220a4e76421dd3c812e2b",
+    "tests/test_evaluation.py": "ddb80b586b89ca42f466f5588bbff918b4d9853e53055c249cb3087d5c62b69d"
+  },
+  "submission_ready": false,
+  "blockers": [
+    "Original Foundry project/account and operations backend unavailable",
+    "No numeric spending ceiling supplied; no real Hosted ON/OFF comparison executed"
+  ]
+}

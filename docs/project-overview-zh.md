@@ -1,5 +1,7 @@
 # ReasonFuse 项目全景报告
 
+> 历史工程快照：本文描述最终提交冲刺前的状态。当前运行方式、评测和验收请从 [README](../README.md) 与 [提交冲刺记录](submission-sprint.md) 阅读；下文保留原有时点含义。
+
 **报告日期：2026 年 9 月 21 日，新西兰时间。**
 
 **代码基线：** `main`，提交 `389d1e10d90352ff2cbb7b92eccc4252580f865b`。本次核查时，本地 HEAD 与 [GitHub main](https://github.com/miku-wwl/reason-fuse/tree/389d1e10d90352ff2cbb7b92eccc4252580f865b) 相同，工作区干净；本报告是随后新增的文档。

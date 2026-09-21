@@ -13,3 +13,5 @@
 **/terraform.tfvars
 **/evidence/private/
 evidence/**/private/
+# Preserve the local PDF export without including it in submission source.
+docs/project-overview-zh.pdf

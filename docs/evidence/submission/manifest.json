@@ -1,0 +1,20 @@
+{
+  "algorithm": "SHA256, LF normalized",
+  "files": {
+    "cloud-evaluation/manifest.json": "b8865c9d29746867a1ea4a9c4a33b8135f28bf313d75c272a46f15b65d0e98be",
+    "cloud-evaluation/results.csv": "862391fab8973b96989b59d64c0fe86268bcc6490c4c5f24257ad817717f3b04",
+    "cloud-evaluation/results.json": "8c66e6ea52ad9cb135b53f42be016688a6cf41d688b8264a116754e2681d49e3",
+    "cloud-readonly-final.json": "ef7c1ff13a6f80507cfd2a644e234cd0d9b2a244ef6df47ebc10f967f9ae410d",
+    "cloud-readonly-status.json": "03fac80c23bf8bf4d3ca1a3882b9d89bbba4c3a3bd1985dca8817635d0a86d1f",
+    "evaluation-harness-v1/evaluation/__init__.py": "4ab6751fe5996d8b305591e8b058338df945be1d265b10e8a465d24658ac1b04",
+    "evaluation-harness-v1/evaluation/runtime.py": "eafa78b0bd569055934e43edab8f29a26b7aabfdda95416451d7dd66c80ccbc8",
+    "evaluation-harness-v1/evaluation/scoring.py": "4184a17521b819e34c54d8f4649c6359e033f5aaa36efb2074c70b623e18461c",
+    "evaluation-harness-v1/scripts/evaluate.py": "d5d4e8becd0ab24d71ab466254d00c7f797bb29f0bc589d27b774c0ccbb571ae",
+    "final-validation.json": "46649405535ddef6c7a2570822b6589c9d9e89df648f3b3496db50fea665bb65",
+    "harness-review.md": "d461a84cb59e9b7d15ac361a721b3a0c632a625caab30966634aa885e6158049",
+    "local-evaluation/manifest.json": "0941684cd5ecf042b87b4172b75f60ea43dff0e432937a3b4bf7f6665da11c1e",
+    "local-evaluation/results.csv": "207c844a395f03100f1c5d63fe7bd45e09b93d32f6d61455af7fa6c08a87bdd8",
+    "local-evaluation/results.json": "b88b58e31692e92f30f17395eaaaf0af20ba7c4646f1deffbc88fd68c0becced",
+    "local-model-smoke.json": "b98490410b19fd248744e5563d024024f1004603ab740b392ba82cce92145ef8"
+  }
+}

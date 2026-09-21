@@ -1,0 +1,32 @@
+{
+  "checked_utc": "2026-09-21T08:17:59.194500+00:00",
+  "source_commit": "97738312e7d3ee6e6eb8066ac795fc7755c06a38",
+  "agent_version_get": {
+    "result": "ResourceNotFound",
+    "message": "Subdomain does not map to a resource."
+  },
+  "arm_reads": [
+    {
+      "operation": "group exists",
+      "target": "rg-reason-fuse",
+      "exit_code": 0,
+      "result": false
+    },
+    {
+      "operation": "group exists",
+      "target": "rg-reasonfuse-p0-validation",
+      "exit_code": 0,
+      "result": false
+    },
+    {
+      "operation": "cognitiveservices account",
+      "target": "subscription cognitive accounts",
+      "exit_code": 0,
+      "result": []
+    }
+  ],
+  "azure_resource_mutations": 0,
+  "azure_model_calls": 0,
+  "new_demo_resources_created": 0,
+  "scope": "read-only availability refresh; historical v10 proof preserved"
+}

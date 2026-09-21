@@ -1,0 +1,29 @@
+{
+  "checked_utc": "2026-09-21T22:25:52.233978+00:00",
+  "source_commit": "97738312e7d3ee6e6eb8066ac795fc7755c06a38",
+  "scope": "final read-only availability refresh; no resource mutation or model calls",
+  "arm_reads": [
+    {
+      "operation": "group exists",
+      "target": "rg-reason-fuse",
+      "result": false
+    },
+    {
+      "operation": "group exists",
+      "target": "rg-reasonfuse-p0-validation",
+      "result": false
+    },
+    {
+      "operation": "cognitiveservices account list",
+      "target": "original subscription",
+      "account_count": 0,
+      "result": "EMPTY"
+    }
+  ],
+  "azure_resource_mutations": 0,
+  "azure_model_calls": 0,
+  "new_demo_resources_created": 0,
+  "agent_version_get": {
+    "result": "ResourceNotFound"
+  }
+}

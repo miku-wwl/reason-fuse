@@ -1,241 +1,119 @@
 # ReasonFuse
 
-ReasonFuse is a deterministic reliability layer for AI agents. It detects
-non-progress, contains unsafe or repeated execution, and verifies that an
-accepted action actually changed the external world before the agent claims
-success.
+ReasonFuse is a cloud-validated reliability runtime for side-effecting AI agents that separates planning, authorization, execution, verification, and success determination.
 
-## The problem
+当前路径是 **一个 Agent + Microsoft Foundry Hosted Agent + Operations Toolbox + 一个受控重启场景**。核心已在 `reasonfuse` **v10** 上通过 CLOUD-1 至 CLOUD-12。它不是生产运维平台。
 
-Agents can appear busy without making progress:
+**当前云可用性：BLOCKED。** 2026-09-21 22:25 UTC（新西兰9月22日）的 [最终只读核查](docs/evidence/submission/cloud-readonly-final.json) 显示原 `rg-reason-fuse` 已不存在，原 Foundry 地址返回 ResourceNotFound，原订阅 Cognitive Services 账户列表为空。本轮没有删除云资源；历史 v10 PASS 仍保留。现阶段不能称为只差录像，见最终验收的具体阻塞。
 
-- `Todo != objective progress`. A changed plan is not evidence that the real
-  system changed.
-- `HTTP 202` or `accepted=true != successful outcome`. Acceptance only means
-  that an operation was accepted for processing.
-- An agent must obtain fresh external evidence before claiming success.
-- Repeated non-progress must eventually be contained so another operational
-  dispatch is blocked.
+先读本文，再看 [提交摘要](SUBMISSION-READY.md)、[录制脚本](docs/demo-script.md) 和 [最终验收](docs/submission-sprint.md)。[中文全景报告](docs/project-overview-zh.md) 保留提交冲刺开始前的工程快照。
 
-ReasonFuse makes those boundaries explicit and fail-closed.
+## 问题
 
-## Architecture
+“模型说成功”“工具请求被接受”“副作用已执行”“目标状态已达到”是四件事。`accepted=true` 或 HTTP 202 不能证明服务恢复健康；Todo 变化也不等于客观进展。
 
-```text
-Microsoft Foundry Hosted Agent
-        ↓
-Microsoft Agent Framework
-        ↓
-ReasonFuse
-        ↓
-Foundry Toolbox / MCP
-        ↓
-External Operations State
+模型提出动作，原生审批授权，ReasonFuse 在执行前确定权限和预算，在接受后登记验证义务，再用注册的外部观察决定是否成功。
+
+## 架构
+
+```mermaid
+flowchart TD
+    C[客户端：请求 / 原生审批 / 续接] --> H[Foundry Hosted Agent]
+    H --> A[Hosted admission：恢复会话前取得执行权]
+    A <--> S[Foundry State Store：准入 + AgentSession]
+    A --> F[Agent Framework + gpt-5-mini]
+    F --> R[ReasonFuse：预算 / 生命周期 / 遏制]
+    R --> T[Foundry Toolbox / MCP]
+    T --> X[restart_service：受控副作用]
+    X --> V[注册 service_status：资源 + generation]
+    V --> O[权威结果 + 保存会话]
+    O --> C
 ```
 
-The Hosted Agent is the competition deployment runtime. ReasonFuse owns the
-progress, containment, approval-boundary, and outcome-verification decisions;
-the model and tool platform provide proposals, execution, and observations.
+当前外部对象为测试夹具中的 `orders`。同一资源、同一 generation 的新鲜 HEALTHY 观察才得到 VERIFIED；匹配的不健康结果为 FAILED；陈旧、不匹配或缺失证据为 UNKNOWN。
 
-Foundry Local is an additional low-cost validation path using the same
-ReasonFuse core. It is not the competition deployment runtime and does not
-prove Microsoft Foundry cloud infrastructure.
+## 实现的保证
 
-The final lean scope does not include APIM/canary infrastructure, an
-Operations App Service, Terraform, or a custom Azure Monitor exporter.
+- 重启必须原生审批；用户文本不等于审批。
+- 派发前原子预留步骤、工具和副作用预算，取消后不假装没有尝试过。
+- 接受动作产生验证义务；验证额度包含在总预算内。
+- 模型跳过验证时，完成中间件执行注册验证器；陈旧观察不能 VERIFIED。
+- FAILED / UNKNOWN 遏制后续操作，重新批准不能自动绕过。
+- 操作类回答与结构化结果由运行时替换，再发布权威历史；流式输出先缓冲至完成验证。
+- Hosted 准入先于会话恢复，延续至保存完成；ETag 条件写拒绝竞争，响应别名拒绝旧分支。
+- 不确定执行权不自动过期或转交，见 [人工对账手册](docs/recovery-runbook.md)。
 
-`server.py` is a local in-memory fixture. The bounded cloud Operations MCP
-fixture lives under `cloud/operations-mcp/`; neither is a production
-Operations backend.
+默认契约为 12 个核心步骤、10 次工具调用、最多 1 次副作用尝试。runtime 模式强制保护及后置条件；[配置](src/reasonfuse/config.py)、[契约](src/reasonfuse/core/contract.py)、[完成边界](src/reasonfuse/completion.py)、[准入](src/reasonfuse/host_admission.py) 可直接审查。
 
-## 目录
+## 当前验证
 
-```text
-reason-fuse/
-├── azure.yaml                    # 唯一的 Foundry/azd 部署入口
-├── pyproject.toml                # 工程依赖声明
-├── uv.lock / requirements.txt    # 依赖锁与远程构建输入
-├── server.py                     # 本地 deterministic Operations fixture
-├── docs/evidence/                # 精简的本地/云端证据索引
-├── cloud/operations-mcp/         # 可复现的 bounded MCP fixture
-├── src/
-│   ├── main.py                   # Hosted Agent 启动入口
-│   └── reasonfuse/
-│       ├── main.py
-│       ├── agent.py
-│       ├── core/                 # 冻结的 progress/containment/outcome 核心
-│       └── validation/           # AgentSession 与本地 wiring 钩子
-├── scripts/bootstrap.ps1         # 固定 azd/扩展工具链准备
-└── tests/                        # 本地 unit、wiring、history audit
-```
+| 验证层 | 结果与证据 |
+| --- | --- |
+| 本地完整回归 | **131/131 PASS**：原核心100项与新增辅助脚本31项；见 [最终验收](docs/submission-sprint.md) |
+| 真实 Hosted | **v10 CLOUD-1 至 CLOUD-12 PASS**：[报告](docs/evidence/p0-hosted-concurrency-validation.md) / [逐项索引](docs/evidence/p0-foundry/hosted-concurrency/scenario-index.json) |
+| 历史并发缺陷 | v7/v8 FAIL，v9 复现重复派发和状态覆盖；v10 持久化准入修复了被测两种续接路径，旧证据保留 |
+| 15 场景 ON/OFF | [固定协议、JSON/CSV 与评测结果](docs/evaluation.md)；本地脚本化控制和真实模型结果分开，未执行项明确记录 |
+| 身份与完整性 | v10 28 个源码文件与 70 个证据清单项；检查历史身份以及当前核心不变，不因更新 README 重写历史哈希 |
+| Foundry Local | 当前冻结核心一次真实本地模型 smoke **PASS**：审批前零派发、重启后注册验证 VERIFIED；[原始结果及计量限制](docs/evidence/submission/local-model-smoke.json) |
 
-## 本地检查
+云 PASS 使用真实模型、原生审批、MCP 和独立后端计数。本轮不会为了重现已有 PASS 再付费跑整套云验证。评测仅覆盖固定 15 场景，不声称统计显著性或普适收益。
 
-在仓库根目录运行；这些命令不访问 Azure：
+## 本地检查与演示
+
+已有 Python 3.13 虚拟环境时，下列检查不访问 Azure：
 
 ```powershell
-pwsh -File scripts/bootstrap.ps1
-uv sync --frozen --python 3.13
-$env:PYTHONPATH = (Join-Path $PWD 'src')
-.venv/Scripts/python.exe -m unittest discover -s tests -p 'test*.py'
-.venv/Scripts/python.exe tests/local_wiring.py
-.venv/Scripts/python.exe tests/local_history_audit.py
-python -m compileall src tests
-uv lock --check
+$env:PYTHONPATH = 'src'
+.venv/Scripts/python.exe -B -m unittest discover -s tests -p 'test*.py'
+.venv/Scripts/python.exe scripts/check_hosted_concurrency_evidence.py
+.venv/Scripts/python.exe scripts/check_submission.py
 git diff --check
 ```
 
-仓库不维护 300-run benchmark、10k microbenchmark 或自动重复 runner。
+新环境执行 `uv sync --frozen --python 3.13` 可能下载依赖；`pwsh -File scripts/bootstrap.ps1` 会准备固定 azd/扩展，也可能下载，不能称为离线操作。
 
-本地 fixture 可用于低成本 outcome 验证：
-
-```powershell
-$env:PORT = "8000"
-.venv/Scripts/python.exe server.py
-```
-
-`restart_service` 返回 accepted 后必须重新读取 `service_status`，才能得到
-verified/failed/unknown 结果。
-
-## Foundry Local validation — LOCAL ONLY
-
-仓库还提供一个可选的本地模型审计路径。它使用官方
-`agent-framework-foundry-local` 客户端、同一组 ReasonFuse providers/middleware，以及
-`server.py` 的 HTTP fixture；不会访问 Azure，也不会运行大规模 benchmark。
-Foundry Local 运行时本身必须由本机按 Microsoft 文档安装并启动，Python 依赖已经锁定在
-`pyproject.toml`/`uv.lock` 中。
-
-已保存的本地证据使用 Foundry Local CLI `0.10.3` 和模型 `phi-4-mini`，见
-[`docs/evidence/foundry-local-e2e.json`](docs/evidence/foundry-local-e2e.json)。其中真实 function calling、native
-approval、`OUTCOME_VERIFIED`、`POSTCONDITION_FAILED`、`OUTCOME_UNKNOWN`、containment、
-blocked-host validation 和 no-replay 均为 `PASS`。
-
-```powershell
-uv sync --frozen --python 3.13
-$env:PYTHONPATH = (Join-Path $PWD 'src')
-$env:FOUNDRY_LOCAL_MODEL = "phi-4-mini"
-.venv/Scripts/python.exe scripts/foundry_local_e2e.py --report docs/evidence/foundry-local-e2e.json
-```
-
-首次使用 Windows CLI 时可先检查 daemon 和模型目录：
-
-```powershell
-foundry server start
-foundry server status
-foundry model list --type chat
-foundry model download phi-4-mini
-foundry model load phi-4-mini
-```
-
-本地适配层只在这个审计入口内兼容当前 CLI 的 `server`/catalog 接口与 Python SDK
-旧版探测方式；它不改变 Hosted Agent 的部署代码。
-
-该审计执行有界的本地场景：正常多轮会话、真实 read-only function call、native approval、
-accepted-but-not-success 后的 VERIFIED/FAILED/UNKNOWN fresh postcondition、no-progress
-containment、blocked-hostname validation，以及 verified restart 后的 no-replay。它还会通过
-`FoundryLocalClient.manager` 检查选定模型是否支持 tool calling；Foundry Local CLI/服务未
-安装或未启动时，它会诚实报告 `BLOCKED`，不会把 Hosted Agent 的
-`history_source="agent_server"` 伪称为本地等价物。
-
-这些本地检查可以证明 Foundry Local 推理、function calling、Agent Framework approval、
-ReasonFuse middleware/core、本地 HTTP fixture、outcome verification、containment 和
-no-replay；不能证明 Microsoft Foundry Hosted Agent infrastructure、Azure RBAC、Hosted
-Responses endpoint、Foundry IQ、Foundry Toolbox、Application Insights 或 cloud tracing。
-本地多轮记录使用 local `AgentSession`，不把它改称为
-`history_source="agent_server"`。云端证据见
-[`docs/evidence/cloud-e2e.md`](docs/evidence/cloud-e2e.md)。
-
-## Proven bounded cloud E2E
-
-The bounded Hosted Agent behavioral path is **PASS**. The temporary Operations
-MCP resources used for that audit were deleted after evidence capture; the
-detailed raw Azure reports are local-only and are not part of this repository.
-
-Observed deployment and protocol:
-
-- Hosted Agent: `reasonfuse:6`
-- Responses protocol: `2.0.0`
-- Model: `gpt-5-mini`
-- Normal multi-turn Hosted Agent behavior: `PASS`
-- Normal request contract: `history_source="agent_server"`, `store=False`
+精确参数及前置资源见 [演示环境手册](docs/demo-environment.md)。这些脚本已准备并本地验证，尚未在本轮重新部署；它们要求已存在有效的 Foundry 项目、模型和 v10 基线，目前该前提不满足：
 
 ```text
-BEFORE: UNHEALTHY / g1
-  → native MCP approval request
-  → no execution before approval
-  → approved restart
-  → accepted=true / status_code=202
-  → execution_count=1 / side_effect_count=1
-  → fresh service_status
-  → HEALTHY / g2
-  → OUTCOME_VERIFIED
+demo-up.ps1    → 临时夹具、发布 Toolbox、检查 Agent
+demo-smoke.ps1 → 端点、MCP 两工具、原生审批配置
+demo-run.ps1   → A VERIFIED / B FAILED 后 BLOCKED / C 并发保护
+demo-down.ps1  → 只清理本轮拥有资源与会话，并读回确认
 ```
 
-Repeated no-progress then produced `NO_PROGRESS` containment; a subsequent
-restart was `BLOCKED` and `side_effect_count` remained `1`. No accidental
-replay: **PASS**. The detailed identifiers and runtime state are in
-[`docs/evidence/cloud-e2e.md`](docs/evidence/cloud-e2e.md).
+先运行 DryRun，云执行需显式执行参数。脚本要求复用有效项目、模型与 v10，不创建基础平台。**原 Foundry 基础资源与临时后端当前均不可用。** 录制前须先恢复并验证基础资源，再启动夹具，结束后精确清理。
 
-The approval continuation temporarily used `store=True` because a
-`previous_response_id` continuation with `store=False` does not persist the
-server-side response state required by that continuation. The normal frozen
-Hosted request remains `store=False`; no `store=False` approval-continuation
-PASS is claimed.
+### 两层 store
 
-## Azure Hosted Agent 部署（显式执行）
+| 所在层 | 当前值 |
+| --- | --- |
+| 外部客户端 → Hosted Responses，含首次请求和续接 | **`store=true`** |
+| Agent 内部 → 模型 | **`default_options={"store": False}`** |
+| Hosted 历史 | **`history_source="agent_server"`** |
 
-标准资源由 `azure.yaml` 中的 `azure.ai.project` 和 `azure.ai.agent` hosts 交给
-`azd` 管理。部署前需要 Azure 登录、目标订阅/区域，以及 Foundry project/model 和
-Hosted Agent 所需权限。不要把平台注入的 `FOUNDRY_PROJECT_ENDPOINT` 或
-`APPLICATIONINSIGHTS_CONNECTION_STRING` 写进 `azure.yaml`。当前提交没有配置
-Application Insights 或自定义云 tracing，因此不要把它们描述成已验证能力。
+不要沿用历史 v6 的外部 `store=false` 示例。v10 对该模式失败关闭，错误体验仍为 HTTP 500；竞争当前返回 failed Responses / `server_error`，不是统一 HTTP 409 契约。
 
-```powershell
-pwsh -File scripts/bootstrap.ps1
-$azd = ".tools/azd-1.33.0/azd-windows-amd64.exe"
+## 三个演示故事
 
-& $azd auth login
-& $azd env new <azd-environment>
-& $azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
-& $azd env set AZURE_LOCATION "australiaeast"
-& $azd env set REASONFUSE_ENABLED "true"
-& $azd env set REASONFUSE_CONTRACT_JSON "{}"
+1. **A：接受仍需验证。** 批准 → accepted/g2 → 注册读取 HEALTHY/g2 → VERIFIED。
+2. **B：失败后不能靠再批准绕过。** accepted → 匹配 UNHEALTHY → FAILED → 新批准 BLOCKED → 没有第二次派发。
+3. **C：竞争续接。** 一方取得准入，另一方在工具前失败。在这个被测场景中只接受一次测试副作用；不是通用 exactly-once。
 
-# provision + deploy；会真实访问 Azure 并可能产生费用
-& $azd up --no-prompt
-```
+讲解词与录制清单见 [demo-script.md](docs/demo-script.md)。不生成假截图，不代替人工录制。
 
-也可以把 `azd up` 拆成 `azd provision` 和 `azd deploy reasonfuse`，以便在资源
-创建前单独检查环境。当前仓库禁止在本地审计中自动执行这些命令。按需部署前应先
-确认 Foundry 配额、区域可用性和费用；本项目默认不创建 APIM、Operations Web App
-或额外的 canary 基础设施。
+## 限制
 
-可选的外部 Toolbox/IQ 接线不属于默认 `azure.yaml` 资源图。若部署环境提供对应
-endpoint，agent 仍可通过环境变量加载它们；仓库不把这类外部后端误报为已部署或已验证。
+- 只注册 `restart_service → service_status`，不保证任意工具正确性。
+- 本地/云操作后端都是内存测试夹具，不重启生产基础设施；reset 为带外管理，不是 Agent 工具。
+- 未验证云崩溃、驱逐、网络分区恢复、高负载或广泛多用户生产行为；无广义分布式 exactly-once。
+- 无自动回滚/解锁；BUSY 可持续阻止执行，失败关闭不恢复业务可用性。
+- 整回合缓冲增加首字等待和内存占用，未新增回合体积上限。
+- 固定 SDK 包含预览版本和内部生命周期接口；[State Store 为预览能力](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/agent-state-store)，升级需复验。
+- 未验证 Foundry IQ、App Insights 故障链路；不包含 Dashboard、APIM、Kubernetes 生产集成、多 Agent。
+- 不宣称通用防幻觉、生产就绪或比赛获奖保证。
 
-## Submission boundaries
+## 证据阅读顺序
 
-`src/reasonfuse/core/` 保持以下语义：planning changed 不等于 reality changed、Todo
-不等于 objective progress、accepted 不等于 verified success、fresh postcondition
-verification、重复 non-progress fuse，以及 containment 后禁止继续执行 operational
-tools。Foundry 观察执行；ReasonFuse 验证进展和结果。
+[提交摘要](SUBMISSION-READY.md) → [验收](docs/submission-sprint.md) → [评测](docs/evaluation.md) → [v10 云证据](docs/evidence/p0-hosted-concurrency-validation.md)。
 
-Current limitations are explicit:
-
-- Application Insights / cloud custom tracing: **NOT CONFIGURED**
-- Foundry IQ native retrieval: **NOT VALIDATED**
-- APIM/canary: **REMOVED FROM FINAL SCOPE**
-- The bounded Operations MCP service is a deterministic fixture, not a
-  production backend.
-- The final video is **PENDING**.
-- Large benchmarks and repeated model runs are **OUT OF SCOPE**.
-
-No cloud `REASONFUSE_FUSE_TRIPPED` telemetry event is claimed. The containment
-claim above is based on observed Hosted Agent behavior and runtime state, not on
-Application Insights evidence.
-
-Evidence index:
-
-- [`docs/evidence/validation-summary.md`](docs/evidence/validation-summary.md)
-- [`docs/evidence/cloud-e2e.md`](docs/evidence/cloud-e2e.md)
-- [`docs/evidence/foundry-local-e2e.json`](docs/evidence/foundry-local-e2e.json)
+[历史索引](docs/evidence/README.md) 明确标识 v6、v7/v8 FAIL、v9 诊断、v10 PASS。历史命令不自动成为当前指南；历史结果、时间戳和哈希不为美化而改写。
