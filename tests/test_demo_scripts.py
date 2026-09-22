@@ -2,6 +2,7 @@
 from copy import deepcopy
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 from unittest.mock import MagicMock, patch
 from types import SimpleNamespace
@@ -9,12 +10,28 @@ from types import SimpleNamespace
 ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT/'scripts'),str(ROOT)]
 from demo_support import (validate_owned_inventory, verify_toolbox, APPROVAL, manifest_path,
-                         plan, command, validate_endpoints, check_binding, down)
+                         plan, command, validate_endpoints, check_binding, down, save)
 from demo_stories import assertions
 from check_submission import secret_findings
 
 
 class DemoSafetyTests(unittest.TestCase):
+    def test_manifest_save_survives_transient_windows_replace_lock(self):
+        original = Path.replace
+        attempts = []
+        def flaky_replace(source, target):
+            attempts.append(target)
+            if len(attempts) == 1:
+                raise PermissionError('transient Windows file lock')
+            return original(source, target)
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)/'ownership.json'
+            with patch('demo_support.manifest_path', return_value=target), patch.object(Path, 'replace', flaky_replace):
+                save({'run':'temporary','status':'PASS'})
+            self.assertEqual(len(attempts), 2)
+            self.assertIn('"status": "PASS"', target.read_text(encoding='utf-8'))
+            self.assertEqual(list(Path(directory).glob('*.tmp')), [])
+
     def test_exact_owned_inventory_only(self):
         m={'owner':'run-owner','expected_resources':['/subscriptions/s/resourceGroups/rg/providers/Microsoft.App/containerApps/test']}
         group={'tags':{'reasonfuse-owner':'run-owner'}}

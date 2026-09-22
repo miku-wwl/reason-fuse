@@ -11,6 +11,7 @@ import io
 import json
 import math
 from pathlib import Path
+import re
 import sys
 import time
 import zipfile
@@ -19,9 +20,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT), str(ROOT/'src'), str(ROOT/'scripts')]
 from demo_support import load, save, project, manifest_path, create_owned_session, smoke
 from demo_stories import OwnedDriver
-from evaluation.runtime import load_protocol, execute_scenario, RequestBudget
+from evaluation.runtime import load_protocol, execute_scenario, NoApprovalRequested
 from evaluation.scoring import score
 from evaluate import metadata, write_results, utc
+from cloud_budget import request_budget
 
 
 def source_package():
@@ -56,6 +58,30 @@ def validate_arms(arms):
     return True
 
 
+def route_to_arm(m, p, version):
+    """Align the serving endpoint with the selected version and verify readback."""
+    from azure.ai.projects.models import AgentEndpointConfig, FixedRatioVersionSelectionRule, VersionSelector
+    before = p.agents.get(m['agent']).as_dict()['agent_endpoint']['version_selector']
+    m.setdefault('prior_agent_version_selector', before)
+    rules = before['version_selection_rules']
+    current = rules[0]['agent_version'] if len(rules) == 1 else None
+    if current not in {version, *m['evaluation_versions'].values(),
+                       m['prior_agent_version_selector']['version_selection_rules'][0]['agent_version']}:
+        raise ValueError('Agent endpoint selector changed outside this evaluation')
+    if current != version:
+        m['selector_mutation_intent'] = version
+        save(m)
+        p.agents.update_details(m['agent'], agent_endpoint=AgentEndpointConfig(
+            version_selector=VersionSelector(version_selection_rules=[
+                FixedRatioVersionSelectionRule(agent_version=version, traffic_percentage=100)])))
+        m.setdefault('agent_selector_revisions', []).append({'timestamp_utc': utc(), 'version': version})
+        save(m)
+        time.sleep(5)  # allow the serving endpoint to converge after the control-plane readback
+    after = p.agents.get(m['agent']).as_dict()['agent_endpoint']['version_selector']['version_selection_rules']
+    if len(after) != 1 or after[0]['agent_version'] != version or after[0]['traffic_percentage'] != 100:
+        raise ValueError('Agent endpoint version selector readback mismatch')
+
+
 def prepare(m):
     from azure.ai.projects.models import HostedAgentDefinition
     if m.get('evaluation_versions'):
@@ -72,8 +98,10 @@ def prepare(m):
             definition['environment_variables']['REASONFUSE_PROFILE'] = 'evaluation'
             definition['environment_variables']['REASONFUSE_ENABLED'] = str(arm == 'ON').lower()
             definition['code_configuration'].pop('content_hash', None)
+            archive = io.BytesIO(data)
+            archive.name = 'reasonfuse-evaluation.zip'
             v = p.agents.create_version_from_code(m['agent'], definition=HostedAgentDefinition(definition),
-                code=io.BytesIO(data), code_zip_sha256=digest,
+                code=archive, code_zip_sha256=digest,
                 description='Bounded ON/OFF evaluation ' + arm,
                 metadata={'reasonfuse-owner': m['owner'], 'evaluation-arm': arm})
             m['evaluation_versions'][arm] = v.version; save(m)
@@ -102,22 +130,51 @@ async def run(m, args):
         raise ValueError('Interrupted execution requires reconciliation before evaluation')
     await asyncio.to_thread(smoke, m)  # revalidate current Toolbox/fixture before any model request
     protocol = load_protocol()
-    budget = RequestBudget(args.max_requests, args.max_reported_tokens)
+    budget = request_budget(m, args.max_requests, args.max_reported_tokens)
+    save(m)
+    prior_rows = []
+    if args.resume_from:
+        expected = m['evaluation_reconciliation']['filesystem_prior_sha256']
+        for scenario in protocol['scenarios']:
+            if scenario['id'] == args.resume_from:
+                break
+            for arm in protocol['arms']:
+                name = f'evaluation-{m["evaluation_reconciliation"]["filesystem_previous_batch_id"]}-{scenario["id"]}-{arm}.json'
+                checkpoint = manifest_path(m['run']).parent/name
+                if hashlib.sha256(checkpoint.read_bytes()).hexdigest() != expected[name]:
+                    raise ValueError('Prior scored checkpoint changed during infrastructure resume')
+                row = json.loads(checkpoint.read_text(encoding='utf-8'))
+                if row['execution_status'] == 'ERROR' or row['scenario'] != scenario['id'] or row['arm'] != arm:
+                    raise ValueError('Cannot reuse incomplete or mismatched prior score')
+                prior_rows.append(row)
+        if len(prior_rows) != 4:
+            raise ValueError('Only the fixed E03 infrastructure continuation is authorized')
     selected = set(protocol['minimum_cloud_subset']) if args.minimum_subset else {s['id'] for s in protocol['scenarios']}
     payload = metadata('real-hosted')
     payload.update({'results': [], 'model_network_calls': None, 'internal_model_call_count_note': 'Not exposed by Hosted; Responses requests recorded separately.',
+        'automatic_retries': None, 'runner_retries': 0,
+        'internal_sdk_retry_policy': {'maximum_retries': 2, 'actual_retries': None},
         'maximum_requests': args.max_requests, 'maximum_reported_tokens': args.max_reported_tokens,
         'declared_budget_usd': args.budget_usd, 'spend_cap_note': 'Token stop applies after reported usage; not a provider hard billing cap.',
         'cleanup': 'Owned sessions and evaluation versions recorded; run demo-down after capturing results.'})
+    payload['funded_budget'] = m.get('funded_budget')
+    payload['batch_id'] = args.batch_id
+    payload['resumed_from'] = args.resume_from
+    payload['prior_checkpoint_sha256'] = m.get('evaluation_reconciliation', {}).get('filesystem_prior_sha256') if args.resume_from else None
+    payload['results'] = list(prior_rows)
     with project(m) as p:
         arms = {arm: p.agents.get_version(m['agent'], v).as_dict() for arm,v in m['evaluation_versions'].items()}
         validate_arms(arms)
         payload['arm_configuration'] = arms
-    with AzureCliCredential() as credential:
+        m.setdefault('prior_agent_version_selector', p.agents.get(m['agent']).as_dict()['agent_endpoint']['version_selector'])
+        save(m)
+    with AzureCliCredential(process_timeout=60) as credential:
         token = credential.get_token('https://ai.azure.com/.default').token
     async with httpx.AsyncClient(timeout=httpx.Timeout(240, connect=30)) as client:
         interrupted = False
         for s in protocol['scenarios']:
+            if args.resume_from and s['id'] < args.resume_from:
+                continue
             for arm in protocol['arms']:
                 if interrupted or s['id'] not in selected or budget.stopped or budget.requests + s['maximum_requests'] > budget.maximum_requests:
                     payload['results'].append({'scenario': s['id'], 'arm': arm, 'lane': 'real-hosted',
@@ -128,13 +185,16 @@ async def run(m, args):
                     raise ValueError('Interrupted demo requires reconciliation before resetting fixture')
                 m['interrupted_story'] = 'evaluation-' + s['id'] + '-' + arm
                 save(m)  # set before reset or request; ambiguous execution is never auto-cleared
-                started, error, driver = time.perf_counter(), None, None
+                started, error, driver, no_proposal = time.perf_counter(), None, None, False
                 try:
                     with project(m) as p:
+                        route_to_arm(m, p, m['evaluation_versions'][arm])
                         session = create_owned_session(m, p, m['evaluation_versions'][arm])
-                        with p.get_openai_client() as api:
+                        with p.get_openai_client(agent_name=m['agent']) as api:
                             conv = api.conversations.create(metadata={'purpose':'reasonfuse-evaluation','scenario':s['id'],'arm':arm})
-                    m.setdefault('conversations', []).append(conv.id); save(m)
+                    m.setdefault('conversations', []).append(conv.id)
+                    m.setdefault('conversation_scopes', {})[conv.id] = 'agent'
+                    save(m)
                     reset = await client.post(m['fixture_base']+'/test/reset', json={'mode':s['mode']})
                     reset.raise_for_status()
                     async def snapshot():
@@ -143,12 +203,22 @@ async def run(m, args):
                         agent_session_id=session, agent_version=m['evaluation_versions'][arm],
                         headers={'Authorization':'Bearer '+token}, budget=budget, max_output_tokens=1000)
                     await execute_scenario(driver, s, protocol, conv.id)
+                except NoApprovalRequested as exc:
+                    last = driver.records[-1] if driver and driver.records else {}
+                    if last.get('response', {}).get('status') == 'completed' and last.get('backend_after', {}).get('restart_pending') is False:
+                        no_proposal = True
+                    else:
+                        error = {'type':type(exc).__name__, 'message':str(exc)}
                 except Exception as exc:
                     error = {'type':type(exc).__name__, 'message':str(exc)}
                 row = score(s,arm,driver.records if driver else [],lane='real-hosted',elapsed=time.perf_counter()-started,error=error)
+                if no_proposal:
+                    row['execution_status'] = 'MODEL_DID_NOT_ATTEMPT'
+                    row['behavior_note'] = 'Completed turn with no native proposal and no pending fixture action; recorded without model retry.'
                 payload['results'].append(row)
                 # Persist before clearing the interruption fence.
-                checkpoint = manifest_path(m['run']).parent/f"evaluation-{s['id']}-{arm}.json"
+                prefix = 'evaluation-' + (args.batch_id + '-' if args.batch_id != 'initial' else '')
+                checkpoint = manifest_path(m['run']).parent/f"{prefix}{s['id']}-{arm}.json"
                 with checkpoint.open('x',encoding='utf-8') as file:
                     json.dump(row,file,indent=2)
                 interrupted = row['execution_status'] == 'ERROR'
@@ -157,10 +227,24 @@ async def run(m, args):
                 else:
                     m.pop('interrupted_story', None)
                 save(m)
+                if not interrupted:
+                    # The checkpoint is durable before releasing the sandbox.
+                    from demo_support import _delete_session
+                    from azure.core.exceptions import ResourceNotFoundError
+                    with project(m) as p:
+                        try:
+                            _delete_session(m, p, session)
+                        except ResourceNotFoundError:
+                            pass
+                    m.setdefault('evaluation_sessions_deleted', []).append(session)
+                    save(m)
     payload['completed_utc'] = utc()
-    payload['responses_request_count'] = budget.requests
-    payload['observed_reported_tokens'] = budget.reported_tokens
+    payload['new_responses_request_count'] = budget.requests
+    payload['responses_request_count'] = budget.requests + sum(row['responses_request_count'] for row in prior_rows)
+    payload['observed_reported_tokens'] = budget.reported_tokens + sum(row['total_reported_tokens'] or 0 for row in prior_rows)
     payload['interrupted'] = interrupted
+    payload['spend_ledger'] = m.get('spend_ledger')
+    payload['model_deadline_utc'] = m.get('model_deadline_utc')
     return payload
 
 
@@ -174,6 +258,8 @@ def main():
     parser.add_argument('--max-reported-tokens',type=int)
     parser.add_argument('--minimum-subset',action='store_true')
     parser.add_argument('--output')
+    parser.add_argument('--batch-id',default='initial')
+    parser.add_argument('--resume-from')
     args=parser.parse_args()
     if not args.execute:
         print('DRY_RUN: prepare two pinned evaluation versions, or run at most 15 pairs/64 Responses; demo-down removes owned versions/sessions. No cloud/model calls.')
@@ -185,7 +271,15 @@ def main():
     if not args.max_reported_tokens or not args.output or Path(args.output).exists():
         parser.error('Positive max-reported-tokens and a new output directory are required')
     if not 1<=args.max_requests<=64: parser.error('Request limit must be 1..64; no matrix expansion')
-    marker=manifest_path(m['run']).parent/'evaluation-started.json'
+    if not re.fullmatch(r'[a-z][a-z0-9-]{2,23}', args.batch_id):
+        parser.error('Invalid batch ID')
+    if args.batch_id != 'initial' and m.get('evaluation_reconciliation', {}).get('replacement_batch_id') != args.batch_id:
+        if m.get('evaluation_reconciliation', {}).get('filesystem_replacement_batch_id') != args.batch_id:
+            parser.error('Replacement batch requires a recorded infrastructure reconciliation')
+    if args.resume_from:
+        if args.resume_from != 'E03' or args.batch_id != m.get('evaluation_reconciliation', {}).get('filesystem_replacement_batch_id'):
+            parser.error('Only recorded E03 infrastructure continuation is permitted')
+    marker=manifest_path(m['run']).parent/('evaluation-started.json' if args.batch_id=='initial' else 'evaluation-started-'+args.batch_id+'.json')
     with marker.open('x',encoding='utf-8') as file: json.dump({'started_utc':utc(),'maximum_scored_executions':30},file)
     payload=asyncio.run(run(m,args))
     write_results(args.output,payload)

@@ -1,0 +1,14 @@
+{
+  "prepared_utc": "2026-09-22T20:37:21.959584+00:00",
+  "source_package_sha256": "dfcf6627aa9969189c0be3a51f9b9808ea61e24dcde0bbc2f4eeae53bbc487b9",
+  "source_file_count": 26,
+  "on_version": "12",
+  "off_version": "13",
+  "on_status": "active",
+  "off_status": "active",
+  "identical_except_enable_switch": true,
+  "shared_definition_sha256_without_enable_switch": "dedb9f486cf0b45c288b491f901d77725a8755b4f15df51457af3300f9ed973f",
+  "model_calls_during_prepare": 0,
+  "downloaded_package_hash_verified_in_prepare": true,
+  "original_private_config_sha256": "3c511eb90eda5bd6448e930d8152ebfacd902e5fcae11e353eb243331bd89145"
+}

@@ -1,0 +1,13 @@
+{
+  "timestamp_utc": "2026-09-22T20:30:38.450275+00:00",
+  "reason": "Project-level conversation was invisible at agent-scoped Responses route. GET same new conversation returned project 200, agent 404. Initial POST returned 404 before model/tool execution; backend counters and events stayed zero.",
+  "repair": "Create conversations at pinned agent endpoint in demo and evaluation. Cleanup tracks project versus agent scope. Preserve original story-A.json and retry only routing repair as story-A-routing-repair.json.",
+  "initial_http_status": 404,
+  "model_usage_observed": false,
+  "no_model_behavior_retry": true,
+  "harness_hashes": {
+    "scripts/demo_support.py": "0038542e6274e18b0b56143726580a5b986b4b6ea41ff2dbaecf8b5915a7a55a",
+    "scripts/demo_stories.py": "8a1815b1a902678e7425f9fab372304e0074310b902130ced156eafd86db1647",
+    "scripts/evaluate_cloud.py": "229e255031e8d32ea2405d2bffecd2153a6b771b1908419fd79f23badc06326d"
+  }
+}

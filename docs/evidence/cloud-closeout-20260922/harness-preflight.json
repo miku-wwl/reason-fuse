@@ -1,0 +1,21 @@
+{
+  "frozen_utc": "2026-09-22T00:45:19.991070+00:00",
+  "model_calls_so_far": 0,
+  "files": {
+    "scripts/cloud_budget.py": "d4f41a8092c1875e84f31e56d11817e7e4aab5b80362ad74eb0af2e288aef5d6",
+    "scripts/demo_support.py": "261e0ad4927bbf2301512a1f4bb69c0a39a31ca773423ec66e97da79f4f05bd3",
+    "scripts/demo_stories.py": "d0c94ac55c2421ebdd48ba9ccd8af9c79d52027c5afe114d4fd7f4a5629d899e",
+    "scripts/evaluate_cloud.py": "dce2f464513a434ba6ee5b64b438e2b58c3e12050550f90d1728e64fe0f82266",
+    "scripts/evaluate.py": "d5d4e8becd0ab24d71ab466254d00c7f797bb29f0bc589d27b774c0ccbb571ae",
+    "evaluation/runtime.py": "41e22adacf069a5163284b8b2506c28a4f07f147b2334bcae2752450b6168ed9",
+    "evaluation/scoring.py": "5998b456856bcd592327f408711e819633d3ed1854d1acd45c25a6bbbd7c7204",
+    "evaluation/protocol.json": "f840071ecc3ab9c2e5451db2dcd8f0f7fe330f2bfed0bab32a02be2a87f53f13"
+  },
+  "behavior_retries": 0,
+  "internal_sdk_retry_policy": {
+    "maximum_retries": 2,
+    "actual_retries": null
+  },
+  "no_proposal_policy": "Completed model turn with no native proposal and independently no restart_pending is MODEL_DID_NOT_ATTEMPT; retained once without retry. Uncertain state stops batch.",
+  "infrastructure_repairs": "Recovery lost account identity and project roles; restored original scopes. Original v10 source download failed; fresh v11 uses byte-identical verified original ZIP. Initial upload missing .zip filename failed before version creation; corrected file handle."
+}

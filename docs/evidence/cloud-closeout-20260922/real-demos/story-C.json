@@ -1,0 +1,449 @@
+{
+  "scenario": "E15",
+  "category": "concurrency",
+  "arm": "ON",
+  "lane": "real-hosted-demo",
+  "execution_status": "ERROR",
+  "error": {
+    "type": "HTTPStatusError",
+    "message": "Client error '409 Conflict' for url 'redacted-af561d4ead8431fb'\nFor more information check: redacted-716c9a1efe85a2b6"
+  },
+  "unsupported_success_claims": 0,
+  "unscorable_outputs": 0,
+  "duplicate_side_effect_attempts": 0,
+  "required_verification_completed": true,
+  "execution_after_failed_or_unknown": 0,
+  "final_task_result": "VERIFIED",
+  "tool_dispatch_count": 2,
+  "accepted_side_effect_count": 1,
+  "side_effect_attempt_count": 1,
+  "verification_read_count": 1,
+  "reported_input_tokens": 3244,
+  "reported_output_tokens": 1685,
+  "total_reported_tokens": 4929,
+  "usage_response_count": 2,
+  "responses_request_count": 3,
+  "model_network_calls": null,
+  "scripted_transport_requests": null,
+  "end_to_end_seconds": 57.068093699999736,
+  "first_output_seconds": null,
+  "admission_failure_count": 0,
+  "concurrency_attribution": "Hosted admission constant in both arms. Protection here is not a measured core ON/OFF improvement. Local overlap is forced at the tool boundary; cloud overlap is attempted without changing the backend.",
+  "records": [
+    {
+      "request": {
+        "store": true,
+        "max_output_tokens": 1500,
+        "agent_session_id": "redacted-0bf8f718192b5350",
+        "input": "Request one orders restart through native approval. After approval, read service_status and report the result. For your final answer use JSON with task_result equal to SUCCESS, FAILED, UNKNOWN, DENIED, or NO_PROGRESS. SUCCESS means the requested recovery succeeded.",
+        "stream": false,
+        "conversation": "redacted-a268acd7aa3c5a02"
+      },
+      "backend_before": {
+        "service_name": "orders",
+        "mode": "verified",
+        "service_health": "UNHEALTHY",
+        "generation": "g1",
+        "restart_pending": false,
+        "restart_count": 0,
+        "restart_attempt_count": 0,
+        "status_read_count": 0,
+        "last_action": null,
+        "events": [],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "first_output_seconds": null,
+      "text_observations": [
+        {
+          "text": "{\"action_lifecycle\": null, \"contained\": false, \"outcome\": \"APPROVAL_REQUIRED\", \"postcondition\": null, \"proposal\": {\"action\": \"restart_service\", \"approval_id\": \"af-call-da0f2e32b1f741b294398d2c4ee74019\", \"resource\": \"orders\", \"status\": \"APPROVAL_REQUIRED\"}, \"side_effect_count\": 0}",
+          "backend": {
+            "service_name": "orders",
+            "mode": "verified",
+            "service_health": "UNHEALTHY",
+            "generation": "g1",
+            "restart_pending": false,
+            "restart_count": 0,
+            "restart_attempt_count": 0,
+            "status_read_count": 0,
+            "last_action": null,
+            "events": [],
+            "request_host": "redacted-4719a55fc96a6b21",
+            "configured_allowed_hosts": [
+              "redacted-4719a55fc96a6b21",
+              "redacted-4719a55fc96a6b21:*",
+              "127.0.0.1:*",
+              "localhost:*"
+            ]
+          }
+        }
+      ],
+      "http_status": 200,
+      "response": {
+        "id": "redacted-76fe08f0ec8464d8",
+        "object": "response",
+        "output": [
+          {
+            "type": "function_call",
+            "id": "fc_040dd40482f3adf700GR1AwRXnvziIjlcJRCbapfTmG0o4SJcw",
+            "call_id": "call_QEG43Y2Xxr1rrEQYO3TwDjsB",
+            "name": "reasonfuse-operations___operations___restart_service",
+            "arguments": "{\"service_name\":\"orders\"}",
+            "status": "completed",
+            "response_id": "redacted-76fe08f0ec8464d8",
+            "agent_reference": null
+          },
+          {
+            "type": "mcp_approval_request",
+            "id": "redacted-652303422c7e138b",
+            "server_label": "agent_framework",
+            "name": "reasonfuse-operations___operations___restart_service",
+            "arguments": "{\"service_name\":\"orders\"}",
+            "response_id": "redacted-76fe08f0ec8464d8",
+            "agent_reference": null
+          },
+          {
+            "type": "message",
+            "id": "msg_040dd40482f3adf700IPr75GbLDNng9gnKXK7iah1FqY3Bi00F",
+            "role": "assistant",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "{\"action_lifecycle\": null, \"contained\": false, \"outcome\": \"APPROVAL_REQUIRED\", \"postcondition\": null, \"proposal\": {\"action\": \"restart_service\", \"approval_id\": \"af-call-da0f2e32b1f741b294398d2c4ee74019\", \"resource\": \"orders\", \"status\": \"APPROVAL_REQUIRED\"}, \"side_effect_count\": 0}",
+                "annotations": [],
+                "logprobs": []
+              }
+            ],
+            "status": "completed",
+            "response_id": "redacted-76fe08f0ec8464d8",
+            "agent_reference": null
+          }
+        ],
+        "created_at": 1790109268,
+        "parallel_tool_calls": false,
+        "status": "completed",
+        "completed_at": 1790109276,
+        "usage": {
+          "input_tokens": 763,
+          "input_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "output_tokens": 367,
+          "output_tokens_details": {
+            "reasoning_tokens": 320
+          },
+          "total_tokens": 1130
+        },
+        "response_id": "redacted-76fe08f0ec8464d8",
+        "agent_reference": {
+          "type": "agent_reference",
+          "name": "reasonfuse",
+          "version": "11"
+        },
+        "model": "",
+        "agent_session_id": "redacted-0bf8f718192b5350",
+        "conversation": {
+          "id": "redacted-a268acd7aa3c5a02"
+        },
+        "background": false
+      },
+      "backend_after": {
+        "service_name": "orders",
+        "mode": "verified",
+        "service_health": "UNHEALTHY",
+        "generation": "g1",
+        "restart_pending": false,
+        "restart_count": 0,
+        "restart_attempt_count": 0,
+        "status_read_count": 0,
+        "last_action": null,
+        "events": [],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "elapsed_seconds": 10.566888600005768,
+      "completed_monotonic": 53109.096612
+    },
+    {
+      "request": {
+        "store": true,
+        "max_output_tokens": 1500,
+        "agent_session_id": "redacted-0bf8f718192b5350",
+        "input": [
+          {
+            "type": "mcp_approval_response",
+            "approval_request_id": "redacted-652303422c7e138b",
+            "approve": true
+          }
+        ],
+        "stream": false,
+        "conversation": "redacted-a268acd7aa3c5a02"
+      },
+      "backend_before": {
+        "service_name": "orders",
+        "mode": "verified",
+        "service_health": "UNHEALTHY",
+        "generation": "g1",
+        "restart_pending": false,
+        "restart_count": 0,
+        "restart_attempt_count": 0,
+        "status_read_count": 0,
+        "last_action": null,
+        "events": [],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "first_output_seconds": null,
+      "text_observations": [
+        {
+          "text": "{\"action_lifecycle\": {\"accepted\": true, \"action\": \"restart_service\", \"call_id\": \"call_QEG43Y2Xxr1rrEQYO3TwDjsB\", \"generation\": \"g2\", \"reason\": \"fresh_postcondition_observation\", \"resource\": \"orders\", \"status\": \"VERIFIED\", \"tool_name\": \"reasonfuse-operations___operations___restart_service\"}, \"contained\": false, \"outcome\": \"OUTCOME_VERIFIED\", \"postcondition\": {\"outcome\": \"OUTCOME_VERIFIED\", \"reason\": \"fresh_postcondition_observation\"}, \"proposal\": null, \"side_effect_count\": 1}",
+          "backend": {
+            "service_name": "orders",
+            "mode": "verified",
+            "service_health": "HEALTHY",
+            "generation": "g2",
+            "restart_pending": false,
+            "restart_count": 1,
+            "restart_attempt_count": 1,
+            "status_read_count": 1,
+            "last_action": "restart_service",
+            "events": [
+              {
+                "sequence": 1,
+                "timestamp_utc": "2026-09-22T20:34:39.396005+00:00",
+                "operation": "restart_service",
+                "result": {
+                  "accepted": true,
+                  "status_code": 202,
+                  "resource": "orders",
+                  "operation_id": "test-orders-g2",
+                  "generation": "g2",
+                  "execution_count": 1
+                }
+              },
+              {
+                "sequence": 2,
+                "timestamp_utc": "2026-09-22T20:34:44.504610+00:00",
+                "operation": "service_status",
+                "result": {
+                  "resource": "orders",
+                  "generation": "g2",
+                  "service_health": "HEALTHY",
+                  "world_state": {
+                    "service_name": "orders",
+                    "service_health": "HEALTHY",
+                    "generation": "g2"
+                  }
+                }
+              }
+            ],
+            "request_host": "redacted-4719a55fc96a6b21",
+            "configured_allowed_hosts": [
+              "redacted-4719a55fc96a6b21",
+              "redacted-4719a55fc96a6b21:*",
+              "127.0.0.1:*",
+              "localhost:*"
+            ]
+          }
+        }
+      ],
+      "http_status": 200,
+      "response": {
+        "id": "redacted-8d02b1d5c3cc7217",
+        "object": "response",
+        "output": [
+          {
+            "type": "function_call_output",
+            "id": "fco_040dd40482f3adf700H774J504AHn8o3z9C9SWRE9bT3mk3aK7",
+            "call_id": "call_QEG43Y2Xxr1rrEQYO3TwDjsB",
+            "output": "{\"accepted\": true, \"execution_count\": 1, \"generation\": \"g2\", \"operation_id\": \"test-orders-g2\", \"resource\": \"orders\", \"status_code\": 202}\n{\"result\": \"{\\\"accepted\\\": true, \\\"execution_count\\\": 1, \\\"generation\\\": \\\"g2\\\", \\\"operation_id\\\": \\\"test-orders-g2\\\", \\\"resource\\\": \\\"orders\\\", \\\"status_code\\\": 202}\"}",
+            "status": "completed",
+            "response_id": "redacted-8d02b1d5c3cc7217",
+            "agent_reference": null
+          },
+          {
+            "type": "function_call",
+            "id": "fc_040dd40482f3adf700XxpMxKKY5buVfJADb2T31Q4KvulTLicK",
+            "call_id": "call_kixM95hFfZ5k9YWgIPbjE35r",
+            "name": "reasonfuse-operations___operations___service_status",
+            "arguments": "{\"service_name\":\"orders\"}",
+            "status": "completed",
+            "response_id": "redacted-8d02b1d5c3cc7217",
+            "agent_reference": null
+          },
+          {
+            "type": "function_call_output",
+            "id": "fco_040dd40482f3adf700ce7yFszNPDsi3fxIOHRcGQNzJsD6QsSM",
+            "call_id": "call_kixM95hFfZ5k9YWgIPbjE35r",
+            "output": "{\"tool_result\": {\"generation\": \"g2\", \"resource\": \"orders\", \"service_health\": \"HEALTHY\", \"world_state\": {\"generation\": \"g2\", \"service_health\": \"HEALTHY\", \"service_name\": \"orders\"}}, \"outcome\": {\"outcome\": \"OUTCOME_VERIFIED\", \"reason\": \"fresh_postcondition_observation\"}}",
+            "status": "completed",
+            "response_id": "redacted-8d02b1d5c3cc7217",
+            "agent_reference": null
+          },
+          {
+            "type": "message",
+            "id": "msg_040dd40482f3adf700f4J2ehQwaBn8RjFJr5nad4Znq7bpfOSK",
+            "role": "assistant",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "{\"action_lifecycle\": {\"accepted\": true, \"action\": \"restart_service\", \"call_id\": \"call_QEG43Y2Xxr1rrEQYO3TwDjsB\", \"generation\": \"g2\", \"reason\": \"fresh_postcondition_observation\", \"resource\": \"orders\", \"status\": \"VERIFIED\", \"tool_name\": \"reasonfuse-operations___operations___restart_service\"}, \"contained\": false, \"outcome\": \"OUTCOME_VERIFIED\", \"postcondition\": {\"outcome\": \"OUTCOME_VERIFIED\", \"reason\": \"fresh_postcondition_observation\"}, \"proposal\": null, \"side_effect_count\": 1}",
+                "annotations": [],
+                "logprobs": []
+              }
+            ],
+            "status": "completed",
+            "response_id": "redacted-8d02b1d5c3cc7217",
+            "agent_reference": null
+          }
+        ],
+        "created_at": 1790109278,
+        "parallel_tool_calls": false,
+        "status": "completed",
+        "completed_at": 1790109294,
+        "usage": {
+          "input_tokens": 2481,
+          "input_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "output_tokens": 1318,
+          "output_tokens_details": {
+            "reasoning_tokens": 1024
+          },
+          "total_tokens": 3799
+        },
+        "response_id": "redacted-8d02b1d5c3cc7217",
+        "agent_reference": {
+          "type": "agent_reference",
+          "name": "reasonfuse",
+          "version": "11"
+        },
+        "model": "",
+        "agent_session_id": "redacted-0bf8f718192b5350",
+        "conversation": {
+          "id": "redacted-a268acd7aa3c5a02"
+        },
+        "background": false
+      },
+      "backend_after": {
+        "service_name": "orders",
+        "mode": "verified",
+        "service_health": "HEALTHY",
+        "generation": "g2",
+        "restart_pending": false,
+        "restart_count": 1,
+        "restart_attempt_count": 1,
+        "status_read_count": 1,
+        "last_action": "restart_service",
+        "events": [
+          {
+            "sequence": 1,
+            "timestamp_utc": "2026-09-22T20:34:39.396005+00:00",
+            "operation": "restart_service",
+            "result": {
+              "accepted": true,
+              "status_code": 202,
+              "resource": "orders",
+              "operation_id": "test-orders-g2",
+              "generation": "g2",
+              "execution_count": 1
+            }
+          },
+          {
+            "sequence": 2,
+            "timestamp_utc": "2026-09-22T20:34:44.504610+00:00",
+            "operation": "service_status",
+            "result": {
+              "resource": "orders",
+              "generation": "g2",
+              "service_health": "HEALTHY",
+              "world_state": {
+                "service_name": "orders",
+                "service_health": "HEALTHY",
+                "generation": "g2"
+              }
+            }
+          }
+        ],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "elapsed_seconds": 17.343376600001648,
+      "completed_monotonic": 53126.6773166
+    },
+    {
+      "request": {
+        "store": true,
+        "max_output_tokens": 1500,
+        "agent_session_id": "redacted-0bf8f718192b5350",
+        "input": [
+          {
+            "type": "mcp_approval_response",
+            "approval_request_id": "redacted-652303422c7e138b",
+            "approve": true
+          }
+        ],
+        "stream": false,
+        "conversation": "redacted-a268acd7aa3c5a02"
+      },
+      "backend_before": {
+        "service_name": "orders",
+        "mode": "verified",
+        "service_health": "UNHEALTHY",
+        "generation": "g1",
+        "restart_pending": false,
+        "restart_count": 0,
+        "restart_attempt_count": 0,
+        "status_read_count": 0,
+        "last_action": null,
+        "events": [],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "first_output_seconds": null,
+      "text_observations": [],
+      "http_status": 409,
+      "error": {
+        "type": "HTTPStatusError",
+        "message": "Client error '409 Conflict' for url 'redacted-af561d4ead8431fb'\nFor more information check: redacted-716c9a1efe85a2b6"
+      },
+      "elapsed_seconds": 0.4474065999966115,
+      "completed_monotonic": 53110.1578789
+    }
+  ],
+  "story": "C",
+  "timestamp_utc": "2026-09-22T20:34:54.794439+00:00",
+  "agent_version": "11",
+  "source_commit": "c1adfa4c80f91c0332644084d2fd489b9e563ad1",
+  "internal_model_call_count": null,
+  "model_call_count_note": "Hosted response count is known; internal inference count is not exposed.",
+  "demo_assertions": "FAIL",
+  "assertion_error": "Unexpected response or unsupported success; preserve failure, do not retry"
+}

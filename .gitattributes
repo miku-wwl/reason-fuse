@@ -3,3 +3,4 @@
 *.md whitespace=-blank-at-eol
 # Preserve original evidence bytes and their recorded SHA-256 values.
 evidence/** -text -whitespace
+docs/evidence/cloud-closeout-20260922/** -text -eol -whitespace

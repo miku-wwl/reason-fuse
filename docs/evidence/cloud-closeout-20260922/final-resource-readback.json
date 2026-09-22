@@ -1,0 +1,28 @@
+{
+  "readback_utc": "2026-09-22T21:40:56.432859+00:00",
+  "temporary_resource_group_exists": false,
+  "original_resource_group_exists": true,
+  "account_provisioning_state": "Succeeded",
+  "model_provisioning_state": "Succeeded",
+  "baseline_version": "11",
+  "baseline_status": "active",
+  "baseline_source_sha256": "1ebeb782fa7ebf71dee65f6975599c0b916afd740d77e47abf28144248999425",
+  "agent_state": "enabled",
+  "agent_selector": [
+    {
+      "type": "FixedRatio",
+      "agent_version": "@latest",
+      "traffic_percentage": 100
+    }
+  ],
+  "toolbox_default_version": "5",
+  "owned_evaluation_versions_removed": {
+    "ON": true,
+    "OFF": true
+  },
+  "owned_toolbox_version_removed": true,
+  "cleanup_result": "PASS",
+  "cleanup_step_count": 78,
+  "cleanup_failed_step_count": 0,
+  "model_calls_for_readback": 0
+}

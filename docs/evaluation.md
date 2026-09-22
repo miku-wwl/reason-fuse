@@ -1,6 +1,23 @@
 # 有界 15 场景 ON/OFF 评测
 
-**结论：本地控制实验完成；真实云模型比较为 PARTIAL-BUDGET，30 项均未执行。** 不把脚本化模型输出当成真实模型行为分布，不宣称统计显著性。
+> 本页主表是 2026-09-21 的本地评测与预算阻塞快照。2026-09-22/23 获批 USD 15 后的真实云批次、全部失败记录及当前结论见 [云端闭环报告](cloud-closeout-zh.md)；下方旧云结果的 30 项未执行只描述当时的快照。
+
+**历史结论：本地控制实验完成；截至 2026-09-21，真实云模型比较为 PARTIAL-BUDGET，30 项均未执行。** 不把脚本化模型输出当成真实模型行为分布，不宣称统计显著性。
+
+## 2026-09-22/23 真实云补充结果
+
+USD15 授权后，原项目/模型恢复，使用同一核验源码包发布 ON/v12 与 OFF/v13。两臂只差 `REASONFUSE_ENABLED`，Agent端点逐臂明确路由到具体版本并检查实际返回版本。原协议没有重排；四个 E01/E02 检查点被后续基础设施续跑按原哈希纳入，执行过程、失败与脱敏原始记录见 [云端闭环报告](cloud-closeout-zh.md)、[JSON/CSV/哈希](evidence/cloud-closeout-20260922/real-evaluation-filesystem-repair/manifest.json)。
+
+| 指标 | ON | OFF |
+| --- | ---: | ---: |
+| 实际执行 / 固定行位 | 15/15（E15 ERROR） | 14/15（E15未运行） |
+| 正常完成 | 12 | 8 |
+| 模型未提出所需审批/动作 | 2 | 6 |
+| 无依据成功输出 | 0 | 0 |
+| 重复副作用派发尝试 | 0 | 0 |
+| 有接受操作且完成必需验证 | 11/11 | 6/7 |
+
+正式云评测发出53条 Responses。E15 ON 的竞争分支 HTTP409 不是预定义的明确 ReasonFuse准入错误；OFF被阻止继续。两臂都没有观察到本地脚本实验的无依据成功差值，唯一接受动作却未完成验证读取的OFF项为E05。这是固定单次真实模型样本的窄观察，不能外推发生率或宣称统计显著性。下文历史本地/预算快照原文保留。
 
 In a bounded 15-scenario controlled evaluation, the local scripted control produced observable differences at the real ReasonFuse/Agent Framework/Hosted admission boundaries. This is deterministic mechanism evidence, not a live-model benchmark.
 

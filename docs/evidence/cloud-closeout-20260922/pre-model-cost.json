@@ -1,0 +1,10 @@
+{
+  "as_of_utc": "2026-09-22T20:26:06.818842+00:00",
+  "fixture_elapsed_hours": 19.721,
+  "hosted_v11_estimate_hours": 19.927,
+  "aca_usd_if_1_active_replica_entire_interval": 0.7455,
+  "one_v11_1vcpu_2gib_usd_if_active_entire_interval": 2.4511,
+  "basic_acr_usd_prorated": 0.1369,
+  "illustrative_total_usd": 3.3334,
+  "note": "Public retail estimate, not invoice; old restored agent versions, other resources, Azure credits, taxes, regional billing and host activity unverified. Budget USD15 total with USD8 model allowance, USD4 planned infra plus USD3 contingency."
+}

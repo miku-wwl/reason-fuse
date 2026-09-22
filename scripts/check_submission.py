@@ -87,7 +87,7 @@ def run_checks():
     source = json.loads((ROOT/'docs/evidence/p0-foundry/hosted-concurrency/V10-source-identity.json').read_text())['files']
     if len(source) != 28 or any('/.env' in n or n.startswith(('.tools/', '.azure/')) for n in source):
         errors.append('Unexpected deployed source allowlist')
-    for manifest in (ROOT/'docs/evidence/submission').rglob('manifest.json'):
+    for manifest in list((ROOT/'docs/evidence/submission').rglob('manifest.json')) + list((ROOT/'docs/evidence/cloud-closeout-20260922').rglob('manifest.json')):
         data = json.loads(manifest.read_text())
         for name, expected in data['files'].items():
             if digest((manifest.parent/name).read_bytes()) != expected:

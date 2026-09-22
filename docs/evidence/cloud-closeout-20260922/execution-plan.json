@@ -1,0 +1,32 @@
+{
+  "authorized_budget_usd": 15,
+  "source_commit": "c1adfa4c80f91c0332644084d2fd489b9e563ad1",
+  "plan_frozen_before_model_calls": true,
+  "maximum_scored_executions": 30,
+  "maximum_evaluation_responses": 64,
+  "maximum_demo_responses": 9,
+  "evaluation_case_order": "unchanged E01..E15, ON then OFF; no model-behavior retries",
+  "model": "gpt-5-mini 2025-08-07 GlobalStandard",
+  "retail_price_usd_per_million": {
+    "input": 0.25,
+    "cached_input": 0.025,
+    "output": 2.0
+  },
+  "model_rate_limit_readback": {
+    "tokens_per_minute": 10000,
+    "requests_per_minute": 10
+  },
+  "maximum_model_phase_minutes": 90,
+  "model_spending_stop_usd": 8,
+  "missing_usage_reserve_usd_per_response": 0.1,
+  "missing_usage_note": "Reservation is a spending allowance only; missing usage and actual inference counts remain unknown. Unexpected terminal failures still stop the batch.",
+  "infra_reserve_usd": 4,
+  "contingency_usd": 3,
+  "session_cleanup": "Delete each owned evaluation session after raw checkpoint; delete all owned demo sessions and fixture group at end. Restored base account/project/model remain.",
+  "rate_limit_note": "Provider rate limits use estimation and are not a hard billing cap. Use conservative allowance, active-duration tracking, deadline and prompt cleanup.",
+  "sources": [
+    "https://prices.azure.com/api/retail/prices",
+    "https://learn.microsoft.com/en-us/azure/ai-services/recover-purge-resources",
+    "https://learn.microsoft.com/en-us/azure/foundry/tutorials/quickstart-create-foundry-resources"
+  ]
+}

@@ -3,6 +3,7 @@ import asyncio
 from copy import deepcopy
 import json
 from pathlib import Path
+import re
 import time
 
 import httpx
@@ -10,6 +11,7 @@ from azure.identity import AzureCliCredential
 from evaluation.runtime import Driver, RequestBudget, execute_scenario, load_protocol, output_text, is_admission_rejection
 from evaluation.scoring import score
 from demo_support import project, save, smoke, utc, manifest_path, create_owned_session
+from cloud_budget import request_budget
 
 
 class OwnedDriver(Driver):
@@ -40,6 +42,8 @@ class OwnedDriver(Driver):
         finally:
             # Ownership comes from explicit creation, never from an unexpected
             # response identity. Raw response identifiers remain in evidence.
+            if self.budget and hasattr(self.budget, 'snapshot'):
+                self.manifest['spend_ledger'] = self.budget.snapshot()
             save(self.manifest)
 
 
@@ -64,13 +68,18 @@ def assertions(story, result):
             raise AssertionError('Expected a pre-dispatch admission rejection and a completed VERIFIED branch')
 
 
-async def run_story(m, story):
+async def run_story(m, story, *, evidence_suffix=None):
     if m['status'] != 'READY_FOR_MANUAL_DEMO':
         raise ValueError('Run demo-up/smoke before executing stories')
     if m.get('interrupted_story'):
         raise ValueError('Prior story interrupted; preserve evidence and reconcile before another reset')
     directory = manifest_path(m['run']).parent
-    target = directory / ('story-' + story + '.json')
+    if evidence_suffix is not None:
+        if not re.fullmatch(r'[a-z][a-z0-9-]{2,23}', evidence_suffix):
+            raise ValueError('Invalid infrastructure retry evidence suffix')
+        if m.get('reconciled_infrastructure_attempts', {}).get(story) != evidence_suffix:
+            raise ValueError('Infrastructure retry requires an explicit recorded reconciliation')
+    target = directory / ('story-' + story + ('-' + evidence_suffix if evidence_suffix else '') + '.json')
     if target.exists():
         raise FileExistsError('Story evidence exists; do not overwrite or retry for prettier behavior')
     # smoke is synchronous; no model requests and outside the active event loop.
@@ -84,10 +93,12 @@ async def run_story(m, story):
     try:
         with project(m) as p:
             pinned_session = create_owned_session(m, p, m['agent_version'])
-            with p.get_openai_client() as api:
+            with p.get_openai_client(agent_name=m['agent']) as api:
                 conv = api.conversations.create(metadata={'purpose': 'reasonfuse-demo', 'run': m['run'], 'story': story})
-        m.setdefault('conversations', []).append(conv.id); save(m)
-        with AzureCliCredential() as credential:
+        m.setdefault('conversations', []).append(conv.id)
+        m.setdefault('conversation_scopes', {})[conv.id] = 'agent'
+        save(m)
+        with AzureCliCredential(process_timeout=60) as credential:
             token = credential.get_token('https://ai.azure.com/.default').token
         async with httpx.AsyncClient(timeout=httpx.Timeout(240, connect=30)) as client:
             reset = await client.post(m['fixture_base'] + '/test/reset', json={'mode': s['mode']})
@@ -96,7 +107,7 @@ async def run_story(m, story):
                 r = await client.get(m['fixture_base'] + '/test/state'); r.raise_for_status(); return r.json()
             driver = OwnedDriver(client, m['responses_endpoint'], snapshot, manifest=m,
                 agent_session_id=pinned_session, agent_version=m['agent_version'], verbose=True,
-                headers={'Authorization': 'Bearer ' + token}, budget=RequestBudget(s['maximum_requests'], 40000), max_output_tokens=1500)
+                headers={'Authorization': 'Bearer ' + token}, budget=request_budget(m, s['maximum_requests'], 40000), max_output_tokens=1500)
             await execute_scenario(driver, s, protocol, conv.id)
     except Exception as exc:
         error = {'type': type(exc).__name__, 'message': str(exc)}
@@ -104,6 +115,8 @@ async def run_story(m, story):
     result.update({'story': story, 'timestamp_utc': utc(), 'agent_version': m['agent_version'],
                    'source_commit': m['source_commit'], 'internal_model_call_count': None,
                    'model_call_count_note': 'Hosted response count is known; internal inference count is not exposed.'})
+    if evidence_suffix:
+        result['infrastructure_retry_suffix'] = evidence_suffix
     try:
         assertions(story, result)
         result['demo_assertions'] = 'PASS'

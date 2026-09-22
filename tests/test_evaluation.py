@@ -154,6 +154,7 @@ class EvaluationTests(unittest.IsolatedAsyncioTestCase):
         base={'status':'active','definition':{'environment_variables':{'REASONFUSE_PROFILE':'evaluation','REASONFUSE_ENABLED':'true'}}}
         off=deepcopy(base);off['definition']['environment_variables']['REASONFUSE_ENABLED']='false'
         p.agents.get_version.side_effect=[MagicMock(as_dict=lambda:base),MagicMock(as_dict=lambda:off)]
+        p.agents.get.return_value.as_dict.return_value={'agent_endpoint':{'version_selector':{'version_selection_rules':[{'agent_version':'11','traffic_percentage':100}]}}}
         api=p.get_openai_client.return_value.__enter__.return_value
         api.conversations.create.return_value.id='owned-conversation'
         credential=MagicMock();credential.__enter__.return_value.get_token.return_value.token='unit-test-token'
@@ -166,9 +167,10 @@ class EvaluationTests(unittest.IsolatedAsyncioTestCase):
         original_client=httpx.AsyncClient
         m={'run':'unit-test','agent':'reasonfuse','agent_version':'10','evaluation_versions':{'ON':'11','OFF':'12'},
            'sessions':[],'fixture_base':'https://test.invalid','responses_endpoint':'https://test.invalid/responses'}
-        args=Namespace(max_requests=64,max_reported_tokens=100,budget_usd=1,minimum_subset=False)
+        args=Namespace(max_requests=64,max_reported_tokens=100,budget_usd=1,minimum_subset=False,batch_id='initial',resume_from=None)
         with tempfile.TemporaryDirectory() as temp, patch('evaluate_cloud.project',return_value=p), \
                 patch('evaluate_cloud.smoke') as smoke_mock, \
+                patch('evaluate_cloud.route_to_arm'), \
                 patch('evaluate_cloud.create_owned_session',return_value='owned-session'), \
                 patch('evaluate_cloud.save'),patch('demo_stories.save'), \
                 patch('evaluate_cloud.manifest_path',return_value=Path(temp)/'ownership.json'), \

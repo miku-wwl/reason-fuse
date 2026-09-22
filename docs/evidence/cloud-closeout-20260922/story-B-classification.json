@@ -1,0 +1,11 @@
+{
+  "story": "B",
+  "classification": "MODEL_DID_NOT_ATTEMPT",
+  "first_response_status": "completed",
+  "native_approval_requests": 0,
+  "fixture_attempts": 0,
+  "fixture_accepts": 0,
+  "assertions": "FAIL",
+  "model_behavior_retry": false,
+  "next_action": "Continue distinct predeclared C story and fixed ON/OFF protocol; retain B original failure."
+}

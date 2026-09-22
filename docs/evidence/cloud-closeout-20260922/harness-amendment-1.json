@@ -1,0 +1,12 @@
+{
+  "timestamp_utc": "2026-09-22T20:27:10.584160+00:00",
+  "classification": "infrastructure credential timeout before session, reset, or model request",
+  "observation": "First Story A invocation failed during smoke because AzureCliCredential default az process timeout is 10 seconds. Manifest had no interrupted_story, sessions, conversations, spend ledger or deadline.",
+  "repair": "Set AzureCliCredential(process_timeout=60) at three real cloud entry points; no protocol, prompts, model behavior, scoring, source package, or execution counts changed.",
+  "post_repair_hashes": {
+    "scripts/demo_support.py": "1f2ede06c0f711eee7cab95b1f65229bf2b0dcaa3a9d868adfda4cd46ce03ace",
+    "scripts/demo_stories.py": "e4f0048e96faaa26fc1a8020fb184e0436222a1bc3538dad28e410b18b6974ed",
+    "scripts/evaluate_cloud.py": "5ed83728e4143b1775b98165e05bbda16ca689d36825b5131cba038c0769cc5e"
+  },
+  "model_requests_before_repair": 0
+}

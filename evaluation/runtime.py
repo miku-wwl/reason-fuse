@@ -111,6 +111,10 @@ class ResponseFailure(RuntimeError):
     pass
 
 
+class NoApprovalRequested(ValueError):
+    """Completed model turn did not submit a side-effect proposal; never retry it."""
+
+
 def is_admission_rejection(response):
     """Only the two known pre-dispatch concurrency rejections qualify."""
     error = response.get('error') or {}
@@ -219,7 +223,7 @@ def continuation(s, response, conversation, value):
 def approval_input(response, approved=True):
     requests = [i for i in response.get('output', []) if i.get('type') == 'mcp_approval_request']
     if not requests:
-        raise ValueError('Expected approval missing; retain model behavior, never retry')
+        raise NoApprovalRequested('No approval proposed; retain model behavior, never retry')
     return [{'type': 'mcp_approval_response', 'approval_request_id': i['id'], 'approve': approved} for i in requests]
 
 

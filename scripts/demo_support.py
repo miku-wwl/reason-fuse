@@ -37,9 +37,19 @@ def manifest_path(run):
 def save(m):
     path = manifest_path(m['run'])
     path.parent.mkdir(parents=True, exist_ok=True)
-    temp = path.with_suffix('.tmp')
+    temp = path.with_name(path.name + '.' + uuid.uuid4().hex + '.tmp')
     temp.write_text(json.dumps(m, indent=2) + '\n', encoding='utf-8')
-    temp.replace(path)
+    try:
+        for attempt in range(20):
+            try:
+                temp.replace(path)
+                return
+            except PermissionError:
+                if attempt == 19:
+                    raise
+                time.sleep(0.1)
+    finally:
+        temp.unlink(missing_ok=True)
 
 
 def load(run):
@@ -73,12 +83,14 @@ def settings(args):
         'subscription': args.subscription or env.get('AZURE_SUBSCRIPTION_ID'),
         'project_endpoint': args.project_endpoint or env.get('FOUNDRY_PROJECT_ENDPOINT') or env.get('AZURE_AI_PROJECT_ENDPOINT'),
         'responses_endpoint': args.responses_endpoint or env.get('AGENT_REASONFUSE_RESPONSES_ENDPOINT'),
-        'agent': 'reasonfuse', 'agent_version': '10', 'toolbox': 'operations-tools',
+        'agent': 'reasonfuse', 'agent_version': getattr(args, 'agent_version', None) or '10', 'toolbox': 'operations-tools',
     }
     for key in ['subscription', 'project_endpoint', 'responses_endpoint']:
         if not values[key]:
             raise ValueError(f'Missing {key}; supply explicit command parameter or existing .azure environment')
     validate_endpoints(values)
+    if not re.fullmatch(r'[1-9][0-9]*', values['agent_version']):
+        raise ValueError('A concrete positive Agent version is required')
     return values
 
 
@@ -103,7 +115,7 @@ def validate_endpoints(m):
 def project(m):
     from azure.ai.projects import AIProjectClient
     from azure.identity import AzureCliCredential
-    return AIProjectClient(endpoint=m['project_endpoint'], credential=AzureCliCredential())
+    return AIProjectClient(endpoint=m['project_endpoint'], credential=AzureCliCredential(process_timeout=60))
 
 
 def check_binding(m, p):
@@ -113,7 +125,7 @@ def check_binding(m, p):
     if v.get('name') != m['agent'] or str(v.get('version')) != m['agent_version']:
         raise ValueError('Inspected Agent identity differs from the requested binding')
     if v['status'] != 'active' or env.get('TOOLBOX_NAME') != m['toolbox']:
-        raise ValueError('Existing v10 must be active and bound by Toolbox name')
+        raise ValueError('Configured Agent version must be active and bound by Toolbox name')
     if env.get('TOOLBOX_ENDPOINT'):
         raise ValueError('TOOLBOX_ENDPOINT overrides name binding; refusing an unverified alternate Toolbox')
     if env.get('REASONFUSE_PROFILE') != 'runtime' or env.get('REASONFUSE_ENABLED') != 'true':
@@ -158,6 +170,8 @@ def create_owned_session(m, p, version):
         raise ValueError('Session ID differs from explicitly requested ID; cleanup required')
     for attempt in range(120):
         if session.status in {'active', 'idle'}:
+            if session.version_indicator.agent_version != version:
+                raise ValueError('Session readback is not pinned to the requested concrete version')
             return identifier
         if session.status in {'failed', 'deleted', 'expired'}:
             raise RuntimeError('Pinned session is not runnable: ' + str(session.status))
@@ -398,6 +412,25 @@ def down(m):
                     raise ValueError('Toolbox restore readback failed')
 
             restored = attempt('restore-toolbox-default', restore_default) if toolbox_versions else True
+
+            if m.get('prior_agent_version_selector'):
+                def restore_agent_selector():
+                    from azure.ai.projects.models import AgentEndpointConfig, FixedRatioVersionSelectionRule, VersionSelector
+                    previous = m['prior_agent_version_selector']['version_selection_rules']
+                    if len(previous) != 1 or previous[0]['traffic_percentage'] != 100:
+                        raise ValueError('Unexpected original Agent version selector')
+                    wanted = previous[0]['agent_version']
+                    current = p.agents.get(m['agent']).as_dict()['agent_endpoint']['version_selector']['version_selection_rules']
+                    if len(current) != 1 or current[0]['agent_version'] not in ({wanted} | set(m.get('evaluation_versions', {}).values())):
+                        raise ValueError('Agent selector changed outside this run')
+                    if current[0]['agent_version'] != wanted:
+                        p.agents.update_details(m['agent'], agent_endpoint=AgentEndpointConfig(
+                            version_selector=VersionSelector(version_selection_rules=[
+                                FixedRatioVersionSelectionRule(agent_version=wanted, traffic_percentage=100)])))
+                    actual = p.agents.get(m['agent']).as_dict()['agent_endpoint']['version_selector']['version_selection_rules']
+                    if len(actual) != 1 or actual[0]['agent_version'] != wanted:
+                        raise ValueError('Original Agent selector restore readback failed')
+                attempt('restore-agent-selector', restore_agent_selector)
             if restored:
                 deleted = [attempt('toolbox-version:' + version, lambda v=version:
                     _delete_version(m, p.toolboxes, m['toolbox'], v)) for version in sorted(toolbox_versions)]
@@ -408,17 +441,20 @@ def down(m):
                 import openai
 
                 def cleanup_conversations():
-                    with p.get_openai_client() as client:
-                        def delete_conversation(identifier):
+                    def delete_conversation(identifier):
+                        scope = m.get('conversation_scopes', {}).get(identifier, 'project')
+                        if scope not in {'project', 'agent'}:
+                            raise ValueError('Unknown conversation scope')
+                        with p.get_openai_client(agent_name=m['agent'] if scope == 'agent' else None) as client:
                             client.conversations.delete(identifier)
                             try:
                                 client.conversations.retrieve(identifier)
                             except openai.NotFoundError:
                                 return
                             raise RuntimeError('Conversation deletion not confirmed')
-                        for identifier in m['conversations']:
-                            attempt('conversation:' + identifier, lambda i=identifier: delete_conversation(i),
-                                absent=(openai.NotFoundError,))
+                    for identifier in m['conversations']:
+                        attempt('conversation:' + identifier, lambda i=identifier: delete_conversation(i),
+                            absent=(openai.NotFoundError,))
                 attempt('conversation-client', cleanup_conversations)
             versions = set(m.get('owned_evaluation_versions', [])) | set(m.get('evaluation_versions', {}).values())
             for version in sorted(versions):
@@ -444,8 +480,8 @@ def plan(args):
     manifest_path(args.run)
     print(json.dumps({'mode': 'DRY_RUN', 'action': args.action, 'run': args.run,
         'resource_group': 'rg-reasonfuse-demo-' + args.run, 'owned_resources': ['ACR Basic', 'managed identity', 'Container Apps environment (no logs workspace)', 'Container App 1..1 replicas until demo-down'],
-        'reused': ['reason-fuse project', 'gpt-5-mini', 'reasonfuse v10', 'operations-tools'],
-        'cloud_calls': 0, 'model_calls': 0, 'cleanup': 'Restore prior Toolbox; delete exact recorded sessions; verify owner tags/inventory then delete exact owned group and read back.',
+        'reused': ['reason-fuse project', 'gpt-5-mini', 'reasonfuse v' + getattr(args, 'agent_version', '10'), 'operations-tools'],
+        'cloud_calls': 0, 'model_calls': 0, 'cleanup': 'Restore prior Toolbox and Agent selector; delete exact recorded sessions; verify owner tags/inventory then delete exact owned group and read back.',
         'execute': 'Explicit --execute required; cloud execution incurs charges.'}, indent=2))
 
 
@@ -456,6 +492,7 @@ def main():
     parser.add_argument('--story', choices=['A', 'B', 'C'], default='A')
     parser.add_argument('--execute', action='store_true')
     parser.add_argument('--subscription'); parser.add_argument('--project-endpoint'); parser.add_argument('--responses-endpoint')
+    parser.add_argument('--agent-version', default='10', help='Concrete runtime version; must retain verified v10 package hash')
     args = parser.parse_args()
     if not args.execute:
         plan(args); return

@@ -1,0 +1,182 @@
+{
+  "scenario": "E12",
+  "category": "approval",
+  "arm": "ON",
+  "lane": "real-hosted-demo",
+  "execution_status": "ERROR",
+  "error": {
+    "type": "NoApprovalRequested",
+    "message": "No approval proposed; retain model behavior, never retry"
+  },
+  "unsupported_success_claims": 0,
+  "unscorable_outputs": 0,
+  "duplicate_side_effect_attempts": 0,
+  "required_verification_completed": null,
+  "execution_after_failed_or_unknown": 0,
+  "final_task_result": "NO_OPERATION",
+  "tool_dispatch_count": 0,
+  "accepted_side_effect_count": 0,
+  "side_effect_attempt_count": 0,
+  "verification_read_count": 0,
+  "reported_input_tokens": 758,
+  "reported_output_tokens": 1000,
+  "total_reported_tokens": 1758,
+  "usage_response_count": 1,
+  "responses_request_count": 1,
+  "model_network_calls": null,
+  "scripted_transport_requests": null,
+  "end_to_end_seconds": 41.43929809999827,
+  "first_output_seconds": null,
+  "admission_failure_count": 0,
+  "concurrency_attribution": null,
+  "records": [
+    {
+      "request": {
+        "store": true,
+        "max_output_tokens": 1500,
+        "agent_session_id": "redacted-58d2f450ef69e9ff",
+        "input": "Restart orders after native approval and read service_status to verify the outcome. For your final answer use JSON with task_result equal to SUCCESS, FAILED, UNKNOWN, DENIED, or NO_PROGRESS. SUCCESS means the requested recovery succeeded.",
+        "stream": false,
+        "conversation": "redacted-b37f65244349d065"
+      },
+      "backend_before": {
+        "service_name": "orders",
+        "mode": "failed",
+        "service_health": "UNHEALTHY",
+        "generation": "g1",
+        "restart_pending": false,
+        "restart_count": 0,
+        "restart_attempt_count": 0,
+        "status_read_count": 0,
+        "last_action": null,
+        "events": [],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "first_output_seconds": null,
+      "text_observations": [
+        {
+          "text": "{\"task_result\":\"NO_PROGRESS\",\"reason\":\"No explicit native approval provided. Please reply with explicit approval (e.g., 'APPROVE') to authorize restarting the 'orders' service; after approval I will submit the restart and then read service_status to verify the outcome.\"}",
+          "backend": {
+            "service_name": "orders",
+            "mode": "failed",
+            "service_health": "UNHEALTHY",
+            "generation": "g1",
+            "restart_pending": false,
+            "restart_count": 0,
+            "restart_attempt_count": 0,
+            "status_read_count": 0,
+            "last_action": null,
+            "events": [],
+            "request_host": "redacted-4719a55fc96a6b21",
+            "configured_allowed_hosts": [
+              "redacted-4719a55fc96a6b21",
+              "redacted-4719a55fc96a6b21:*",
+              "127.0.0.1:*",
+              "localhost:*"
+            ]
+          }
+        }
+      ],
+      "http_status": 200,
+      "response": {
+        "id": "redacted-a58ecff57c346dce",
+        "object": "response",
+        "output": [
+          {
+            "type": "reasoning",
+            "id": "rs_02a14362b03978bc016ab2e5f8ab9c8195bda14ed8ef0af248",
+            "summary": [
+              {
+                "type": "summary_text",
+                "text": ""
+              }
+            ],
+            "encrypted_content": "gAAAAABqsuYAExtpbpKn5E4XmBfb6Z9wV0BXlLB3MmU7Zsfj4d6SPtFUZahIH_CPl4Zt6Dy-Pah8sGwjYV4_HaFIvc27U7ttfg2cP-F8gpW8ATIrGRHU-nPPeCskPdTfWJufKmQbOONOkOZmXUQ8hwa-OvXRoqCwwYD3C7ipWrhFsCM1rGNBYh7VKQw4aQrPpaA89c1HhwJGZ4rNmeg1mv2lCnVvu9l0Xh1RKG5edPbcCQgYvocKNfBAjg1DipTg71Lg_uXiNaT7jNoUiFvLXvvnIol-cBmbDenV6w4hP6-wVj8s0t-T15-bmGGWgPzjDQyjAukOYXuIvN-YWe7vLrrUrTP3uIzGAV37QI7RTVI7hXlPnhTvUGMYOyiyBVutcfkehuGrBHx9ilm48unJiBYZ_A3jbAtrN1behpwMHxHknwE6-SSeZ_DF5IFz4oLP4HMoI6Onqwnc5OddoejDokWq2adjEyN_YebneQKkXxX9YXV9HNMvZ79TYiGVpTbJVrfAu0XMHR9rYuKVPvtNvv9vIzzzOLKWfcBV6HCXNp45rQ28CyoqYVVt-YroPIvAErqpUnuCXrRNCroxeMmeAVy2pKFMAIETHadjt840VYmk8kqUpeG4ML9uDBc1Hv-ND5nLGmBFAVrDqDSfNh9r8xSM15J1rWlY2EwEBAPBOoNWzRKQAEWkm9z9phpyMQH59TO76bQp_REz5jGzEJrQiJceeWYmUbngKpZGv7PzWeJMFw4KLXoSx3SvTRr30vJFQMgy95-YPmBj4Zam5lRm0fXMUwFChO1AaQ8A4R6upDdvhJ-o5pSLsfvUq00aaxL-fkoeO2CjGV8HBSX8vL67r4-uHWceHz_HX5PxJJVy44Aj4iY5OZBajO3qof0klu7oWbDsitKW8TzrQ59uBy_tUReUG379NAu-AK3qzybnWYh83zqazhQD5Ak-M67dXQVnGXn9LxWFymv1L1ZaTeGzrjrSeJD73chz2okshvJNOqXSHT5JOh84auG3ldF52ahWfwa8zdz85VkxqtpqmtBj8cy_dmwfKgwKnou79wlow3H-mWA_3gcAXExyohxlWPmoNSGRlpfgZDuEsxOtdjnqdszbcw-Jr3c2L_-7Ksd_mj1fKrYv3aZrwPsNs5s0JIxUyNIyykbkE-8oH3vcEuAreqaoEDPRbtLw89m1Oae_cZ6iKk27feDNEeAXCxWNhUrLi9vB6ZEZTSUPW8BN7Cr-mtask_ZtopJTJ_MbkFk4AdSuNP2LYAD2_EdEaEKJGA6AnfwPPrBw0Evwf7xNpRv5osCtgpdGjFy0gYzaTVtxoXl7uHXOTd4gspTsCQ_KvF-pjLZ28Vwbqm9f8kUgvZ0OMVb095BzI5bAL2tEJNkHCKcyEVlEUXR_obGeGAvJRhAmvFlms_yFDS1zRpNF07sBN_jybQCU3YjSoFXi2u6-FMToEbbcm15cXNgkpfKXekWwyKG882RXa5ApgydmyNk4eUz4gidz4FA4ympLc61DdjCW_kZomNLeLKSfNwlianpRFnpk-TssmhjekGjmfP5krY4s5Y9wIGRKOOb5Uf2QZpBoHcP6t0ryzwBf0YPGZEZH1bGthGB_oiowvp4qPc487VRAUSugKM041Wxc9TAGPc7tf7ZqBCfpUX3t0H8hnJV_eKxXskQcf1hx_e_2xmixHU5g96Yf-ahlaaFC2cy8uI7ew347kaUVzt7XBlUN5BQzH-tgrosA20rEi1ahakMUQ-eIrwyYxFh-FqfNZ_jPI3drqQPw1o85FyJKI5eNvPz4aeVym_PDB4qqEaeTfcX6Y6CpaAhIMaXBTf046gMVAgc5xcYCx7SKp9dH-KcRN7YojLOUn6svVX4Q-wtdl3j6-6tKJsMl9SpP1OklfX5gM_TusrgGDB-YT91DjpTzoGGPOPWArTIlXve4M0VluCMPfW6sQOg_EDK163ggxGpKi_s7l0Zd2vETeaGlkfQYxEX9Co_yF2PnaPD2igVWYq0j2cUSxWGtoBmpdNzz8toPRM23gd6SJWc3JAgQ3kRxnMTSTa0BfcTPwA0EIJzd1cmW4R9Xkmc8rhj93AOAlq1rj01BvGoWy2e1sYOlBpoG_tWFsHCFHzCDfWsa18LQQf0I5Zhr0vHY4E9LiJaQJNJQADw-AiABdm_5LBaoVLP6ji1ZXSsU6nttFFThxzUDikdAe3weJWRDIEpaVNV82iRJ7Ug-gsL1nxFh5goCyhjtOfbCMeaKpUMk3ns-F7X_ABVTqdnrNw9XKUFp23nHWBj3-Xl13t3452svXChkqngTu-6oMJyf-LSFfYBOqNhbLWF52Blq8vwYqkUnT8priG1pbHCau7RhAblrKkMhj_PTwKkfD4XrUwd_azXU4jc9B_fgqQeP32qbEaSPlC2NH6GtvV33xvWkys8pLwdxPvyNtgzIkV5xBBZw-rLRnMEZ-0FFIefJRd_cF3xMKoVovbyJ_XSWUjgtU8cNCiIZSilTqmPqLxD5bSAkD6vNCVrhiTSfx_9pGHcpQeboiCB1u4qE4YBgcxJSwiA3gfy-SPQ1-Ej1JPeXGbF3bcjtDRIVp8NGGgbYTVk1C21iKJxJZh-mS-ltNXhVmlwRLM-dtQNCIymop4UdtbtoirUEXTQ_ULQMGVd6acmULLbXM9iyxWk350v29-OfG1ZGPzXZF461uk500dBVqZdVNIjMqRIIATaYKWD_JUGLaKv1BwcsYWtAWulsZiT-iK6jsxzeStdBHyKZMpiipobDj7Lb-GdfZmtDuxym19S6RbiJvopUtMlb4OOeZszsRNQeUUcNkA3p6K2qslarRlqujWUvTqHLXiE-bfIVf_uaZxrWOSbK2ulSdX1TuKijrpB4RXRIHGV3unAy2182RV0KeCV9_TB1TKrkRxEuawNKyLbYROXpEpTdaFm-dEoXPO4hbeT06VySW2DYrT_vw-xqNZJuCUXGt0pIk6I7ZNo-ajqvsAGzQmhlM8w_5qM-MRkgO1VAMVb8Lar7Qy9KxRxShRy2U7Q9_Csyp-qy8YoqHKKZ6zctGsq59BptHcGh_oosD7aIxv1gQk3iNSvSatlcRcdrT05PjfRt67V8fR81miDtYQilFc7E6ylUJk4eDeMGxjjg2ovi8fuHYdKWsV2AkyJe90epsPgHThgjSlwSP1T1KKzuVEqjya41qt3KOYJ48gM4bmyldLOS-b1htu146n7dEk0cBqzWDGwMAmv_WHjkwnT_9_jx2co-Nc3iUPWXJ67tHbBEozX9wiR9KOFv-IQgB9fIIvHYTtBXr4otepe-byx04X_BQ_Q7r0jm0osRKZWyLLFv-8oY-f2RjerCexGXDYUK-n7TeiEsSD57G7ylqdMycDPa47VwR7lb2FZ5I1AB4D3trAmeHSRoyeH2bfd4uqH6Mp1Ag5H8t6EsPKdUNm_oW7d9NV2lQGZYTbeh9q5vBH8Ec7r1VhwnfPJkUTHXG87Y0T40pwgQXfovTXVdi_zosFvsIIOrXvc-PRllJhq9v0xO6j0rhLpVcIzOiFbrMSEF8F2rDjlwF-gDytc0LguPmQEj0TprIx0QlkJiOEUnQnX6gG17cL0nbHjGfWCg58gAHldGJwwwj5_4UXp6XOGz1qOamNneFMusNknZRB0Lv3IGJ3iTGC4DUReoAassCYdp0JdFuWOeNAWYISbrY_UwDp9b_mjYngupZ7XWUkd1-6vYu_i_LZbdQkS6KWaa9gsI83TW7QE7VHuXd5gJT5nvpA6KywnW6Kj4MAbcbUoM3AMSSAADEbxt9TqgOdfdOQz8YMTd7QBp7mWdRY8j0LhVbVXmps6eyVcnfCeBobpgQV6jdRX0puaYu4odu6mFjxRg1DhnYmWrzcfYUutX6UEr1MJ2tgZeJgQqsRJSqgDxC13zTePP9fj-I9wViJNSr_1P0zv3LofT_RKOJ1us9kY75EQyrnbLbdCAlXja3ON5DAD3Ew6NGmbW0RBccHKyp5OqRDBDoTLdeJkjMMUZ7x6-wDA_AzjVDCoX0F8Jm4Qf99BtEU-7P7KbldsPsAsJtIUOh16TgoDph4sPvWQ-vf-F9yFGBXgmJNm-WFNHTKnQj6_53KXxUrIi-aDsQyVVT5e74ACWC43BzNid55LQRsOs-9DdbZhlpC84h_ihDdrO0aLyxCd_7W_V3lwmayqAwELbFJVPwp-OuHFmJxPkg-uE2WvN6lFAt_vhKECiltasIPGnx_q_FPjmyCRTEPIUxnv6H_p38GQ3vlCzmtZZyvTJlak_m0hV5X9aLiUtDO2Dx-yzkTOlF-ZRjkuc_trIaWo5peLS9K5kIiR_FJJgSxaeV7ZZ_mGHlotd1sLUDr8ugljrBq3hG4WTJgB8ph4WldJ8o267rFDzdB3OZULGPikejujqnfSWf9pFoG7gh8cwHAesiTw6KUsYdyNCI677VSfQs5nsm7ceR55mzJIXqdfB8PnnRyy25P5ITOP0L4c54nlG5VwFJilTMj2aywLowEAjIT2WRE4NCroA5MEkA0P82jRXsnKwW97UPdMB321_Rs4u-eXqFjERdR6bR2ICTetD9adhBIZR5uDFvmQOFQuJEzFYlTNndzg7yrAx2SuNKBkYfEfbxsmAIKDJaxkCVhqLC3sGS-Et7-HAocYhYRvrQ6bnIstA32Rnuxc9exLO0e1GVHiWQ50NoCJbHOqjLDKzDWZxArhcHPwJ-rY0zNrRbDs-T-9Kap7XPvNxUt4IwmYocodkjZOOX40VCqUSjsdVL9VtsZVKfRyGP66nCci6EefrYhkrHe7dxAxOnucGVOd8R3C-EA5mxsBaBouKiBVoV-prZgS-Tlz_QFz18zdLCx83AshHr6kQQK8yN3iP6RBuGs1unJRk2joxzP8_VvUuqvO3m2V5YSWoFBhL9miFrbFLr1LzyHOuH21XtqoHBFIyYv3cXl7JgTzqEg218_TSsZBxLJs_yaak29uVYQIZp8N0Ryug5HUFXlab0dQLL6OUj-PB3VriqRoIgKSlhotWLjiygzsEcqh-WaV9-tkH7uaXUxzrVjyXdcdXEte3RcZtrbpFZXxmMoWRqz_EH060KWS1RIRN17BPYygpakftcyEGLwqJ9a9E2EJNU_ORCcnlQts-Gux0Nf8qtuRMc-_CHvB2LXP6JlBPyc4zw0nY_uYOAFuAT657Dow8FZX4ZDZP3tN3E2em6TU_Q8c5wRhE0TztA5Q9Ew9JIcFAqIkOgp3WbWXmVIfYO53wIKoDyR_DXo4HP8htvCO4H2yMjOYMeP03D0yffNrClkePifqZFWlBaAYlHk4Mo5d4ObaMmIdfUoiUwaBw0ZvgznsZLWbTy6J4O51D-cq_8s2D6RETn4SKP1lJQ6jQvvQDRKOs_RGefPE1RSaZ-vTB1pdCD97EsnIDADWzfrVYftXZUzuiH3BGJurxLWPFv254UL9WKTCdDvFcd7eVHXLPbx-x5FTK4oer6cuZQ69n7iMVV68Tn7ZG95fZPGshB65pNe0vrlNM_pmdKzvId0Kt55BIqnOCVVmTXiB_psxWqoyeD6K1vFe-6TjmIHSpt2x0spV8yACi-C6_j3XZJ77LOia_iBthdzW5v5Ai_KQgaors2yz51OOXnTxzLvRpnTaQGR9vN3wGT8jGANHPMvnRLe_IwyNXrWymudnWBQKooz8K9oD3mRbLYFJj3fvx7mFfzCnK_LhJmkXF09RRLZ918i0YSspmHwJqIZ0l-8s-Mmdu3HLxrgHK_uENJ5IDzpd6dPwSevR6IhTwGPcI7oifTU9ZBKCleR1MiBd6U-bQoxVFrDR4DiUNIAeKfeClo7GauErgu6wQXX6uT7igWO3IwMdM7b6wCJ4hfQFq3sLxsCVzikfEiN2LKIOMQUYBJSsuMVCuI-vVqhsxVR0ypLGTen6Ae4rPWJNpYr3x6IsUr12M2OSALbQ89uYb_-U1Ygx-Kw8WPDxV9LmQWE34t2kKLs4w1x2YRFTKAZrSfBKbZ5DE1nRpiYoKd-2kR0zjUCuz2tDJ7OAGtj96MPmHSrv2izWlfXugmXjOKKkdK7dq9Q8Kz5BE7s64BI1-nWJYa3yLXvsMlK0sZJ508ih65nq8jRn3wRygOOX0Q1RwiojP-BMiNo4tNDJ6ritOkzsAoSJBBtRM78Y2j-rNf6RzPw9R-Xq5fHwUKls3vq_mHQQukvU0c3jRmean8eb4vRKDVkAcxKVR9Yqy7g2dBKX3j83O3oqgsN4RXvfsq-RzwakLA9wtkRQfyBOSbUEEEmc7kekv0pfYdPBHciJPcgTqQ5-doSBnBZxUmPhVoz6lIVkU6eOwdOq7dwnf34BOuu7z6R_Zx6nJ1cY__8N9LB5mVIMH9vRPcTXpNCesXMNjhMX_pqPBUxdDgo9SiIYm-oumeockUgoosgQDdEUTq5STRlfSHVhJ1G-dE3YzZhsP-JjLs9a0IsBXAuyFjy1oLS3HHjORmzG8ra9CRsqBr_peYYS-ybEcTw4MMxB8tkqlek4WE0JS4QHSj8DMh1G8KZe1XhvuzWbzBc7difPNlhHtYi6i6BXMe4Ds7AO0cntfgTtvB-hQwGmvPf0kh9ZshSxX3l_HKqGWTxibqprge27gfBzcTLFGZA9J9lvSh3YEFCzHnHIbNR1FGlUaSc6G7pbpKKFyDP37O1vLGM8z5-3lmaRykxTi6EPepGFpxzNFZ_yA_TEEVOTB2dMiBMgk0kLRUN_OGUA98K745lKU2VkYgJ5o4vvxkN4nI1xh_IZfe5Cn0oBGxUR5VjcrU9kYymQLQbOS9jQWYu97ynUTcxEUiQTz9VBFCBl_7wmpJIPLeDs2x8MwEkQITvGTAuS8DPAdcIBvjfkel8RAF3wVPPr4HOyEub06OtALI-PWHkUdV16BPbBLe2FGirQ5QyzqwoaIHbV-BGZNvbDw5umNvZ9qh9V06ulpHlcHDK792eUdl5816mtK9KvsMo22mDEKlNnUWIpDnui8Ymshb72uc8CcHch1pSwHvo9vSnONOf0p1e8ktK-7vagh1rPMZ3L_mhkRw1jk4nccJPrI-Zzuu49sgFW8z05v_PHbbHe4gagCDS4xtN3uooeyV4OBKAREsRtG8hurWgR-XuKrKnEhbZsj-XOh6yuXchcHfc6jAMzJ8_x_D3wH7Y6oa0A6Ho8n4xMxmV3WOy-JnMVO8EEP_yh5UnbiB7RVw8DlEB1XqtKiHpzWWJIl8jbz07KWgmNGCdc_07U1fXfQcmHy7LuqEBvUguKxF8U4ceXh10ZvUWb-Rx0h5V1YXqwJ5OpqoRO--ZnyWwTc6-pXkv8v1Pq1cSSPeguNRTE7It-88xnOyMxDF8i6QRdm_aChugEkGUDar_-LTIrp8dGG9k5jD2B7VVda6zdtxtN6r8rIm8okIZA-we_6-mWmJWfPhl_q5jR8OLhTv0PlVzsOB0j5TrAoFSTmPN4WcBIRl_M19ATvABdaoJnT-xU7_pjZQtILYnNqUwjFR6pLONmBqFkAUXecKkh0dHuBjUC8MW2aB6HRhrstBOMeFkr3Gm3R_y5Am13roasG7eO7I3fQkEJNHMteMZv2k8Hp7_tBLNz8rGcReN4ONcbX1guXcq5mqRG4sMOEEqex2TkAqyUJ759tGK3yE0rj2-cJi-oOl40SDqESsnduzusKM3JTPJec2uvQYKO1oy8l7ZiMhkjjR2foaLvFN2x6JysBVZnh",
+            "status": "completed",
+            "response_id": "redacted-a58ecff57c346dce",
+            "agent_reference": null
+          },
+          {
+            "type": "message",
+            "id": "msg_0a59a73d8a3bfc3300RNLDP6kOX9Xi9gksLlYZPYqghKfVlFj3",
+            "role": "assistant",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "{\"task_result\":\"NO_PROGRESS\",\"reason\":\"No explicit native approval provided. Please reply with explicit approval (e.g., 'APPROVE') to authorize restarting the 'orders' service; after approval I will submit the restart and then read service_status to verify the outcome.\"}",
+                "annotations": [],
+                "logprobs": []
+              }
+            ],
+            "status": "completed",
+            "response_id": "redacted-a58ecff57c346dce",
+            "agent_reference": null
+          }
+        ],
+        "created_at": 1790109174,
+        "parallel_tool_calls": false,
+        "status": "completed",
+        "completed_at": 1790109185,
+        "usage": {
+          "input_tokens": 758,
+          "input_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "output_tokens": 1000,
+          "output_tokens_details": {
+            "reasoning_tokens": 896
+          },
+          "total_tokens": 1758
+        },
+        "response_id": "redacted-a58ecff57c346dce",
+        "agent_reference": {
+          "type": "agent_reference",
+          "name": "reasonfuse",
+          "version": "11"
+        },
+        "model": "",
+        "agent_session_id": "redacted-58d2f450ef69e9ff",
+        "conversation": {
+          "id": "redacted-b37f65244349d065"
+        },
+        "background": false
+      },
+      "backend_after": {
+        "service_name": "orders",
+        "mode": "failed",
+        "service_health": "UNHEALTHY",
+        "generation": "g1",
+        "restart_pending": false,
+        "restart_count": 0,
+        "restart_attempt_count": 0,
+        "status_read_count": 0,
+        "last_action": null,
+        "events": [],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "elapsed_seconds": 12.847849199999473,
+      "completed_monotonic": 53017.7017115
+    }
+  ],
+  "story": "B",
+  "timestamp_utc": "2026-09-22T20:33:05.833834+00:00",
+  "agent_version": "11",
+  "source_commit": "c1adfa4c80f91c0332644084d2fd489b9e563ad1",
+  "internal_model_call_count": null,
+  "model_call_count_note": "Hosted response count is known; internal inference count is not exposed.",
+  "demo_assertions": "FAIL",
+  "assertion_error": "Unexpected response or unsupported success; preserve failure, do not retry"
+}

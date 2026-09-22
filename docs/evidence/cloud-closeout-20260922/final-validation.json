@@ -1,0 +1,41 @@
+{
+  "validated_at_utc": "2026-09-22T21:49:13Z",
+  "source_commit_before_delivery": "c1adfa4c80f91c0332644084d2fd489b9e563ad1",
+  "validation": {
+    "full_unittest_discover": {
+      "command": ".venv/Scripts/python.exe -B -m unittest discover -s tests -p 'test*.py'",
+      "tests_run": 135,
+      "failures": 0,
+      "errors": 0,
+      "result": "PASS"
+    },
+    "hosted_concurrency_evidence_gate": {
+      "command": ".venv/Scripts/python.exe scripts/check_hosted_concurrency_evidence.py",
+      "result": "PASS"
+    },
+    "submission_integrity_and_links": {
+      "command": ".venv/Scripts/python.exe scripts/check_submission.py",
+      "result": "PASS",
+      "historical_files_unchanged": 139,
+      "frozen_files": 32,
+      "secret_scan_scope": "heuristic patterns and forbidden paths, not exhaustive"
+    },
+    "git_diff_check": "PASS"
+  },
+  "cloud_result": {
+    "submission_ready": false,
+    "demo_a": "PASS",
+    "demo_b": "FAIL_MODEL_DID_NOT_ATTEMPT",
+    "demo_c": "FAIL_HTTP_409_NOT_ATTRIBUTED",
+    "on_off_executed": 29,
+    "on_off_planned": 30,
+    "e15_off": "NOT_RUN",
+    "cleanup": "PASS"
+  },
+  "evidence_sha256": {
+    "real_evaluation_results_json": "fa3371fd626b6ccec2bb20d40f3d88c67672c7868955caecb56c6a9169e02e50",
+    "cost_closeout_json": "e6192d0fcc436e0872fd843855ebcaf59605266f3312b9b145a97770ffc11d41",
+    "final_resource_readback_json": "3554f035646954a58baf4f0997461766a78e0f6304472714ba5777fd8d6e9c49"
+  },
+  "scope_note": "Local checks and hash readbacks do not turn the real-cloud B/C failures or the unrun E15 OFF arm into PASS."
+}

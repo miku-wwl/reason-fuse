@@ -4,6 +4,8 @@ Current commands are in the [repository README](../../README.md). Historical fil
 retain their original timestamps, outcomes and hashes; do not use old commands as
 current operating instructions.
 
+The 2026-09-22/23 funded cloud continuation has its own [Chinese closeout report](../cloud-closeout-zh.md) and [new evidence directory](cloud-closeout-20260922/). The prior `submission/` artifacts remain the unchanged 2026-09-21 snapshot.
+
 | Artifact | Historical scope |
 | --- | --- |
 | [cloud-e2e.md](cloud-e2e.md) | v6 proof; external store=false instructions superseded by v10 store=true |

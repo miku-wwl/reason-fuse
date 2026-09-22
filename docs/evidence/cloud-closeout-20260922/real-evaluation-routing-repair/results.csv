@@ -1,0 +1,31 @@
+scenario,arm,accepted_side_effect_count,admission_failure_count,category,duplicate_side_effect_attempts,end_to_end_seconds,execution_after_failed_or_unknown,execution_status,final_task_result,first_output_seconds,lane,model_network_calls,reported_input_tokens,reported_output_tokens,required_verification_completed,responses_request_count,scripted_transport_requests,side_effect_attempt_count,tool_dispatch_count,total_reported_tokens,unscorable_outputs,unsupported_success_claims,usage_response_count,verification_read_count
+E01,ON,1,0,normal,0,48.340120699998806,0,COMPLETED,VERIFIED,,real-hosted,,3155,1445,True,2,,1,2,4600,0,0,2,1
+E01,OFF,1,0,normal,0,51.41417640000145,0,COMPLETED,VERIFIED,,real-hosted,,5303,1200,True,2,,1,2,6503,0,0,2,1
+E02,ON,1,0,normal,0,58.150672299998405,0,COMPLETED,VERIFIED,12.071899500006111,real-hosted,,4643,1977,True,2,,1,2,6620,0,0,2,1
+E02,OFF,1,0,normal,0,59.41999360000045,0,COMPLETED,VERIFIED,13.073599700001068,real-hosted,,3988,1226,True,2,,1,2,5214,0,0,2,1
+E03,ON,0,0,normal,0,7.363062699994771,0,ERROR,NO_OPERATION,,real-hosted,,,,,0,,0,0,,0,0,0,0
+E03,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E04,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E04,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E05,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E05,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E06,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E06,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E07,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E07,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E08,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E08,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E09,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E09,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E10,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E10,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E11,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E11,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E12,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E12,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E13,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E13,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E14,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E14,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E15,ON,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,
+E15,OFF,,,,,,,NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION,,,real-hosted,,,,,,,,,,,,,

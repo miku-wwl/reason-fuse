@@ -2,11 +2,11 @@
 
 ReasonFuse is a cloud-validated reliability runtime for side-effecting AI agents that separates planning, authorization, execution, verification, and success determination.
 
-当前路径是 **一个 Agent + Microsoft Foundry Hosted Agent + Operations Toolbox + 一个受控重启场景**。核心已在 `reasonfuse` **v10** 上通过 CLOUD-1 至 CLOUD-12。它不是生产运维平台。
+当前路径是 **一个 Agent + Microsoft Foundry Hosted Agent + Operations Toolbox + 一个受控重启场景**。核心曾在 `reasonfuse` **v10** 上通过 CLOUD-1 至 CLOUD-12；恢复后的 v11 使用哈希一致的原始源码包，并完成了本轮有界云执行。它不是生产运维平台。
 
-**当前云可用性：BLOCKED。** 2026-09-21 22:25 UTC（新西兰9月22日）的 [最终只读核查](docs/evidence/submission/cloud-readonly-final.json) 显示原 `rg-reason-fuse` 已不存在，原 Foundry 地址返回 ResourceNotFound，原订阅 Cognitive Services 账户列表为空。本轮没有删除云资源；历史 v10 PASS 仍保留。现阶段不能称为只差录像，见最终验收的具体阻塞。
+**当前提交状态：NOT READY。** 原 Foundry 账户软删除恢复后，项目、模型和新 v11 基线可用；一次临时测试后端已完整部署并删除。真实云演示 A 通过，B/C 未达到预先规定的断言，固定 ON/OFF 执行29/30项。详细现况、费用与清理读回见 [15美元云端闭环报告](docs/cloud-closeout-zh.md)。[2026-09-21资源缺失读回](docs/evidence/submission/cloud-readonly-final.json) 仅是历史快照。
 
-先读本文，再看 [提交摘要](SUBMISSION-READY.md)、[录制脚本](docs/demo-script.md) 和 [最终验收](docs/submission-sprint.md)。[中文全景报告](docs/project-overview-zh.md) 保留提交冲刺开始前的工程快照。
+先读本文，再看 [提交摘要](SUBMISSION-READY.md)、[本轮云端闭环](docs/cloud-closeout-zh.md) 与 [录制脚本](docs/demo-script.md)。[原提交冲刺矩阵](docs/submission-sprint.md) 和 [中文全景报告](docs/project-overview-zh.md) 保留各自时点的工程快照。
 
 ## 问题
 
@@ -49,14 +49,15 @@ flowchart TD
 
 | 验证层 | 结果与证据 |
 | --- | --- |
-| 本地完整回归 | **131/131 PASS**：原核心100项与新增辅助脚本31项；见 [最终验收](docs/submission-sprint.md) |
+| 本地完整回归 | 本轮 **135/135 PASS**；历史证据与提交检查 PASS，见 [云端闭环报告](docs/cloud-closeout-zh.md) |
 | 真实 Hosted | **v10 CLOUD-1 至 CLOUD-12 PASS**：[报告](docs/evidence/p0-hosted-concurrency-validation.md) / [逐项索引](docs/evidence/p0-foundry/hosted-concurrency/scenario-index.json) |
 | 历史并发缺陷 | v7/v8 FAIL，v9 复现重复派发和状态覆盖；v10 持久化准入修复了被测两种续接路径，旧证据保留 |
-| 15 场景 ON/OFF | [固定协议、JSON/CSV 与评测结果](docs/evaluation.md)；本地脚本化控制和真实模型结果分开，未执行项明确记录 |
+| 15 场景 ON/OFF | [原固定协议及本地结果](docs/evaluation.md)；[本轮真实云29/30项、原始结果/CSV/哈希](docs/evidence/cloud-closeout-20260922/real-evaluation-filesystem-repair/manifest.json)；本地脚本化控制与真实模型分开 |
+| 本轮真实演示与清理 | A PASS，B/C FAIL；临时资源组、评测版本和Toolbox版本删除读回PASS；见 [闭环报告](docs/cloud-closeout-zh.md) |
 | 身份与完整性 | v10 28 个源码文件与 70 个证据清单项；检查历史身份以及当前核心不变，不因更新 README 重写历史哈希 |
 | Foundry Local | 当前冻结核心一次真实本地模型 smoke **PASS**：审批前零派发、重启后注册验证 VERIFIED；[原始结果及计量限制](docs/evidence/submission/local-model-smoke.json) |
 
-云 PASS 使用真实模型、原生审批、MCP 和独立后端计数。本轮不会为了重现已有 PASS 再付费跑整套云验证。评测仅覆盖固定 15 场景，不声称统计显著性或普适收益。
+历史 v10 云 PASS 使用真实模型、原生审批、MCP 和独立后端计数。本轮 v11 另行执行了有界演示和 ON/OFF；失败与模型未尝试均保留，不能以历史 PASS 覆盖。评测仅覆盖固定 15 场景，不声称统计显著性或普适收益。
 
 ## 本地检查与演示
 
@@ -72,7 +73,7 @@ git diff --check
 
 新环境执行 `uv sync --frozen --python 3.13` 可能下载依赖；`pwsh -File scripts/bootstrap.ps1` 会准备固定 azd/扩展，也可能下载，不能称为离线操作。
 
-精确参数及前置资源见 [演示环境手册](docs/demo-environment.md)。这些脚本已准备并本地验证，尚未在本轮重新部署；它们要求已存在有效的 Foundry 项目、模型和 v10 基线，目前该前提不满足：
+精确参数及前置资源见 [演示环境手册](docs/demo-environment.md)。本轮 `demo-up/smoke/down` 在真实 Azure 完成过一次；它们现在复用已恢复的项目、模型和 v11。当前临时夹具已删除，B/C 的真实演示断言尚未通过：
 
 ```text
 demo-up.ps1    → 临时夹具、发布 Toolbox、检查 Agent
@@ -81,7 +82,7 @@ demo-run.ps1   → A VERIFIED / B FAILED 后 BLOCKED / C 并发保护
 demo-down.ps1  → 只清理本轮拥有资源与会话，并读回确认
 ```
 
-先运行 DryRun，云执行需显式执行参数。脚本要求复用有效项目、模型与 v10，不创建基础平台。**原 Foundry 基础资源与临时后端当前均不可用。** 录制前须先恢复并验证基础资源，再启动夹具，结束后精确清理。
+先运行 DryRun，云执行需显式执行参数。新的 up 应明确指定 `-AgentVersion 11`，按预算建立一次性夹具，结束后调用 down 并读回；**B/C 的实测失败尚需解决，不能直接把脚本作为已通过的最终录像流程。**
 
 ### 两层 store
 
@@ -91,7 +92,7 @@ demo-down.ps1  → 只清理本轮拥有资源与会话，并读回确认
 | Agent 内部 → 模型 | **`default_options={"store": False}`** |
 | Hosted 历史 | **`history_source="agent_server"`** |
 
-不要沿用历史 v6 的外部 `store=false` 示例。v10 对该模式失败关闭，错误体验仍为 HTTP 500；竞争当前返回 failed Responses / `server_error`，不是统一 HTTP 409 契约。
+不要沿用历史 v6 的外部 `store=false` 示例。历史 v10 对该模式失败关闭，竞争证据包含明确的 failed Responses / `server_error`；本轮 v11 的竞争支路返回 HTTP 409，未被严格断言归因给 ReasonFuse。平台和版本间没有统一的错误形态保证。
 
 ## 三个演示故事
 
@@ -114,6 +115,6 @@ demo-down.ps1  → 只清理本轮拥有资源与会话，并读回确认
 
 ## 证据阅读顺序
 
-[提交摘要](SUBMISSION-READY.md) → [验收](docs/submission-sprint.md) → [评测](docs/evaluation.md) → [v10 云证据](docs/evidence/p0-hosted-concurrency-validation.md)。
+[提交摘要](SUBMISSION-READY.md) → [当前云端闭环](docs/cloud-closeout-zh.md) → [固定评测与历史本地结果](docs/evaluation.md) → [v10 云证据](docs/evidence/p0-hosted-concurrency-validation.md)。
 
 [历史索引](docs/evidence/README.md) 明确标识 v6、v7/v8 FAIL、v9 诊断、v10 PASS。历史命令不自动成为当前指南；历史结果、时间戳和哈希不为美化而改写。

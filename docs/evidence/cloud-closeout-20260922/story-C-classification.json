@@ -1,0 +1,16 @@
+{
+  "story": "C",
+  "classification": "HTTP_409_COMPETING_BRANCH_UNATTRIBUTED",
+  "http_statuses": [
+    200,
+    200,
+    409
+  ],
+  "fixture_attempts": 1,
+  "fixture_accepts": 1,
+  "fresh_verification": true,
+  "explicit_reasonfuse_admission_error": false,
+  "assertions": "FAIL",
+  "model_behavior_retry": false,
+  "next_action": "Continue fixed ON/OFF protocol; retain C original result."
+}

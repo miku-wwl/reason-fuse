@@ -1,0 +1,615 @@
+{
+  "started_utc": "2026-09-22T20:37:48.087890+00:00",
+  "source_commit": "c1adfa4c80f91c0332644084d2fd489b9e563ad1",
+  "lane": "real-hosted",
+  "scenario_count": 15,
+  "protocol_sha256": "f840071ecc3ab9c2e5451db2dcd8f0f7fe330f2bfed0bab32a02be2a87f53f13",
+  "harness_source_hashes": {
+    "evaluation/__init__.py": "4ab6751fe5996d8b305591e8b058338df945be1d265b10e8a465d24658ac1b04",
+    "evaluation/runtime.py": "41e22adacf069a5163284b8b2506c28a4f07f147b2334bcae2752450b6168ed9",
+    "evaluation/scoring.py": "5998b456856bcd592327f408711e819633d3ed1854d1acd45c25a6bbbd7c7204",
+    "scripts/evaluate.py": "d5d4e8becd0ab24d71ab466254d00c7f797bb29f0bc589d27b774c0ccbb571ae"
+  },
+  "runtime_source_identity": "docs/evidence/p0-foundry/hosted-concurrency/V10-source-identity.json",
+  "python": "3.13.9",
+  "versions": {
+    "agent-framework-core": "1.17.0",
+    "agent-framework-foundry": "1.12.0",
+    "agent-framework-foundry-hosting": "1.0.0b260903",
+    "azure-ai-projects": "2.3.0",
+    "azure-ai-agentserver-responses": "2.2.0b1",
+    "azure-ai-agentserver-core": "2.1.0"
+  },
+  "azure_resources_created": 0,
+  "azure_resources_deleted": 0,
+  "automatic_retries": null,
+  "cleanup": "Owned sessions and evaluation versions recorded; run demo-down after capturing results.",
+  "results": [
+    {
+      "scenario": "E01",
+      "category": "normal",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "ERROR",
+      "error": {
+        "type": "ValueError",
+        "message": "Served Agent name/version differs from pinned evaluation/demo target"
+      },
+      "unsupported_success_claims": 0,
+      "unscorable_outputs": 0,
+      "duplicate_side_effect_attempts": 0,
+      "required_verification_completed": null,
+      "execution_after_failed_or_unknown": 0,
+      "final_task_result": "NO_OPERATION",
+      "tool_dispatch_count": 0,
+      "accepted_side_effect_count": 0,
+      "side_effect_attempt_count": 0,
+      "verification_read_count": 0,
+      "reported_input_tokens": 762,
+      "reported_output_tokens": 625,
+      "total_reported_tokens": 1387,
+      "usage_response_count": 1,
+      "responses_request_count": 1,
+      "model_network_calls": null,
+      "scripted_transport_requests": null,
+      "end_to_end_seconds": 35.4542999999976,
+      "first_output_seconds": null,
+      "admission_failure_count": 0,
+      "concurrency_attribution": null,
+      "records": [
+        {
+          "request": {
+            "store": true,
+            "max_output_tokens": 1000,
+            "agent_session_id": "redacted-f26dfddb6a7f5102",
+            "input": "Restart orders, request native approval, and verify with operations___service_status before reporting recovery. For your final answer use JSON with task_result equal to SUCCESS, FAILED, UNKNOWN, DENIED, or NO_PROGRESS. SUCCESS means the requested recovery succeeded.",
+            "stream": false,
+            "conversation": "redacted-11ded3bee4966256"
+          },
+          "backend_before": {
+            "service_name": "orders",
+            "mode": "verified",
+            "service_health": "UNHEALTHY",
+            "generation": "g1",
+            "restart_pending": false,
+            "restart_count": 0,
+            "restart_attempt_count": 0,
+            "status_read_count": 0,
+            "last_action": null,
+            "events": [],
+            "request_host": "redacted-4719a55fc96a6b21",
+            "configured_allowed_hosts": [
+              "redacted-4719a55fc96a6b21",
+              "redacted-4719a55fc96a6b21:*",
+              "127.0.0.1:*",
+              "localhost:*"
+            ]
+          },
+          "first_output_seconds": null,
+          "text_observations": [
+            {
+              "text": "{\"action_lifecycle\": null, \"contained\": false, \"outcome\": \"APPROVAL_REQUIRED\", \"postcondition\": null, \"proposal\": {\"action\": \"restart_service\", \"approval_id\": \"af-call-77e4824c0bf241d1979838dc4b7a19cd\", \"resource\": \"orders\", \"status\": \"APPROVAL_REQUIRED\"}, \"side_effect_count\": 0}",
+              "backend": {
+                "service_name": "orders",
+                "mode": "verified",
+                "service_health": "UNHEALTHY",
+                "generation": "g1",
+                "restart_pending": false,
+                "restart_count": 0,
+                "restart_attempt_count": 0,
+                "status_read_count": 0,
+                "last_action": null,
+                "events": [],
+                "request_host": "redacted-4719a55fc96a6b21",
+                "configured_allowed_hosts": [
+                  "redacted-4719a55fc96a6b21",
+                  "redacted-4719a55fc96a6b21:*",
+                  "127.0.0.1:*",
+                  "localhost:*"
+                ]
+              }
+            }
+          ],
+          "http_status": 200,
+          "response": {
+            "id": "redacted-24e2ceff8d5a7c7b",
+            "object": "response",
+            "output": [
+              {
+                "type": "function_call",
+                "id": "fc_0f4be34b842e07d900z4uIUOE72BEmqQyyjC4jcHmKHAZrNZCC",
+                "call_id": "call_9oG46adHX85mVRR2rz6jUFjr",
+                "name": "reasonfuse-operations___operations___restart_service",
+                "arguments": "{\"service_name\":\"orders\"}",
+                "status": "completed",
+                "response_id": "redacted-24e2ceff8d5a7c7b",
+                "agent_reference": null
+              },
+              {
+                "type": "mcp_approval_request",
+                "id": "redacted-328451d5a3a5351c",
+                "server_label": "agent_framework",
+                "name": "reasonfuse-operations___operations___restart_service",
+                "arguments": "{\"service_name\":\"orders\"}",
+                "response_id": "redacted-24e2ceff8d5a7c7b",
+                "agent_reference": null
+              },
+              {
+                "type": "message",
+                "id": "msg_0f4be34b842e07d900b0h2sq4p83chdqlpKzgZUZ5VXNGNzpc9",
+                "role": "assistant",
+                "content": [
+                  {
+                    "type": "output_text",
+                    "text": "{\"action_lifecycle\": null, \"contained\": false, \"outcome\": \"APPROVAL_REQUIRED\", \"postcondition\": null, \"proposal\": {\"action\": \"restart_service\", \"approval_id\": \"af-call-77e4824c0bf241d1979838dc4b7a19cd\", \"resource\": \"orders\", \"status\": \"APPROVAL_REQUIRED\"}, \"side_effect_count\": 0}",
+                    "annotations": [],
+                    "logprobs": []
+                  }
+                ],
+                "status": "completed",
+                "response_id": "redacted-24e2ceff8d5a7c7b",
+                "agent_reference": null
+              }
+            ],
+            "created_at": 1790109509,
+            "parallel_tool_calls": false,
+            "status": "completed",
+            "completed_at": 1790109519,
+            "usage": {
+              "input_tokens": 762,
+              "input_tokens_details": {
+                "cached_tokens": 0,
+                "cache_write_tokens": 0
+              },
+              "output_tokens": 625,
+              "output_tokens_details": {
+                "reasoning_tokens": 576
+              },
+              "total_tokens": 1387
+            },
+            "response_id": "redacted-24e2ceff8d5a7c7b",
+            "agent_reference": {
+              "type": "agent_reference",
+              "name": "reasonfuse",
+              "version": "13"
+            },
+            "model": "",
+            "agent_session_id": "redacted-f26dfddb6a7f5102",
+            "conversation": {
+              "id": "redacted-11ded3bee4966256"
+            },
+            "background": false
+          },
+          "backend_after": {
+            "service_name": "orders",
+            "mode": "verified",
+            "service_health": "UNHEALTHY",
+            "generation": "g1",
+            "restart_pending": false,
+            "restart_count": 0,
+            "restart_attempt_count": 0,
+            "status_read_count": 0,
+            "last_action": null,
+            "events": [],
+            "request_host": "redacted-4719a55fc96a6b21",
+            "configured_allowed_hosts": [
+              "redacted-4719a55fc96a6b21",
+              "redacted-4719a55fc96a6b21:*",
+              "127.0.0.1:*",
+              "localhost:*"
+            ]
+          },
+          "elapsed_seconds": 12.965513999995892,
+          "completed_monotonic": 53352.0370004
+        }
+      ]
+    },
+    {
+      "scenario": "E01",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E02",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E02",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E03",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E03",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E04",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E04",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E05",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E05",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E06",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E06",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E07",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E07",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E08",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E08",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E09",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E09",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E10",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E10",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E11",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E11",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E12",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E12",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E13",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E13",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E14",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E14",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E15",
+      "arm": "ON",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    },
+    {
+      "scenario": "E15",
+      "arm": "OFF",
+      "lane": "real-hosted",
+      "execution_status": "NOT RUN — PRIOR EXECUTION REQUIRES RECONCILIATION",
+      "reported_input_tokens": null,
+      "reported_output_tokens": null,
+      "total_reported_tokens": null
+    }
+  ],
+  "model_network_calls": null,
+  "internal_model_call_count_note": "Not exposed by Hosted; Responses requests recorded separately.",
+  "runner_retries": 0,
+  "internal_sdk_retry_policy": {
+    "maximum_retries": 2,
+    "actual_retries": null
+  },
+  "maximum_requests": 64,
+  "maximum_reported_tokens": 500000,
+  "declared_budget_usd": 15.0,
+  "spend_cap_note": "Token stop applies after reported usage; not a provider hard billing cap.",
+  "funded_budget": {
+    "total_usd": 15,
+    "model_limit_usd": 8,
+    "missing_usage_reserve_usd": 0.1
+  },
+  "arm_configuration": {
+    "ON": {
+      "metadata": {
+        "reasonfuse-owner": "8bb4096069e54638a02cd7d760570b04",
+        "evaluation-arm": "ON",
+        "enableVnextExperience": "true"
+      },
+      "object": "agent.version",
+      "id": "reasonfuse:12",
+      "name": "reasonfuse",
+      "version": "12",
+      "description": "Bounded ON/OFF evaluation ON",
+      "created_at": 1790109360,
+      "definition": {
+        "kind": "hosted",
+        "container_protocol_versions": [],
+        "cpu": "1",
+        "memory": "2Gi",
+        "environment_variables": {
+          "AZURE_AI_MODEL_DEPLOYMENT_NAME": "gpt-5-mini",
+          "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT": "false",
+          "REASONFUSE_CONTRACT_JSON": "{}",
+          "REASONFUSE_ENABLED": "true",
+          "REASONFUSE_PROFILE": "evaluation",
+          "TOOLBOX_NAME": "operations-tools"
+        },
+        "protocol_versions": [
+          {
+            "protocol": "responses",
+            "version": "2.0.0"
+          }
+        ],
+        "code_configuration": {
+          "runtime": "python_3_13",
+          "entry_point": [
+            "python",
+            "src/main.py"
+          ],
+          "dependency_resolution": "remote_build",
+          "content_hash": "dfcf6627aa9969189c0be3a51f9b9808ea61e24dcde0bbc2f4eeae53bbc487b9"
+        }
+      },
+      "draft": false,
+      "status": "active",
+      "instance_identity": {
+        "principal_id": "redacted-f1291f86c0f99ae5",
+        "client_id": "redacted-f1291f86c0f99ae5"
+      },
+      "blueprint": {
+        "principal_id": "redacted-39431d4d89fa48b2",
+        "client_id": "redacted-93563f2b1352083d"
+      },
+      "blueprint_reference": {
+        "type": "ManagedAgentIdentityBlueprint",
+        "blueprint_id": "reasonfuse-5aa6a"
+      },
+      "agent_guid": "redacted-b72f5a5df9494b11"
+    },
+    "OFF": {
+      "metadata": {
+        "reasonfuse-owner": "8bb4096069e54638a02cd7d760570b04",
+        "evaluation-arm": "OFF",
+        "enableVnextExperience": "true"
+      },
+      "object": "agent.version",
+      "id": "reasonfuse:13",
+      "name": "reasonfuse",
+      "version": "13",
+      "description": "Bounded ON/OFF evaluation OFF",
+      "created_at": 1790109404,
+      "definition": {
+        "kind": "hosted",
+        "container_protocol_versions": [],
+        "cpu": "1",
+        "memory": "2Gi",
+        "environment_variables": {
+          "AZURE_AI_MODEL_DEPLOYMENT_NAME": "gpt-5-mini",
+          "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT": "false",
+          "REASONFUSE_CONTRACT_JSON": "{}",
+          "REASONFUSE_ENABLED": "false",
+          "REASONFUSE_PROFILE": "evaluation",
+          "TOOLBOX_NAME": "operations-tools"
+        },
+        "protocol_versions": [
+          {
+            "protocol": "responses",
+            "version": "2.0.0"
+          }
+        ],
+        "code_configuration": {
+          "runtime": "python_3_13",
+          "entry_point": [
+            "python",
+            "src/main.py"
+          ],
+          "dependency_resolution": "remote_build",
+          "content_hash": "dfcf6627aa9969189c0be3a51f9b9808ea61e24dcde0bbc2f4eeae53bbc487b9"
+        }
+      },
+      "draft": false,
+      "status": "active",
+      "instance_identity": {
+        "principal_id": "redacted-f1291f86c0f99ae5",
+        "client_id": "redacted-f1291f86c0f99ae5"
+      },
+      "blueprint": {
+        "principal_id": "redacted-39431d4d89fa48b2",
+        "client_id": "redacted-93563f2b1352083d"
+      },
+      "blueprint_reference": {
+        "type": "ManagedAgentIdentityBlueprint",
+        "blueprint_id": "reasonfuse-5aa6a"
+      },
+      "agent_guid": "redacted-b72f5a5df9494b11"
+    }
+  },
+  "completed_utc": "2026-09-22T20:38:40.088304+00:00",
+  "responses_request_count": 1,
+  "observed_reported_tokens": 1387,
+  "interrupted": true,
+  "spend_ledger": {
+    "known_usage_usd": 0.012395,
+    "unknown_usage_reserve_usd": 0.2,
+    "accounted_model_usd": 0.212395,
+    "responses_reserved": 8,
+    "responses_with_unknown_usage": 2,
+    "reported_tokens": 14258,
+    "note": "Unknown usage reserve is an allowance, not a billed or observed cost; internal retries are not exposed."
+  },
+  "model_deadline_utc": "2026-09-22T21:57:59.267809+00:00"
+}

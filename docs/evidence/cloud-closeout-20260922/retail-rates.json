@@ -1,0 +1,98 @@
+{
+  "source": "https://prices.azure.com/api/retail/prices",
+  "currency": "USD",
+  "region": "australiaeast",
+  "model": [
+    {
+      "currencyCode": "USD",
+      "armRegionName": "australiaeast",
+      "productName": "Azure OpenAI GPT5",
+      "skuName": "GPT 5 Mini outpt Glbl",
+      "meterName": "GPT 5 Mini outpt Glbl 1M Tokens",
+      "retailPrice": 2.0,
+      "unitOfMeasure": "1M",
+      "effectiveStartDate": "2025-08-01T00:00:00Z",
+      "meterId": "5f65e7f0-17ee-5f84-b26e-3961f58df137"
+    },
+    {
+      "currencyCode": "USD",
+      "armRegionName": "australiaeast",
+      "productName": "Azure OpenAI GPT5",
+      "skuName": "GPT 5 Mini cchd Inpt Glbl",
+      "meterName": "GPT 5 Mini cchd Inpt Glbl 1M Tokens",
+      "retailPrice": 0.025,
+      "unitOfMeasure": "1M",
+      "effectiveStartDate": "2025-08-01T00:00:00Z",
+      "meterId": "9aec16ba-cad6-5719-a78e-331f3adbf2e6"
+    },
+    {
+      "currencyCode": "USD",
+      "armRegionName": "australiaeast",
+      "productName": "Azure OpenAI GPT5",
+      "skuName": "GPT 5 Mini Inpt Glbl",
+      "meterName": "GPT 5 Mini Inpt Glbl 1M Tokens",
+      "retailPrice": 0.25,
+      "unitOfMeasure": "1M",
+      "effectiveStartDate": "2025-08-01T00:00:00Z",
+      "meterId": "ab602fda-d355-58b8-807f-8fb285ff7b92"
+    }
+  ],
+  "infra": [
+    {
+      "currencyCode": "USD",
+      "armRegionName": "australiaeast",
+      "productName": "Foundry Agents",
+      "skuName": "Hosted",
+      "meterName": "Hosted vCPU Usage",
+      "retailPrice": 0.0994,
+      "unitOfMeasure": "1 Hour",
+      "effectiveStartDate": "2026-02-01T00:00:00Z",
+      "meterId": "6f2c2340-b32f-51fd-9e50-70f366b1a980"
+    },
+    {
+      "currencyCode": "USD",
+      "armRegionName": "australiaeast",
+      "productName": "Foundry Agents",
+      "skuName": "Hosted",
+      "meterName": "Hosted Memory Usage",
+      "retailPrice": 0.0118,
+      "unitOfMeasure": "1 Hour",
+      "effectiveStartDate": "2026-02-01T00:00:00Z",
+      "meterId": "fd2839e9-f059-590e-89a6-e95a54fa3962"
+    },
+    {
+      "currencyCode": "USD",
+      "armRegionName": "australiaeast",
+      "productName": "Azure Container Apps",
+      "skuName": "Standard",
+      "meterName": "Standard vCPU Active Usage",
+      "retailPrice": 3.4e-05,
+      "unitOfMeasure": "1 Second",
+      "effectiveStartDate": "2022-06-01T00:00:00Z",
+      "meterId": "013772f8-63db-52a2-9c69-f2ae9012ef09"
+    },
+    {
+      "currencyCode": "USD",
+      "armRegionName": "australiaeast",
+      "productName": "Azure Container Apps",
+      "skuName": "Standard",
+      "meterName": "Standard Memory Active Usage",
+      "retailPrice": 4e-06,
+      "unitOfMeasure": "1 GiB Second",
+      "effectiveStartDate": "2022-06-01T00:00:00Z",
+      "meterId": "c35c8b99-9953-57cc-a67f-75365d560cb5"
+    },
+    {
+      "currencyCode": "USD",
+      "armRegionName": "australiaeast",
+      "productName": "Container Registry",
+      "skuName": "Basic",
+      "meterName": "Basic Registry Unit",
+      "retailPrice": 0.1666,
+      "unitOfMeasure": "1/Day",
+      "effectiveStartDate": "2018-01-01T00:00:00Z",
+      "meterId": "5c9e7a65-5784-494c-9718-7749d4075dd9"
+    }
+  ],
+  "interpretation": "Public retail estimate; observed usage and duration are separate from delayed invoice. No free grants or cached-token discounts assumed."
+}

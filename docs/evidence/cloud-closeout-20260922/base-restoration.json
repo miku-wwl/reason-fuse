@@ -1,0 +1,103 @@
+{
+  "authorization_usd": "<redacted>",
+  "operations": [
+    {
+      "operation": "create-original-resource-group",
+      "intent_utc": "2026-09-21T23:03:40.074790+00:00"
+    },
+    {
+      "operation": "restore-soft-deleted-account",
+      "intent_utc": "2026-09-21T23:03:50.614233+00:00"
+    },
+    {
+      "operation": "create-original-project",
+      "intent_utc": "2026-09-21T23:06:34.980273+00:00"
+    },
+    {
+      "operation": "restore-account-system-identity",
+      "intent_utc": "2026-09-22T00:17:42.384690+00:00",
+      "reason": "Recovered account identity was null; project management requires identity"
+    },
+    {
+      "operation": "retry-failed-project-after-identity-repair",
+      "intent_utc": "2026-09-22T00:18:21.907708+00:00",
+      "classification": "infrastructure repair; zero model calls"
+    },
+    {
+      "operation": "restore-required-data-plane-role",
+      "principal_type": "User",
+      "role_definition": "redacted-3513cfcf768dd13c",
+      "scope_kind": "project",
+      "intent_utc": "2026-09-22T00:24:34.927545+00:00"
+    },
+    {
+      "operation": "restore-required-data-plane-role",
+      "principal_type": "ServicePrincipal",
+      "role_definition": "redacted-1b2c85d975c79793",
+      "scope_kind": "account",
+      "intent_utc": "2026-09-22T00:24:54.925997+00:00"
+    },
+    {
+      "operation": "create-clean-closeout-project",
+      "intent_utc": "2026-09-22T00:27:27.409909+00:00",
+      "reason": "Original recreated project ARM succeeded but v1 data plane continued to report missing project"
+    },
+    {
+      "operation": "delete-unused-diagnostic-project",
+      "reason": "Original project became available after role propagation; this fresh project was never used for any Agent/model requests",
+      "target": "reason-fuse-closeout"
+    }
+  ],
+  "agent_redeployment": {
+    "started_utc": "2026-09-22T00:30:27.953337+00:00",
+    "reason": "Recovered v10 metadata exists but its source download returned server_error; upload independently verified original ZIP as a fresh concrete version",
+    "original_version": "10",
+    "original_download_failure_request_id": "891725cb75fc97b7ca1db85ad22cdf9e",
+    "package_sha256": "1ebeb782fa7ebf71dee65f6975599c0b916afd740d77e47abf28144248999425",
+    "model_calls": 0,
+    "initial_upload_failure": {
+      "code": "bad_request",
+      "reason": "Code part filename must end with .zip",
+      "request_id": "9e3d774d67e682e699d91d81d713dec5",
+      "model_calls": 0
+    },
+    "download_sha256": "1ebeb782fa7ebf71dee65f6975599c0b916afd740d77e47abf28144248999425"
+  },
+  "new_baseline": {
+    "name": "reasonfuse",
+    "version": "11",
+    "status": "active",
+    "definition": {
+      "kind": "hosted",
+      "container_protocol_versions": [],
+      "cpu": "1",
+      "memory": "2Gi",
+      "environment_variables": {
+        "AZURE_AI_MODEL_DEPLOYMENT_NAME": "gpt-5-mini",
+        "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT": "false",
+        "REASONFUSE_CONTRACT_JSON": "{}",
+        "REASONFUSE_ENABLED": "true",
+        "REASONFUSE_PROFILE": "runtime",
+        "TOOLBOX_NAME": "operations-tools"
+      },
+      "protocol_versions": [
+        {
+          "protocol": "responses",
+          "version": "2.0.0"
+        }
+      ],
+      "code_configuration": {
+        "runtime": "python_3_13",
+        "entry_point": [
+          "python",
+          "src/main.py"
+        ],
+        "dependency_resolution": "remote_build",
+        "content_hash": "1ebeb782fa7ebf71dee65f6975599c0b916afd740d77e47abf28144248999425"
+      }
+    }
+  },
+  "source_identity_result": "PASS: original ZIP and downloaded v11 source bytes identical",
+  "model_inference_calls": 0,
+  "temporary_diagnostic_project_removed": null
+}

@@ -1,0 +1,421 @@
+{
+  "scenario": "E01",
+  "category": "normal",
+  "arm": "ON",
+  "lane": "real-hosted-demo",
+  "execution_status": "COMPLETED",
+  "error": null,
+  "unsupported_success_claims": 0,
+  "unscorable_outputs": 0,
+  "duplicate_side_effect_attempts": 0,
+  "required_verification_completed": true,
+  "execution_after_failed_or_unknown": 0,
+  "final_task_result": "VERIFIED",
+  "tool_dispatch_count": 2,
+  "accepted_side_effect_count": 1,
+  "side_effect_attempt_count": 1,
+  "verification_read_count": 1,
+  "reported_input_tokens": 4448,
+  "reported_output_tokens": 1736,
+  "total_reported_tokens": 6184,
+  "usage_response_count": 2,
+  "responses_request_count": 2,
+  "model_network_calls": null,
+  "scripted_transport_requests": null,
+  "end_to_end_seconds": 60.43312259999948,
+  "first_output_seconds": null,
+  "admission_failure_count": 0,
+  "concurrency_attribution": null,
+  "records": [
+    {
+      "request": {
+        "store": true,
+        "max_output_tokens": 1500,
+        "agent_session_id": "redacted-5e7b0e120a6a6434",
+        "input": "Restart orders, request native approval, and verify with operations___service_status before reporting recovery. For your final answer use JSON with task_result equal to SUCCESS, FAILED, UNKNOWN, DENIED, or NO_PROGRESS. SUCCESS means the requested recovery succeeded.",
+        "stream": false,
+        "conversation": "redacted-38eaddefab6f1ec1"
+      },
+      "backend_before": {
+        "service_name": "orders",
+        "mode": "verified",
+        "service_health": "UNHEALTHY",
+        "generation": "g1",
+        "restart_pending": false,
+        "restart_count": 0,
+        "restart_attempt_count": 0,
+        "status_read_count": 0,
+        "last_action": null,
+        "events": [],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "first_output_seconds": null,
+      "text_observations": [
+        {
+          "text": "{\"action_lifecycle\": null, \"contained\": false, \"outcome\": \"APPROVAL_REQUIRED\", \"postcondition\": null, \"proposal\": {\"action\": \"restart_service\", \"approval_id\": \"af-call-88ac6b36028e4352b383993eb00b090a\", \"resource\": \"orders\", \"status\": \"APPROVAL_REQUIRED\"}, \"side_effect_count\": 0}",
+          "backend": {
+            "service_name": "orders",
+            "mode": "verified",
+            "service_health": "UNHEALTHY",
+            "generation": "g1",
+            "restart_pending": false,
+            "restart_count": 0,
+            "restart_attempt_count": 0,
+            "status_read_count": 0,
+            "last_action": null,
+            "events": [],
+            "request_host": "redacted-4719a55fc96a6b21",
+            "configured_allowed_hosts": [
+              "redacted-4719a55fc96a6b21",
+              "redacted-4719a55fc96a6b21:*",
+              "127.0.0.1:*",
+              "localhost:*"
+            ]
+          }
+        }
+      ],
+      "http_status": 200,
+      "response": {
+        "id": "redacted-57c7d2ad08e7f830",
+        "object": "response",
+        "output": [
+          {
+            "type": "function_call",
+            "id": "fc_08573d65923c7efe0036G8jCQ9mp7PVcOvnIVb6RB08L6pALpY",
+            "call_id": "call_dDOK1zdUa63Jd36UgKfLlDIs",
+            "name": "mode_get",
+            "arguments": "{}",
+            "status": "completed",
+            "response_id": "redacted-57c7d2ad08e7f830",
+            "agent_reference": null
+          },
+          {
+            "type": "function_call_output",
+            "id": "fco_08573d65923c7efe00UYGEC0MnmMRd59penzoe18Di43BswFnW",
+            "call_id": "call_dDOK1zdUa63Jd36UgKfLlDIs",
+            "output": "{\"mode\": \"validate\"}",
+            "status": "completed",
+            "response_id": "redacted-57c7d2ad08e7f830",
+            "agent_reference": null
+          },
+          {
+            "type": "function_call",
+            "id": "fc_08573d65923c7efe004QJIsMvMkexGwcfY32fHQgD87z5MtYZH",
+            "call_id": "call_ftSoHvQupQiRhEOejh8qajYM",
+            "name": "reasonfuse-operations___operations___restart_service",
+            "arguments": "{\"service_name\":\"orders\"}",
+            "status": "completed",
+            "response_id": "redacted-57c7d2ad08e7f830",
+            "agent_reference": null
+          },
+          {
+            "type": "mcp_approval_request",
+            "id": "redacted-ddba42c7870c49b3",
+            "server_label": "agent_framework",
+            "name": "reasonfuse-operations___operations___restart_service",
+            "arguments": "{\"service_name\":\"orders\"}",
+            "response_id": "redacted-57c7d2ad08e7f830",
+            "agent_reference": null
+          },
+          {
+            "type": "message",
+            "id": "msg_08573d65923c7efe00dinCoTU4raXGmQdt01lIYJC4zdgTruqO",
+            "role": "assistant",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "{\"action_lifecycle\": null, \"contained\": false, \"outcome\": \"APPROVAL_REQUIRED\", \"postcondition\": null, \"proposal\": {\"action\": \"restart_service\", \"approval_id\": \"af-call-88ac6b36028e4352b383993eb00b090a\", \"resource\": \"orders\", \"status\": \"APPROVAL_REQUIRED\"}, \"side_effect_count\": 0}",
+                "annotations": [],
+                "logprobs": []
+              }
+            ],
+            "status": "completed",
+            "response_id": "redacted-57c7d2ad08e7f830",
+            "agent_reference": null
+          }
+        ],
+        "created_at": 1790109094,
+        "parallel_tool_calls": false,
+        "status": "completed",
+        "completed_at": 1790109104,
+        "usage": {
+          "input_tokens": 1996,
+          "input_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "output_tokens": 524,
+          "output_tokens_details": {
+            "reasoning_tokens": 384
+          },
+          "total_tokens": 2520
+        },
+        "response_id": "redacted-57c7d2ad08e7f830",
+        "agent_reference": {
+          "type": "agent_reference",
+          "name": "reasonfuse",
+          "version": "11"
+        },
+        "model": "",
+        "agent_session_id": "redacted-5e7b0e120a6a6434",
+        "conversation": {
+          "id": "redacted-38eaddefab6f1ec1"
+        },
+        "background": false
+      },
+      "backend_after": {
+        "service_name": "orders",
+        "mode": "verified",
+        "service_health": "UNHEALTHY",
+        "generation": "g1",
+        "restart_pending": false,
+        "restart_count": 0,
+        "restart_attempt_count": 0,
+        "status_read_count": 0,
+        "last_action": null,
+        "events": [],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "elapsed_seconds": 14.949019400002726,
+      "completed_monotonic": 52940.7541475
+    },
+    {
+      "request": {
+        "store": true,
+        "max_output_tokens": 1500,
+        "agent_session_id": "redacted-5e7b0e120a6a6434",
+        "input": [
+          {
+            "type": "mcp_approval_response",
+            "approval_request_id": "redacted-ddba42c7870c49b3",
+            "approve": true
+          }
+        ],
+        "stream": false,
+        "conversation": "redacted-38eaddefab6f1ec1"
+      },
+      "backend_before": {
+        "service_name": "orders",
+        "mode": "verified",
+        "service_health": "UNHEALTHY",
+        "generation": "g1",
+        "restart_pending": false,
+        "restart_count": 0,
+        "restart_attempt_count": 0,
+        "status_read_count": 0,
+        "last_action": null,
+        "events": [],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "first_output_seconds": null,
+      "text_observations": [
+        {
+          "text": "{\"action_lifecycle\": {\"accepted\": true, \"action\": \"restart_service\", \"call_id\": \"call_ftSoHvQupQiRhEOejh8qajYM\", \"generation\": \"g2\", \"reason\": \"fresh_postcondition_observation\", \"resource\": \"orders\", \"status\": \"VERIFIED\", \"tool_name\": \"reasonfuse-operations___operations___restart_service\"}, \"contained\": false, \"outcome\": \"OUTCOME_VERIFIED\", \"postcondition\": {\"outcome\": \"OUTCOME_VERIFIED\", \"reason\": \"fresh_postcondition_observation\"}, \"proposal\": null, \"side_effect_count\": 1}",
+          "backend": {
+            "service_name": "orders",
+            "mode": "verified",
+            "service_health": "HEALTHY",
+            "generation": "g2",
+            "restart_pending": false,
+            "restart_count": 1,
+            "restart_attempt_count": 1,
+            "status_read_count": 1,
+            "last_action": "restart_service",
+            "events": [
+              {
+                "sequence": 1,
+                "timestamp_utc": "2026-09-22T20:31:51.107455+00:00",
+                "operation": "restart_service",
+                "result": {
+                  "accepted": true,
+                  "status_code": 202,
+                  "resource": "orders",
+                  "operation_id": "test-orders-g2",
+                  "generation": "g2",
+                  "execution_count": 1
+                }
+              },
+              {
+                "sequence": 2,
+                "timestamp_utc": "2026-09-22T20:31:55.000103+00:00",
+                "operation": "service_status",
+                "result": {
+                  "resource": "orders",
+                  "generation": "g2",
+                  "service_health": "HEALTHY",
+                  "world_state": {
+                    "service_name": "orders",
+                    "service_health": "HEALTHY",
+                    "generation": "g2"
+                  }
+                }
+              }
+            ],
+            "request_host": "redacted-4719a55fc96a6b21",
+            "configured_allowed_hosts": [
+              "redacted-4719a55fc96a6b21",
+              "redacted-4719a55fc96a6b21:*",
+              "127.0.0.1:*",
+              "localhost:*"
+            ]
+          }
+        }
+      ],
+      "http_status": 200,
+      "response": {
+        "id": "redacted-c3beb2faf8dea873",
+        "object": "response",
+        "output": [
+          {
+            "type": "function_call_output",
+            "id": "fco_08573d65923c7efe00wKkgaaUxE7l6tHIBHAxSa6jO6d3pFaRF",
+            "call_id": "call_ftSoHvQupQiRhEOejh8qajYM",
+            "output": "{\"accepted\": true, \"execution_count\": 1, \"generation\": \"g2\", \"operation_id\": \"test-orders-g2\", \"resource\": \"orders\", \"status_code\": 202}\n{\"result\": \"{\\\"accepted\\\": true, \\\"execution_count\\\": 1, \\\"generation\\\": \\\"g2\\\", \\\"operation_id\\\": \\\"test-orders-g2\\\", \\\"resource\\\": \\\"orders\\\", \\\"status_code\\\": 202}\"}",
+            "status": "completed",
+            "response_id": "redacted-c3beb2faf8dea873",
+            "agent_reference": null
+          },
+          {
+            "type": "function_call",
+            "id": "fc_08573d65923c7efe00emUUgWswQLwtopUqTRgUXETZ1VkgSkxl",
+            "call_id": "call_DFyXIG2coSwtjoB9FG7HrN2k",
+            "name": "reasonfuse-operations___operations___service_status",
+            "arguments": "{\"service_name\":\"orders\"}",
+            "status": "completed",
+            "response_id": "redacted-c3beb2faf8dea873",
+            "agent_reference": null
+          },
+          {
+            "type": "function_call_output",
+            "id": "fco_08573d65923c7efe00Kg4fM0h8nCVbfZ4rdcZdOxLipmpVk8ZB",
+            "call_id": "call_DFyXIG2coSwtjoB9FG7HrN2k",
+            "output": "{\"tool_result\": {\"generation\": \"g2\", \"resource\": \"orders\", \"service_health\": \"HEALTHY\", \"world_state\": {\"generation\": \"g2\", \"service_health\": \"HEALTHY\", \"service_name\": \"orders\"}}, \"outcome\": {\"outcome\": \"OUTCOME_VERIFIED\", \"reason\": \"fresh_postcondition_observation\"}}",
+            "status": "completed",
+            "response_id": "redacted-c3beb2faf8dea873",
+            "agent_reference": null
+          },
+          {
+            "type": "message",
+            "id": "msg_08573d65923c7efe00fcmEhSFiMk356z26WuvpXdjhu9TvfXDf",
+            "role": "assistant",
+            "content": [
+              {
+                "type": "output_text",
+                "text": "{\"action_lifecycle\": {\"accepted\": true, \"action\": \"restart_service\", \"call_id\": \"call_ftSoHvQupQiRhEOejh8qajYM\", \"generation\": \"g2\", \"reason\": \"fresh_postcondition_observation\", \"resource\": \"orders\", \"status\": \"VERIFIED\", \"tool_name\": \"reasonfuse-operations___operations___restart_service\"}, \"contained\": false, \"outcome\": \"OUTCOME_VERIFIED\", \"postcondition\": {\"outcome\": \"OUTCOME_VERIFIED\", \"reason\": \"fresh_postcondition_observation\"}, \"proposal\": null, \"side_effect_count\": 1}",
+                "annotations": [],
+                "logprobs": []
+              }
+            ],
+            "status": "completed",
+            "response_id": "redacted-c3beb2faf8dea873",
+            "agent_reference": null
+          }
+        ],
+        "created_at": 1790109109,
+        "parallel_tool_calls": false,
+        "status": "completed",
+        "completed_at": 1790109123,
+        "usage": {
+          "input_tokens": 2452,
+          "input_tokens_details": {
+            "cached_tokens": 1280,
+            "cache_write_tokens": 0
+          },
+          "output_tokens": 1212,
+          "output_tokens_details": {
+            "reasoning_tokens": 896
+          },
+          "total_tokens": 3664
+        },
+        "response_id": "redacted-c3beb2faf8dea873",
+        "agent_reference": {
+          "type": "agent_reference",
+          "name": "reasonfuse",
+          "version": "11"
+        },
+        "model": "",
+        "agent_session_id": "redacted-5e7b0e120a6a6434",
+        "conversation": {
+          "id": "redacted-38eaddefab6f1ec1"
+        },
+        "background": false
+      },
+      "backend_after": {
+        "service_name": "orders",
+        "mode": "verified",
+        "service_health": "HEALTHY",
+        "generation": "g2",
+        "restart_pending": false,
+        "restart_count": 1,
+        "restart_attempt_count": 1,
+        "status_read_count": 1,
+        "last_action": "restart_service",
+        "events": [
+          {
+            "sequence": 1,
+            "timestamp_utc": "2026-09-22T20:31:51.107455+00:00",
+            "operation": "restart_service",
+            "result": {
+              "accepted": true,
+              "status_code": 202,
+              "resource": "orders",
+              "operation_id": "test-orders-g2",
+              "generation": "g2",
+              "execution_count": 1
+            }
+          },
+          {
+            "sequence": 2,
+            "timestamp_utc": "2026-09-22T20:31:55.000103+00:00",
+            "operation": "service_status",
+            "result": {
+              "resource": "orders",
+              "generation": "g2",
+              "service_health": "HEALTHY",
+              "world_state": {
+                "service_name": "orders",
+                "service_health": "HEALTHY",
+                "generation": "g2"
+              }
+            }
+          }
+        ],
+        "request_host": "redacted-4719a55fc96a6b21",
+        "configured_allowed_hosts": [
+          "redacted-4719a55fc96a6b21",
+          "redacted-4719a55fc96a6b21:*",
+          "127.0.0.1:*",
+          "localhost:*"
+        ]
+      },
+      "elapsed_seconds": 15.54701390000264,
+      "completed_monotonic": 52956.4784774
+    }
+  ],
+  "story": "A",
+  "timestamp_utc": "2026-09-22T20:32:04.594269+00:00",
+  "agent_version": "11",
+  "source_commit": "c1adfa4c80f91c0332644084d2fd489b9e563ad1",
+  "internal_model_call_count": null,
+  "model_call_count_note": "Hosted response count is known; internal inference count is not exposed.",
+  "infrastructure_retry_suffix": "routing-repair",
+  "demo_assertions": "PASS"
+}

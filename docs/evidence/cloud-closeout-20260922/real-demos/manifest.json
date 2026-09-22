@@ -1,0 +1,15 @@
+{
+  "algorithm": "SHA256, LF normalized",
+  "files": {
+    "story-A.json": "8d9e7540c267c11967a5016cbf02a25cb1e1a40f7c51c7362daaccd5c759056f",
+    "story-A-routing-repair.json": "25a04ee03e435c28333ad6f87dcb203b0d8cc135c82dd1d36564f5f75079c135",
+    "story-B.json": "06d74eb5ca815b99389d759b4dbcec0029bbf948ed2d8226f2932619f2683080",
+    "story-C.json": "afc95d1af253c5cfc620f51714c3fdd9261b6f42452deb12de783e73d8a73627"
+  },
+  "private_original_sha256": {
+    "story-A.json": "f37397e1ef6e889ed46d3a9fed37790785a967e3986a5d967839823f5258fb66",
+    "story-A-routing-repair.json": "51f6931cf34e94fe3acfcffc545674daf97fce8d635566c746d4e66fd01ff33d",
+    "story-B.json": "12017859a984b667efae3ea6b5eb1ecffd803b5eaff3d22d2f9d04076ecc5929",
+    "story-C.json": "2ff9b52df08bc87a2c2b0bbd7fa0586757b659527d33777a67ee7eae461383bf"
+  }
+}

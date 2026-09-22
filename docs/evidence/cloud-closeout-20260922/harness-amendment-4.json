@@ -1,0 +1,20 @@
+{
+  "timestamp_utc": "2026-09-22T20:51:07.973363+00:00",
+  "classification": "WINDOWS_ATOMIC_REPLACE_TRANSIENT_LOCK_BEFORE_E03_MODEL_REQUEST",
+  "failure_model_requests": 0,
+  "fixture_unchanged_from_E02_OFF": true,
+  "repair": "Unique temporary manifest filename plus bounded PermissionError retry. Continue from E03, incorporating exact E01/E02 checkpoint bytes; no rerun of those four scored executions.",
+  "continuation_batch_id": "filesystem-repair",
+  "prior_checkpoint_sha256": {
+    "evaluation-routing-repair-E01-ON.json": "8d5bcedd3fe0d7620afb481a032cf004575dcace026817d654b0100b4da8ac8d",
+    "evaluation-routing-repair-E01-OFF.json": "118c5d4670f623c46e29911c33e992e4bdb3064c0b50989f983abd670bf604fa",
+    "evaluation-routing-repair-E02-ON.json": "0fc7df99e97fdc8421cf7adae8ad564cd20bab40455da04d5ec181399725b88b",
+    "evaluation-routing-repair-E02-OFF.json": "25879d59b5a0170dce1953f0fa0b4d26fe3bb83930cb5654513a6ba22ddc4d03"
+  },
+  "new_harness_hashes": {
+    "scripts/demo_support.py": "4759ef508df472922bb9f496b4c9d1259387250e842e0bfc642ba5eebe842480",
+    "scripts/evaluate_cloud.py": "3ebf98aed6a48ec91bd7b844a8194097b32fcc712869c2cd93dfb9eba4ed8a8d",
+    "tests/test_demo_scripts.py": "45dc515748fb4e814509adf79651af5db74ad42c5c49c4014227578a5a14a58b"
+  },
+  "targeted_tests": "19/19 PASS"
+}

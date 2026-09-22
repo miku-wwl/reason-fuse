@@ -1,0 +1,16 @@
+{
+  "timestamp_utc": "2026-09-22T20:42:14.908625+00:00",
+  "observation": "Initial E01 ON session readback pinned version 12, but actual completed response reported version 13. Native proposal returned, no tool dispatched, backend stayed zero.",
+  "classification": "ROUTING_MISMATCH_INFRASTRUCTURE; no ON score assigned",
+  "repair": "Replacement batch routes endpoint to each concrete ON/OFF version before pinned session invocation, verifies selector and served version, and restores original selector at cleanup.",
+  "replacement_batch_id": "routing-repair",
+  "model_requests_in_initial_batch": 1,
+  "source_hashes": {
+    "scripts/demo_support.py": "f9c8b34ff77db87d8337f7b9d2fc57b345ae30f9d5ab6ec1843e1a7db19d3c52",
+    "scripts/evaluate_cloud.py": "fc3453f05e5cb0c03d0c9f8e5f54ed0d663fc6143532eb13f54ddb2fc60721f7"
+  },
+  "sources": [
+    "https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/manage-hosted-sessions",
+    "https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/configure-agent"
+  ]
+}
